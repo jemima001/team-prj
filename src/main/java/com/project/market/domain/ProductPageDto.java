@@ -7,12 +7,10 @@ import lombok.Data;
 @Data
 public class ProductPageDto {
 
-	private String BoardId;
-	private String Writer;
-	private String ProductCode;
-	private String BoardTitle;
-	private int Price;
-	private String img;
-	private String BoardBody;
-	private LocalDateTime Date;
+	private String id;
+	private String boardTitle;
+	private String boardBody;
+	private String productId;
+	private String Bestproduct;
+	private LocalDateTime inserttime;
 }

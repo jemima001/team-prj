@@ -15,6 +15,15 @@
 <body>
 
 <p>상품 추가 페이지</p>
+<form action="/market/product/add" method="post" enctype="multipart/form-data">
+상품 게시글 제목 : <input type="text" name="boardTitle" /><br />
+게시글 내용 <br />
+<textarea rows="10" cols="100" name ="boardBody"></textarea><br />
+사진 업로드<br />
+<input multiple="multiple" type="file" />
+
+<button>작성</button>
+</form>
 
 </body>
 </html>
