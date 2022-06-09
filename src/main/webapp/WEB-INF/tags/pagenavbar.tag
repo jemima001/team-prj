@@ -15,20 +15,20 @@
     <div class="collapse navbar-collapse " id="navbarSupportedContent">
       <ul id="nav" class="nav me-auto bg-light">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/project/home">Home</a>
+          <a class="nav-link active" aria-current="page" href="/market/project/home">Home</a>
         </li>
       </ul>
       <ul class="nav bg-light">
         <!-- 오른쪽으로 밀기 -->
         <li class="nav-item">
-          <a class="nav-link" href="/project/home/login">로그인</a>
+          <a class="nav-link" href="/market/member/login">로그인</a>
         </li>
          
         <li class="nav-item">
-          <a class="nav-link" href="#">회원가입</a>
+          <a class="nav-link" href="/market/member/signup">회원가입</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">1:1문의</a>
+          <a class="nav-link" href="/market/project/cusCenter">고객센터</a>
         </li>
       </ul>
      <!--  <form action="/spr/Board/boardSearch" class="d-flex" role="search" method="post">
