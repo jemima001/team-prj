@@ -12,7 +12,7 @@ import com.project.market.service.MemberService;
 
 @Controller
 @RequestMapping("member")
-public class memberController {
+public class MemberController {
 	@Autowired
 	private MemberService service;
 	
