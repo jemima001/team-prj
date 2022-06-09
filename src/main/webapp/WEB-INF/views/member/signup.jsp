@@ -164,6 +164,11 @@
 				<h1>회원 가입 </h1>
 
 				<form id="form1" action="${appRoot }/member/signup" method="post">
+					<label for="nameInput1" class="form-label">
+						이름
+					</label>
+					<input class="form-control" id="nameInput1" type="text" name="name" />
+					
 					<label for="idInput1" class="form-label">
 						아이디 
 					</label>
