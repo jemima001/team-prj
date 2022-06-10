@@ -15,4 +15,6 @@ public interface NoticeMapper {
 
 	int insertNotice(NoticeDto notice);
 
+	NoticeDto selectNoticeById(int id);
+
 }

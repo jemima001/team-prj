@@ -30,6 +30,11 @@ public class NoticeService {
 		
 		return cnt == 1;
 	}
+
+	public NoticeDto getNoticeById(int id) {
+		NoticeDto board = mapper.selectNoticeById(id);
+		return board;
+	}
 	
 	
 }

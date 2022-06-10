@@ -63,4 +63,10 @@ public class NoticeController {
 		return "redirect:/notice/list";
 	}
 
+	@GetMapping("get")
+	public void get(int id, Model model) {
+		NoticeDto dto = service.getNoticeById(id);
+		model.addAttribute("notice", dto);
+		
+	}
 }

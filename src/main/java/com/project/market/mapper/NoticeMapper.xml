@@ -23,4 +23,15 @@
 	INSERT INTO Notice (title, body, memberId) 
 	VALUES (#{title}, #{body}, #{memberId})
 	</insert>
+	
+	<select id="selectNoticeById" resultType="com.project.market.domain.NoticeDto">
+	SELECT n.id, 
+	       n.title, 
+	       n.body, 
+	       n.inserted, 
+	       m.id memberId,
+	       m.nickName writerNickName
+	FROM Notice n JOIN Member m ON n.memberId = m.id
+	WHERE n.id = #{id}
+	</select>
 </mapper>
