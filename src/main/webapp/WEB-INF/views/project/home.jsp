@@ -20,14 +20,13 @@
 		<div class="col">
 			
 				<form action="#" class="d-flex" role="search" method="post">
-			        <p><img src="/resources/images/a.jpg"></p>
-			        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="Search">
+			        <p><img src="resources/images/a.png"></p>
+			        <input class="form-control me-auto" type="search" placeholder="Search" aria-label="Search" name="Search">
 			        <button class="btn btn-outline-success" type="submit">Search</button>
 			    	<a class="btn btn-primary" href="${appRoot }/member/cart" role="button">장바구니</a>
 				</form>
 				<div class="col">
 					<form action="#">
-					
 						<button id=1>asfa</button>
 						<button id=2>asfa</button>
 						<button id=3>asfa</button>
@@ -40,7 +39,7 @@
 	</div>
 </div>
 
-<p><img src="/resources/images/dog.jpg"></p>
+<a href="${appRoot }/product/list">상품전체보기</a>
 
 </body>
 </html>
