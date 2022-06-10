@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("project")
 public class MainController {
+	
+	
 	@GetMapping("home")
 	public void main() {
 		
