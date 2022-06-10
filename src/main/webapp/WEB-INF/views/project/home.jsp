@@ -23,7 +23,6 @@
 			        <p><img src="/resources/images/a.jpg"></p>
 			        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="Search">
 			        <button class="btn btn-outline-success" type="submit">Search</button>
-			    	<a class="btn btn-primary" href="#" role="button">마이페이지</a>
 			    	<a class="btn btn-primary" href="${appRoot }/member/cart" role="button">장바구니</a>
 				</form>
 				<div class="col">
