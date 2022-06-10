@@ -56,6 +56,11 @@ public class ProductPageService {
 		// TODO Auto-generated method stub
 		return mapper.getBoardlist();
 	}
+	public boolean deleteBoard(ProductPageDto dto) {
+		int ok = mapper.deleteBoard(dto);
+		
+		return ok ==1;
+	}
 	
 
 	

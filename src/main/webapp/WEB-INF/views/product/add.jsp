@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix='c' uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="my" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
 <%
 	request.setCharacterEncoding("utf-8");
 %>
@@ -107,9 +107,12 @@ $(document).ready(function() {
 <title>Insert title here</title>
 </head>
 <body>
-<my:pagenavbar></my:pagenavbar>
-	<p>상품 추가 페이지 ${m_category[1].middle_name },
-		${m_category[1].product_middle_class}</p>
+	<my:pagenavbar></my:pagenavbar>
+	<div class="container">
+		<div class ="row">
+			<div class="col">
+			
+	<p>상품 추가 페이지 </p>
 	<!-- <form action="/market/product/product_add" method="post"> -->
 	<form action="/market/product/add" method="post"
 		enctype="multipart/form-data">
@@ -123,7 +126,7 @@ $(document).ready(function() {
 				<option value="${category.product_middle_class}">${category.middle_name }</option>
 			</c:forEach>
 		</select>
-		<div id="low_class_categorylist_get">
+		<div align="left" id="low_class_categorylist_get">
 
 			상품 소 분류 :
 			<select name="Product_low_class">
@@ -139,7 +142,7 @@ $(document).ready(function() {
 		<br />
 		가격 :
 		<input type="number" name="price" />
-	<!-- 	<button>상품등록</button>
+		<!-- 	<button>상품등록</button>
 	</form> -->
 
 		상품 게시글 제목 :
@@ -155,6 +158,10 @@ $(document).ready(function() {
 
 		<button>작성</button>
 	</form>
+			
+			</div>
+		</div>
+	</div>
 
 </body>
 </html>

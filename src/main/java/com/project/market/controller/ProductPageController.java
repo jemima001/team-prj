@@ -83,5 +83,15 @@ public class ProductPageController {
 	 model.addAttribute("boardlist", list);
 		
 	}
+	
+	@PostMapping("deleteBoard")
+	public String deleteBoard(ProductPageDto dto) {
+		//System.out.println(dto.getId());
+		 boolean ok = service.deleteBoard(dto);
+		System.out.println(ok);
+		// if 사용해서 메시지 출력 해야함
+		 return "redirect:/product/list";
+		
+	}
 
 }
