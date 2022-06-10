@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix = 'c' uri ="http://java.sun.com/jsp/jstl/core" %>
-    <%@ taglib prefix="my" tagdir="/WEB-INF/tags" %>
     <%request.setCharacterEncoding("utf-8"); %>
 <!DOCTYPE html>
 <html>
@@ -14,32 +13,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-<my:pagenavbar></my:pagenavbar>
-<div class="container">
-	<div class="row">
-		<div class="col">
-			
-				<form action="#" class="d-flex" role="search" method="post">
-			        <p><img src="resources/images/a.png"></p>
-			        <input class="form-control me-auto" type="search" placeholder="Search" aria-label="Search" name="Search">
-			        <button class="btn btn-outline-success" type="submit">Search</button>
-			    	<a class="btn btn-primary" href="${appRoot }/member/cart" role="button">장바구니</a>
-				</form>
-				<div class="col">
-					<form action="#">
-						<button id=1>asfa</button>
-						<button id=2>asfa</button>
-						<button id=3>asfa</button>
-						<button id=4>asfa</button>
-						<button id=5>asfa</button>
-						<button id=6>asfa</button>
-					</form>
-				</div>
-		</div>
-	</div>
-</div>
-
-<a href="${appRoot }/product/list">상품전체보기</a>
-
+<h1>판매 페이지 테스트</h1>
+<p>판매글 제목 : ${productboard.boardTitle }</p>
+<p>판매글 내용 : ${productboard.boardBody }</p>
+<p>판매 상품 : ${product.productname }</p>
+<p>가격 : ${product.price }</p>
 </body>
 </html>
