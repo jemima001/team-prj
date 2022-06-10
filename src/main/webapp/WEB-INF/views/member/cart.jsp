@@ -14,33 +14,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<my:pagenavbar></my:pagenavbar>
-<div class="container">
-	<div class="row">
-		<div class="col">
-			
-				<form action="#" class="d-flex" role="search" method="post">
-			        <p><img src="/resources/images/a.jpg"></p>
-			        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="Search">
-			        <button class="btn btn-outline-success" type="submit">Search</button>
-			    	<a class="btn btn-primary" href="${appRoot }/member/cart" role="button">장바구니</a>
-				</form>
-				<div class="col">
-					<form action="#">
-					
-						<button id=1>asfa</button>
-						<button id=2>asfa</button>
-						<button id=3>asfa</button>
-						<button id=4>asfa</button>
-						<button id=5>asfa</button>
-						<button id=6>asfa</button>
-					</form>
-				</div>
-		</div>
-	</div>
-</div>
-
-<p><img src="/resources/images/dog.jpg"></p>
-
+	<my:pagenavbar></my:pagenavbar>
+	<h1>장바구니</h1>
 </body>
 </html>
