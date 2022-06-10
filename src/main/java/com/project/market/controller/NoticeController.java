@@ -1,5 +1,6 @@
 package com.project.market.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +47,11 @@ public class NoticeController {
 	}
 	
 	@PostMapping("write")
-	public String wirteBoardProcess(NoticeDto notice, RedirectAttributes rttr) {
+	public String wirteBoardProcess(NoticeDto notice,
+									Principal principal,
+									RedirectAttributes rttr) {
+		
+		notice.setMemberId(principal.getName());
 		boolean success = service.addNotice(notice);
 		
 		if (success) {
@@ -55,7 +60,7 @@ public class NoticeController {
 			rttr.addFlashAttribute("message", "게시물 추가 중 문제가 발생하였습니다.");
 		}
 		
-		return "redirect:/notice/" + notice.getId();
+		return "redirect:/notice/list";
 	}
 
 }

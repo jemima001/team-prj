@@ -20,7 +20,7 @@
 	</select>
 	
 	<insert id="insertNotice">
-	INSERT INTO Notice (title, body) 
-	VALUES (#{title}, #{body})
+	INSERT INTO Notice (title, body, memberId) 
+	VALUES (#{title}, #{body}, #{memberId})
 	</insert>
 </mapper>
