@@ -171,6 +171,12 @@
 <body>
 	<my:pagenavbar current="mypage"></my:pagenavbar>
 	
+	<div class="containenr">
+		<a href="#">개인정보수정</a>
+		<a href="#">장바구니</a>
+		<a href="#">주문내역</a>
+	</div>
+	
 	<div class="container">
 	
 		
