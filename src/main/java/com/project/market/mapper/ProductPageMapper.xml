@@ -37,7 +37,8 @@ SELECT id as productId FROM Product ORDER BY id DESC LIMIT 1;
 
 
 <select id="getproductBoard" resultType="com.project.market.domain.ProductPageDto" >
-SElECT BoardTitle as boardTitle, 
+SElECT 	id,
+		BoardTitle as boardTitle, 
 		BoardBody as boardBody, 
 		productId, 
 		inserttime 
@@ -54,9 +55,15 @@ SELECT name as productname,
 </select>
 
 <select id="getBoardlist" resultType="com.project.market.domain.ProductPageDto" >
-SELECT ProductPage.id as id, BoardTitle, BoardBody, Product.price as price  FROM ProductPage 
+SELECT ProductPage.id as id, BoardTitle, BoardBody, Product.price as price,ProductPage.inserttime as inserttime  FROM ProductPage 
 							JOIN Product ON ProductPage.productId = Product.id;
 
 
 </select>
+
+<delete id="deleteBoard">
+DELETE FROM ProductPage 
+WHERE id = #{id};
+
+</delete>
 </mapper>

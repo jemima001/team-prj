@@ -27,7 +27,7 @@
 					<tbody>
 						<c:forEach items="${boardlist }" var="pege">
 							<tr>
-								<td>${pege.boardTitle }</td>
+								<td>${pege.id }</td>
 								<td>
 													
 									<c:url value="/product/get" var="getUrl">
@@ -53,8 +53,8 @@
 									</c:if> --%>
 									
 								</td>
-								<td>${board.writerNickName }</td>
-								<td>${board.prettyInserted }</td>
+								<td>${pege.price }</td>
+								<td>${pege.inserttime }</td>
 							</tr>
 						</c:forEach>
 					</tbody>

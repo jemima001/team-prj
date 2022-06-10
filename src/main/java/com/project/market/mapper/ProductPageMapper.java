@@ -31,6 +31,8 @@ public interface ProductPageMapper {
 
 	List<ProductPageDto> getBoardlist();
 
+	int deleteBoard(ProductPageDto dto);
+
 ;
 
 	

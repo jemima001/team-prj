@@ -20,5 +20,26 @@
 <p>판매글 내용 : ${productboard.boardBody }</p>
 <p>판매 상품 : ${product.productname }</p>
 <p>가격 : ${product.price }</p>
+<p>판매글 아이디 :${productboard.id }</p>
+<form action="/market/product/deleteBoard"  method="post">
+<input type="hidden" name="id" value="${productboard.id }" />
+<<input type="submit" value ="판매글 삭제" />
+</form>
+
+
+<!-- 수정폼 -->
+판매글 제목: <br />
+<input type="text" name="boardTitle" value="${productboard.boardTitle }" /> <br />
+판매글 내용 : <br />
+<textarea rows="10" cols="100" name="boardBody">${productboard.boardBody }</textarea> <br />
+판매 상품: <br />
+<input type="text" value="${product.productname }"  /> <br />
+
+가격 : <br />
+<input type="number" name="price" value="${product.price }" /> <br />
+
+
+
+
 </body>
 </html>
