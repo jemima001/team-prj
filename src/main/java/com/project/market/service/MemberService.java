@@ -1,7 +1,5 @@
 package com.project.market.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -30,7 +28,11 @@ public class MemberService {
 		// insert member  
 		int cnt1 = mapper.insertMember(member);
 		
-		return cnt1 == 1;
+		// insert auth
+		int cnt2 = mapper.insertAuth(member.getId(), "ROLE_USER");
+				
+		return cnt1 == 1 && cnt2 == 1;
+		
 	}
 
 	public boolean hasMemberId(String id) {
@@ -43,6 +45,50 @@ public class MemberService {
 
 	public boolean hasMemberNickName(String nickName) {
 		return mapper.countMemberNickName(nickName) > 0;
+	}
+
+	public MemberDto getMemberById(String id) {
+		// TODO Auto-generated method stub
+		return mapper.selectMemberById(id);
+	}
+	
+	@Transactional
+	public boolean removeMember(MemberDto dto) {
+		MemberDto member = mapper.selectMemberById(dto.getId());
+		
+		String rawPW = dto.getPassword();
+		String encodedPW = member.getPassword();
+		
+		if (passwordEncoder.matches(rawPW, encodedPW)) {
+					
+			// 권한테이블 삭제
+			mapper.deleteAuthById(dto.getId());
+			
+			// 멤버테이블 삭제
+			int cnt = mapper.deleteMemberById(dto.getId());
+			
+			return cnt == 1;
+		}
+		
+		return false;
+	}
+
+	public boolean modifyMember(MemberDto dto, String oldPassword) {
+		// db에서 member 읽어서
+		MemberDto oldMember = mapper.selectMemberById(dto.getId());
+		
+		String encodedPW = oldMember.getPassword();
+		
+		// 기존password가 일치할 때만 계속 진행
+		if (passwordEncoder.matches(oldPassword, encodedPW)) {
+			
+			// 암호 인코딩
+			dto.setPassword(passwordEncoder.encode(dto.getPassword()));
+			
+			return mapper.updateMember(dto) == 1;
+		}
+		
+		return false;
 	}
 	
 }

@@ -15,7 +15,7 @@
 </head>
 <body>
 
-	<my:pagenavbar></my:pagenavbar>
+	<my:pagenavbar current="login"></my:pagenavbar>
 	
 	<div class="container">
 	
