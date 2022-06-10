@@ -27,6 +27,42 @@
 		FROM Member
 		WHERE nickName = #{nickName}	
 	</select>
+	
+	<select id="selectMemberById" resultType="com.project.market.domain.MemberDto">
+		SELECT id,
+		       password,
+		       email,
+		       nickName,
+		       name,
+		       inserted
+		FROM   Member
+		WHERE id = #{id} 
+	</select>
+	
+	<!-- 권한 추가 -->
+	<insert id="insertAuth">
+		INSERT INTO Auth (memberId, role)
+		VALUES (#{id}, #{auth})
+	</insert>
+	
+	<delete id="deleteAuthById">
+		DELETE FROM Auth
+		WHERE memberId = #{id}
+	</delete>
+	
+	<delete id="deleteMemberById">
+		DELETE FROM Member
+		WHERE id = #{id}
+	</delete>
+	
+	<update id="updateMember">
+		UPDATE Member
+		SET password = #{password},
+		    email = #{email},
+		    nickName = #{nickName}
+		WHERE
+		    id = #{id}
+	</update>
 </mapper>
 
 
