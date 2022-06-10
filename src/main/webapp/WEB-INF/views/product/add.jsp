@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix='c' uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="my" tagdir="/WEB-INF/tags" %>
 <%
 	request.setCharacterEncoding("utf-8");
 %>
@@ -106,7 +107,7 @@ $(document).ready(function() {
 <title>Insert title here</title>
 </head>
 <body>
-
+<my:pagenavbar></my:pagenavbar>
 	<p>상품 추가 페이지 ${m_category[1].middle_name },
 		${m_category[1].product_middle_class}</p>
 	<!-- <form action="/market/product/product_add" method="post"> -->
