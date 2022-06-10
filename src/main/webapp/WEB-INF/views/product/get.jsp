@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix = 'c' uri ="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib prefix="my" tagdir="/WEB-INF/tags" %>
     <%request.setCharacterEncoding("utf-8"); %>
 <!DOCTYPE html>
 <html>
@@ -13,6 +14,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<my:pagenavbar></my:pagenavbar>
 <h1>판매 페이지 테스트</h1>
 <p>판매글 제목 : ${productboard.boardTitle }</p>
 <p>판매글 내용 : ${productboard.boardBody }</p>

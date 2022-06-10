@@ -33,13 +33,15 @@ public class ProductPageController {
 	}
 	
 	@PostMapping("add")
-	public void addproduct_in(ProductPageDto dto, ProductDto productdto) {
+	public String addproduct_in(ProductPageDto dto, ProductDto productdto) {
 		int productId = service.addProduct(productdto);
 		System.out.println("제품 판매글 로 받은 데이터");
 		System.out.println("판매글 제목 :"+dto.getBoardTitle());
 		System.out.println("판매글 내용 :"+dto.getBoardBody());
 		System.out.println("판매글 로 제품 id 학인 :" +productId);
 		service.AddProductPage(dto, productId);
+		return "redirect:/product/list";
+		
 	}
 	
 	@PostMapping("product_add")
