@@ -58,7 +58,9 @@
 							</tr>
 						</c:forEach>
 					</tbody>
+					
 				</table>
+				<a href="${appRoot }/product/add">게시물 작성</a>
 
 </body>
 </html>
