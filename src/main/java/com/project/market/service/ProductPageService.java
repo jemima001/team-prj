@@ -130,8 +130,13 @@ public class ProductPageService {
 	}
 	public List<String> getfileList(int id) {
 		List<String> fileList = mapper.getfileList(id);
-		System.out.println("fileList in 서비스:"+fileList);
+	//	System.out.println("fileList in 서비스:"+fileList);
 		return fileList;
+	}
+	public boolean upDateProduct(ProductDto dto) {
+		// TODO Auto-generated method stub
+		 int cun = mapper.updateProduct(dto);
+		return cun==1; 
 	}
 	
 

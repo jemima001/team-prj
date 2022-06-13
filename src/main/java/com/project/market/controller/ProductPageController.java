@@ -89,7 +89,7 @@ public class ProductPageController {
 		List<String> fileList = service.getfileList(id);
 		Board.setFileList(fileList);
 		
-		System.out.println("fileList:" +fileList);
+		//System.out.println("fileList:" +fileList);
 		
 		model.addAttribute("productboard", Board);
 		model.addAttribute("product", product);
@@ -117,11 +117,28 @@ public class ProductPageController {
 	@GetMapping("modif")
 	public void modifboard(int id, Model model) {
 		ProductPageDto productborad = service.getProductBoard(id);
+		productborad.setId(id);
 		int productId = productborad.getProductId();
 		ProductDto product = service.getproduct(productId);
+		
 		List<String> fileList = service.getfileList(id);
+		List<ProductDto> list = service.getcategory();
 		productborad.setFileList(fileList);
 		model.addAttribute("productpage", productborad);
+		model.addAttribute("m_category", list);
+		model.addAttribute("product", product);
+		System.out.println("수정 페이지 프로덕트 dto:"+product);
+		System.out.println();
 		// rttr.addFlashAttribute("product", product);
+	}
+	
+	@PostMapping("modif")
+	public void updateboard(ProductDto dto, ProductPageDto pageDto) {
+		System.out.println("포스트 수정 컨트롤러 !!!!!!!!!!!!!!!!!!!!!!!!");
+		System.out.println(dto);
+		System.out.println(pageDto);
+		
+		boolean ok = service.upDateProduct(dto);
+		
 	}
 }

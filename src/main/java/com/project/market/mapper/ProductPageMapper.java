@@ -37,6 +37,8 @@ public interface ProductPageMapper {
 	void insertFile(@Param("boardId")int string, @Param("fileName")String fileName);
 	
 	List<String> getfileList(int id);
+	
+	int updateProduct(ProductDto dto)
 
 ;
 

@@ -56,7 +56,8 @@ SELECT	File.fileName as fileList
 
 <select id="getproduct" resultType="com.project.market.domain.ProductDto">
 SELECT name as productname, 
-	   price as price
+	   price as price,
+	   Stock
 	   From Product 
 	   WHERE id =#{productId};
 
@@ -78,4 +79,16 @@ WHERE id = #{id};
 <insert id="insertFile">
 INSERT INTO File (boardId, fileName) VALUES(#{boardId}, #{fileName});
 </insert>
+
+<update id="updateProduct">
+UPDATE Product
+		SET name = #{productname},
+			Stock = #{Stock},
+            price = #{price},
+		WHERE 
+		    id = #{productId};
+
+
+</update>
+
 </mapper>
