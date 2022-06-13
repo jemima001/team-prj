@@ -35,7 +35,7 @@
 	
 	입금이 확인되면 구매가 확정됩니다. <br><br><br>
 	
-	 <form action="${appRoot }/product/list" method="post">
+	 <form action="${appRoot }/product/list" method="get">
 	<button id="submitButton11"> 상품 더 담기 </button>
 	<!-- 상품 페이지로 이동하는 버튼 -->
 	</form>
