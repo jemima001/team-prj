@@ -23,6 +23,8 @@ public interface MemberMapper {
 	int deleteMemberById(String id);
 
 	int updateMember(MemberDto dto);
+
+	int updateAddress(@Param("id") String id,@Param("member") MemberDto member);
 }
 
 

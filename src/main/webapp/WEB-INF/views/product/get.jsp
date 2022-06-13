@@ -27,49 +27,27 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<my:pagenavbar></my:pagenavbar>
-	<h1>판매 페이지 테스트</h1>
-	<form action="/market/product/list" method="get">
-		<!-- 여기에 구매 페이지 주소 입력 -->
-		<!-- 구매 버튼 연결 주소 입력 -->
-		<!-- 판매글 아이디(29번째줄), 상품 아이디(30번쨰줄) , 상품 구매수량(28번째줄) 넘어 갑니다. -->
-		<!-- 상품페이지 dto에 구매 수량 Purchase 추가 했습니다.(아직 사용한 곳은 없음...) -->
-		<p>판매글 제목 : ${productboard.boardTitle }</p>
-		<p>판매글 내용 : ${productboard.boardBody }</p>
-		<p>판매 상품 : ${product.productname }</p>
-		<p>가격 : ${product.price }</p>
-
-		
-		
-		<c:forEach items="${productboard.fileList }" var="file">
-			<%
-			if(pageContext.getAttribute("file") != null){
-					
-				String file = (String) pageContext.getAttribute("file");
-				String encodedFileName = java.net.URLEncoder.encode(file, "utf-8");
-				pageContext.setAttribute("encodedFileName", encodedFileName);
-			}
-			%>
-			
-			
-			
-			<div>
-				<img
-					src="${imageUrl }/project/${productboard.id}/${encodedFileName }"
-					alt="" />
-			</div>
-		</c:forEach>
-		
-		구매 수량
-		<input type="number" name="Purchase" value="1" />
-		<input type="hidden" value="${productboard.id }" />
-		<input type="hidden" value="${productboard.productId }" />
-		<button>구매 버튼</button>
-	</form>
-	<form action="/market/product/deleteBoard" method="post">
-		<input type="hidden" name="id" value="${productboard.id }" />
-		<input type="submit" value="판매글 삭제" />
-	</form>
+<my:pagenavbar></my:pagenavbar>
+<h1>판매 페이지 테스트</h1>
+<form action="${appRoot }/order/info" method="get">  <!-- 여기에 구매 페이지 주소 입력 -->
+<!-- 구매 버튼 연결 주소 입력 -->
+<!-- 판매글 아이디(29번째줄), 상품 아이디(30번쨰줄) , 상품 구매수량(28번째줄) 넘어 갑니다. -->
+<!-- 상품페이지 dto에 구매 수량 Purchase 추가 했습니다.(아직 사용한 곳은 없음...) -->
+<p>판매글 제목 : ${productboard.boardTitle }</p>
+<p>판매글 내용 : ${productboard.boardBody }</p>
+<p>판매 상품 : ${product.productname }</p>
+<p>가격 : ${product.price }</p>
+<p>판매글 아이디 :${productboard.id }</p>
+구매 수량
+<input type="number" name ="Purchase" value="1" />
+<input type="hidden" value ="${productboard.id }" />
+<input type="hidden" value ="${productboard.productId }"  />
+<button>구매 버튼</button>
+</form>
+<form action="/market/product/deleteBoard"  method="post">
+<input type="hidden" name="id" value="${productboard.id }" />
+<input type="submit" value ="판매글 삭제" />
+</form>
 
 
 

@@ -5,6 +5,18 @@
 <%
 	request.setCharacterEncoding("utf-8");
 %>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
+	
+<c:url value="/project/home" var="homeUrl" ></c:url>
+
+<sec:authorize access="isAuthenticated()">
+	<sec:authentication property="principal" var="principal" />
+	<c:url value="/order/cart" var="cartUrl">
+		<c:param name="id" value="${principal.username }" />
+	</c:url>
+</sec:authorize>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,12 +39,14 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<my:pagenavbar></my:pagenavbar>
+	<my:pagenavbar current="home"></my:pagenavbar>
 	<div class="container">
 		<div class="row">
 			<div class="col-md-3">
 				<p>
-					<img src="${appRoot }/resources/images/dog.jpg">
+					<a href="${homeUrl }">
+						<img src="${appRoot }/resources/images/dog.jpg">
+					</a>
 				</p>
 			</div>
 			<div class="col-md-9">
@@ -40,22 +54,25 @@
 					<input class="form-control me-auto" type="search"
 						placeholder="Search" aria-label="Search" name="Search">
 					<button class="btn btn-outline-success" type="submit">Search</button>
-					<a class="btn btn-primary" href="${appRoot }/member/cart"
-						role="button">장바구니</a>
+					<button class="btn btn-dark"><a href="${cartUrl }" class="nav-link ${current == 'cart' ? 'active' : '' }">장바구니</a></button>
 				</form>
-
-				<div class="col">
-					<form action="#">
-						<button id=1>asfa</button>
-						<button id=2>asfa</button>
-						<button id=3>asfa</button>
-						<button id=4>asfa</button>
-						<button id=5>asfa</button>
-						<button id=6>asfa</button>
-					</form>
-				</div>
 			</div>
 		</div>
+<hr />
+		<table class="table">
+			<thead>
+				<tr>
+					<th><a href="${appRoot }/product/list">ALL</a></th>
+					<th><a href="#">화분식물</a></th>
+					<th><a href="#">행잉식물</a></th>
+					<th><a href="#">선인장식물</a></th>
+					<th><a href="#">대형식물</a></th>
+					<th><a href="#">꽃</a></th>
+					<th><a href="#">기타</a></th>
+				</tr>
+			</thead>
+		</table>
+
 		<a href="${appRoot }/product/list">상품전체보기</a>
 		<div id="carouselExampleCaptions" class="carousel slide"
 			data-bs-ride="false">
