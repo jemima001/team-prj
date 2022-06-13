@@ -84,7 +84,7 @@ INSERT INTO File (boardId, fileName) VALUES(#{boardId}, #{fileName});
 UPDATE Product
 		SET name = #{productname},
 			Stock = #{Stock},
-            price = #{price},
+            price = #{price}
 		WHERE 
 		    id = #{productId};
 

@@ -67,8 +67,8 @@ $(document).ready(function() {
 		상품명 :
 		<br />
 		<input value ="${product.productname }" type="text" name="productname" readonly="readonly">
-		
-		
+		<input type="hidden" name="productId" value="${product.productId }" />
+	제품 아이디 :${product.productId }
 		상품 중 분류 :
 		<select id="middle_class" name="Product_middle_class">
 			<option value="0">분류 선택</option>

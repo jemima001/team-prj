@@ -120,7 +120,7 @@ public class ProductPageController {
 		productborad.setId(id);
 		int productId = productborad.getProductId();
 		ProductDto product = service.getproduct(productId);
-		
+		product.setProductId(productId);
 		List<String> fileList = service.getfileList(id);
 		List<ProductDto> list = service.getcategory();
 		productborad.setFileList(fileList);
@@ -138,7 +138,7 @@ public class ProductPageController {
 		System.out.println(dto);
 		System.out.println(pageDto);
 		
-		boolean ok = service.upDateProduct(dto);
+		 boolean ok = service.upDateProduct(dto);
 		
 	}
 }
