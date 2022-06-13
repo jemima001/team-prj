@@ -14,13 +14,13 @@ public class OrderDto {
 	
 	private String address;	//받는 사람 주소
 	
-	private String orderState; // 주문 상태
+	//private String orderState; // 주문 상태
 			
-	private int bookPrice; // 상품 1개 가격
+	//private int price; // 상품 1개 가격
 	
-	private int bookCount; //주문 수량
+	private int productCount; //주문 수량
 	
-	private List<OrderDto> orders; // 주문 수량(dto 어디서 받아올지 따라 수정할수도 있음)
+	private List<MemberDto> orders; // 주문 수량(dto 어디서 받아올지 따라 수정할수도 있음)/ 장바구니
 	
 	private int totalOrderPrice; //총 가격(상품 가격 * 주문 수량)
 	

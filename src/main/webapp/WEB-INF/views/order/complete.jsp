@@ -16,35 +16,15 @@
 
 </head>
 <body>
-<my:pagenavbar></my:pagenavbar>
+<my:pagenavbar current="complete"></my:pagenavbar>
+
+<div class="row justify-content-center">
+<div class="col-12 col-lg-6">
 
 <h4> 주문 완료 </h4> <br>
-
-
-<form id="form11" action="${appRoot }/order/complete" method="post">
-	
 	
 	<!-- 주문자 성함 -->
 	${member.id } 님의 주문이 완료되었습니다. <br> <br>
-	
-	
-	<h5>Recipient Info 수령자 정보</h5> <br> 
-	
-	
-	수령인 성함: <input type="text" name="receiver"/>
-	<!--<p id="receiverMessage10"></p>-->
-	<br>
-	
-	수령 주소 : <input type="text" name="address"/>
-	<!-- <p id="addressMessage10"></p> -->
-	<br> <br>
-	
-	<h5>Product Info 상품 정보</h5> <br>
-	
-	
-	상품 명 :${'aaaa' } <br>
-	
-	주문 수량 : <input type="number" > <br><br>
 	
 	
 	<h5>Payment Info 결제 정보</h5> <br> 
@@ -55,10 +35,12 @@
 	
 	입금이 확인되면 구매가 확정됩니다. <br><br><br>
 	
-	<button id="submitButton11" disabled> 상품 더 둘러보기 </button>
+	 <form action="${appRoot }/product/list" method="post">
+	<button id="submitButton11"> 상품 더 담기 </button>
 	<!-- 상품 페이지로 이동하는 버튼 -->
-	
-</form>
+	</form>
+</div>
+</div>
 
 
 
