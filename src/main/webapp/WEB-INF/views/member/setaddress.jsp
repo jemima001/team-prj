@@ -62,7 +62,7 @@
 					</div>
 
 					<div class="mt-3">
-						<button class="btn btn-primary" id="submitButton1">완료</button>
+						<button class="btn btn-success" id="submitButton1">완료</button>
 					</div>
 				</form>
 			</div>
