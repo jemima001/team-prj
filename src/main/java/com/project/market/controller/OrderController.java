@@ -70,4 +70,9 @@ public class OrderController {
 	public void orderComplete(OrderDto order) {
 		
 	}
+	
+	@GetMapping("cart")
+	public void cart() {
+		
+	}
 }

@@ -25,7 +25,7 @@
 
 <sec:authorize access="isAuthenticated()">
 	<sec:authentication property="principal" var="principal" />
-	<c:url value="/member/cart" var="cartUrl">
+	<c:url value="/order/cart" var="cartUrl">
 		<c:param name="id" value="${principal.username }" />
 	</c:url>
 </sec:authorize>
