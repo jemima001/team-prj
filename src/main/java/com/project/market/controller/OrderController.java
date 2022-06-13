@@ -27,12 +27,15 @@ public class OrderController {
 			Principal principal) {
 		
 		MemberDto memberdto = new MemberDto();//db에서 가져오기
+		
+		//MemberDto memberdto = memberSerivce.getMemberById(principal.getName());
+		
 		memberdto.setId("donald");
 		memberdto.setNickName("도람뿌"); //아직 데이터가 없으므로 임의로 지정함
 		
 		//memberdto.setpayment
 		
-		//MemberDto memberdto = memberSerivce.getMemberById(principal.getName());
+		
 		//productdto 승호씨가 만드는 영역이므로 우선 비활성화
 		//ProductDto productdto = new ProductDto(); // db에서 가져오기
 		//productdto.setId(1); //primary key
@@ -60,5 +63,11 @@ public class OrderController {
 			rttr.addFlashAttribute("order", order);
 			return "redirect:/market/project/order";
 		}
-	}	
+	}
+	
+	
+	@GetMapping("complete")
+	public void orderComplete(OrderDto order) {
+		
+	}
 }

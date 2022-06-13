@@ -12,61 +12,20 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
-<title> 주문서 작성 ▶ 스토어</title>
-
-<script>
-
-$(document).ready(function(){
-	let pwOk = false;
-	let addressOk = false;
-	
-	//패스워드 오타 확인
-	$("#passwordInput10, #passwordInput20").keyup(function(){
-		const pw1 = $("#passwordInput10").val();
-		const pw2 = $("#passwordInput20").val();
-		
-		pwOk = false;
-		if (pw1 == pw2) {
-			$("#passwordMessage10").text("비밀번호가 일치합니다.");
-			pwOk = true;
-		} elxe {
-			$("#passwordMessage10").text("비밀번호가 일치하지 않습니다.");
-		}
-		
-		enableSubmit();
-	});
-	
-	const enableSubmit = function(){
-		if(pwOk){
-			$("#submitButton10").removeAttr("disabled");
-		} else {
-			$("#submitButton10").attr("disabled","");
-		}
-	}
-});
-
-
-</script>
+<title>주문 완료</title>
 
 </head>
 <body>
-
-<!-- current 속성 추가하기(navbar) -->
 <my:pagenavbar></my:pagenavbar>
 
-
-<!--  
-<p id ="theme"> 주문 결제 Order/ Payment </p>
--->
-
-<h4> Order/Payment 주문/결제</h4> <br>
+<h4> 주문 완료 </h4> <br>
 
 
-<form id="form10" action="${appRoot }/order/info" method="post">
+<form id="form11" action="${appRoot }/order/complete" method="post">
 	
-	닉네임: ${member.nickName }  <br>
 	
-	주문자 성함: ${member.id } 님의 주문을 진행합니다. <br> <br>
+	<!-- 주문자 성함 -->
+	${member.id } 님의 주문이 완료되었습니다. <br> <br>
 	
 	
 	<h5>Recipient Info 수령자 정보</h5> <br> 
@@ -92,21 +51,14 @@ $(document).ready(function(){
 	
 	결제 금액 : ${123 } 원 <br><br>
 	
+	입금 정보 : 우리 352-1234-5678-90 스토어이름 <br>
 	
-	<h5> 비밀번호 확인 </h5> <br>
+	입금이 확인되면 구매가 확정됩니다. <br><br><br>
 	
-	결제 전, 비밀번호를 확인합니다. <br>
-	
-	비밀번호 : <input id="passwordInput10" type="text" name="password"/> <br>
-	
-	비밀번호 확인 : <input id="passwordInput20" type="text" name="passwordConfirm"/> <br>
-	<p id="passwordMessage10"></p>
-	
-	
-	<button id="submitButton10" disabled> 결제하기 </button>
+	<button id="submitButton11" disabled> 상품 더 둘러보기 </button>
+	<!-- 상품 페이지로 이동하는 버튼 -->
 	
 </form>
-
 
 
 
