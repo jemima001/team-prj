@@ -41,16 +41,10 @@
 
 
 <!-- 수정폼 -->
-판매글 제목: <br />
-<input type="text" name="boardTitle" value="${productboard.boardTitle }" /> <br />
-판매글 내용 : <br />
-<textarea rows="10" cols="100" name="boardBody">${productboard.boardBody }</textarea> <br />
-판매 상품: <br />
-<input type="text" value="${product.productname }"  /> <br />
-
-가격 : <br />
-<input type="number" name="price" value="${product.price }" /> <br />
-
+<form action="/market/product/modif">
+<input type="hidden" value= "${productboard.id }" name ="id" />
+<input type="submit" />
+</form>
 
 
 

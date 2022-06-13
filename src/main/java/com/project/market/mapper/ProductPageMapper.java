@@ -9,10 +9,11 @@ import com.project.market.domain.ProductPageDto;
 
 public interface ProductPageMapper {
 
-	int AddPage(@Param("boardTitle") String boardTitle, 
+	/*int AddPage(@Param("boardTitle") String boardTitle, 
 				@Param("boardBody") String boardBody, 
-				@Param("productId") int productId);
-
+				@Param("productId") int productId);*/
+	
+	int AddPage(ProductPageDto dto);
 	int Addproduct(ProductDto dto);
 
 	List<ProductDto> getcategory();
@@ -27,11 +28,17 @@ public interface ProductPageMapper {
 
 	ProductPageDto getproductBoard(int boardid);
 
-	ProductDto getproduct(String productId);
+	ProductDto getproduct(int productId);
 
 	List<ProductPageDto> getBoardlist();
 
 	int deleteBoard(ProductPageDto dto);
+
+	void insertFile(@Param("boardId")int string, @Param("fileName")String fileName);
+	
+	List<String> getfileList(int id);
+	
+	int updateProduct(ProductDto dto)
 
 ;
 

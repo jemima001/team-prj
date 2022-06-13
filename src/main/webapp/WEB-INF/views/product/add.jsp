@@ -159,7 +159,7 @@ $(document).ready(function() {
 		<br />
 		사진 업로드
 		<br />
-		<input multiple="multiple" type="file" />
+		<input multiple="multiple" type="file" name="file" accept = "image/*" />
 
 		<button>작성</button>
 	</form>
