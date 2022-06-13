@@ -146,6 +146,22 @@ public class MemberController {
 				(principal != null && principal.getName().equals(id));
 	}
 	
+	@GetMapping("setaddress")
+	public String getMember2(String id,
+			Principal principal,
+			HttpServletRequest request,
+			Model model) {
+		
+		if (hasAuthOrAdmin(id, principal, request)) {
+			MemberDto member = service.getMemberById(id);
+			model.addAttribute("member", member);
+			
+			return null;
+		}
+		
+		return "redirect:/member/login";
+	}
+	
 	@PostMapping("remove")
 	public String removeMember(MemberDto dto,
 			Principal principal,
@@ -163,7 +179,7 @@ public class MemberController {
 				return "redirect:/member/mypage";
 			}
 		} else {
-			return "redirect:/member/login";
+			return "redirect:/member/mypage";
 		}
 	}
 	
@@ -189,6 +205,26 @@ public class MemberController {
 		} else {
 			return "redirect:/member/login";
 		}
+		
+	}
+	
+	@PostMapping("setaddress")
+	public String modifyAddress(MemberDto dto,
+			Principal principal,
+			HttpServletRequest req,
+			RedirectAttributes rttr) {
+		
+			boolean success = service.setAddress(dto);
+			
+			if (success) {
+				rttr.addFlashAttribute("message", "기본배송지 설정이 완료되었습니다.");
+			} else {
+				rttr.addFlashAttribute("message", "기본배송지 설정이 완료되지 않았습니다.");
+			}
+			
+			rttr.addFlashAttribute("member", dto); // model object
+			rttr.addAttribute("id", dto.getId()); // query string
+			return "redirect:/member/mypage";
 		
 	}
 	
