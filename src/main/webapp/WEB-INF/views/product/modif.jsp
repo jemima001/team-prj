@@ -14,5 +14,13 @@
 </head>
 <body>
 <p>수정 페이지</p>
+
+<form action="/market/product/modif">
+	제목 : <br />
+	<input type="text" value="${productpage.boardTitle}" /> <br />
+	 본문 : <br />
+	 <textarea rows="15" cols="100">${productpage.boardBody}</textarea>
+	
+</form>
 </body>
 </html>

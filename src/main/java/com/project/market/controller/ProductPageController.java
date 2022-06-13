@@ -115,13 +115,13 @@ public class ProductPageController {
 	}
 
 	@GetMapping("modif")
-	public void modifboard(int id, RedirectAttributes rttr) {
+	public void modifboard(int id, Model model) {
 		ProductPageDto productborad = service.getProductBoard(id);
 		int productId = productborad.getProductId();
 		ProductDto product = service.getproduct(productId);
 		List<String> fileList = service.getfileList(id);
 		productborad.setFileList(fileList);
-		rttr.addFlashAttribute("productpage", productborad);
-		rttr.addFlashAttribute("product", product);
+		model.addAttribute("productpage", productborad);
+		// rttr.addFlashAttribute("product", product);
 	}
 }

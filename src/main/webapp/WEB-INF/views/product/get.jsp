@@ -38,20 +38,28 @@
 		<p>판매글 내용 : ${productboard.boardBody }</p>
 		<p>판매 상품 : ${product.productname }</p>
 		<p>가격 : ${product.price }</p>
+
+		
 		
 		<c:forEach items="${productboard.fileList }" var="file">
-			
 			<%
+			if(pageContext.getAttribute("file") != null){
+					
 				String file = (String) pageContext.getAttribute("file");
-			String encodedFileName = java.net.URLEncoder.encode(file, "utf-8");
-			pageContext.setAttribute("encodedFileName", encodedFileName);
+				String encodedFileName = java.net.URLEncoder.encode(file, "utf-8");
+				pageContext.setAttribute("encodedFileName", encodedFileName);
+			}
 			%>
+			
+			
+			
 			<div>
 				<img
 					src="${imageUrl }/project/${productboard.id}/${encodedFileName }"
 					alt="" />
 			</div>
 		</c:forEach>
+		
 		구매 수량
 		<input type="number" name="Purchase" value="1" />
 		<input type="hidden" value="${productboard.id }" />
