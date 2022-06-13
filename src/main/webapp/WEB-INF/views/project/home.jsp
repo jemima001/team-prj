@@ -7,6 +7,8 @@
 %>
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
+	
+<c:url value="/project/home" var="homeUrl" ></c:url>
 
 <sec:authorize access="isAuthenticated()">
 	<sec:authentication property="principal" var="principal" />
@@ -42,7 +44,9 @@
 		<div class="row">
 			<div class="col-md-3">
 				<p>
-					<img src="${appRoot }/resources/images/dog.jpg">
+					<a href="${homeUrl }">
+						<img src="${appRoot }/resources/images/dog.jpg">
+					</a>
 				</p>
 			</div>
 			<div class="col-md-9">
@@ -60,8 +64,8 @@
 				<tr>
 					<th><a href="${appRoot }/product/list">ALL</a></th>
 					<th><a href="#">화분식물</a></th>
+					<th><a href="#">행잉식물</a></th>
 					<th><a href="#">선인장식물</a></th>
-					<th><a href="#">미니식물</a></th>
 					<th><a href="#">대형식물</a></th>
 					<th><a href="#">꽃</a></th>
 					<th><a href="#">기타</a></th>
