@@ -119,6 +119,8 @@ $(document).ready(function() {
 		상품명 :
 		<br />
 		<input type="text" name="productname">
+		
+		
 		상품 중 분류 :
 		<select id="middle_class" name="Product_middle_class">
 			<option value="0">분류 선택</option>
@@ -126,7 +128,9 @@ $(document).ready(function() {
 				<option value="${category.product_middle_class}">${category.middle_name }</option>
 			</c:forEach>
 		</select>
-		<div align="left" id="low_class_categorylist_get">
+		
+		
+		<div id="low_class_categorylist_get" >
 
 			상품 소 분류 :
 			<select name="Product_low_class">
@@ -136,6 +140,7 @@ $(document).ready(function() {
 			</select>
 
 		</div>
+		
 		<br />
 		수량 :
 		<input type="number" name="Stock" />
