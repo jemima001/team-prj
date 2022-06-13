@@ -6,6 +6,7 @@
 <c:url value="/member/login" var="loginUrl"></c:url>
 <c:url value="/logout" var="logoutUrl"></c:url>
 <c:url value="/member/signup" var="signupUrl" ></c:url>
+<c:url value="/project/home" var="homeUrl" ></c:url>
 
 <sec:authorize access="isAuthenticated()">
 	<sec:authentication property="principal" var="principal"/>
@@ -14,19 +15,17 @@
 	</c:url>
 </sec:authorize>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light" ><!-- 색깔때문에 버튼 안보였음!! -->
+<nav class="navbar" style="background-color: #e3f233;">
   <div class="container">
-    <a class="navbar-brand" href="/spr/Board/boardlist"></a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
-    								data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse " id="navbarSupportedContent">
-      <ul id="nav" class="nav me-auto bg-light">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/market/project/home">Home</a>
-        </li>
-      </ul>
+    <a class="navbar-brand" href="${homeUrl }"><i class="fa-solid fa-house"></i></a>
+    
+    <!-- button.navbar-toggler>span.navbar-toggler-icon -->
+   <!--  <button class="navbar-toggler" 
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent">
+    	<span class="navbar-toggler-icon"></span>
+    </button> -->
+    
       <ul class="nav bg-light">
         <!-- 오른쪽으로 밀기 -->
         <sec:authorize access="not isAuthenticated()">
@@ -54,7 +53,7 @@
         </sec:authorize>
         
         <li class="nav-item">
-          <a class="nav-link" href="/market/project/cusCenter">고객센터</a>
+          <a class="nav-link" href="/market/notice/list">고객센터</a>
         </li>
       </ul>
       

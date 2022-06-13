@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.project.market.mapper.ProductPageMapper">
+
+<insert id="AddPage">
+INSERT INTO ProductPage (BoardTitle,BoardBody,productId) VALUES(#{boardTitle},#{boardBody},#{productId})
+
+</insert>
+
+<insert id="Addproduct">
+INSERT INTO Product (name,Stock,price) VALUES(#{productname},#{Stock},#{price})
+</insert>
+
+<select id="getcategory" resultType="com.project.market.domain.ProductDto">
+Select id as Product_middle_class , name as middle_name FROM Product_middle_class
+
+</select>
+
+<select id="getcategory_low" resultType="com.project.market.domain.ProductDto">
+SELECT id as Product_low_class ,  name as low_name
+FROM Product_low_class
+where Product_middle_class = #{Product_middle_class}
+
+</select>
+
+<insert id="Addcategory">
+INSERT INTO ProductCode (Productid, ProductCode0, ProductCode1) VALUES(#{productId},#{newProductCode0},#{newProductCode1})
+</insert>
+
+<select id="getproductId" resultType="int" >
+SELECT id as productId FROM Product ORDER BY id DESC LIMIT 1;
+
+</select>
+
+
+<select id="getproductBoard" resultType="com.project.market.domain.ProductPageDto" >
+SElECT 	id,
+		BoardTitle as boardTitle, 
+		BoardBody as boardBody, 
+		productId, 
+		inserttime 
+		FROM ProductPage 
+		WHERE id = #{boardId} ;
+</select>
+
+<select id="getproduct" resultType="com.project.market.domain.ProductDto">
+SELECT name as productname, 
+	   price as price
+	   From Product 
+	   WHERE id =#{productId};
+
+</select>
+
+<select id="getBoardlist" resultType="com.project.market.domain.ProductPageDto" >
+SELECT ProductPage.id as id, BoardTitle, BoardBody, Product.price as price,ProductPage.inserttime as inserttime  FROM ProductPage 
+							JOIN Product ON ProductPage.productId = Product.id;
+
+
+</select>
+
+<delete id="deleteBoard">
+DELETE FROM ProductPage 
+WHERE id = #{id};
+
+</delete>
+</mapper>
