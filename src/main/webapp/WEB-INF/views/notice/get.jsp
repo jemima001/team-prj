@@ -50,17 +50,15 @@ $(document).ready(function() {
 						<h2 style="display: inline;">고객센터</h2>
 					</li>
 				</ul>
-			</div>
-			<h1>
 				<sec:authorize access="hasRole('ADMIN')">
 						<button id="edit-button1" class="btn btn-secondary">
 							<i class="fa-solid fa-pen-to-square"></i>
 						</button>
 				</sec:authorize>
-			</h1>
-				<c:if test="${not empty message }">
-					<div class="alert alert-primary">${message }</div>
-				</c:if>
+			</div>
+			<c:if test="${not empty message }">
+				<div class="alert alert-primary">${message }</div>
+			</c:if>
 			<form id="form1" action="${appRoot }/notice/modify" method="post" enctype="multipart/form-data">
 				<input type="hidden" name="id" value="${notice.id }" />
 				<div>
