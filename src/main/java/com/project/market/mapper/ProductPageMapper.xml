@@ -5,7 +5,7 @@
 
 <mapper namespace="com.project.market.mapper.ProductPageMapper">
 
-<insert id="AddPage">
+<insert id="AddPage" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
 INSERT INTO ProductPage (BoardTitle,BoardBody,productId) VALUES(#{boardTitle},#{boardBody},#{productId})
 
 </insert>
@@ -37,26 +37,58 @@ SELECT id as productId FROM Product ORDER BY id DESC LIMIT 1;
 
 
 <select id="getproductBoard" resultType="com.project.market.domain.ProductPageDto" >
-SElECT BoardTitle as boardTitle, 
-		BoardBody as boardBody, 
-		productId, 
-		inserttime 
-		FROM ProductPage 
-		WHERE id = #{boardId} ;
+SElECT 	board.id,
+		board.BoardTitle as boardTitle, 
+		board.BoardBody as boardBody, 
+		board.productId, 
+		board.inserttime
+		FROM ProductPage as board
+		WHERE board.id = #{boardId} ;
+</select>
+
+<select id="getfileList" resultType="string">
+		
+SELECT	File.fileName as fileList
+		FROM ProductPage as board LEFT JOIN File ON board.id = File.boardId
+		WHERE board.id = #{id} ;
+
 </select>
 
 <select id="getproduct" resultType="com.project.market.domain.ProductDto">
 SELECT name as productname, 
-	   price as price
+	   price as price,
+	   Stock
 	   From Product 
 	   WHERE id =#{productId};
 
 </select>
 
 <select id="getBoardlist" resultType="com.project.market.domain.ProductPageDto" >
-SELECT ProductPage.id as id, BoardTitle, BoardBody, Product.price as price  FROM ProductPage 
+SELECT ProductPage.id as id, BoardTitle, BoardBody, Product.price as price,ProductPage.inserttime as inserttime  FROM ProductPage 
 							JOIN Product ON ProductPage.productId = Product.id;
 
 
 </select>
+
+<delete id="deleteBoard">
+DELETE FROM ProductPage 
+WHERE id = #{id};
+
+</delete>
+
+<insert id="insertFile">
+INSERT INTO File (boardId, fileName) VALUES(#{boardId}, #{fileName});
+</insert>
+
+<update id="updateProduct">
+UPDATE Product
+		SET name = #{productname},
+			Stock = #{Stock},
+            price = #{price}
+		WHERE 
+		    id = #{productId};
+
+
+</update>
+
 </mapper>

@@ -1,4 +1,4 @@
-<%@ tag language="java" pageEncoding="UTF-8"%>
+<%@ tag language="java" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri ="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ attribute name="current" %>
@@ -15,7 +15,7 @@
 	</c:url>
 </sec:authorize>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light mb-3">
+<nav class="navbar" style="background-color: #e3f233;">
   <div class="container">
     <a class="navbar-brand" href="${homeUrl }"><i class="fa-solid fa-house"></i></a>
     

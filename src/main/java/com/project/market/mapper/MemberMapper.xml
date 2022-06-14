@@ -63,6 +63,11 @@
 		WHERE
 		    id = #{id}
 	</update>
+	
+	<insert id="updateAddress">
+		INSERT INTO Address (memberId, address)
+		VALUES (#{id}, #{member.address})
+	</insert>
 </mapper>
 
 
