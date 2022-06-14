@@ -12,7 +12,12 @@
 		<security:csrf disabled="true" />
 		<security:form-login always-use-default-target="true" login-page="/member/login" default-target-url="/project/home" />
 		<security:logout logout-success-url="/project/home" />
+		<security:remember-me/>
 		
+		<!-- 공지사항 create, update, delete -->
+		<security:intercept-url pattern="/notice/write" access="isAuthenticated()"/>
+		<security:intercept-url pattern="/notice/modify" access="isAuthenticated()"/>
+		<security:intercept-url pattern="/notice/remove" access="isAuthenticated()"/>
 	</security:http>
 
 

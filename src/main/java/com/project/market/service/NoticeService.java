@@ -35,6 +35,16 @@ public class NoticeService {
 		NoticeDto board = mapper.selectNoticeById(id);
 		return board;
 	}
+
+	public boolean updateNotice(NoticeDto dto) {
+		int cnt = mapper.updateBoard(dto);
+		
+		return cnt == 1;
+	}
+
+	public boolean deleteNotice(int id) {
+		return mapper.deleteNotice(id) == 1;
+	}
 	
 	
 }

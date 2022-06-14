@@ -34,6 +34,7 @@ $(document).ready(function() {
 		}
 
 	});
+});
 </script>
 <title>Insert title here</title>
 </head>
@@ -51,14 +52,10 @@ $(document).ready(function() {
 				</ul>
 			</div>
 			<h1>
-				<sec:authorize access="isAuthenticated()">
-					<sec:authentication property="principal" var="principal"/>
-
-					<c:if test="${principal.username == board.memberId }">
+				<sec:authorize access="hasRole('ADMIN')">
 						<button id="edit-button1" class="btn btn-secondary">
 							<i class="fa-solid fa-pen-to-square"></i>
 						</button>
-					</c:if>
 				</sec:authorize>
 			</h1>
 				<c:if test="${not empty message }">

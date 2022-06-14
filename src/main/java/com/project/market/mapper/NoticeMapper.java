@@ -17,4 +17,8 @@ public interface NoticeMapper {
 
 	NoticeDto selectNoticeById(int id);
 
+	int updateBoard(NoticeDto dto);
+
+	int deleteNotice(int id);
+
 }

@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,9 +26,11 @@
 					</li>
 				</ul>
 				<ul class="nav bg-light">
-					<li>
-						<a href="/market/notice/write">글쓰기</a>
-					</li>
+					<sec:authorize access="hasRole('ADMIN')">
+						<li>
+							<a href="/market/notice/write">글쓰기</a>
+						</li>
+					</sec:authorize>
 				</ul>
 			</div>
 			<div class="container d-flex">

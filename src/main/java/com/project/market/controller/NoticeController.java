@@ -69,4 +69,53 @@ public class NoticeController {
 		model.addAttribute("notice", dto);
 		
 	}
+	
+	@PostMapping("modify")
+	public String modify(NoticeDto dto,
+			Principal principal, 
+			RedirectAttributes rttr) {
+		NoticeDto oldNotice = service.getNoticeById(dto.getId());
+		
+		if (oldNotice.getMemberId().equals(principal.getName())) {
+			boolean success = service.updateNotice(dto);
+			
+			if (success) {
+				rttr.addFlashAttribute("message", "글이 수정되었습니다.");
+			} else {
+				rttr.addFlashAttribute("message", "글이 수정되지 않았습니다.");
+			}
+			
+		} else {
+			rttr.addFlashAttribute("message", "권한이 없습니다.");
+		}
+		
+		rttr.addAttribute("id", dto.getId());
+		return "redirect:/notice/get";
+		
+	}
+	
+	@PostMapping("remove")
+	public String remove(NoticeDto dto, Principal principal, RedirectAttributes rttr) {
+		
+		// 게시물 정보 얻고
+		NoticeDto oldBoard = service.getNoticeById(dto.getId());
+		// 게시물 작성자(memberId)와 principal의 name과 비교해서 같을 때만 진행.
+		if (oldBoard.getMemberId().equals(principal.getName())) {
+			boolean success = service.deleteNotice(dto.getId());
+			
+			if (success) {
+				rttr.addFlashAttribute("message", "글이 삭제 되었습니다.");
+				
+			} else {
+				rttr.addFlashAttribute("message", "글이 삭제 되지않았습니다.");
+			}
+			
+		} else {
+			rttr.addFlashAttribute("message", "권한이 없습니다.");
+			rttr.addAttribute("id", dto.getId());
+			return "redirect:/notice/get";
+		}
+		
+		return "redirect:/notice/list";
+	}
 }
