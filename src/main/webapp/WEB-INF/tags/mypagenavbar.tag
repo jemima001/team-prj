@@ -8,6 +8,7 @@
 <c:url value="/logout" var="logoutUrl"></c:url>
 <c:url value="/member/signup" var="signupUrl"></c:url>
 <c:url value="/project/home" var="homeUrl"></c:url>
+<c:url value="/member/adminpage" var="adminpageUrl"></c:url>
 
 <sec:authorize access="isAuthenticated()">
 	<sec:authentication property="principal" var="principal" />
@@ -34,7 +35,8 @@
 	<div class="container">
 		<sec:authorize access="hasRole('ADMIN')">
 			<a href="${adminpageUrl }" class="nav-link ${current == 'adminpage' ? 'active' : '' }" style="color: white;">회원관리</a>
-			<a href="#" class="nav-link ${current == 'orderlist' ? 'active' : '' }" style="color: white;">전체주문관리</a>
+			<a href="${appRoot }/member/orderlist" class="nav-link ${current == 'orderlist' ? 'active' : '' }" style="color: white;">전체주문관리</a>
+			<a href="${appRoot }/member/productlist" class="nav-link ${current == 'productlist' ? 'active' : '' }" style="color: white;">상품관리</a>
 		</sec:authorize>
 		<sec:authorize access="not hasRole('ADMIN')">
 		<a href="${mypageUrl }"

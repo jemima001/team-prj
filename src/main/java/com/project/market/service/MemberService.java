@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.project.market.domain.MemberDto;
+import com.project.market.domain.ProductDto;
 import com.project.market.mapper.MemberMapper;
 
 @Service
@@ -120,6 +121,10 @@ public class MemberService {
 	public List<MemberDto> listMember() {
 
 		return mapper.selectAllMember();
+	}
+	
+	public List<ProductDto> Productlist() {
+		return mapper.getProductlist();
 	}
 
 }
