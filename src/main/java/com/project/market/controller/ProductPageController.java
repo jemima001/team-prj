@@ -40,7 +40,7 @@ public class ProductPageController {
 	public String addproduct_in(ProductPageDto dto, 
 								ProductDto productdto, 
 								MultipartFile[] file) {
-		
+		System.out.println("중분류 확인 :"+productdto);
 		int productId = service.addProduct(productdto);
 		System.out.println("제품 판매글 로 받은 데이터");
 		System.out.println("판매글 제목 :"+dto.getBoardTitle());
@@ -98,9 +98,9 @@ public class ProductPageController {
 	}
 	
 	@GetMapping("list")
-	public void getlist(Model model) {
-		
-	 List<ProductPageDto> list = service.getboardlist();
+	public void getlist(Model model, String cat) {
+		System.out.println("cat:"+cat);
+	 List<ProductPageDto> list = service.getboardlist(cat);
 	 System.out.println(list);
 	 model.addAttribute("boardlist", list);
 		

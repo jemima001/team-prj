@@ -32,7 +32,7 @@ $(document).ready(function() {
 	
 	$('#middle_class').on('change', function() {
 		const data = {
-				Product_middle_class : $("#middle_class").val()
+				Product_Middle_Class : $("#middle_class").val()
 				} 
 		$.ajax({
 			url : "${appRoot}/product/get_low_class",
@@ -129,7 +129,7 @@ $(document).ready(function() {
 </div>
 
 					상품 중 분류 :
-					<select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" id="middle_class" name="Product_middle_class">
+					<select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" id="middle_class" name="Product_Middle_Class">
 						<option value="0">분류 선택</option>
 						<c:forEach items="${ m_category}" var="category">
 							<option value="${category.product_Middle_Class}">${category.middle_Name }</option>

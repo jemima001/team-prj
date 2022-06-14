@@ -95,7 +95,10 @@ public class ProductPageService {
 	public int addProduct(ProductDto dto) {
 		ProductDto NewProductDto = new ProductDto();
 		int ok = mapper.Addproduct(dto);
+		System.out.println(ok);
+		System.out.println(dto);
 		int productId =  mapper.getproductId(dto);
+		System.out.println(productId);
 		NewProductDto.setProductId(productId);
 		int NewProductCode0 = dto.getProduct_Middle_Class();
 		int	NewProductCode1 = dto.getProduct_Low_Class();
@@ -121,9 +124,9 @@ public class ProductPageService {
 		// TODO Auto-generated method stub
 		return mapper.getproduct(productId);
 	}
-	public List<ProductPageDto> getboardlist() {
+	public List<ProductPageDto> getboardlist(String cat) {
 		// TODO Auto-generated method stub
-		return mapper.getBoardlist();
+		return mapper.getBoardlist(cat);
 	}
 	public boolean deleteBoard(ProductPageDto dto) {
 		int ok = mapper.deleteBoard(dto);

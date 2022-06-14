@@ -27,7 +27,7 @@ where Product_middle_class = #{Product_middle_class}
 </select>
 
 <insert id="Addcategory">
-INSERT INTO ProductCode (Productid, ProductCode0, ProductCode1) VALUES(#{productId},#{newProductCode0},#{newProductCode1})
+INSERT INTO ProductCode (ProductId, ProductCode0, ProductCode1) VALUES(#{productId},#{newProductCode0},#{newProductCode1})
 </insert>
 
 <select id="getproductId" resultType="int" >
@@ -55,7 +55,7 @@ SELECT	File.fileName as fileList
 </select>
 
 <select id="getproduct" resultType="com.project.market.domain.ProductDto">
-SELECT name as productname, 
+SELECT name as productName, 
 	   price as price,
 	   Stock
 	   From Product 
@@ -82,7 +82,7 @@ INSERT INTO File (boardId, fileName) VALUES(#{boardId}, #{fileName});
 
 <update id="updateProduct">
 UPDATE Product
-		SET name = #{productname},
+		SET name = #{productName},
 			Stock = #{Stock},
             price = #{price}
 		WHERE 
@@ -105,4 +105,6 @@ DELETE FROM File
 	WHERE boardId = #{id}
 	  AND fileName = #{fileName}
 </delete>
+
+
 </mapper>
