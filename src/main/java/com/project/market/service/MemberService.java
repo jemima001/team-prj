@@ -1,5 +1,7 @@
 package com.project.market.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -104,9 +106,20 @@ public class MemberService {
 	}
 
 	public boolean setAddress(MemberDto dto) {
-		
+
 		return mapper.updateAddress(dto.getId(), dto) == 1;
 
+	}
+
+	public void initPassword(String id) {
+
+		String pw = passwordEncoder.encode(id);
+		mapper.updatePasswordById(id, pw);
+	}
+
+	public List<MemberDto> listMember() {
+
+		return mapper.selectAllMember();
 	}
 
 }

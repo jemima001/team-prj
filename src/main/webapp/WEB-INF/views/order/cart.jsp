@@ -27,7 +27,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<my:pagenavbar></my:pagenavbar>
+	<my:pagenavbar current="cart"></my:pagenavbar>
 	<div class="container">
 		<div class="row">
 			<div class="col">

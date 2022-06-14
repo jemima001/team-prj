@@ -68,6 +68,23 @@
 		INSERT INTO Address (memberId, address)
 		VALUES (#{id}, #{member.address})
 	</insert>
+	
+	<update id="updatePasswordById">
+		UPDATE Member
+		SET password = #{pw}
+		WHERE id = #{id}
+	</update>
+	
+	<select id="selectAllMember" resultType="com.project.market.domain.MemberDto">
+		SELECT id,
+		       password,
+		       name,
+		       email,
+		       nickName,
+		       inserted
+		FROM   Member
+		ORDER BY inserted DESC
+	</select>
 </mapper>
 
 
