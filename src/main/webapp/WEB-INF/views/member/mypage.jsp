@@ -230,8 +230,7 @@
 
 						<label for="emailInput1" class="form-label"> 이메일 </label>
 						<div class="input-group">
-							<input class="form-control" id="emailInput1" type="email"
-								value="${member.email }" />
+							<input class="form-control" id="emailInput1" type="email" value="${member.email }" />
 							<button class="btn btn-secondary" id="emailCheckButton1" disabled>이메일중복확인</button>
 						</div>
 						<p class="form-text" id="emailMessage1"></p>
