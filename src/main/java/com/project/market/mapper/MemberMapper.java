@@ -1,8 +1,11 @@
 package com.project.market.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 import com.project.market.domain.MemberDto;
+import com.project.market.domain.ProductDto;
 
 public interface MemberMapper {
 
@@ -25,6 +28,12 @@ public interface MemberMapper {
 	int updateMember(MemberDto dto);
 
 	int updateAddress(@Param("id") String id,@Param("member") MemberDto member);
+	
+	void updatePasswordById(@Param("id") String id, @Param("pw") String pw);
+
+	List<MemberDto> selectAllMember();
+	
+	List<ProductDto> getProductlist();
 }
 
 

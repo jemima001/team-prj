@@ -1,6 +1,7 @@
 package com.project.market.controller;
 
 import java.security.Principal;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.project.market.domain.MemberDto;
+import com.project.market.domain.ProductDto;
 import com.project.market.service.MemberService;
 
 @Controller
@@ -228,8 +230,47 @@ public class MemberController {
 		
 	}
 	
-	@GetMapping("cart")
-	public void cart() {
+	@GetMapping("initpw")
+	public void initpwPage() {
 		
 	}
+	
+	@PostMapping("initpw")
+	public String initpwProcess(String id) {
+		service.initPassword(id);
+		
+		return "redirect:/project/home";
+	}
+	
+	@GetMapping("adminpage")
+	// jsp (id, password, email, nickName, inserted) table로 보여주세요.
+	// ORDER BY inserted DESC
+	public void list(Model model) {
+		List<MemberDto> list = service.listMember();
+		model.addAttribute("memberList", list);
+	}
+	
+	@GetMapping("productlist")
+	public void getlist(Model model) {
+		
+	 List<ProductDto> list = service.Productlist();
+	 System.out.println(list);
+	 model.addAttribute("productlist", list);
+		
+	}
+	
+	@PostMapping("productRemove")
+	public String removeProduct(ProductDto dto) {
+		
+		return "redirect:/member/productlist";
+	}
+	
+	@GetMapping("orderlist")
+	public void getOrderlist(Model model) {
+		
+		List<MemberDto> list = service.listMember();
+		model.addAttribute("memberList", list);
+		
+	}
+	
 }

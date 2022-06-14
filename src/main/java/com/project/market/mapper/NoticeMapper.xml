@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.market.mapper.NoticeMapper">
+	<select id="selectNotice" resultType="com.project.market.domain.NoticeDto">
+	SELECT n.id, 
+  		   n.title, 
+  		   n.inserted,
+  		   m.nickName writerNickName 
+  	FROM Notice n JOIN Member m ON n.memberId = m.id 
+  	GROUP BY id
+  	ORDER BY id DESC
+  	LIMIT #{from }, #{row }
+	</select>
+	
+	<select id="countBoard" resultType="int">
+	SELECT Count(id) 
+	FROM Notice
+	</select>
+	
+	<insert id="insertNotice">
+	INSERT INTO Notice (title, body, memberId) 
+	VALUES (#{title}, #{body}, #{memberId})
+	</insert>
+	
+	<select id="selectNoticeById" resultType="com.project.market.domain.NoticeDto">
+	SELECT n.id, 
+	       n.title, 
+	       n.body, 
+	       n.inserted, 
+	       m.id memberId,
+	       m.nickName writerNickName
+	FROM Notice n JOIN Member m ON n.memberId = m.id
+	WHERE n.id = #{id}
+	</select>
+	
+	<update id="updateBoard">
+	UPDATE Notice
+	SET title = #{title},
+		body = #{body}
+	WHERE id = #{id}
+	</update>
+	
+	<delete id="deleteNotice">
+	DELETE FROM Notice
+	WHERE id = #{id }
+	</delete>
+</mapper>
