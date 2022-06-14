@@ -98,9 +98,14 @@ public class ProductPageController {
 	}
 	
 	@GetMapping("list")
-	public void getlist(Model model, String cat) {
+	public void getlist(Model model, String cat, String search) {
+		List<ProductDto> categoryList = service.getcategory();
+		// ajx로 나중에 처리 시도 해야
+		/*List<ProductDto> list_low = service.getcategory_low();*/
+		model.addAttribute("m_category", categoryList);
 		System.out.println("cat:"+cat);
-	 List<ProductPageDto> list = service.getboardlist(cat);
+		
+	    List<ProductPageDto> list = service.getboardlist(cat, search);
 	 System.out.println(list);
 	 model.addAttribute("boardlist", list);
 		

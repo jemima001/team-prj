@@ -31,7 +31,7 @@ public interface ProductPageMapper {
 
 	ProductDto getproduct(int productId);
 
-	List<ProductPageDto> getBoardlist(String cat);
+	List<ProductPageDto> getBoardlist(@Param("cat") String cat,@Param("search") String search);
 
 	int deleteBoard(ProductPageDto dto);
 

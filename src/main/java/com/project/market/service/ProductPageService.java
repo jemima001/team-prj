@@ -124,9 +124,9 @@ public class ProductPageService {
 		// TODO Auto-generated method stub
 		return mapper.getproduct(productId);
 	}
-	public List<ProductPageDto> getboardlist(String cat) {
+	public List<ProductPageDto> getboardlist(String cat, String search ) {
 		// TODO Auto-generated method stub
-		return mapper.getBoardlist(cat);
+		return mapper.getBoardlist(cat, "%" + search +"%");
 	}
 	public boolean deleteBoard(ProductPageDto dto) {
 		int ok = mapper.deleteBoard(dto);
