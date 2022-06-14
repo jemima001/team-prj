@@ -1,6 +1,7 @@
 package com.project.market.service;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -19,6 +20,7 @@ import com.project.market.mapper.ProductPageMapper;
 import software.amazon.awssdk.core.sync.RequestBody;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.s3.S3Client;
+import software.amazon.awssdk.services.s3.model.DeleteObjectRequest;
 import software.amazon.awssdk.services.s3.model.ObjectCannedACL;
 import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 
@@ -93,10 +95,13 @@ public class ProductPageService {
 	public int addProduct(ProductDto dto) {
 		ProductDto NewProductDto = new ProductDto();
 		int ok = mapper.Addproduct(dto);
+		System.out.println(ok);
+		System.out.println(dto);
 		int productId =  mapper.getproductId(dto);
+		System.out.println(productId);
 		NewProductDto.setProductId(productId);
-		int NewProductCode0 = dto.getProduct_middle_class();
-		int	NewProductCode1 = dto.getProduct_low_class();
+		int NewProductCode0 = dto.getProduct_Middle_Class();
+		int	NewProductCode1 = dto.getProduct_Low_Class();
 		
 		mapper.Addcategory(NewProductCode0, NewProductCode1 , productId);
 		return mapper.getproductId(NewProductDto);
@@ -119,9 +124,9 @@ public class ProductPageService {
 		// TODO Auto-generated method stub
 		return mapper.getproduct(productId);
 	}
-	public List<ProductPageDto> getboardlist() {
+	public List<ProductPageDto> getboardlist(String cat) {
 		// TODO Auto-generated method stub
-		return mapper.getBoardlist();
+		return mapper.getBoardlist(cat);
 	}
 	public boolean deleteBoard(ProductPageDto dto) {
 		int ok = mapper.deleteBoard(dto);
@@ -137,6 +142,35 @@ public class ProductPageService {
 		// TODO Auto-generated method stub
 		 int cun = mapper.updateProduct(dto);
 		return cun==1; 
+	}
+	@Transactional
+	public boolean upDatepage(ProductPageDto pageDto, MultipartFile[] files, ArrayList<String> deleteImg) {
+		System.out.println("getId 페이지 아이디 확인 :"+pageDto.getId());
+		
+		if(deleteImg != null) {
+			for (String fileName : deleteImg ) {
+				deleterFromAwsS3(pageDto.getId(), fileName);
+				mapper.deleteImg(pageDto.getId(), fileName);
+			}
+		}
+		
+		
+		if(files != null) {
+			
+		addFiles(pageDto.getId(), files);
+		
+		}
+		
+		int cun = mapper.updataPage(pageDto);
+		return cun==1;
+	}
+	private void deleterFromAwsS3(int id, String fileName) {
+		String key = "board/" + id +"/"+ fileName;
+		DeleteObjectRequest deleteObjectRequest = DeleteObjectRequest.builder()
+				.bucket(bucketName)
+				.key(key)
+				.build();
+		s3.deleteObject(deleteObjectRequest);
 	}
 	
 

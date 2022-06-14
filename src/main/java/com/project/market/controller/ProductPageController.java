@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -39,6 +40,7 @@ public class ProductPageController {
 	public String addproduct_in(ProductPageDto dto, 
 								ProductDto productdto, 
 								MultipartFile[] file) {
+		System.out.println("중분류 확인 :"+productdto);
 		int productId = service.addProduct(productdto);
 		System.out.println("제품 판매글 로 받은 데이터");
 		System.out.println("판매글 제목 :"+dto.getBoardTitle());
@@ -65,17 +67,17 @@ public class ProductPageController {
 	public void productadd(ProductDto dto) {
 		
 		System.out.println("제품 등록으로 받은 데이터");
-		System.out.println("productname:"+dto.getProductname());
+		System.out.println("productname:"+dto.getProductName());
 		System.out.println("Stock:"+dto.getStock());
-		System.out.println("proce:"+dto.getPrice());
-		System.out.println("M-class:"+dto.getProduct_middle_class());
-		System.out.println("low-class:"+dto.getProduct_low_class());
+		System.out.println("price:"+dto.getPrice());
+		System.out.println("M-class:"+dto.getProduct_Middle_Class());
+		System.out.println("low-class:"+dto.getProduct_Low_Class());
 		 service.addProduct(dto);
 		
 	}
 	@GetMapping("get_low_class")
 	@ResponseBody
-	public List<ProductDto> retrun_low_class(ProductDto dto){
+	public List<ProductDto> return_low_class(ProductDto dto){
 		
 		List<ProductDto> list = service.getcategory_low(dto);
 		System.out.println("low_list ajax통신 소분류 카테고리 :"+list);
@@ -96,9 +98,9 @@ public class ProductPageController {
 	}
 	
 	@GetMapping("list")
-	public void getlist(Model model) {
-		
-	 List<ProductPageDto> list = service.getboardlist();
+	public void getlist(Model model, String cat) {
+		System.out.println("cat:"+cat);
+	 List<ProductPageDto> list = service.getboardlist(cat);
 	 System.out.println(list);
 	 model.addAttribute("boardlist", list);
 		
@@ -133,12 +135,26 @@ public class ProductPageController {
 	}
 	
 	@PostMapping("modif")
-	public void updateboard(ProductDto dto, ProductPageDto pageDto) {
+	public String updateboard(ProductDto dto, 
+							ProductPageDto pageDto, 
+							MultipartFile[] file,
+							@RequestParam(name = "deleteImg", required = false) ArrayList<String> deleteImg) {
 		System.out.println("포스트 수정 컨트롤러 !!!!!!!!!!!!!!!!!!!!!!!!");
 		System.out.println(dto);
 		System.out.println(pageDto);
+		System.out.println(deleteImg);
+		// 사진 추가 코드 입력
+				if (file != null) {
+					List<String> fileList = new ArrayList<String>();
+					for (MultipartFile f : file) {
+						fileList.add(f.getOriginalFilename());
+					}
+					pageDto.setFileList(fileList);
+				}
 		
-		 boolean ok = service.upDateProduct(dto);
+		boolean ok = service.upDateProduct(dto);
+		boolean ok_page = service.upDatepage(pageDto , file, deleteImg);
+		return "redirect:/product/get?id="+pageDto.getId();
 		
 	}
 }
