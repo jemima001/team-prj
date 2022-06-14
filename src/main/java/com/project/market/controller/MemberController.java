@@ -1,6 +1,7 @@
 package com.project.market.controller;
 
 import java.security.Principal;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -228,8 +229,24 @@ public class MemberController {
 		
 	}
 	
-	@GetMapping("cart")
-	public void cart() {
+	@GetMapping("initpw")
+	public void initpwPage() {
 		
 	}
+	
+	@PostMapping("initpw")
+	public String initpwProcess(String id) {
+		service.initPassword(id);
+		
+		return "redirect:/project/home";
+	}
+	
+	@GetMapping("adminpage")
+	// jsp (id, password, email, nickName, inserted) table로 보여주세요.
+	// ORDER BY inserted DESC
+	public void list(Model model) {
+		List<MemberDto> list = service.listMember();
+		model.addAttribute("memberList", list);
+	}
+	
 }

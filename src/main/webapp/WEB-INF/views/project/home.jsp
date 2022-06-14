@@ -45,7 +45,7 @@
 			<div class="col-md-3">
 				<p>
 					<a href="${homeUrl }">
-						<img src="${appRoot }/resources/images/dog.jpg">
+						<img src="${appRoot }/resources/images/logo.jpg">
 					</a>
 				</p>
 			</div>
@@ -54,7 +54,7 @@
 					<input class="form-control me-auto" type="search"
 						placeholder="Search" aria-label="Search" name="Search">
 					<button class="btn btn-outline-success" type="submit">Search</button>
-					<button class="btn btn-dark"><a href="${cartUrl }" class="nav-link ${current == 'cart' ? 'active' : '' }">장바구니</a></button>
+					<button class="btn btn-outline-dark"><a href="${cartUrl }" class="nav-link ${current == 'cart' ? 'active' : '' }">장바구니</a></button>
 				</form>
 			</div>
 		</div>
@@ -62,18 +62,17 @@
 		<table class="table">
 			<thead>
 				<tr>
-					<th><a href="${appRoot }/product/list">ALL</a></th>
-					<th><a href="#">화분식물</a></th>
-					<th><a href="#">행잉식물</a></th>
-					<th><a href="#">선인장식물</a></th>
-					<th><a href="#">대형식물</a></th>
-					<th><a href="#">꽃</a></th>
-					<th><a href="#">기타</a></th>
+					<th><a href="${appRoot }/product/list" style="color: black;">ALL</a></th>
+					<th><a href="#" style="color: black;">화분식물</a></th>
+					<th><a href="#" style="color: black;">행잉식물</a></th>
+					<th><a href="#" style="color: black;">선인장식물</a></th>
+					<th><a href="#" style="color: black;">대형식물</a></th>
+					<th><a href="#" style="color: black;">꽃</a></th>
+					<th><a href="#" style="color: black;">기타</a></th>
 				</tr>
 			</thead>
 		</table>
 
-		<a href="${appRoot }/product/list">상품전체보기</a>
 		<div id="carouselExampleCaptions" class="carousel slide"
 			data-bs-ride="false">
 			<div class="carousel-indicators">
@@ -87,7 +86,7 @@
 			</div>
 			<div class="carousel-inner">
 				<div class="carousel-item active">
-					<img src="${appRoot }/resources/images/dog.jpg"
+					<img src="${appRoot }/resources/images/main.JPG"
 						class="d-block w-100" alt="...">
 					<div class="carousel-caption d-none d-md-block">
 						<h5>First slide label</h5>
@@ -96,7 +95,7 @@
 					</div>
 				</div>
 				<div class="carousel-item">
-					<img src="${appRoot }/resources/images/a.png" class="d-block w-100"
+					<img src="${appRoot }/resources/images/main2.jpg" class="d-block w-100"
 						alt="...">
 					<div class="carousel-caption d-none d-md-block">
 						<h5>Second slide label</h5>
@@ -105,7 +104,7 @@
 					</div>
 				</div>
 				<div class="carousel-item">
-					<img src="${appRoot }/resources/images/cc.png"
+					<img src="${appRoot }/resources/images/main3.jpg"
 						class="d-block w-100" alt="...">
 					<div class="carousel-caption d-none d-md-block">
 						<h5>Third slide label</h5>
@@ -129,22 +128,22 @@
 		<div class="row">
 			<div class="col">
 				<p>
-					<img src="${appRoot }/resources/images/dog.jpg">
+					<img src="${appRoot }/resources/images/1.jpg">
 				</p>
 			</div>
 			<div class="col">
 				<p>
-					<img src="${appRoot }/resources/images/dog.jpg">
+					<img src="${appRoot }/resources/images/2.jpg">
 				</p>
 			</div>
 			<div class="col">
 				<p>
-					<img src="${appRoot }/resources/images/dog.jpg">
+					<img src="${appRoot }/resources/images/3.jpg">
 				</p>
 			</div>
 			<div class="col">
 				<p>
-					<img src="${appRoot }/resources/images/dog.jpg">
+					<img src="${appRoot }/resources/images/4.jpg">
 				</p>
 			</div>
 		</div>
