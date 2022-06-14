@@ -11,7 +11,7 @@ INSERT INTO ProductPage (BoardTitle,BoardBody,productId) VALUES(#{boardTitle},#{
 </insert>
 
 <insert id="Addproduct">
-INSERT INTO Product (name,Stock,price) VALUES(#{productname},#{Stock},#{price})
+INSERT INTO Product (name,Stock,price) VALUES(#{productName},#{Stock},#{price})
 </insert>
 
 <select id="getcategory" resultType="com.project.market.domain.ProductDto">
@@ -64,7 +64,7 @@ SELECT name as productname,
 </select>
 
 <select id="getBoardlist" resultType="com.project.market.domain.ProductPageDto" >
-SELECT ProductPage.id as id, BoardTitle, BoardBody, Product.price as price,ProductPage.inserttime as inserttime  FROM ProductPage 
+SELECT ProductPage.id as id, BoardTitle, BoardBody, Product.price as priceTopage,ProductPage.inserttime as inserttime  FROM ProductPage 
 							JOIN Product ON ProductPage.productId = Product.id;
 
 
@@ -90,5 +90,19 @@ UPDATE Product
 
 
 </update>
+<update id="updataPage">
+UPDATE ProductPage
+		SET BoardTitle = #{boardTitle},
+			BoardBody = #{boardBody}
+		WHERE 
+		    id = #{id};
 
+</update>
+
+
+<delete id="deleteImg">
+DELETE FROM File
+	WHERE boardId = #{id}
+	  AND fileName = #{fileName}
+</delete>
 </mapper>

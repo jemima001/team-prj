@@ -53,7 +53,7 @@
 									</c:if> --%>
 									
 								</td>
-								<td>${pege.price }</td>
+								<td>${pege.priceTopage }</td>
 								<td>${pege.inserttime }</td>
 							</tr>
 						</c:forEach>

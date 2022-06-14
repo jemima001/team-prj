@@ -3,6 +3,7 @@ package com.project.market.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
+import org.springframework.security.access.method.P;
 
 import com.project.market.domain.ProductDto;
 import com.project.market.domain.ProductPageDto;
@@ -38,9 +39,10 @@ public interface ProductPageMapper {
 	
 	List<String> getfileList(int id);
 	
-	int updateProduct(ProductDto dto)
+	int updateProduct(ProductDto dto);
+	int updataPage(ProductPageDto pageDto);
 
-;
+	void deleteImg(@Param("id")int id,@Param("fileName") String fileName);
 
 	
 

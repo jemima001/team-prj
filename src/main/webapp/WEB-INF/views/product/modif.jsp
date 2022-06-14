@@ -63,12 +63,15 @@ $(document).ready(function() {
 <my:pagenavbar></my:pagenavbar>
 <p>수정 페이지</p>
 
-<form action="/market/product/modif" method="post">
+<form action="/market/product/modif" method="post" enctype="multipart/form-data">
 		상품명 :
 		<br />
-		<input value ="${product.productname }" type="text" name="productname" readonly="readonly">
-		<input type="hidden" name="productId" value="${product.productId }" />
-	제품 아이디 :${product.productId }
+		<input value ="${product.productName }" type="text" name="productName" readonly="readonly">
+		<input type="hidden" name="price" value="${product.price }" /> <br />
+		현재 재고 :
+ 		<input type="hidden" name="productId" value="${product.productId }" /> <br />
+		<input type="number" name = "Stock" value ="${product.stock }"><br />
+	제품 아이디 :${product.productId } <br />
 		상품 중 분류 :
 		<select id="middle_class" name="Product_middle_class">
 			<option value="0">분류 선택</option>
@@ -93,9 +96,10 @@ $(document).ready(function() {
 		<input type="number" name = "Stock" value="${product.stock }"/>
 		<br />
 	제목 : <br />
-	<input type="text" value="${productpage.boardTitle}" /> <br />
+	<input type="hidden" name="id" value="${productpage.id}" />
+	<input type="text" value="${productpage.boardTitle}" name="boardTitle" /> <br />
 	 본문 : <br />
-	 <textarea rows="15" cols="100">${productpage.boardBody}</textarea>
+	 <textarea rows="15" cols="100" name="boardBody">${productpage.boardBody}</textarea>
 	
 	<c:forEach items="${productpage.fileList }" var="file">
 			<%
@@ -110,13 +114,16 @@ $(document).ready(function() {
 			
 			
 			<div>
+			<input type="checkbox" id="deleteImg" name="deleteImg" value="${file }">
 				<img
 					src="${imageUrl }/project/${productpage.id}/${encodedFileName }"
 					alt="" />
 			</div>
 		</c:forEach>
 		
-		
+		사진 업로드
+		<br />
+		<input multiple="multiple" type="file" name="file" accept = "image/*" />
 		
 		
 	<input type="submit" value="전송" />
