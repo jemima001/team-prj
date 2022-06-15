@@ -132,7 +132,7 @@
 		</choose>
 		
 		</if>
-		<if test="search == '%%'">
+		<if test="search == null">
 		
 		
 		<choose>
