@@ -99,8 +99,8 @@ public class ProductPageController {
 	
 	@GetMapping("list")
 	public void getlist(Model model, 
-						String cat, 
-						String search
+						@RequestParam(name = "cat", defaultValue = "0" ) String cat, 
+						@RequestParam(name ="search", defaultValue = "")String search
 						) {
 		
 		//List<String> fileList = service.getFileForList();
