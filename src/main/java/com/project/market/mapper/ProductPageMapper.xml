@@ -14,21 +14,21 @@
 
 	<insert id="Addproduct">
 		INSERT INTO Product (name,Stock,price)
-		VALUES(#{productName},#{Stock},#{price})
+		VALUES(#{productName},#{stock},#{price})
 	</insert>
 
 	<select id="getcategory"
 		resultType="com.project.market.domain.ProductDto">
-		Select id as Product_middle_class , name as middle_name FROM
+		Select id as product_Middle_Class , name as middle_Name FROM
 		Product_middle_class
 
 	</select>
 
 	<select id="getcategory_low"
 		resultType="com.project.market.domain.ProductDto">
-		SELECT id as Product_low_class , name as low_name
-		FROM Product_low_class
-		where Product_middle_class = #{Product_middle_class}
+		SELECT id as product_Low_Class , name as low_Name
+		FROM Product_low_Class
+		where Product_middle_class = #{Product_Middle_Class}
 
 	</select>
 
@@ -86,10 +86,15 @@
 		FROM ProductPage as pp Join ProductCode as p ON pp.productId = p.Productid
 		JOIN Product ON Product.id =pp.productId
 		Join Product_middle_class as pm ON p.ProductCode0 = pm.id
+		
+		
 		<if test="search != '%%'">
 		
 		
 		<choose>
+			<when test="cat==0">
+			WHERE pp.BoardTitle LIKE #{search}
+			</when>
 			<when test="cat== 1">
 				WHERE pm.id = 1
 				AND pp.BoardTitle LIKE #{search}
@@ -125,9 +130,9 @@
 				AND pp.BoardTitle LIKE #{search}
 			</when>
 		</choose>
-		WHERE pp.BoardTitle LIKE #{search}
+		
 		</if>
-
+		
 
 
 	</select>
@@ -167,6 +172,37 @@
 		WHERE boardId = #{id}
 		AND fileName = #{fileName}
 	</delete>
+
+	<select id="getprodutlist" resultType="com.project.market.domain.ProductDto">
+	
+	SELECT 
+	id as productId,
+	name as productName,
+	   Stock as Stock,
+       price as price
+ 			FROM Product;
+	
+	</select>
+
+<delete id="deleteCategory">
+ DELETE FROM ProductCode
+		WHERE Productid = #{productId};
+
+</delete>
+
+<delete id="DeleteProduct">
+DELETE FROM Product
+		WHERE id = #{productId};
+
+</delete>
+
+<update id="modifyProduct">
+UPDATE Product
+	SET Stock = #{stock},
+		price = #{price}
+	WHERE id =#{productId};
+
+</update>
 
 
 </mapper>

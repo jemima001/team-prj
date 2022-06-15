@@ -28,7 +28,7 @@
 <script>
 $(document).ready(function() {
 	
-	/* $("#low_class_categorylist_get").hide(); */
+	 $("#low_class_categorylist_get").hide(); 
 	
 	$('#middle_class').on('change', function() {
 		const data = {
@@ -114,7 +114,7 @@ $(document).ready(function() {
 		<div class="row">
 			<div class="col">
 
-				<p>상품 추가 페이지</p>
+				<h1></h1>
 				<!-- <form action="/market/product/product_add" method="post"> -->
 				<form action="/market/product/add" method="post"
 					enctype="multipart/form-data">
@@ -124,9 +124,9 @@ $(document).ready(function() {
  -->
 
 					<div class="mb-3">
-  <label for="productName" class="form-label">상품명</label>
-  <input type="text" name="productName" class="form-control" id="productNameInput">
-</div>
+  						<label for="productName" class="form-label">상품명</label>
+ 						 <input type="text" name="productName" class="form-control" id="productNameInput">
+					</div>
 
 					상품 중 분류 :
 					<select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" id="middle_class" name="Product_Middle_Class">
@@ -150,13 +150,13 @@ $(document).ready(function() {
 
 					<br />
 					수량 :
-					<input type="number" name="Stock" />
+					<input type="number" name="stock" min="0"/>
 					<br />
 					
 					
 					
 					가격 :
-					<input type="number" name="price" />
+					<input type="number" name="price" min="0" />
 					<!-- 	<button>상품등록</button>
 	</form> -->
 

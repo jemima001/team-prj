@@ -43,6 +43,11 @@ public interface ProductPageMapper {
 	int updataPage(ProductPageDto pageDto);
 
 	void deleteImg(@Param("id")int id,@Param("fileName") String fileName);
+	
+	List<ProductDto> getprodutlist();
+	int deleteCategory(ProductDto dto);
+	int DeleteProduct(ProductDto dto);
+	int modifyProduct(ProductDto dto);
 
 	
 

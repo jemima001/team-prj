@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.project.market.domain.ProductDto;
@@ -171,6 +172,25 @@ public class ProductPageService {
 				.key(key)
 				.build();
 		s3.deleteObject(deleteObjectRequest);
+	}
+
+	public List<ProductDto> Productlist() {
+		// TODO Auto-generated method stub
+		return mapper.getprodutlist();
+	}
+	@Transactional
+	public boolean deleteProduct(ProductDto dto) {
+		int okDeleteCategory= mapper.deleteCategory(dto);
+		int okDeleteProduct = mapper.DeleteProduct(dto);
+		
+		System.out.println("okDeleteCategory:"+okDeleteCategory);
+		System.out.println("okDeleteProduct:"+okDeleteProduct);
+		
+		return okDeleteProduct == 1;
+	}
+	public boolean modifyProduct(ProductDto dto) {
+		int ok = mapper.modifyProduct(dto);
+		return ok==1;
 	}
 	
 
