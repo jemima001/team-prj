@@ -15,7 +15,7 @@
 					<form action="${approot }/market/product/list" class="d-flex" role="search" method="get">
 					<div class="input-group">
 						<input class="form-control me-auto" type="search"
-							placeholder="Search" aria-label="Search" name="Search">
+							placeholder="Search" aria-label="Search" name="search">
 						<button class="btn btn-outline-success" type="submit">Search</button>
 					</div>
 					</form>
