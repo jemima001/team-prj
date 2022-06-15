@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.market.mapper.CartMapper">
+
+<select id="selectAllCart"
+		resultType="com.project.market.domain.CartDto">
+		SELECT c.cartId cartId,
+			p.name productName,
+			c.bookCount bookCount,
+			(p.price * c.bookCount) price 
+		FROM Product p 
+		JOIN Cart c ON p.id = c.productId
+		JOIN Member m ON m.id = c.memberId
+		WHERE m.id = #{id}
+	</select>
+
+
+
+</mapper>

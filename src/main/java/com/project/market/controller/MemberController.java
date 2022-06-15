@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.project.market.domain.MemberDto;
+import com.project.market.domain.ProductDto;
 import com.project.market.service.MemberService;
 
 @Controller
@@ -247,6 +248,34 @@ public class MemberController {
 	public void list(Model model) {
 		List<MemberDto> list = service.listMember();
 		model.addAttribute("memberList", list);
+	}
+	
+	@GetMapping("productlist")
+	public void getlist(Model model) {
+		
+	 List<ProductDto> list = service.Productlist();
+	 model.addAttribute("productlist", list);
+		
+	}
+	
+	@PostMapping("productRemove")
+	public String removeProduct(ProductDto dto) {
+		
+		return "redirect:/member/productlist";
+	}
+	
+	@PostMapping("productModify")
+	public String modifyProduct(ProductDto dto) {
+		
+		return "redirect:/member/productlist";
+	}
+	
+	@GetMapping("orderlist")
+	public void getOrderlist(Model model) {
+		
+		List<MemberDto> list = service.listMember();
+		model.addAttribute("memberList", list);
+		
 	}
 	
 }

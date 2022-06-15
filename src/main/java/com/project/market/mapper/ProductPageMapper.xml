@@ -5,90 +5,253 @@
 
 <mapper namespace="com.project.market.mapper.ProductPageMapper">
 
-<insert id="AddPage" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
-INSERT INTO ProductPage (BoardTitle,BoardBody,productId) VALUES(#{boardTitle},#{boardBody},#{productId})
+	<insert id="AddPage" useGeneratedKeys="true" keyColumn="id"
+		keyProperty="id">
+		INSERT INTO ProductPage (BoardTitle,BoardBody,productId)
+		VALUES(#{boardTitle},#{boardBody},#{productId})
 
-</insert>
+	</insert>
 
-<insert id="Addproduct">
-INSERT INTO Product (name,Stock,price) VALUES(#{productname},#{Stock},#{price})
-</insert>
+	<insert id="Addproduct">
+		INSERT INTO Product (name,Stock,price)
+		VALUES(#{productName},#{stock},#{price})
+	</insert>
 
-<select id="getcategory" resultType="com.project.market.domain.ProductDto">
-Select id as Product_middle_class , name as middle_name FROM Product_middle_class
+	<select id="getcategory"
+		resultType="com.project.market.domain.ProductDto">
+		Select id as product_Middle_Class , name as middle_Name FROM
+		Product_middle_class
 
-</select>
+	</select>
 
-<select id="getcategory_low" resultType="com.project.market.domain.ProductDto">
-SELECT id as Product_low_class ,  name as low_name
-FROM Product_low_class
-where Product_middle_class = #{Product_middle_class}
+	<select id="getcategory_low"
+		resultType="com.project.market.domain.ProductDto">
+		SELECT id as product_Low_Class , name as low_Name
+		FROM Product_low_Class
+		where Product_middle_class = #{Product_Middle_Class}
 
-</select>
+	</select>
 
-<insert id="Addcategory">
-INSERT INTO ProductCode (Productid, ProductCode0, ProductCode1) VALUES(#{productId},#{newProductCode0},#{newProductCode1})
-</insert>
+	<insert id="Addcategory">
+		INSERT INTO ProductCode (ProductId, ProductCode0, ProductCode1)
+		VALUES(#{productId},#{newProductCode0},#{newProductCode1})
+	</insert>
 
-<select id="getproductId" resultType="int" >
-SELECT id as productId FROM Product ORDER BY id DESC LIMIT 1;
+	<select id="getproductId" resultType="int">
+		SELECT id as productId FROM Product ORDER BY id DESC LIMIT 1;
 
-</select>
+	</select>
 
 
-<select id="getproductBoard" resultType="com.project.market.domain.ProductPageDto" >
-SElECT 	board.id,
-		board.BoardTitle as boardTitle, 
-		board.BoardBody as boardBody, 
-		board.productId, 
+	<select id="getproductBoard"
+		resultType="com.project.market.domain.ProductPageDto">
+		SElECT board.id,
+		board.BoardTitle as boardTitle,
+		board.BoardBody as boardBody,
+		board.productId,
 		board.inserttime
 		FROM ProductPage as board
 		WHERE board.id = #{boardId} ;
-</select>
+	</select>
 
-<select id="getfileList" resultType="string">
-		
-SELECT	File.fileName as fileList
-		FROM ProductPage as board LEFT JOIN File ON board.id = File.boardId
+	<select id="getfileList" resultType="string">
+
+		SELECT File.fileName as fileList
+		FROM ProductPage as board LEFT JOIN File ON
+		board.id = File.boardId
 		WHERE board.id = #{id} ;
 
-</select>
+	</select>
 
-<select id="getproduct" resultType="com.project.market.domain.ProductDto">
-SELECT name as productname, 
-	   price as price,
-	   Stock
-	   From Product 
-	   WHERE id =#{productId};
+	<select id="getproduct"
+		resultType="com.project.market.domain.ProductDto">
+		SELECT name as productName,
+		price as price,
+		Stock
+		From Product
+		WHERE id =#{productId};
 
-</select>
+	</select>
 
-<select id="getBoardlist" resultType="com.project.market.domain.ProductPageDto" >
-SELECT ProductPage.id as id, BoardTitle, BoardBody, Product.price as price,ProductPage.inserttime as inserttime  FROM ProductPage 
-							JOIN Product ON ProductPage.productId = Product.id;
+	<select id="getBoardlist"
+		resultType="com.project.market.domain.ProductPageDto">
+		SELECT pp.id as id,
+		pp.BoardTitle,
+		pp.BoardBody,
+		Product.price as priceTopage,
+		Product.name as productName,
+		pm.name,
+		pp.inserttime as inserttime
+
+		FROM ProductPage as pp Join ProductCode as p ON pp.productId = p.Productid
+		JOIN Product ON Product.id =pp.productId
+		Join Product_middle_class as pm ON p.ProductCode0 = pm.id
+		
+		
+		<if test="search != '%%'">
+		
+		
+		<choose>
+			<when test="cat==0">
+			WHERE pp.BoardTitle LIKE #{search}
+			</when>
+			<when test="cat== 1">
+				WHERE pm.id = 1
+				AND pp.BoardTitle LIKE #{search}
+			</when>
+			<when test="cat== 2">
+				WHERE pm.id = 2
+				AND pp.BoardTitle LIKE #{search}
+			</when>
+
+			<when test="cat== 3">
+				WHERE pm.id = 3
+				AND pp.BoardTitle LIKE #{search}
+			</when>
+
+			<when test="cat== 4">
+				WHERE pm.id = 4
+				AND pp.BoardTitle LIKE #{search}
+			</when>
+
+			<when test="cat== 5">
+				WHERE pm.id = 5
+				AND pp.BoardTitle LIKE #{search}
+			</when>
 
 
-</select>
+			<when test="cat== 7">
+				WHERE pm.id = 6
+				AND pp.BoardTitle LIKE #{search}
+			</when>
 
-<delete id="deleteBoard">
-DELETE FROM ProductPage 
-WHERE id = #{id};
+			<when test="cat== 8">
+				WHERE pm.id = 7
+				AND pp.BoardTitle LIKE #{search}
+			</when>
+		</choose>
+		
+		</if>
+		<if test="search == '%%'">
+		
+		
+		<choose>
+			<when test="cat==0">
+			WHERE pp.BoardTitle 
+			</when>
+			<when test="cat== 1">
+				WHERE pm.id = 1
+				
+			</when>
+			<when test="cat== 2">
+				WHERE pm.id = 2
+				
+			</when>
+
+			<when test="cat== 3">
+				WHERE pm.id = 3
+				
+			</when>
+
+			<when test="cat== 4">
+				WHERE pm.id = 4
+				 
+			</when>
+
+			<when test="cat== 5">
+				WHERE pm.id = 5
+				
+			</when>
+
+
+			<when test="cat== 7">
+				WHERE pm.id = 6
+				
+			</when>
+
+			<when test="cat== 8">
+				WHERE pm.id = 7
+				
+			</when>
+		</choose>
+		
+		</if>
+		
+
+
+	</select>
+
+	<delete id="deleteBoard">
+		DELETE FROM ProductPage
+		WHERE id = #{id};
+
+	</delete>
+
+	<insert id="insertFile">
+		INSERT INTO File (boardId, fileName) VALUES(#{boardId}, #{fileName});
+	</insert>
+
+	<update id="updateProduct">
+		UPDATE Product
+		SET name = #{productName},
+		Stock = #{Stock},
+		price = #{price}
+		WHERE
+		id = #{productId};
+
+
+	</update>
+	<update id="updataPage">
+		UPDATE ProductPage
+		SET BoardTitle = #{boardTitle},
+		BoardBody = #{boardBody}
+		WHERE
+		id = #{id};
+
+	</update>
+
+
+	<delete id="deleteImg">
+		DELETE FROM File
+		WHERE boardId = #{id}
+		AND fileName = #{fileName}
+	</delete>
+
+	<select id="getprodutlist" resultType="com.project.market.domain.ProductDto">
+	
+	SELECT 
+	id as productId,
+	name as productName,
+	   Stock as Stock,
+       price as price
+ 			FROM Product;
+	
+	</select>
+
+<delete id="deleteCategory">
+ DELETE FROM ProductCode
+		WHERE Productid = #{productId};
 
 </delete>
 
-<insert id="insertFile">
-INSERT INTO File (boardId, fileName) VALUES(#{boardId}, #{fileName});
-</insert>
+<delete id="DeleteProduct">
+DELETE FROM Product
+		WHERE id = #{productId};
 
-<update id="updateProduct">
+</delete>
+
+<update id="modifyProduct">
 UPDATE Product
-		SET name = #{productname},
-			Stock = #{Stock},
-            price = #{price}
-		WHERE 
-		    id = #{productId};
-
+	SET Stock = #{stock},
+		price = #{price}
+	WHERE id =#{productId};
 
 </update>
+
+<select id="getFileForList" resultType="string">
+
+SELECT * FROM File GROUP BY boardId;
+</select>
+
 
 </mapper>
