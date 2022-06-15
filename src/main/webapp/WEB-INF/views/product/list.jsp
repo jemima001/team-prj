@@ -15,6 +15,26 @@
 </head>
 <body>
 <my:pagenavbar></my:pagenavbar>
+
+<form action="/market/product/list">
+
+
+<div class="form-check form-check-inline">
+
+</div>
+<c:forEach items="${ m_category}" var="category">
+
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="cat" id="inlineRadio2" value="${category.product_Middle_Class}">
+  <label class="form-check-label" for="inlineRadio2">${category.middle_Name }</label>
+</div>
+</c:forEach>
+
+<input type="text" name="search" />
+<input type="submit" value="검색">
+
+</form>
+
 	<table class="table">
 					<thead>
 						<tr class="table-dark">
@@ -53,7 +73,7 @@
 									</c:if> --%>
 									
 								</td>
-								<td>${pege.price }</td>
+								<td>${pege.priceTopage }</td>
 								<td>${pege.inserttime }</td>
 							</tr>
 						</c:forEach>
@@ -61,6 +81,7 @@
 					
 				</table>
 				<a href="${appRoot }/product/add">게시물 작성</a>
+				<a href="${appRoot }/product/productlist">상품 삭제</a>
 
 </body>
 </html>

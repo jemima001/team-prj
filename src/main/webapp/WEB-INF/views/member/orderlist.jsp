@@ -36,6 +36,7 @@
 					</tr>
 				</thead>
 				<tbody>
+					<c:forEach items="${orderList }" var="order">
 						<tr>
 							<td></td>
 							<td></td>
@@ -44,6 +45,7 @@
 							<td></td>
 							<td></td>
 						</tr>
+					</c:forEach>
 				</tbody>
 			</table>
 		</div>

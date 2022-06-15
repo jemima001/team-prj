@@ -14,7 +14,7 @@ public class ProductPageDto {
 	private int productId;
 	private String Bestproduct;
 	private LocalDateTime inserttime;
-	private int price;
+	private int priceTopage;
 	private int Purchase;
 	private List<String> fileList; 
 }
