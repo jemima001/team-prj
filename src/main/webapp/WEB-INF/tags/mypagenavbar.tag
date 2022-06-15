@@ -36,7 +36,7 @@
 		<sec:authorize access="hasRole('ADMIN')">
 			<a href="${adminpageUrl }" class="nav-link ${current == 'adminpage' ? 'active' : '' }" style="color: black;">회원관리</a>
 			<a href="${appRoot }/member/orderlist" class="nav-link ${current == 'orderlist' ? 'active' : '' }" style="color: black;">전체주문관리</a>
-			<a href="${appRoot }/member/productlist" class="nav-link ${current == 'productlist' ? 'active' : '' }" style="color: black;">상품관리</a>
+			<a href="${appRoot }/product/productlist" class="nav-link ${current == 'productlist' ? 'active' : '' }" style="color: black;">상품관리</a>
 		</sec:authorize>
 		<sec:authorize access="not hasRole('ADMIN')">
 		<a href="${mypageUrl }"
