@@ -254,13 +254,18 @@ public class MemberController {
 	public void getlist(Model model) {
 		
 	 List<ProductDto> list = service.Productlist();
-	 System.out.println(list);
 	 model.addAttribute("productlist", list);
 		
 	}
 	
 	@PostMapping("productRemove")
 	public String removeProduct(ProductDto dto) {
+		
+		return "redirect:/member/productlist";
+	}
+	
+	@PostMapping("productModify")
+	public String modifyProduct(ProductDto dto) {
 		
 		return "redirect:/member/productlist";
 	}
