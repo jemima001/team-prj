@@ -47,13 +47,23 @@
 						</tr>
 					</thead>
 					<tbody>
+					
+					<c:forEach items="${cartList }" var="cart">
+					
 						<tr>
-							<th><input type="checkbox" /></th>
-							<td>상품이름</td>
-							<td>1</td>
-							<td>10000</td>
+							<th><input type="checkbox" value="${cart.cartId }"
+							name="cartId" form="form21" /></th>
+							
+							<td>${cart.productName }</td>
+							<td>${cart.bookCount }</td>
+							<td>${cart.price }</td>
 							<td>무료</td>
 						</tr>
+					
+					</c:forEach>
+						
+						
+						
 					</tbody>
 				</table>
 			</div>
@@ -70,14 +80,28 @@
 					<tbody>
 						<tr>
 							<td>총 주문 금액</td>
-							<td>#원</td>
+							<td> ${10000} 원</td>
 						</tr>
 					</tbody>
 				</table>
 			</div>
 		</div>
 		
-		<a class="btn btn-success" href="${appRoot }/order/info" role="button">결제하기</a>
+		
+
+		<button class="btn btn-danger" form="form21" role="button" type="submit">선택 상품 삭제하기</button>
+		
+		 <a class="btn btn-success" href="${appRoot }/order/info" role="button"> 결제하기</a>
+		<!-- <button class="btn btn-success" form="form22" role="button" type="submit" <a href="${appRoot }/order/info"</a> >선택 상품 결제하기</button>-->
+	
 	</div>
+	
+	<form id="form21" action="checked">
+	</form>
+	
+	<!--<form id="form22" action="ordered" <a href="${appRoot }/order/info"</a> > </form>-->
+	
+	
+	
 </body>
 </html>
