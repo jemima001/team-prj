@@ -36,18 +36,23 @@
 			<div class="container d-flex">
 					<div class="row flex-fill" >
 						<div class="col d-flex justify-content-center" style="background: silver; border: solid 1px;">
-							<a href="">
+							<a href="/market/notice/list">
 								<span>공지사항</span>	
 							</a>
 						</div>
 						<div class="col d-flex justify-content-center" style="background: silver; border: solid 1px;">
-							<a href="">
-								<span>1:1문의</span>
+							<a href="#">
+								<span>1:1문의하기</span>
 							</a>
 						</div>
 						<div class="col d-flex justify-content-center" style="background: silver; border: solid 1px;">
 							<a href="#">
-								<span>#</span>
+								<span>1:1문의확인</span>
+							</a>
+						</div>
+						<div class="col d-flex justify-content-center" style="background: silver; border: solid 1px;">
+							<a href="${appRoot }/comm/chat.do">
+								<span>1:1톡</span>
 							</a>
 						</div>
 					</div>
