@@ -98,9 +98,16 @@ public class ProductPageController {
 	}
 	
 	@GetMapping("list")
-	public void getlist(Model model, String cat) {
+	public void getlist(Model model, 
+						@RequestParam(name = "cat", required = true ,defaultValue = "0")String cat, 
+						@RequestParam(name = "search",required = true ,defaultValue = "" )	String search) {
+		List<ProductDto> categoryList = service.getcategory();
+		// ajx로 나중에 처리 시도 해야
+		/*List<ProductDto> list_low = service.getcategory_low();*/
+		model.addAttribute("m_category", categoryList);
 		System.out.println("cat:"+cat);
-	 List<ProductPageDto> list = service.getboardlist(cat);
+		
+	    List<ProductPageDto> list = service.getboardlist(cat, search);
 	 System.out.println(list);
 	 model.addAttribute("boardlist", list);
 		
@@ -157,4 +164,30 @@ public class ProductPageController {
 		return "redirect:/product/get?id="+pageDto.getId();
 		
 	}
+	
+	@GetMapping("productlist")
+	public void getlist(Model model) {
+		
+	 List<ProductDto> list = service.Productlist();
+	// System.out.println(list);
+	 model.addAttribute("productlist", list);
+		
+	}
+	
+	@PostMapping("productRemove")
+	public String removeProduct(ProductDto dto) {
+		
+		System.out.println("상품 삭제 받는 dto:"+dto);
+		boolean ok = service.deleteProduct(dto);
+		System.out.println("ok:"+ok);
+		return "redirect:/product/productlist";
+	}
+	
+	@PostMapping("productModify")
+	public String productModify(ProductDto dto) {
+		boolean ok = service.modifyProduct(dto);
+		System.out.println("상품 수정 받는 dto:"+dto);
+		return "redirect:/product/productlist";
+	}
+	
 }

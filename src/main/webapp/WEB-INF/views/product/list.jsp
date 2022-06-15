@@ -18,38 +18,20 @@
 
 <form action="/market/product/list">
 
-<div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="cat" id="inlineRadio1" value="1">
-  <label class="form-check-label" for="inlineRadio1">전체</label>
-</div>
-<div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="cat" id="inlineRadio2" value="2">
-  <label class="form-check-label" for="inlineRadio2">화분식물</label>
-</div>
-<div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="cat" id="inlineRadio2" value="3">
-  <label class="form-check-label" for="inlineRadio2">행잉식물</label>
-</div>
-<div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="cat" id="inlineRadio2" value="4">
-  <label class="form-check-label" for="inlineRadio2">선인장 식물</label>
-</div>
-<div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="cat" id="inlineRadio2" value="5">
-  <label class="form-check-label" for="inlineRadio2">대형 식물</label>
-</div>
 
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="cat" id="inlineRadio2" value="6">
-  <label class="form-check-label" for="inlineRadio2">꽃</label>
-  
-  <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="cat" id="inlineRadio2" value="7">
-  <label class="form-check-label" for="inlineRadio2">기타</label>
+
 </div>
-  
+<c:forEach items="${ m_category}" var="category">
+
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="cat" id="inlineRadio2" value="${category.product_Middle_Class}">
+  <label class="form-check-label" for="inlineRadio2">${category.middle_Name }</label>
 </div>
-<input type="submit" value="보기">
+</c:forEach>
+
+<input type="text" name="search" />
+<input type="submit" value="검색">
 
 </form>
 
@@ -99,6 +81,7 @@
 					
 				</table>
 				<a href="${appRoot }/product/add">게시물 작성</a>
+				<a href="${appRoot }/product/productlist">상품 삭제</a>
 
 </body>
 </html>

@@ -87,11 +87,11 @@
 						pageContext.setAttribute("encodedFileName", encodedFileName);
 					}
 					%>
+				 <div>
 						<img
 							src="${imageUrl }/project/${productboard.id}/${encodedFileName }"
 							alt="" />
 					</div> 
-				 <div>
 
 				</c:forEach>
  

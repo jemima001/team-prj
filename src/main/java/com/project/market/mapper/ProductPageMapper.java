@@ -31,7 +31,7 @@ public interface ProductPageMapper {
 
 	ProductDto getproduct(int productId);
 
-	List<ProductPageDto> getBoardlist(String cat);
+	List<ProductPageDto> getBoardlist(@Param("cat") String cat,@Param("search") String search);
 
 	int deleteBoard(ProductPageDto dto);
 
@@ -43,6 +43,11 @@ public interface ProductPageMapper {
 	int updataPage(ProductPageDto pageDto);
 
 	void deleteImg(@Param("id")int id,@Param("fileName") String fileName);
+	
+	List<ProductDto> getprodutlist();
+	int deleteCategory(ProductDto dto);
+	int DeleteProduct(ProductDto dto);
+	int modifyProduct(ProductDto dto);
 
 	
 
