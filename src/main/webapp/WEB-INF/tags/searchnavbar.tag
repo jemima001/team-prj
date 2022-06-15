@@ -12,7 +12,7 @@
 			</ul>
 			<ul class="nav">
 				<li class="nav-item">
-					<form action="#" class="d-flex" role="search" method="post">
+					<form action="${approot }/market/product/list" class="d-flex" role="search" method="get">
 					<div class="input-group">
 						<input class="form-control me-auto" type="search"
 							placeholder="Search" aria-label="Search" name="Search">
