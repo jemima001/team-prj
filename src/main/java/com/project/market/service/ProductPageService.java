@@ -192,6 +192,10 @@ public class ProductPageService {
 		int ok = mapper.modifyProduct(dto);
 		return ok==1;
 	}
+	public List<String> getFileForList() {
+		// TODO Auto-generated method stub
+		return mapper.getFileForList();
+	}
 	
 
 	

@@ -40,13 +40,13 @@ public class ProductPageController {
 	public String addproduct_in(ProductPageDto dto, 
 								ProductDto productdto, 
 								MultipartFile[] file) {
-		System.out.println("중분류 확인 :"+productdto);
+		/*	System.out.println("중분류 확인 :"+productdto);*/
 		int productId = service.addProduct(productdto);
-		System.out.println("제품 판매글 로 받은 데이터");
+		/*System.out.println("제품 판매글 로 받은 데이터");
 		System.out.println("판매글 제목 :"+dto.getBoardTitle());
 		System.out.println("판매글 내용 :"+dto.getBoardBody());
 		System.out.println("판매글 로 제품 id 학인 :" +productId);
-		System.out.println(dto);
+		System.out.println(dto);*/
 		// 사진 추가 코드 입력
 		if (file != null) {
 			List<String> fileList = new ArrayList<String>();
@@ -66,12 +66,12 @@ public class ProductPageController {
 	@PostMapping("product_add")
 	public void productadd(ProductDto dto) {
 		
-		System.out.println("제품 등록으로 받은 데이터");
+		/*System.out.println("제품 등록으로 받은 데이터");
 		System.out.println("productname:"+dto.getProductName());
 		System.out.println("Stock:"+dto.getStock());
 		System.out.println("price:"+dto.getPrice());
 		System.out.println("M-class:"+dto.getProduct_Middle_Class());
-		System.out.println("low-class:"+dto.getProduct_Low_Class());
+		System.out.println("low-class:"+dto.getProduct_Low_Class());*/
 		 service.addProduct(dto);
 		
 	}
@@ -99,8 +99,11 @@ public class ProductPageController {
 	
 	@GetMapping("list")
 	public void getlist(Model model, 
-						@RequestParam(name = "cat", required = true ,defaultValue = "0")String cat, 
-						@RequestParam(name = "search",required = true ,defaultValue = "" )	String search) {
+						@RequestParam(name = "cat", defaultValue = "0" ) String cat, 
+						@RequestParam(name ="search", defaultValue = "")String search
+						) {
+		
+		//List<String> fileList = service.getFileForList();
 		List<ProductDto> categoryList = service.getcategory();
 		// ajx로 나중에 처리 시도 해야
 		/*List<ProductDto> list_low = service.getcategory_low();*/
