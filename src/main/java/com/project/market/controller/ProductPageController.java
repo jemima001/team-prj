@@ -99,7 +99,7 @@ public class ProductPageController {
 	
 	@GetMapping("list")
 	public void getlist(Model model, 
-						@RequestParam(name = "cat", required = true ,defaultValue = "0")String cat, 
+						String cat, 
 						String search
 						) {
 		
