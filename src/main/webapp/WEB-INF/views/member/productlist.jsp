@@ -50,7 +50,7 @@
 				<tr>
 					<td>${product.productId }</td>
 					<td>
-							<input class="form-control" id="productIdInput1" type="text" value="${product.productname }" />
+							<input class="form-control" id="productIdInput1" type="text" value="${product.productName }" />
 					</td>
 					<td>
 						<input class="form-control" id="stockInput1" type="text" value="${product.stock }" />
@@ -95,6 +95,30 @@
 				</div>
 			</div>
 		</div>
+		
+		<!-- 수정(modify) 확인 Modal -->
+		<div class="modal fade" id="modalModify${product.productId }" tabindex="-1"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel2">수정 하시겠습니까?</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>
+				</div>
+				
+				<form id="form2" action="${appRoot }/member/productModify" method="post">
+						<input type="hidden" value="${product.productId }" name="id" />
+					</form>
+				
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-bs-dismiss="modal">Close</button>
+					<button form="form2" type="submit" class="btn btn-danger">수정</button>
+				</div>
+			</div>
+		</div>
+	</div>
 	</c:forEach>
 
 </body>

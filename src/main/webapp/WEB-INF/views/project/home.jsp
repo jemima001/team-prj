@@ -10,13 +10,6 @@
 	
 <c:url value="/project/home" var="homeUrl" ></c:url>
 
-<sec:authorize access="isAuthenticated()">
-	<sec:authentication property="principal" var="principal" />
-	<c:url value="/order/cart" var="cartUrl">
-		<c:param name="id" value="${principal.username }" />
-	</c:url>
-</sec:authorize>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,31 +25,40 @@
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
 	referrerpolicy="no-referrer"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
 	crossorigin="anonymous"></script>
 <title>Insert title here</title>
+<style>
+	.row{
+		text-align: center;
+	}
+</style>
 </head>
 <body>
 	<my:pagenavbar current="home"></my:pagenavbar>
+	<my:searchnavbar current="home"></my:searchnavbar>
 	<div class="container">
 		<div class="row">
-			<div class="col-md-3">
+			<div class="col justify-content-center">
 				<p>
 					<a href="${homeUrl }">
 						<img src="${appRoot }/resources/images/logo.jpg">
 					</a>
 				</p>
 			</div>
-			<div class="col-md-9">
+			
+			<!-- 검색 창 -->
+			<!-- <div class="col-md-9">
 				<form action="#" class="d-flex" role="search" method="post">
 					<input class="form-control me-auto" type="search"
 						placeholder="Search" aria-label="Search" name="Search">
 					<button class="btn btn-outline-success" type="submit">Search</button>
-					<button class="btn btn-outline-dark"><a href="${cartUrl }" class="nav-link ${current == 'cart' ? 'active' : '' }">장바구니</a></button>
 				</form>
-			</div>
+			</div> -->
+			
 		</div>
 <hr />
 		<table class="table">
