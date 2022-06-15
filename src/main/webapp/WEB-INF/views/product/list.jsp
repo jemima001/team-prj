@@ -23,7 +23,8 @@
 
 </div>
 <c:forEach items="${ m_category}" var="category">
-
+<input class="form-check-input" type="radio" name="cat" id="inlineRadio2" value="0">
+<label class="form-check-label" for="inlineRadio2">전체보기</label>
 <div class="form-check form-check-inline">
   <input class="form-check-input" type="radio" name="cat" id="inlineRadio2" value="${category.product_Middle_Class}">
   <label class="form-check-label" for="inlineRadio2">${category.middle_Name }</label>

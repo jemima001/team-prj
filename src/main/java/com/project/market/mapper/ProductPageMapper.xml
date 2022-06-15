@@ -132,6 +132,50 @@
 		</choose>
 		
 		</if>
+		<if test="search == '%%'">
+		
+		
+		<choose>
+			<when test="cat==0">
+			WHERE pp.BoardTitle 
+			</when>
+			<when test="cat== 1">
+				WHERE pm.id = 1
+				
+			</when>
+			<when test="cat== 2">
+				WHERE pm.id = 2
+				
+			</when>
+
+			<when test="cat== 3">
+				WHERE pm.id = 3
+				
+			</when>
+
+			<when test="cat== 4">
+				WHERE pm.id = 4
+				 
+			</when>
+
+			<when test="cat== 5">
+				WHERE pm.id = 5
+				
+			</when>
+
+
+			<when test="cat== 7">
+				WHERE pm.id = 6
+				
+			</when>
+
+			<when test="cat== 8">
+				WHERE pm.id = 7
+				
+			</when>
+		</choose>
+		
+		</if>
 		
 
 
@@ -203,6 +247,11 @@ UPDATE Product
 	WHERE id =#{productId};
 
 </update>
+
+<select id="getFileForList" resultType="string">
+
+SELECT * FROM File GROUP BY boardId;
+</select>
 
 
 </mapper>

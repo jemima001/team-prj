@@ -48,6 +48,7 @@ public interface ProductPageMapper {
 	int deleteCategory(ProductDto dto);
 	int DeleteProduct(ProductDto dto);
 	int modifyProduct(ProductDto dto);
+	List<String> getFileForList();
 
 	
 
