@@ -81,6 +81,7 @@
 					
 				</table>
 				<a href="${appRoot }/product/add">게시물 작성</a>
+				<a href="${appRoot }/product/productlist">상품 삭제</a>
 
 </body>
 </html>
