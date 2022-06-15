@@ -24,6 +24,21 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
 	crossorigin="anonymous"></script>
+	<script type="text/javascript">
+	$(document).ready(function() {
+		$("#purchaseButton").click(function() {
+			let purchaseNum = $("#PurchaseInput").val();
+			$("#purchaseInput").val(purchaseNum);
+			console.log(purchaseNum);
+			
+			$("#purchaseForm").submit();
+			
+		})
+		
+		
+	});
+	
+	</script>
 <title>Insert title here</title>
 </head>
 <body>
@@ -32,6 +47,14 @@
 		<div class="row">
 			<div class="col">
 				<h1>구매 페이지</h1>
+				<!-- 장바구니 Form 보내는 값 설정 하는곳 -->
+				<form id="purchaseForm" action="${appRoot }/order/cart" method="get">
+				<input type="hidden" value="${productboard.id }" name ="id" />
+				<input type="hidden" value="${productboard.productId }" name ="productId"  />
+				<input id ="purchaseInput" type="hidden" value ="" name="Purchase">
+				</form>
+				
+				<!-- 구매 페이지로 값 보내는 곳 -->
 				<form action="${appRoot }/order/info" method="get">
 					<!-- 여기에 구매 페이지 주소 입력 -->
 					<!-- 구매 버튼 연결 주소 입력 -->
@@ -69,11 +92,12 @@
 					<p>가격 : ${product.price }</p>
 					<p>판매글 아이디 :${productboard.id }</p>
 					구매 수량
-					<input type="number" name="Purchase" value="1" />
-					<input type="hidden" value="${productboard.id }" />
-					<input type="hidden" value="${productboard.productId }" />
+					<input id="PurchaseInput" type="number" name="Purchase" value="1" />
+					<input type="hidden" value="${productboard.id }" name="id" />
+					<input type="hidden" value="${productboard.productId }" name="productId" />
 					<button>구매 버튼</button>
 				</form>
+				<button id ="purchaseButton">장바구니</button>
 
 
 

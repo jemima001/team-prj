@@ -35,11 +35,11 @@
 			
 			$("#modifyStockInput"+pid).val(newStock);
 			$("#modifyPriceInput"+pid).val(newprice);
-			console.log(newStock);
+			/* console.log(newStock);
 			console.log(newprice);
 			console.log(pid);
 			console.log("-------------------");
-			console.log($("#modifyStockInput"+pid).val());
+			console.log($("#modifyStockInput"+pid).val()); */
 			
 		})	
 		
