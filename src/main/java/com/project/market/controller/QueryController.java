@@ -86,6 +86,7 @@ public class QueryController {
 	public void get(int id, Model model) {
 		QueryDto dto = service.getQueryById(id);
 		model.addAttribute("query", dto);
+		
 	}
 	
 	@PostMapping("modify")
