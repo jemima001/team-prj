@@ -21,7 +21,7 @@ public class NoticeService {
 
 	public int countCustomers() {
 		// TODO Auto-generated method stub
-		return mapper.countBoard();
+		return mapper.countNotice();
 	}
 
 	public boolean addNotice(NoticeDto notice) {
@@ -32,8 +32,8 @@ public class NoticeService {
 	}
 
 	public NoticeDto getNoticeById(int id) {
-		NoticeDto board = mapper.selectNoticeById(id);
-		return board;
+		NoticeDto notice = mapper.selectNoticeById(id);
+		return notice;
 	}
 
 	public boolean updateNotice(NoticeDto dto) {

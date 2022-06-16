@@ -41,13 +41,14 @@ $(document).ready(function() {
 <body>
 
 <my:pagenavbar></my:pagenavbar>
+<my:customercenternavbar current="notice"></my:customercenternavbar>
 <div class="container">
 	<div class="row">
 		<div class="col">
 			<div class="navbar">
 				<ul class="nav me-auto">
 					<li>
-						<h2 style="display: inline;">고객센터</h2>
+						<h2 style="display: inline;">공지사항</h2>
 					</li>
 				</ul>
 				<sec:authorize access="hasRole('ADMIN')">
