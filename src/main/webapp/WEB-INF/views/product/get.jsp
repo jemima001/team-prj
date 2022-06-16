@@ -52,6 +52,7 @@
 				error : function(dtat) {
 					console.log("ajax 문제 발생");
 					console.log($("#PurchaseInput").val());
+					console.log($("#productId").val());
 					$("#cartInforModal2").modal('show');
 					
 				},
@@ -127,7 +128,7 @@
 					구매 수량
 					<input id="PurchaseInput" type="number" name="Purchase" value="1" />
 					<input type="hidden" value="${productboard.id }" name="id" />
-					<input type="hidden" value="${productboard.productId }"
+					<input id="productId" type="hidden" value="${productboard.productId }"
 						name="productId" />
 					<button>구매 버튼</button>
 				</form>
