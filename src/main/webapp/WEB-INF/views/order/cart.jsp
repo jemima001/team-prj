@@ -38,6 +38,9 @@
 		<div class="row">
 			<div class="col">
 				<h1>장바구니 목록</h1>
+				
+				<input type="hidden" value="${cart.orderId }" name="id" />
+				
 				<c:if test="${not empty message }">
 					<div class="alert alert-primary">${message }</div>
 				</c:if>
@@ -103,7 +106,24 @@
 		
 		<button class="btn btn-danger" form="form21" role="button" type="submit">선택 상품 삭제하기</button>
 		
-		 <a class="btn btn-success" href="${appRoot }/order/info" role="button"> 결제하기</a>
+		
+		<!-- 결제 정보 form 보내는 곳 -->
+		
+			<form id="orderListForm" action="${appRoot }/member/userorderlist" method="get">
+				
+					<input id="productName" type="text" value="${cart.productName }" />
+					<input type="hidden" value="${productboard.id }" name="id" />
+					<input id="productId" type="hidden" value="${cart.productId }"
+
+						name="productId" />
+					<a class="btn btn-success" href="${appRoot }/order/info" role="button"> 결제하기</a>
+					
+					
+			</form>
+				
+				
+		
+		 
 		<!-- <button class="btn btn-success" form="form22" role="button" type="submit" <a href="${appRoot }/order/info"</a> >선택 상품 결제하기</button>-->
 	
 	</div>

@@ -8,7 +8,7 @@ import lombok.Data;
 @Data
 public class OrderDto {
 	
-	//private String orderId; //주문번호
+	private int orderId; //주문번호
 	
 	private String memberId; // 주문 회원 아이디
 	

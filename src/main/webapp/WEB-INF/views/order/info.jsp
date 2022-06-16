@@ -113,7 +113,7 @@
 				<div class="container">
 					<div class="row">
 						<div class="col">
-							<h5>주문 목록</h5>
+							<h6>  ▼ 주문 목록  </h6>
 							<c:if test="${not empty message }">
 								<div class="alert alert-primary">${message }</div>
 							</c:if>
@@ -121,7 +121,7 @@
 							<table class="table">
 								<thead>
 									<tr>
-										<th><i class="fa-solid fa-hashtag"></i></th>
+										<th><i class="fa-solid fa-cart-shopping"></i></th>
 										<th>상품정보</th>
 										<th>수량</th>
 										<th>주문금액</th>
@@ -133,7 +133,7 @@
 									<c:forEach items="${cartList }" var="cart">
 
 										<tr>
-											<th><input type="checkbox" value="${cart.cartId }"
+											<th><input type="hidden" value="${cart.cartId }"
 												name="cartIds" form="form21" /></th>
 
 											<td>${cart.productName }</td>

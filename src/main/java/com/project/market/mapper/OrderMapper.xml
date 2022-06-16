@@ -27,6 +27,15 @@
 		FROM Member
 		WHERE id = #{id}
 	</select>
+	
+	
+	<insert id="orderData">
+		INSERT INTO Member(orderId,productName,bookCount,price)
+		VALUES (#{orderId}, #{productName}, #{bookCount}, #{price})
+
+	</insert>
+	
+
 
 
 

@@ -1,11 +1,10 @@
 package com.project.market.service;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import com.project.market.domain.CartDto;
 import com.project.market.domain.MemberDto;
 import com.project.market.domain.OrderDto;
@@ -17,14 +16,29 @@ public class OrderService {
 	@Autowired
 	private OrderMapper mapper;
 
-	// admin이 볼 수 있는 주문 페이지
-	public boolean addOrder(OrderDto order) {
-
-		// insert order
-		int cnt1 = mapper.insertOrder(order);
-
-		return cnt1 == 1;
+	//주문 목록 넘겨주기
+//	public boolean addOrder(OrderDto order, Principal principal) {
+//		
+//		int cnt1 = mapper.insertOrder(order);
+//
+//		return cnt1 == 1;
+//	}
+	
+	//order의 데이터 member로 넘겨주기
+	public void orderData (OrderDto dto, Principal principal) {
+		String memberId = principal.getName();
+		int orderId = dto.getOrderId();
+		int bookCount = dto.getBookCount();
+		int allTotalPrice = dto.getTotalOrderPrice();
+	
+		mapper.orderData (memberId,orderId,bookCount,allTotalPrice);
+		
 	}
+	
+	
+	
+	
+	
 
 
 
