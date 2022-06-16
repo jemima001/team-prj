@@ -11,7 +11,7 @@ public interface NoticeMapper {
 	List<NoticeDto> selectNotice(@Param("from") int from, 
 							   @Param("row") int row);
 	
-	int countBoard();
+	int countNotice();
 
 	int insertNotice(NoticeDto notice);
 

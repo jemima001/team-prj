@@ -15,9 +15,16 @@
 		<security:remember-me/>
 		
 		<!-- 공지사항 create, update, delete -->
-		<security:intercept-url pattern="/notice/write" access="isAuthenticated()"/>
-		<security:intercept-url pattern="/notice/modify" access="isAuthenticated()"/>
-		<security:intercept-url pattern="/notice/remove" access="isAuthenticated()"/>
+		<security:intercept-url pattern="/notice/write" access="hasRole('ADMIN')"/>
+		<security:intercept-url pattern="/notice/modify" access="hasRole('ADMIN')"/>
+		<security:intercept-url pattern="/notice/remove" access="hasRole('ADMIN')"/>
+		
+		<!-- 공지사항 create, update, delete -->
+		<security:intercept-url pattern="/qna/query" access="isAuthenticated()"/>
+		<security:intercept-url pattern="/qna/list" access="isAuthenticated()"/>
+		<security:intercept-url pattern="/qna/remove" access="isAuthenticated()"/>
+		
+		
 	</security:http>
 
 
