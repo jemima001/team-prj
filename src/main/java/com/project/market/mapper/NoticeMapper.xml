@@ -14,7 +14,7 @@
   	LIMIT #{from }, #{row }
 	</select>
 	
-	<select id="countBoard" resultType="int">
+	<select id="countNotice" resultType="int">
 	SELECT Count(id) 
 	FROM Notice
 	</select>

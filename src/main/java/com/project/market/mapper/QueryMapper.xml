@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.market.mapper.QueryMapper">
+	
+	<insert id="insertQuery" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+		INSERT INTO Questions (title, body, memberId)
+		VALUES (#{title}, #{body}, #{memberId})
+	</insert>
+
+	<insert id="insertFile" >
+	INSERT INTO File (boardId, fileName) 
+	VALUES (#{boardId}, #{fileName})
+	</insert>
+	
+	<select id="selectQuery" resultType="com.project.market.domain.QueryDto">
+	SELECT q.id, 
+  		   q.title, 
+  		   q.inserted,
+  		   q.memberId, 
+  		   m.nickName writerNickName 
+  	FROM Questions q JOIN Member m ON q.memberId = m.id 
+  	GROUP BY id
+  	ORDER BY id DESC
+  	LIMIT #{from }, #{row }
+	</select>
+	
+	<select id="countQuery" resultType="int">
+	SELECT Count(id) 
+	FROM Questions
+	</select>
+	
+	<select id="selectQueryById" resultType="com.project.market.domain.QueryDto">
+	SELECT q.id, 
+	       q.title, 
+	       q.body, 
+	       q.inserted, 
+	       m.id memberId,
+	       m.nickName writerNickName
+	FROM Questions q JOIN Member m ON q.memberId = m.id 
+	WHERE q.id = #{id}
+	</select>
+	
+	<select id="selectFileNameByQuery" resultType="string">
+	SELECT fileName
+	FROM File
+	WHERE boardId = #{boardId}
+	</select>
+	
+	<delete id="deleteFileByBoardIdAndFileName">
+	DELETE FROM File
+	WHERE boardId = #{boardId}
+	  AND fileName = #{fileName}
+	</delete>
+	
+	<update id="updateQuery">
+	UPDATE Questions 
+	SET title = #{title},
+	    body = #{body} 
+	WHERE id = #{id}
+	</update>
+	
+	<delete id="deleteQuery">
+	DELETE FROM Questions
+	WHERE id = #{id }
+	</delete>
+	
+	<delete id="deleteFileByBoardId">
+	DELETE FROM File
+	WHERE boardId = #{boardId}
+	</delete>
+</mapper>

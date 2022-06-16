@@ -67,7 +67,6 @@ public class NoticeController {
 	public void get(int id, Model model) {
 		NoticeDto dto = service.getNoticeById(id);
 		model.addAttribute("notice", dto);
-		
 	}
 	
 	@PostMapping("modify")
