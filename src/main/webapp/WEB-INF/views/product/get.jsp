@@ -53,7 +53,6 @@
 					console.log("ajax 문제 발생");
 					console.log($("#PurchaseInput").val());
 					console.log($("#productId").val());
-					$("#cartInforModal2").modal('show');
 					
 				},
 				complete : function() {
@@ -129,6 +128,7 @@
 					<input id="PurchaseInput" type="number" name="Purchase" value="1" />
 					<input type="hidden" value="${productboard.id }" name="id" />
 					<input id="productId" type="hidden" value="${productboard.productId }"
+
 						name="productId" />
 					<button>구매 버튼</button>
 				</form>
