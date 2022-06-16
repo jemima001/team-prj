@@ -40,6 +40,7 @@
 					<thead>
 						<tr class="table-dark">
 							<th><i class="fa-solid fa-hashtag"></i></th>
+							<th>상품 이미지</th>
 							<th>판매 상품</th>
 							<th>가격</th>
 							<th><i class="fa-solid fa-calendar"></i></th>
@@ -49,6 +50,18 @@
 						<c:forEach items="${boardlist }" var="pege">
 							<tr>
 								<td>${pege.id }</td>
+								
+								<td>
+								<c:if test="${pege.fileName !=null}">
+								
+								<img style="width: 200px" class="img-thumbnail" src="${imageUrl }/project/${pege.id }/${pege.fileName}" alt="" />
+								</c:if>
+								<c:if test="${pege.fileName ==null}">
+								
+								<img style="width: 200px" class="img-thumbnail" src="${imageUrl }/project/noImage/noImage.png" alt="" />
+								</c:if>
+								
+								</td>
 								<td>
 													
 									<c:url value="/product/get" var="getUrl">

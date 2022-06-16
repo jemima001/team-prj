@@ -111,7 +111,7 @@ public class ProductPageController {
 		System.out.println("cat:"+cat);
 		
 	    List<ProductPageDto> list = service.getboardlist(cat, search);
-	 System.out.println(list);
+	 System.out.println("상품 리스트:"+list);
 	 model.addAttribute("boardlist", list);
 		
 	}
