@@ -23,7 +23,13 @@
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-	crossorigin="anonymous"></script>
+	crossorigin="anonymous">
+	
+	
+	
+	
+	</script>
+	
 <title>Insert title here</title>
 </head>
 <body>
@@ -48,15 +54,15 @@
 					</thead>
 					<tbody>
 					
-					<c:forEach items="${cartList }" var="cart">
+					<c:forEach items="${cartList }" var="cart" varStatus="status">
 					
 						<tr>
 							<th><input type="checkbox" value="${cart.cartId }"
-							name="cartId" form="form21" /></th>
+							name="cartIds" form="form21" /></th>
 							
 							<td>${cart.productName }</td>
 							<td>${cart.bookCount }</td>
-							<td>${cart.price }</td>
+							<td>${cart.totalPrice }</td>
 							<td>무료</td>
 						</tr>
 					
@@ -74,13 +80,19 @@
 				<table class="table">
 					<thead>
 						<tr>
-							<th>총 주문 상품 #개</th>
+							
+							<th>총 주문 상품 ${cartList.size() }개</th>
+						
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
+						
+						
 							<td>총 주문 금액</td>
-							<td> ${10000} 원</td>
+							<td> ${allTotalPrice }원</td>
+							
+							
 						</tr>
 					</tbody>
 				</table>
@@ -88,7 +100,7 @@
 		</div>
 		
 		
-
+		
 		<button class="btn btn-danger" form="form21" role="button" type="submit">선택 상품 삭제하기</button>
 		
 		 <a class="btn btn-success" href="${appRoot }/order/info" role="button"> 결제하기</a>
@@ -96,7 +108,8 @@
 	
 	</div>
 	
-	<form id="form21" action="checked">
+	<form id="form21" action="checked" method="post">
+		<input type="hidden" value="${member.id }" name="id" />
 	</form>
 	
 	<!--<form id="form22" action="ordered" <a href="${appRoot }/order/info"</a> > </form>-->

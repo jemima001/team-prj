@@ -1,7 +1,9 @@
 package com.project.market.controller;
 
 import java.security.Principal;
+import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.project.market.domain.CartDto;
 import com.project.market.domain.MemberDto;
 import com.project.market.domain.OrderDto;
 import com.project.market.service.OrderService;
@@ -17,38 +20,29 @@ import com.project.market.service.OrderService;
 @RequestMapping("order")
 public class OrderController {
 	
+	@Autowired
 	private OrderService orderService;
 	
+	
 	@GetMapping("info")
-	public void orderForm(
-			//int productId,
-			//int payment,
-			Model model, 
-			Principal principal) {
+	public void orderForm(Model model, Principal principal) {
+		//System.out.println(principal.getName());
+		List<CartDto> list = orderService.cartList(principal.getName());
+		System.out.println(list);
+		model.addAttribute("cartList", list);
 		
-		MemberDto memberdto = new MemberDto();//db에서 가져오기
+		int allTotal = 0;
+		for (CartDto cart : list) {
+			allTotal += cart.getTotalPrice();
+		}
+		model.addAttribute("allTotalPrice", allTotal);
 		
-		//MemberDto memberdto = memberSerivce.getMemberById(principal.getName());
-		
-		memberdto.setId("donald");
-		memberdto.setNickName("도람뿌"); //아직 데이터가 없으므로 임의로 지정함
-		
-		//memberdto.setpayment
-		
-		
-		//productdto 승호씨가 만드는 영역이므로 우선 비활성화
-		//ProductDto productdto = new ProductDto(); // db에서 가져오기
-		//productdto.setId(1); //primary key
-		//productdto.setName("컴퓨터");
-		
-		//model.addAttribute("product", productdto);
-		model.addAttribute("member", memberdto);
-		
-		
+		MemberDto member = orderService.getMemberById(principal.getName());
+		model.addAttribute("member", member);
+	}
+	
 		
 
-		
-	}
 	
 	@PostMapping("info")
 	public String orderProcess(OrderDto order, RedirectAttributes rttr) {
@@ -67,12 +61,20 @@ public class OrderController {
 	
 	
 	@GetMapping("complete")
-	public void orderComplete(OrderDto order) {
+	public void orderComplete(Model model, Principal principal) {
 		
+		List<CartDto> list = orderService.cartList(principal.getName());
+		System.out.println(list);
+		model.addAttribute("cartList", list);
+		
+		int allTotal = 0;
+		for (CartDto cart : list) {
+			allTotal += cart.getTotalPrice();
+		}
+		model.addAttribute("allTotalPrice", allTotal);
+		
+		MemberDto member = orderService.getMemberById(principal.getName());
+		model.addAttribute("member", member);
 	}
 	
-	//@GetMapping("cart")
-	//public void cart() {
-		
-	//}
 }

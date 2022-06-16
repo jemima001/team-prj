@@ -32,9 +32,18 @@ public class CartService {
 		return mapper.selectAllCart(id);
 	}
 
-	
-	
+	public boolean cartDelete(List<Integer> cartIds) {
 		
+		for(Integer getCartId : cartIds) {
+			
+			mapper.deleteCheckedCart(getCartId); 
+		}
+		return true;
+	}
+
+	public void getCart(String memberId) {
+		mapper.getCart(memberId);
+	}
 	
 	
 	}

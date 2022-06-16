@@ -10,6 +10,22 @@
 	
 <c:url value="/project/home" var="homeUrl" ></c:url>
 
+<sec:authorize access="isAuthenticated()">
+	<sec:authentication property="principal" var="principal" />
+	<c:url value="/order/cart" var="cartUrl">
+		<c:param name="id" value="${principal.username }" />
+		<c:param name="Purchase" value="1" />
+	</c:url>
+</sec:authorize>
+
+<sec:authorize access="isAuthenticated()">
+	<sec:authentication property="principal" var="principal" />
+	<c:url value="/order/info" var="orderUrl">
+		<c:param name="id" value="${principal.username }" />
+		<c:param name="Purchase" value="1" />
+	</c:url>
+</sec:authorize>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -65,12 +81,12 @@
 			<thead>
 				<tr>
 					<th><a href="${appRoot }/product/list" style="color: black;">ALL</a></th>
-					<th><a href="#" style="color: black;">화분식물</a></th>
-					<th><a href="#" style="color: black;">행잉식물</a></th>
-					<th><a href="#" style="color: black;">선인장식물</a></th>
-					<th><a href="#" style="color: black;">대형식물</a></th>
-					<th><a href="#" style="color: black;">꽃</a></th>
-					<th><a href="#" style="color: black;">기타</a></th>
+					<th><a href="${appRoot }/product/list?cat=1&search=" style="color: black;">화분식물</a></th>
+					<th><a href="${appRoot}/product/list?cat=2&search=" style="color: black;">행잉식물</a></th>
+					<th><a href="${appRoot}/product/list?cat=3&search=" style="color: black;">선인장식물</a></th>
+					<th><a href="${appRoot}/product/list?cat=4&search=" style="color: black;">대형식물</a></th>
+					<th><a href="${appRoot}/product/list?cat=5&search=" style="color: black;">꽃</a></th>
+					<th><a href="${appRoot}/product/list?cat=6&search=" style="color: black;">기타</a></th>
 				</tr>
 			</thead>
 		</table>
@@ -132,21 +148,37 @@
 				<p>
 					<img src="${appRoot }/resources/images/1.jpg">
 				</p>
+				<div class="btn-group" role="group" aria-label="Basic example">
+				  	<a href="${cartUrl }" class="btn btn-outline-success">장바구니</a>
+  					<a href="${orderUrl }" class="btn btn-outline-dark">구매하기</a>
+				</div>
 			</div>
 			<div class="col">
 				<p>
 					<img src="${appRoot }/resources/images/2.jpg">
 				</p>
+				<div class="btn-group" role="group" aria-label="Basic example">
+				  	<a href="${cartUrl }" class="btn btn-outline-success">장바구니</a>
+  					<a href="${orderUrl }" class="btn btn-outline-dark">구매하기</a>
+				</div>
 			</div>
 			<div class="col">
 				<p>
 					<img src="${appRoot }/resources/images/3.jpg">
 				</p>
+				<div class="btn-group" role="group" aria-label="Basic example">
+				  	<a href="${cartUrl }" class="btn btn-outline-success">장바구니</a>
+  					<a href="${orderUrl }" class="btn btn-outline-dark">구매하기</a>
+				</div>
 			</div>
 			<div class="col">
 				<p>
 					<img src="${appRoot }/resources/images/4.jpg">
 				</p>
+				<div class="btn-group" role="group" aria-label="Basic example">
+				  	<a href="${cartUrl }" class="btn btn-outline-success">장바구니</a>
+  					<a href="${orderUrl }" class="btn btn-outline-dark">구매하기</a>
+				</div>
 			</div>
 		</div>
 	</div>
