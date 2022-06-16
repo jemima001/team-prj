@@ -36,11 +36,15 @@ public class CartService {
 		
 		for(Integer getCartId : cartIds) {
 			
-			mapper.deleteCheckedCart(getCartId);
+			mapper.deleteCheckedCart(getCartId); 
 		}
 		return true;
 	}
 
+	public void getCart(String memberId) {
+		mapper.getCart(memberId);
+	}
+	
 	
 	}
 	
