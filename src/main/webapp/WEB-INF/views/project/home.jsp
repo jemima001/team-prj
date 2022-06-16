@@ -81,12 +81,12 @@
 			<thead>
 				<tr>
 					<th><a href="${appRoot }/product/list" style="color: black;">ALL</a></th>
-					<th><a href="#" style="color: black;">화분식물</a></th>
-					<th><a href="#" style="color: black;">행잉식물</a></th>
-					<th><a href="#" style="color: black;">선인장식물</a></th>
-					<th><a href="#" style="color: black;">대형식물</a></th>
-					<th><a href="#" style="color: black;">꽃</a></th>
-					<th><a href="#" style="color: black;">기타</a></th>
+					<th><a href="${appRoot }/product/list?cat=1&search=" style="color: black;">화분식물</a></th>
+					<th><a href="${appRoot}/product/list?cat=2&search=" style="color: black;">행잉식물</a></th>
+					<th><a href="${appRoot}/product/list?cat=3&search=" style="color: black;">선인장식물</a></th>
+					<th><a href="${appRoot}/product/list?cat=4&search=" style="color: black;">대형식물</a></th>
+					<th><a href="${appRoot}/product/list?cat=5&search=" style="color: black;">꽃</a></th>
+					<th><a href="${appRoot}/product/list?cat=6&search=" style="color: black;">기타</a></th>
 				</tr>
 			</thead>
 		</table>

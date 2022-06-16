@@ -35,7 +35,7 @@
 
 			let data = {
 				purchase : $("#PurchaseInput").val(),
-				productId: $("#productId").val()
+				productId : $("#productId").val()
 			}
 
 			$.ajax({
@@ -53,7 +53,8 @@
 					console.log("ajax 문제 발생");
 					console.log($("#PurchaseInput").val());
 					console.log($("#productId").val());
-					
+					$("#cartInforModal2").modal('show');
+
 				},
 				complete : function() {
 
@@ -69,12 +70,14 @@
 <title>Insert title here</title>
 </head>
 <body>
-<sec:authorize access="isAuthenticated()">
-	<sec:authentication property="principal" var="principal" />
-	<c:url value="/order/cart" var="cartUrl">
-		<c:param name="id" value="${principal.username }" />
-	</c:url>
-</sec:authorize>
+
+
+	<sec:authorize access="isAuthenticated()">
+		<sec:authentication property="principal" var="principal" />
+		<c:url value="/order/cart" var="cartUrl">
+			<c:param name="id" value="${principal.username }" />
+		</c:url>
+	</sec:authorize>
 	<my:pagenavbar></my:pagenavbar>
 	<div class="container">
 		<div class="row">
@@ -83,9 +86,7 @@
 				<!-- -------------------------------------------------------------------------- -->
 				<h1>구매 페이지</h1>
 				<!-- 장바구니 Form 보내는 값 설정 하는곳 -->
-				<form id="cartForm" action="${cartUrl }" method="get">
-					
-				</form>
+				<form id="cartForm" action="${cartUrl }" method="get"></form>
 
 				<!-- 구매 페이지로 값 보내는 곳 -->
 				<form action="${appRoot }/order/info" method="get">
@@ -127,9 +128,8 @@
 					구매 수량
 					<input id="PurchaseInput" type="number" name="Purchase" value="1" />
 					<input type="hidden" value="${productboard.id }" name="id" />
-					<input id="productId" type="hidden" value="${productboard.productId }"
-
-						name="productId" />
+					<input id="productId" type="hidden"
+						value="${productboard.productId }" name="productId" />
 					<button>구매 버튼</button>
 				</form>
 				<button id="purchaseButton">장바구니</button>
@@ -205,22 +205,22 @@
 
 
 
-<sec:authorize access="hasRole('ADMIN')">
-				<form action="/market/product/deleteBoard" method="post">
-					<input type="hidden" name="id" value="${productboard.id }" />
-					<input type="submit" value="판매글 삭제" />
-				</form>
+				<sec:authorize access="hasRole('ADMIN')">
+					<form action="/market/product/deleteBoard" method="post">
+						<input type="hidden" name="id" value="${productboard.id }" />
+						<input type="submit" value="판매글 삭제" />
+					</form>
 
 
 
 
 
-				<!-- 수정폼 -->
-				<form action="/market/product/modif">
-					<input type="hidden" value="${productboard.id }" name="id" />
-					<input type="submit" value="판매글 수정" />
-				</form>
-</sec:authorize>
+					<!-- 수정폼 -->
+					<form action="/market/product/modif">
+						<input type="hidden" value="${productboard.id }" name="id" />
+						<input type="submit" value="판매글 수정" />
+					</form>
+				</sec:authorize>
 			</div>
 		</div>
 	</div>
@@ -228,7 +228,8 @@
 
 
 	<!-- 장바구니 추가 창 -->
-	<div class="addcartModal modal fade" tabindex="-1" id="cartInforModal1" aria-hidden="true">
+	<div class="addcartModal modal fade" tabindex="-1" id="cartInforModal1"
+		aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -249,7 +250,8 @@
 	</div>
 
 	<!-- 장바구니 추가에러 창 -->
-	<div class="addcarErrortModal modal fade" tabindex="-1" id="cartInforModal2" aria-hidden="true">
+	<div class="addcarErrortModal modal fade" tabindex="-1"
+		id="cartInforModal2" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
