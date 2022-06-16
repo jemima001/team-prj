@@ -30,16 +30,11 @@
 </head>
 <body>
 	<my:pagenavbar></my:pagenavbar>
-	<div class="container">
+	<!-- <div class="container">
 		<div class="row">
-			<div class="col">
+			<div class="col"> -->
 
 				<form action="/market/product/list">
-
-
-
-
-
 					<div class="form-check form-check-inline"></div>
 					<input class="form-check-input" type="radio" name="cat"
 						id="inlineRadio2" value="0">
@@ -64,7 +59,9 @@
 					</span>
 
 				</form>
-
+<div class="container">
+		<div class="row">
+			<div class="col">
 				<table class="table">
 					<thead>
 						<tr class="table-dark">
@@ -73,10 +70,10 @@
 							</th>
 							<th>상품 이미지</th>
 							<th>판매 상품</th>
-							<th>가격</th>
+							<!-- <th>가격</th>
 							<th>
 								<i class="fa-solid fa-calendar"></i>
-							</th>
+							</th> -->
 						</tr>
 					</thead>
 					<tbody>
@@ -107,6 +104,7 @@
 									<a href="${getUrl }">
 										<c:out value="${pege.boardTitle }" />
 									</a>
+										<div>${pege.priceTopage }원</div>
 
 									<%-- <c:if test="${board.hasFile }">
 										<span class="babge rounded-pill bg-light text-dark">
@@ -122,9 +120,9 @@
 										</span>
 									</c:if> --%>
 
+								
 								</td>
-								<td>${pege.priceTopage }</td>
-								<td>${pege.inserttime }</td>
+								<%-- <td>${pege.inserttime }</td> --%>
 							</tr>
 						</c:forEach>
 					</tbody>
