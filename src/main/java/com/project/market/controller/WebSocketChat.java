@@ -27,7 +27,7 @@ public class WebSocketChat {
 	public WebSocketChat() {
 		System.out.println("웹소켓(서버) 객체생성");
 	}
-	@RequestMapping(value = "chat.do")
+	@RequestMapping(value = "chat")
 	public ModelAndView getChatViewPage (ModelAndView mav) {
 		mav.setViewName("chat");
 		return mav;
