@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="my" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,30 +13,31 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<my:pagenavbar></my:pagenavbar>
-	<my:customercenternavbar current="notice"></my:customercenternavbar>
-	
+<my:pagenavbar></my:pagenavbar>
+<my:customercenternavbar current="query"></my:customercenternavbar>
+
 	<div class="container">
 		<div class="row">
 			<div class="col">
-				<h1>글 작성</h1>
-				<table class="table">
-					<form action="${appRoot }/notice/write" method="post">
-						<div>
-							<label class="form-label" for="input1">제목</label>
-							<input class="form-control" type="text" name="title" required
-								id="input1" />
-						</div>
-
-						<div>
-							<label class="form-label" for="textarea1">본문</label>
-							<textarea class="form-control" name="body" id="textarea1"
-								cols="30" rows="10"></textarea>
-						</div>
-
-						<button class="btn btn-primary">작성</button>
-					</form>
-				</table>
+				<h1>질문 작성</h1>
+				
+				<form action="${appRoot }/qna/query" method="post" enctype="multipart/form-data">
+					<div>
+						<label class="form-label" for="input1">제목</label>
+						<input class="form-control" type="text" name="title" required id="input1" />
+					</div>
+					
+					<div>
+						<label class="form-label" for="textarea1">본문</label>
+						<textarea class="form-control" name="body" id="textarea1" cols="30" rows="10"></textarea>
+					</div>
+					<div>
+						파일
+						<input multiple="multiple" type="file" name="file" accept="image/*"/>
+					</div>
+					
+					<button class="btn btn-primary">작성</button>
+				</form>
 			</div>
 		</div>
 	</div>

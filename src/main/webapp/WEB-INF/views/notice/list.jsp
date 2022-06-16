@@ -15,49 +15,11 @@
 </head>
 <body>
 <my:pagenavbar></my:pagenavbar>
+<my:customercenternavbar current="notice"></my:customercenternavbar>
 
 <div class="container">
 	<div class="row">
 		<div class="col">
-			<div class="navbar">
-				<ul class="nav me-auto">
-					<li>
-						<h2 style="display: inline;">고객센터</h2>
-					</li>
-				</ul>
-				<ul class="nav bg-light">
-					<sec:authorize access="hasRole('ADMIN')">
-						<li>
-							<a href="/market/notice/write">글쓰기</a>
-						</li>
-					</sec:authorize>
-				</ul>
-			</div>
-			<div class="container d-flex">
-					<div class="row flex-fill" >
-						<div class="col d-flex justify-content-center" style="background: silver; border: solid 1px;">
-							<a href="/market/notice/list">
-								<span>공지사항</span>	
-							</a>
-						</div>
-						<div class="col d-flex justify-content-center" style="background: silver; border: solid 1px;">
-							<a href="#">
-								<span>1:1문의하기</span>
-							</a>
-						</div>
-						<div class="col d-flex justify-content-center" style="background: silver; border: solid 1px;">
-							<a href="#">
-								<span>1:1문의확인</span>
-							</a>
-						</div>
-						<div class="col d-flex justify-content-center" style="background: silver; border: solid 1px;">
-							<a href="${appRoot }/comm/chat.do">
-								<span>1:1톡</span>
-							</a>
-						</div>
-					</div>
-			</div>
-			
 			<table class="table">
 				<thead>
 					<tr>
@@ -90,6 +52,9 @@
 						</c:forEach>
 				</tbody>
 			</table>
+			<div class="mt-3">
+				<my:pagenation path="list"></my:pagenation>
+			</div>
 		</div>
 	</div>
 </div>
