@@ -270,8 +270,16 @@ public class MemberController {
 		return "redirect:/member/productlist";
 	}
 	
-	@GetMapping("orderlist")
+	@GetMapping("adminorderlist")
 	public void getOrderlist(Model model) {
+		
+		List<MemberDto> list = service.listMember();
+		model.addAttribute("memberList", list);
+		
+	}
+	
+	@GetMapping("userorderlist")
+	public void getUserOrderlist(Model model) {
 		
 		List<MemberDto> list = service.listMember();
 		model.addAttribute("memberList", list);

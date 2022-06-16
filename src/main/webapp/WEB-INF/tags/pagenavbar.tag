@@ -38,8 +38,8 @@
 	<div class="container">
 			<ul class="nav">
 				<li class="nav-item">
-					<a class="navbar-brand" href="${homeUrl }" style="color: black;"><i
-						class="fa-solid fa-house fa-lg"></i></a>
+					<a class="navbar-brand" href="${homeUrl }" style="color: black;">
+					<img src="${appRoot }/resources/images/logo.jpg" width="120" height="30"></a>
 				</li>
 			</ul>
 
@@ -52,8 +52,8 @@
 				</sec:authorize>
 
 				<sec:authorize access="isAuthenticated() and not hasRole('ADMIN')">
-					<li class="nav-item" style="background-color: #eae1d8;"><a
-						href="${mypageUrl }"
+					<li class="nav-item" style="background-color: #eae1d8;">
+						<a href="${mypageUrl }" 
 						class="nav-link ${current == 'mypage' ? 'active' : '' }"
 						style="color: black;">마이페이지</a></li>
 				</sec:authorize>
