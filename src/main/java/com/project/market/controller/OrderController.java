@@ -41,38 +41,8 @@ public class OrderController {
 		model.addAttribute("member", member);
 	}
 	
-	
-	
-//	@GetMapping("info")
-//	public void orderForm(
-//			//int productId,
-//			//int payment,
-//			Model model, 
-//			Principal principal) {
-//		
-//		MemberDto memberdto = new MemberDto();//db에서 가져오기
-//		
-//		//MemberDto memberdto = memberSerivce.getMemberById(principal.getName());
-//		
-//		memberdto.setId("donald");
-//		memberdto.setNickName("도람뿌"); //아직 데이터가 없으므로 임의로 지정함
-//		
-//		//memberdto.setpayment
-//		
-//		
-//		//productdto 승호씨가 만드는 영역이므로 우선 비활성화
-//		//ProductDto productdto = new ProductDto(); // db에서 가져오기
-//		//productdto.setId(1); //primary key
-//		//productdto.setName("컴퓨터");
-//		
-//		//model.addAttribute("product", productdto);
-//		model.addAttribute("member", memberdto);
-//		
-//		
 		
 
-		
-//	}
 	
 	@PostMapping("info")
 	public String orderProcess(OrderDto order, RedirectAttributes rttr) {
@@ -91,9 +61,20 @@ public class OrderController {
 	
 	
 	@GetMapping("complete")
-	public void orderComplete(OrderDto order) {
+	public void orderComplete(Model model, Principal principal) {
 		
+		List<CartDto> list = orderService.cartList(principal.getName());
+		System.out.println(list);
+		model.addAttribute("cartList", list);
+		
+		int allTotal = 0;
+		for (CartDto cart : list) {
+			allTotal += cart.getTotalPrice();
+		}
+		model.addAttribute("allTotalPrice", allTotal);
+		
+		MemberDto member = orderService.getMemberById(principal.getName());
+		model.addAttribute("member", member);
 	}
-	
 	
 }
