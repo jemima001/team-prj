@@ -1,5 +1,6 @@
 package com.project.market.controller;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.project.market.domain.ProductDto;
 import com.project.market.domain.ProductPageDto;
@@ -192,5 +192,13 @@ public class ProductPageController {
 		System.out.println("상품 수정 받는 dto:"+dto);
 		return "redirect:/product/productlist";
 	}
-	
+	@PostMapping ("addcart")
+   @ResponseBody
+   public void addcart(ProductDto dto, Principal principal) {
+	   System.out.println("장바구니 추가 ajax:"+dto.getPurchase());
+	   System.out.println("장바구니 추가 ajax:"+dto.getProductId());
+	   System.out.println("장바구니 추가 ajax:"+principal.getName());
+	    service.addCart(dto,principal);
+	   
+   }
 }

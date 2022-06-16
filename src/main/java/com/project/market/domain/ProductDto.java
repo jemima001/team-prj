@@ -13,5 +13,6 @@ public class ProductDto {
 	private int product_Low_Class;
 	private String low_Name;
 	private int productId;
+	private int purchase;
 	
 }

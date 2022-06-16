@@ -279,6 +279,13 @@ ORDER BY  inserttime DESC
 
 		SELECT * FROM File GROUP BY boardId;
 	</select>
+	
+	<insert id="addCart">
+	INSERT INTO Cart(memberId,productId,bookCount)
+        VALUES(#{memberId},#{productId},#{bookCount})
+	
+	</insert>
+
 
 
 </mapper>
