@@ -29,7 +29,20 @@ public class CartController {
 		List<CartDto> list = cartService.cartList(id);
 		System.out.println(list);
 		model.addAttribute("cartList", list);
-			
+		
+		int allTotal = 0;
+		for (CartDto cart : list) {
+			allTotal += cart.getTotalPrice();
+		}
+		model.addAttribute("allTotalPrice", allTotal);
+	}
+	
+	
+	@PostMapping("cart")
+	public void getCart(String memberId, Principal principal) {
+	
+		System.out.println(memberId);
+		
 	}
 	
 	
@@ -49,6 +62,12 @@ public class CartController {
 			
 		return "redirect:/order/cart?id="+principal.getName();
 	}
+	
+	
+	
+	
+	
+	
 	
 	
 	

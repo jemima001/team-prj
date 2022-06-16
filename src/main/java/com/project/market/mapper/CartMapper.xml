@@ -20,7 +20,17 @@
 			   DELETE FROM Cart
 			   WHERE cartId = #{cartId};
 
-
 </delete>
+
+<select id="getCart"
+resultType="com.project.market.domain.CartDto">
+	SELECT p.name productName
+		   p.id productId
+		   p.price price
+	FROM Product p
+	WHERE m.id = #{id}
+	
+</select>
+
 
 </mapper>

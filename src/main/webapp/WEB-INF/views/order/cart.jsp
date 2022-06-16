@@ -54,7 +54,7 @@
 					</thead>
 					<tbody>
 					
-					<c:forEach items="${cartList }" var="cart">
+					<c:forEach items="${cartList }" var="cart" varStatus="status">
 					
 						<tr>
 							<th><input type="checkbox" value="${cart.cartId }"
@@ -80,18 +80,18 @@
 				<table class="table">
 					<thead>
 						<tr>
-							<c:forEach items="${cartList }" var="cart">
-							<th>총 주문 상품 ${cart.bookCount }개</th>
-							</c:forEach>
+							
+							<th>총 주문 상품 ${cartList.size() }개</th>
+						
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
 						
-						<c:forEach items="${cartList }" var="cart">
+						
 							<td>총 주문 금액</td>
-							<td> ${cart.totalPrice } 원</td>
-							</c:forEach>
+							<td> ${allTotalPrice }원</td>
+							
 							
 						</tr>
 					</tbody>
