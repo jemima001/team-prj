@@ -1,6 +1,7 @@
 package com.project.market.service;
 
 import java.io.IOException;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -195,6 +196,18 @@ public class ProductPageService {
 	public List<String> getFileForList() {
 		// TODO Auto-generated method stub
 		return mapper.getFileForList();
+	}
+	public void addCart(ProductDto dto, Principal principal) {
+		// TODO Auto-generated method stub
+		String memberId = principal.getName();
+		System.out.println("서비스"+dto);
+		int bookCount = dto.getPurchase();
+		int productId = dto.getProductId();
+		System.out.println("구매 갯수 서비스에서"+bookCount);
+		System.out.println("제품 아이디 서비스에서"+productId);
+		System.out.println("맴버 아이디 서비스 에서"+memberId);
+		mapper.addCart(memberId,bookCount,productId);
+		
 	}
 	
 

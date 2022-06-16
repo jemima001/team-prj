@@ -1,5 +1,6 @@
 package com.project.market.mapper;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
@@ -49,6 +50,8 @@ public interface ProductPageMapper {
 	int DeleteProduct(ProductDto dto);
 	int modifyProduct(ProductDto dto);
 	List<String> getFileForList();
+	void addCart(ProductDto dto, Principal principal);
+	void addCart(@Param("memberId")String memberId,@Param("bookCount") int bookCount,@Param("productId") int productId);
 
 	
 
