@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.project.market.domain.CartDto;
 import com.project.market.domain.MemberDto;
 import com.project.market.domain.OrderDto;
 import com.project.market.mapper.OrderMapper;
@@ -25,13 +26,29 @@ public class OrderService {
 		return cnt1 == 1;
 	}
 
-	public List<OrderDto> listOrder() {
-		return mapper.selectAllOrder();
-	}
+
 
 	public OrderDto getOrderById(String id) {
 		return mapper.selectOrderById(id);
 	}
+
+	public List<CartDto> cartList(String id) {
+		// TODO Auto-generated method stub
+		return mapper.selectAllOrders(id);
+	}
+
+
+
+	public MemberDto getMemberById(String id) {
+		// TODO Auto-generated method stub
+		return mapper.selectMemberById(id);
+	}
+	
+
+
+	
+	
+	
 
 	//@Transactional 
 	//? 이 부분 수정
