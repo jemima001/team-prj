@@ -90,13 +90,15 @@
 		Product.name as productName,
 		pm.name,
 		pp.inserttime as
-		inserttime
+		inserttime,
+		f.fileName as fileName
 
 		FROM ProductPage as pp Join ProductCode as p ON pp.productId
 		= p.Productid
 		JOIN Product ON Product.id =pp.productId
 		Join
 		Product_middle_class as pm ON p.ProductCode0 = pm.id
+		LEFT JOIN File as f ON pp.id = f.boardId
 
 		<choose>
 			<when test="cat!= null">
@@ -193,12 +195,13 @@
 			</when>
 
 			<when test="cat== null">
+				 GROUP BY pp.id
 				WHERE pp.BoardTitle LIKE #{search}
 
 			</when>
 		</choose>
 
-
+ORDER BY  inserttime DESC 
 	</select>
 
 	<delete id="deleteBoard">
@@ -216,7 +219,7 @@
 		UPDATE Product
 		SET name = #{productName},
 		Stock =
-		#{Stock},
+		#{stock},
 		price = #{price}
 		WHERE
 		id = #{productId};
@@ -246,7 +249,7 @@
 		SELECT
 		id as productId,
 		name as productName,
-		Stock as Stock,
+		Stock as stock,
 		price as price
 		FROM Product;
 

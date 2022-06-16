@@ -70,13 +70,13 @@ $(document).ready(function() {
 		<input type="hidden" name="price" value="${product.price }" /> <br />
 		현재 재고 :
  		<input type="hidden" name="productId" value="${product.productId }" /> <br />
-		<input type="number" name = "Stock" value ="${product.stock }"><br />
+		<input type="number" name = "stock" value ="${product.stock }"><br />
 	제품 아이디 :${product.productId } <br />
 		상품 중 분류 :
 		<select id="middle_class" name="Product_middle_class">
 			<option value="0">분류 선택</option>
 			<c:forEach items="${ m_category}" var="category">
-				<option value="${category.product_middle_class}">${category.middle_name }</option>
+				<option value="${category.product_Middle_Class}">${category.middle_Name }</option>
 			</c:forEach>
 		</select>
 		
@@ -93,7 +93,7 @@ $(document).ready(function() {
 		</div>
 		
 		
-		<input type="number" name = "Stock" value="${product.stock }"/>
+		<input type="number" name = "stock" value="${product.stock }"/>
 		<br />
 	제목 : <br />
 	<input type="hidden" name="id" value="${productpage.id}" />

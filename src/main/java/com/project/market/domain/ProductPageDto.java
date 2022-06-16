@@ -17,4 +17,5 @@ public class ProductPageDto {
 	private int priceTopage;
 	private int Purchase;
 	private List<String> fileList; 
+	private String fileName;
 }
