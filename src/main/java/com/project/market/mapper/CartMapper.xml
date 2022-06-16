@@ -9,13 +9,18 @@
 		SELECT c.cartId cartId,
 			p.name productName,
 			c.bookCount bookCount,
-			(p.price * c.bookCount) price 
+			(p.price * c.bookCount) totalPrice 
 		FROM Product p 
 		JOIN Cart c ON p.id = c.productId
 		JOIN Member m ON m.id = c.memberId
 		WHERE m.id = #{id}
 	</select>
 
+<delete id="deleteCheckedCart">	   
+			   DELETE FROM Cart
+			   WHERE cartId = #{cartId};
 
+
+</delete>
 
 </mapper>

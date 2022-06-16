@@ -7,9 +7,10 @@ import com.project.market.domain.CartDto;
 
 public interface CartMapper {
 
-	
 
 	List<CartDto> selectAllCart(String id);
+
+	int deleteCheckedCart(int cartId);
 
 }
 
