@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.security.access.method.P;
 
+import com.project.market.domain.PaginationDto;
 import com.project.market.domain.ProductDto;
 import com.project.market.domain.ProductPageDto;
 
@@ -32,7 +33,7 @@ public interface ProductPageMapper {
 
 	ProductDto getproduct(int productId);
 
-	List<ProductPageDto> getBoardlist(@Param("cat") String cat,@Param("search") String search);
+	List<ProductPageDto> getBoardlist(@Param("cat") String cat,@Param("search") String search,@Param("pageToStart") int pageToStart,@Param("onePageAllBoardNum") int onePageAllBoardNum);
 
 	int deleteBoard(ProductPageDto dto);
 
@@ -52,6 +53,7 @@ public interface ProductPageMapper {
 	List<String> getFileForList();
 	void addCart(ProductDto dto, Principal principal);
 	void addCart(@Param("memberId")String memberId,@Param("bookCount") int bookCount,@Param("productId") int productId);
+	PaginationDto getAllBoardNum(String cat);
 
 	
 

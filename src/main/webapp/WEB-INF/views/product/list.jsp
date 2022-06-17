@@ -52,13 +52,12 @@
 							for="btnradio${category.product_Middle_Class}">${category.middle_Name }</label>
 					</div>
 				</c:forEach>
-			<span class="input-group mb-3">
-				<input type="text" class="form-control"
-					placeholder="검색어를 입력해 주세요"
-					aria-label="Recipient's username" aria-describedby="button-addon2" name="search">
-				<button class="btn btn-outline-secondary" 
-					id="button-addon2">Button</button>
-			</span>
+				<span class="input-group mb-5">
+					<input type="text" class="form-control" placeholder="검색어를 입력해 주세요"
+						aria-label="Recipient's username" aria-describedby="button-addon2"
+						name="search">
+					<button class="btn btn-outline-secondary" id="button-addon2">Button</button>
+				</span>
 			</div>
 
 
@@ -143,6 +142,33 @@
 					</tbody>
 
 				</table>
+				<!-- ---------- 페이지 네비게이터 ----------- -->
+
+				<nav aria-label="...">
+					<ul class="pagination">
+						<li class="page-item disabled">
+							<a class="page-link">Previous</a>
+						</li>
+						<c:forEach var="i" begin="1" end="${paginationDto.endPage}">
+							
+								<li class="page-item  ${paginationDto.nowpage == i ? 'active' : '' }">
+									<a class="page-link"
+										href="${appRoot }/product/list?cat=${paginationDto.cat }&search=${paginationDto.search }&page=${i}" >${i}</a>
+								</li>
+							
+							
+						</c:forEach>
+						<li class="page-item">
+							<a class="page-link" href="#">Next</a>
+						</li>
+					</ul>
+				</nav>
+
+
+
+
+				<!-- ----------------------------------- -->
+
 			</div>
 		</div>
 	</div>

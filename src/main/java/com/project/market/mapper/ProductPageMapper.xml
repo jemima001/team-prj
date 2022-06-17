@@ -195,13 +195,14 @@
 			</when>
 
 			<when test="cat== null">
-				 GROUP BY pp.id
+				 
 				WHERE pp.BoardTitle LIKE #{search}
 
 			</when>
 		</choose>
-
+ GROUP BY pp.id
 ORDER BY  inserttime DESC 
+LIMIT #{pageToStart},#{onePageAllBoardNum}
 	</select>
 
 	<delete id="deleteBoard">
@@ -285,7 +286,17 @@ ORDER BY  inserttime DESC
         VALUES(#{memberId},#{productId},#{bookCount})
 	
 	</insert>
-
+	
+	<select id="getAllBoardNum" resultType="com.project.market.domain.PaginationDto">
+	   SELECT COUNT(ProductPage.id) as allBoard
+	  FROM ProductPage LEFT JOIN Product ON ProductPage.productId = Product.id
+								JOIN ProductCode ON ProductCode.Productid = Product.id 
+                               <if test = "cat != 0">                               
+                               WHERE ProductCode0 = #{cat} ;
+                               </if>
+                               
+	
+	</select>
 
 
 </mapper>
