@@ -34,32 +34,47 @@
 		<div class="row">
 			<div class="col"> -->
 
-				<form action="/market/product/list">
-					<div class="form-check form-check-inline"></div>
-					<input class="form-check-input" type="radio" name="cat"
-						id="inlineRadio2" value="0">
-					<label class="form-check-label" for="inlineRadio2">전체보기</label>
-					<c:forEach items="${ m_category}" var="category">
-						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="radio" name="cat"
-								id="inlineRadio2" value="${category.product_Middle_Class}">
-							<label class="form-check-label" for="inlineRadio2">${category.middle_Name }</label>
-						</div>
-					</c:forEach>
 
-					<input type="text" name="search" />
-					<input type="submit" value="검색">
-					<span>
-						<sec:authorize access="hasRole('ADMIN')">
-							<a href="${appRoot }/product/add" class="btn btn-outline-dark">게시물
-								작성</a>
-							<a href="${appRoot }/product/productlist"
-								class="btn btn-outline-dark">상품 삭제</a>
-						</sec:authorize>
-					</span>
+	<div style="background-color: #eae1d8">
+		<form action="/market/product/list">
 
-				</form>
-<div class="container">
+			<div class="btn-group" role="group"
+				aria-label="Basic radio toggle button group">
+				<input type="radio" class="btn-check " name="cat" id="btnradio0"
+					autocomplete="off" value="0">
+				<label class="btn btn-outline-primary " for="btnradio0">전체보기</label>
+				<c:forEach items="${ m_category}" var="category">
+					<div class="form-check form-check-inline">
+						<input type="radio" class="btn-check" name="cat"
+							id="btnradio${category.product_Middle_Class}" autocomplete="off"
+							value="${category.product_Middle_Class}">
+						<label class="btn btn-outline-primary"
+							for="btnradio${category.product_Middle_Class}">${category.middle_Name }</label>
+					</div>
+				</c:forEach>
+			<span class="input-group mb-3">
+				<input type="text" class="form-control"
+					placeholder="검색어를 입력해 주세요"
+					aria-label="Recipient's username" aria-describedby="button-addon2" name="search">
+				<button class="btn btn-outline-secondary" 
+					id="button-addon2">Button</button>
+			</span>
+			</div>
+
+
+			<!-- <input type="text" name="search" />
+			<input type="submit" value="검색"> -->
+			<span>
+				<sec:authorize access="hasRole('ADMIN')">
+					<a href="${appRoot }/product/add" class="btn btn-outline-dark">게시물
+						작성</a>
+					<a href="${appRoot }/product/productlist"
+						class="btn btn-outline-dark">상품 삭제</a>
+				</sec:authorize>
+			</span>
+		</form>
+	</div>
+	<div class="container">
 		<div class="row">
 			<div class="col">
 				<table class="table">
@@ -104,7 +119,7 @@
 									<a href="${getUrl }">
 										<c:out value="${pege.boardTitle }" />
 									</a>
-										<div>${pege.priceTopage }원</div>
+									<div>${pege.priceTopage }원</div>
 
 									<%-- <c:if test="${board.hasFile }">
 										<span class="babge rounded-pill bg-light text-dark">
@@ -120,7 +135,7 @@
 										</span>
 									</c:if> --%>
 
-								
+
 								</td>
 								<%-- <td>${pege.inserttime }</td> --%>
 							</tr>
