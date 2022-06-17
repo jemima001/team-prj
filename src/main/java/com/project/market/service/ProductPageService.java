@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.project.market.domain.PaginationDto;
 import com.project.market.domain.ProductDto;
 import com.project.market.domain.ProductPageDto;
 import com.project.market.mapper.ProductPageMapper;
@@ -126,10 +127,36 @@ public class ProductPageService {
 		// TODO Auto-generated method stub
 		return mapper.getproduct(productId);
 	}
-	public List<ProductPageDto> getboardlist(String cat, String search ) {
-		// TODO Auto-generated method stub
-		return mapper.getBoardlist(cat, "%" + search +"%");
+	public List<ProductPageDto> getboardlist(String cat, String search, PaginationDto paginationDto ) { 
+		
+		
+		int pageToStart = (paginationDto.getPage()-1)*15 ;
+		int onePageAllBoardNum = paginationDto.getOnePageAllBoardNum();
+		
+		return mapper.getBoardlist(cat, 
+								  "%" + search +"%", 
+								  pageToStart, 
+								  onePageAllBoardNum
+								  );
 	}
+	
+	// 페이지 값 정의 하는 메소드
+	/*private PaginationDto pageWork(PaginationDto paginationDto, int onePageShowNum) {
+		paginationDto.setOnePageAllBoardNum(onePageShowNum); // 한 페이지 총 보여주는 게시물 갯수
+		paginationDto.setStartPage(1);           // 페이지 네비게이터 시작수
+		paginationDto.setAllPageNum(mapper.getAllBoardNum());
+		int nowPage = paginationDto.getPage();
+		int pageToStart = (nowPage-1)*15 ;
+		int allBoardnum = mapper.getAllBoardNum();
+		int endnum = allBoardnum / paginationDto.getOnePageAllBoardNum();
+		paginationDto.setPageToStart(pageToStart);
+		paginationDto.setEndPage(endnum);
+		System.out.println(paginationDto);
+		
+		
+		return paginationDto;
+		
+	}*/
 	public boolean deleteBoard(ProductPageDto dto) {
 		int ok = mapper.deleteBoard(dto);
 		
@@ -208,6 +235,26 @@ public class ProductPageService {
 		System.out.println("맴버 아이디 서비스 에서"+memberId);
 		mapper.addCart(memberId,bookCount,productId);
 		
+	}
+	public PaginationDto getCountBoard(String cat, int setOnePageAllBoardNum) {
+		PaginationDto paginationDto = mapper.getAllBoardNum(cat);
+		int allPageNum = paginationDto.getAllBoard();
+		/*System.out.println("allPageNum:"+allPageNum);
+		System.out.println("setOnePageAllBoardNum :"+setOnePageAllBoardNum);*/
+		paginationDto.setOnePageAllBoardNum(setOnePageAllBoardNum);
+		paginationDto.setEndPage((allPageNum/setOnePageAllBoardNum)+1);
+		/*System.out.println("(allPageNum/setOnePageAllBoardNum)+1 :"+(allPageNum/setOnePageAllBoardNum)+1);
+		System.out.println("(allPageNum/setOnePageAllBoardNum): "+(allPageNum/setOnePageAllBoardNum));*/
+		if(paginationDto.getEndPage()== 0) {
+			paginationDto.setEndPage(1);
+			
+		}
+		
+		System.out.println("서비스에서 나가는 페이지네비게이터 Dto:"+paginationDto);
+		paginationDto.setCat(cat);
+		paginationDto.setStartPage(1);
+		
+		return  paginationDto;
 	}
 	
 

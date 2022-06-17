@@ -121,19 +121,26 @@
 
 					<!-- --------------------------------------------------- -->
 
-					<p>판매글 내용 : ${productboard.boardBody }</p>
+					<p>상세 정보 : ${productboard.boardBody }</p>
 					<p>판매 상품 : ${product.productName }</p>
 					<p>가격 : ${product.price }</p>
-					<p>판매글 아이디 :${productboard.id }</p>
+					
+					<c:if test="${product.stock != 0 }">
 					구매 수량
 					<input id="PurchaseInput" type="number" name="Purchase" value="1" />
 					<input type="hidden" value="${productboard.id }" name="id" />
 					<input id="productId" type="hidden"
 						value="${productboard.productId }" name="productId" />
-					<button>구매 버튼</button>
+					<button class="buttonTobuy">구매 버튼</button>
+					</c:if>
 				</form>
-				<button id="purchaseButton">장바구니</button>
-
+				<c:if test="${product.stock != 0 }">
+				<button class="buttonTobuy" id="purchaseButton">장바구니</button>
+				</c:if>
+				<c:if test="${product.stock == 0 }">
+						품절되었습니다.
+					
+					</c:if>
 
 
 
@@ -266,6 +273,8 @@
 					<button type="button" class="btn btn-primary"
 						data-bs-dismiss="modal">계속 쇼핑하기</button>
 					<button form="cartForm" class="btn btn-primary">장바구니로 이동</button>
+				
+					
 				</div>
 			</div>
 		</div>

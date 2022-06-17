@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.project.market.domain.PaginationDto;
 import com.project.market.domain.ProductDto;
 import com.project.market.domain.ProductPageDto;
 import com.project.market.service.ProductPageService;
@@ -100,9 +101,13 @@ public class ProductPageController {
 	@GetMapping("list")
 	public void getlist(Model model, 
 						@RequestParam(name = "cat", defaultValue = "0" ) String cat, 
-						@RequestParam(name ="search", defaultValue = "")String search
+						@RequestParam(name ="search", defaultValue = "")String search,
+						@RequestParam(name = "page", defaultValue ="1") int page
 						) {
-		
+		PaginationDto paginationDto = new PaginationDto();
+		int setOnePageAllBoardNum =15;
+		paginationDto.setPage(page);
+		paginationDto.setOnePageAllBoardNum(setOnePageAllBoardNum);
 		//List<String> fileList = service.getFileForList();
 		List<ProductDto> categoryList = service.getcategory();
 		// ajx로 나중에 처리 시도 해야
@@ -110,9 +115,15 @@ public class ProductPageController {
 		model.addAttribute("m_category", categoryList);
 		System.out.println("cat:"+cat);
 		
-	    List<ProductPageDto> list = service.getboardlist(cat, search);
-	 System.out.println("상품 리스트:"+list);
-	 model.addAttribute("boardlist", list);
+	    List<ProductPageDto> list = service.getboardlist(cat, search, paginationDto);
+	    System.out.println("상품 리스트:"+list);
+	    model.addAttribute("boardlist", list);
+	    
+	    PaginationDto outPaginationDto = service.getCountBoard(cat,setOnePageAllBoardNum);
+	    System.out.println("컨트롤러 페이지 네이게이터 Dto:"+ outPaginationDto);
+	    outPaginationDto.setSearch(search);
+	    outPaginationDto.setNowpage(page);
+	    model.addAttribute("paginationDto", outPaginationDto);
 		
 	}
 	
