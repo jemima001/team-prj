@@ -26,8 +26,9 @@
 	crossorigin="anonymous"></script>
 <title>Insert title here</title>
 <script>
-	$(document).ready(function() {
-
+	$(document).ready(
+			function() {
+			
 	});
 </script>
 </head>
@@ -36,31 +37,79 @@
 	<my:mypagenavbar current="setaddress"></my:mypagenavbar>
 
 	<div class="container">
-
-
 		<div class="row justify-content-center">
 			<div class="col-12 col-lg-6">
-
-				<h1>기본배송지설정</h1>
-
-				<form id="form1" action="${appRoot }/member/setaddress" method="post">
+				<h1>현재 기본 배송지</h1>
 					<div>
 						<p>${message }</p>
 					</div>
-
 					<div>
-						<label for="nameInput1" class="form-label"> 이름 </label> <input
-							id="nameInput1" class="form-control" type="text"
-							value="${member.name }" readonly /> 
-							
-							<input type="hidden" name="id" value="${member.id}" />
-							
-							<label for="addressInput1"
-							class="form-label"> 주소 </label> <input class="form-control"
-							id="addressInput1" type="text" name="address" />
+						<label for="nameInput1" class="form-label"> 이름 </label>
+						<input id="nameInput1" class="form-control" type="text"
+							value="${member.name }" readonly />
 
+						<input type="hidden" name="id" value="${member.id}" />
+
+						<label for="addressInput1" class="form-label"> 주소 </label>
+						<input class="form-control" id="addressInput1" type="text"
+							name="address" value="${member.address }" readonly/>
 					</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col">
+				<h1>배송지 목록</h1>
+				<table class="table">
+					<thead>
+						<tr>
+							<th>주소</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="${addressList }" var="address"
+							varStatus="status">
+							<tr>
+								<td>${address.address }</td>
+								<td align="right">
+									<div class="btn-group" role="group" aria-label="Basic example">
+										<button form="form${status.count }" type="submit" class="btn btn-outline-success">기본배송지로 설정</button>
+										<form id="form${status.count }" action="${appRoot }/member/setOneAddress"
+											method="post">
+											<input type="hidden" value="${address.address }" name="address" />
+										</form>
 
+										<button form="formd${status.count }" type="submit" class="btn btn-outline-danger">삭제</button>
+										<form id="formd${status.count }" action="${appRoot }/member/addressRemove"
+											method="post">
+											<input type="hidden" value="${address.address }"
+												name="address" />
+										</form>
+									</div>
+								</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</div>
+			<div class="col-12 col-lg-6">
+				<h1>배송지 추가</h1>
+				<form id="forms1" action="${appRoot }/member/setaddress"
+					method="post">
+					<div>
+						<p>${message }</p>
+					</div>
+					<div>
+						<label for="nameInput1" class="form-label"> 이름 </label>
+						<input id="nameInput1" class="form-control" type="text"
+							value="${member.name }" readonly />
+
+						<input type="hidden" name="id" value="${member.id}" />
+
+						<label for="addressInput1" class="form-label"> 주소 </label>
+						<input class="form-control" id="addressInput1" type="text"
+							name="address" value="" />
+					</div>
 					<div class="mt-3">
 						<button class="btn btn-success" id="submitButton1">완료</button>
 					</div>
@@ -68,6 +117,6 @@
 			</div>
 		</div>
 	</div>
-
+	
 </body>
 </html>

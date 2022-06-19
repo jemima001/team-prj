@@ -37,7 +37,8 @@
 		email,
 		nickName,
 		name,
-		inserted
+		inserted,
+		address
 		FROM Member
 		WHERE id = #{id}
 	</select>
@@ -99,8 +100,32 @@
 		price
 		FROM Product
 	</select>
+	
+	<select id="selectAllAddress"
+		resultType="com.project.market.domain.AddressDto">
+		SELECT memberId,
+		address
+		FROM Address
+	</select>
+	
+	<update id="updateOneAddress">
+		UPDATE Member 
+		SET address = #{address}
+		WHERE id = #{id}
+	</update>
+	
+	<delete id="removeAddress">
+		DELETE FROM Address
+		WHERE address = #{address}
+	</delete>
+	
+	<select id="countAddress" resultType="int">
+		SELECT
+		COUNT(address)
+		FROM Address
+		WHERE address = #{address}
+	</select>
 </mapper>
-
 
 
 
