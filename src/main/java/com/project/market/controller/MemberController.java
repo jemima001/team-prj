@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.project.market.domain.AddressDto;
 import com.project.market.domain.MemberDto;
 import com.project.market.domain.ProductDto;
 import com.project.market.service.MemberService;
@@ -23,156 +24,159 @@ import com.project.market.service.MemberService;
 public class MemberController {
 	@Autowired
 	private MemberService service;
-	
+
 	@GetMapping("login")
 	public void loginPage() {
-		
+
 	}
-	
+
 	@GetMapping("signup")
 	public void signupForm() {
-		
+
 	}
-	
+
 	@PostMapping("signup")
 	public String signupProcess(MemberDto member, RedirectAttributes rttr) {
 		boolean success = service.addMember(member);
-		
+
 		if (success) {
 			rttr.addFlashAttribute("message", "회원가입이 완료되었습니다.");
 			return "redirect:/project/home";
 		} else {
 			rttr.addFlashAttribute("message", "회원가입이 실패하였습니다.");
 			rttr.addFlashAttribute("member", member);
-			
+
 			return "redirect:/member/signup";
 		}
 	}
-	
+
 	@GetMapping(path = "check", params = "id")
 	@ResponseBody
 	public String idCheck(String id) {
-		
+
 		boolean exist = service.hasMemberId(id);
-		
+
 		if (exist) {
 			return "notOk";
 		} else {
 			return "ok";
 		}
 	}
-	
+
 	@GetMapping(path = "check", params = "email")
 	@ResponseBody
 	public String emailCheck(String email) {
-		
+
 		boolean exist = service.hasMemberEmail(email);
-		
+
 		if (exist) {
 			return "notOk";
 		} else {
 			return "ok";
 		}
 	}
-	
+
 	@GetMapping(path = "check", params = "nickName")
 	@ResponseBody
 	public String nickNameCheck(String nickName) {
-		
+
 		boolean exist = service.hasMemberNickName(nickName);
-		
+
 		if (exist) {
 			return "notOk";
 		} else {
 			return "ok";
 		}
 	}
-	
+
 	@GetMapping(path = "check", params = "id")
 	@ResponseBody
 	public String idCheck(String id) {
-		
+
 		boolean exist = service.hasMemberId(id);
-		
+
 		if (exist) {
 			return "notOk";
 		} else {
 			return "ok";
 		}
 	}
-	
+
 	@GetMapping(path = "check", params = "email")
 	@ResponseBody
 	public String emailCheck(String email) {
-		
+
 		boolean exist = service.hasMemberEmail(email);
-		
+
 		if (exist) {
 			return "notOk";
 		} else {
 			return "ok";
 		}
 	}
-	
+
 	@GetMapping(path = "check", params = "nickName")
 	@ResponseBody
 	public String nickNameCheck(String nickName) {
-		
+
 		boolean exist = service.hasMemberNickName(nickName);
-		
+
 		if (exist) {
 			return "notOk";
 		} else {
 			return "ok";
 		}
 	}
-	
+
 	@GetMapping("mypage")
 	public String getMember(String id,
 			Principal principal,
 			HttpServletRequest request,
 			Model model) {
-		
+
 		if (hasAuthOrAdmin(id, principal, request)) {
 			MemberDto member = service.getMemberById(id);
 			model.addAttribute("member", member);
-			
+
 			return null;
 		}
-		
+
 		return "redirect:/member/login";
 	}
-	
+
 	private boolean hasAuthOrAdmin(String id, Principal principal, HttpServletRequest req) {
-		return req.isUserInRole("ROLE_ADMIN") || 
+		return req.isUserInRole("ROLE_ADMIN") ||
 				(principal != null && principal.getName().equals(id));
 	}
-	
+
 	@GetMapping("setaddress")
 	public String getMember2(String id,
 			Principal principal,
 			HttpServletRequest request,
 			Model model) {
-		
+
 		if (hasAuthOrAdmin(id, principal, request)) {
 			MemberDto member = service.getMemberById(id);
 			model.addAttribute("member", member);
-			
+
+			List<AddressDto> list = service.listAddress();
+			model.addAttribute("addressList", list);
+
 			return null;
 		}
-		
-		return "redirect:/member/login";
+
+		return "redirect:/member/setaddress?id="+principal.getName();
 	}
-	
+
 	@PostMapping("remove")
 	public String removeMember(MemberDto dto,
 			Principal principal,
 			HttpServletRequest req,
 			RedirectAttributes rttr) {
-		
+
 		if (hasAuthOrAdmin(dto.getId(), principal, req)) {
 			boolean success = service.removeMember(dto);
-			
+
 			if (success) {
 				rttr.addFlashAttribute("message", "회원 탈퇴 되었습니다.");
 				return "redirect:/project/home";
@@ -184,64 +188,71 @@ public class MemberController {
 			return "redirect:/member/mypage";
 		}
 	}
-	
+
 	@PostMapping("modify")
 	public String modifyMember(MemberDto dto,
-			String oldPassword, 
+			String oldPassword,
 			Principal principal,
 			HttpServletRequest req,
 			RedirectAttributes rttr) {
-		
+
 		if (hasAuthOrAdmin(dto.getId(), principal, req)) {
 			boolean success = service.modifyMember(dto, oldPassword);
-			
+
 			if (success) {
 				rttr.addFlashAttribute("message", "회원 정보가 수정되었습니다.");
 			} else {
 				rttr.addFlashAttribute("message", "회원 정보가 수정되지 않았습니다.");
 			}
-			
+
 			rttr.addFlashAttribute("member", dto); // model object
 			rttr.addAttribute("id", dto.getId()); // query string
 			return "redirect:/member/mypage";
 		} else {
 			return "redirect:/member/login";
 		}
-		
+
 	}
-	
+
 	@PostMapping("setaddress")
 	public String modifyAddress(MemberDto dto,
+			String address,
 			Principal principal,
 			HttpServletRequest req,
 			RedirectAttributes rttr) {
-		
-			boolean success = service.setAddress(dto);
+		boolean exist = service.hasAddress(address);
+		if(exist) {
+			rttr.addFlashAttribute("message", "이미 존재하는 배송지 입니다.");
+			return "redirect:/member/setaddress?id="+principal.getName();
 			
-			if (success) {
-				rttr.addFlashAttribute("message", "기본배송지 설정이 완료되었습니다.");
-			} else {
-				rttr.addFlashAttribute("message", "기본배송지 설정이 완료되지 않았습니다.");
-			}
-			
-			rttr.addFlashAttribute("member", dto); // model object
-			rttr.addAttribute("id", dto.getId()); // query string
-			return "redirect:/member/mypage";
-		
+		} else {
+			service.setAddress(dto);
+		}
+
+		/*if (success) {
+			rttr.addFlashAttribute("message", "기본배송지 설정이 완료되었습니다.");
+		} else {
+			rttr.addFlashAttribute("message", "기본배송지 설정이 완료되지 않았습니다.");
+		}*/
+
+		rttr.addFlashAttribute("member", dto); // model object
+		rttr.addAttribute("id", dto.getId()); // query string
+		return "redirect:/member/setaddress?id="+principal.getName();
+
 	}
-	
+
 	@GetMapping("initpw")
 	public void initpwPage() {
-		
+
 	}
-	
+
 	@PostMapping("initpw")
 	public String initpwProcess(String id) {
 		service.initPassword(id);
-		
+
 		return "redirect:/project/home";
 	}
-	
+
 	@GetMapping("adminpage")
 	// jsp (id, password, email, nickName, inserted) table로 보여주세요.
 	// ORDER BY inserted DESC
@@ -249,41 +260,62 @@ public class MemberController {
 		List<MemberDto> list = service.listMember();
 		model.addAttribute("memberList", list);
 	}
-	
+
 	@GetMapping("productlist")
 	public void getlist(Model model) {
-		
-	 List<ProductDto> list = service.Productlist();
-	 model.addAttribute("productlist", list);
-		
+
+		List<ProductDto> list = service.Productlist();
+		model.addAttribute("productlist", list);
+
 	}
-	
+
 	@PostMapping("productRemove")
 	public String removeProduct(ProductDto dto) {
-		
+
 		return "redirect:/member/productlist";
 	}
-	
+
 	@PostMapping("productModify")
 	public String modifyProduct(ProductDto dto) {
-		
+
 		return "redirect:/member/productlist";
 	}
-	
+
 	@GetMapping("adminorderlist")
 	public void getOrderlist(Model model) {
-		
+
 		List<MemberDto> list = service.listMember();
 		model.addAttribute("memberList", list);
-		
+
 	}
-	
+
 	@GetMapping("userorderlist")
 	public void getUserOrderlist(Model model) {
-		
+
 		List<MemberDto> list = service.listMember();
 		model.addAttribute("memberList", list);
+
+	}
+
+	@PostMapping("addressRemove")
+	public String removeAddress(String address, Principal principal) {
+
+		service.removeAddress(address);
 		
+		return "redirect:/member/setaddress?id="+principal.getName();
 	}
 	
+	@PostMapping("setOneAddress")
+	public String setOneAddress(String id,
+			String address,
+			Principal principal,
+			HttpServletRequest req,
+			RedirectAttributes rttr) {
+
+		System.out.println(principal.getName());
+		System.out.println(address);
+		service.updateOneAddress(principal.getName(), address);
+		
+		return "redirect:/member/setaddress?id="+principal.getName();
+	}
 }

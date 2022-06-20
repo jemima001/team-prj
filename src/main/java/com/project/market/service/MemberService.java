@@ -7,6 +7,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.project.market.domain.AddressDto;
 import com.project.market.domain.MemberDto;
 import com.project.market.domain.ProductDto;
 import com.project.market.mapper.MemberMapper;
@@ -125,6 +126,23 @@ public class MemberService {
 	
 	public List<ProductDto> Productlist() {
 		return mapper.getProductlist();
+	}
+
+	public List<AddressDto> listAddress() {
+		
+		return mapper.selectAllAddress();
+	}
+
+	public void updateOneAddress(String id, String address) {
+		mapper.updateOneAddress(id, address);
+	}
+
+	public void removeAddress(String address) {
+		mapper.removeAddress(address);
+	}
+
+	public boolean hasAddress(String address) {
+		return mapper.countAddress(address) > 0;
 	}
 
 }
