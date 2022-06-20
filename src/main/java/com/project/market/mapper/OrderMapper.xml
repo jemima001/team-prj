@@ -23,6 +23,7 @@
 		email,
 		nickName,
 		name,
+		address,
 		inserted
 		FROM Member
 		WHERE id = #{id}

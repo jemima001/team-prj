@@ -36,6 +36,7 @@ public class OrderController {
 		model.addAttribute("allTotalPrice", allTotal);
 		
 		MemberDto member = orderService.getMemberById(principal.getName());
+		
 		model.addAttribute("member", member);
 	}
 	
