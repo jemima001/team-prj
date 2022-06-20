@@ -111,11 +111,9 @@
 		
 			<form id="orderListForm" action="${appRoot }/member/userorderlist" method="get">
 				
-					<input id="productName" type="text" value="${cart.productName }" />
-					<input type="hidden" value="${productboard.id }" name="id" />
-					<input id="productId" type="hidden" value="${cart.productId }"
-
-						name="productId" />
+					<input id="orderId" type="number" value="${cart.orderId }" />
+					<input id="bookCount" type="number" value="${cart.bookCount }" />
+					<input id="allTotalPrice" type="number" value="${cart.allTotalPrice }"/>						
 					<a class="btn btn-success" href="${appRoot }/order/info" role="button"> 결제하기</a>
 					
 					

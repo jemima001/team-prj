@@ -1,6 +1,5 @@
 package com.project.market.service;
 
-import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,15 +24,15 @@ public class OrderService {
 //	}
 	
 	//order의 데이터 member로 넘겨주기
-	public void orderData (OrderDto dto, Principal principal) {
-		String memberId = principal.getName();
-		int orderId = dto.getOrderId();
-		int bookCount = dto.getBookCount();
-		int allTotalPrice = dto.getTotalOrderPrice();
-	
-		mapper.orderData (memberId,orderId,bookCount,allTotalPrice);
-		
-	}
+//	public void orderData (OrderDto dto, Principal principal) {
+//		String memberId = principal.getName();
+//		int orderId = dto.getOrderId();
+//		int bookCount = dto.getBookCount();
+//		int allTotalPrice = dto.getTotalOrderPrice();
+//	
+//		mapper.orderData (memberId,orderId,bookCount,allTotalPrice);
+//		
+//	}
 	
 	
 	
@@ -56,6 +55,19 @@ public class OrderService {
 	public MemberDto getMemberById(String id) {
 		// TODO Auto-generated method stub
 		return mapper.selectMemberById(id);
+	}
+
+	public void addOrder(CartDto cart, String memberId, String recipient, String address) {
+		// TODO Auto-generated method stub
+		mapper.addOrderList(cart, memberId, recipient, address);
+	}
+
+
+	public void deleteCartList(String memberId) {
+	
+			mapper.deleteCartList(memberId); 
+		
+		
 	}
 	
 

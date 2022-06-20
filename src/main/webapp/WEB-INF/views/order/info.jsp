@@ -281,7 +281,7 @@
 							aria-label="Close"></button>
 					</div>
 					<div class="modal-body">
-						<form id="form10" action="${appRoot }/order/complete" method="get">
+						<form id="form10" action="${appRoot }/order/complete" method="post">
 							<input type="text" value="${member.id }" name="id" readonly />
 							고객님의 주문 <br>
 							<br>
@@ -309,37 +309,6 @@
 
 
 
-		<!-- <form id="form10" action="${appRoot }/order/info" method="post"> 
-
-		닉네임: ${member.nickName } <br>
-		주문자 성함: ${member.id } 님의 주문을 진행합니다. <br> <br>
-
-
-		<h5> Recipient Info 수령자 정보</h5>
-		<br> 수령인 성함: <input type="text" name="receiver" />
-		<!--<p id="receiverMessage10"></p>
-		<br> 수령 주소 : <input type="text" name="address" />
-		<!-- <p id="addressMessage10"></p> 
-		<br> <br>
-
-		<h5>Product Info 상품 정보</h5>
-		<br> 상품 명 :${'aaaa' } <br> 주문 수량 : <input type="number">
-		<br> <br>
-
-
-		<h5>Payment Info 결제 정보</h5>
-		<br> 결제 금액 : ${123 } 원 <br> <br>
-
-		<!--  
-		<h5>비밀번호 확인</h5>
-		<br> 결제 전, 비밀번호를 확인합니다. <br> 비밀번호 : <input
-			id="passwordInput10" type="text" name="password" /> <br> 비밀번호 확인
-		: <input id="passwordInput20" type="text" name="passwordConfirm" /> <br>
-		<p id="passwordMessage10"></p> -->
-
-
-		<!-- <button id="submitButton10" disabled>결제하기</button> 
 	
-	</form> -->
 </body>
 </html>

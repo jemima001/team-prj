@@ -29,11 +29,18 @@
 	</select>
 	
 	
-	<insert id="orderData">
-		INSERT INTO Member(orderId,productName,bookCount,price)
-		VALUES (#{orderId}, #{productName}, #{bookCount}, #{price})
+	<insert id="addOrderList">
+		INSERT INTO Orders(memberId,productName,address,recipient,orderState)
+		VALUES (#{memberId}, #{cart.productName}, #{address}, #{recipient}, 0)
 
 	</insert>
+	
+	
+	<delete id="deleteCartList">	   
+			   DELETE FROM Cart
+			   WHERE memberId = #{memberId};
+			   
+	</delete>
 	
 
 
