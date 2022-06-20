@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
+<%@ taglib prefix="my" tagdir="/WEB-INF/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,52 +14,28 @@
 <title>Insert title here</title>
 </head>
 <body>
-<my:pagenavbar current="adminpage"></my:pagenavbar>
-<my:mypagenavbar current="adminpage"></my:mypagenavbar>
-
-<div class="container">
-	<div class="row">
-		<div class="col">
+	<my:pagenavbar current="findId"></my:pagenavbar>
+	
+	<div class="container">
+	
 		
-
-			<h1>주문 목록</h1>
+		<div class="row justify-content-center">
+			<div class="col-12 col-lg-6">
+				<h1>아이디 찾기 </h1>
+				<div>
+					<p>${message }</p>
+				</div>
+				<form action="${appRoot }/member/findId" method="post">
+					<label for="usernameInput1" class="form-label">
+						이메일 
+					</label>
+					<input id="usernameInput1" class="form-control" type="email" name="email" />
+					
+					<input class="btn btn-primary" type="submit" value="찾기" />
+				</form>
 			
-			<table class="table">
-				<thead>
-					<tr>
-						<th>주문번호</th>
-						<th>ID</th>
-						<th>상품</th>
-						<th>수량</th>
-						<th>가격</th>
-						<th>주문일시</th>
-					</tr>
-				</thead>
-				<tbody>
-					<c:forEach items="${orderList }" var="order">
-						<tr>
-							<td>${order.orderId }</td>
-							<td>${order.memberId }</td>
-							<td>${order.productName }</td>
-							<td>${order.bookCount }</td>
-							<td>${order.totalOrderPrice }</td>
-							<td>${order.recipient }</td>
-							<td>${order.address }</td>
-							<td>${order.inserted }</td>
-						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
+			</div>
 		</div>
 	</div>
-</div>
 </body>
 </html>
-
-
-
-
-
-
-
-
