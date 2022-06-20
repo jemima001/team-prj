@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.project.market.domain.PaginationDto;
 import com.project.market.domain.ProductDto;
@@ -40,7 +41,8 @@ public class ProductPageController {
 	@PostMapping("add")
 	public String addproduct_in(ProductPageDto dto, 
 								ProductDto productdto, 
-								MultipartFile[] file) {
+								MultipartFile[] file,
+								RedirectAttributes rttr) {
 		/*	System.out.println("중분류 확인 :"+productdto);*/
 		int productId = service.addProduct(productdto);
 		/*System.out.println("제품 판매글 로 받은 데이터");
@@ -59,7 +61,13 @@ public class ProductPageController {
 		
 		
 		//
-		service.AddProductPage(dto, productId, file);
+		boolean ok = service.AddProductPage(dto, productId, file);
+		
+		if(ok) {
+			rttr.addFlashAttribute("message", "상품이 게시되었습니다.");
+		} else {
+			rttr.addFlashAttribute("message_error", "상품이 게시에 실패하였습니다.");
+		}
 		return "redirect:/product/list";
 		
 	}
@@ -128,11 +136,17 @@ public class ProductPageController {
 	}
 	
 	@PostMapping("deleteBoard")
-	public String deleteBoard(ProductPageDto dto) {
+	public String deleteBoard(ProductPageDto dto, RedirectAttributes rttr) {
 		//System.out.println(dto.getId());
 		 boolean ok = service.deleteBoard(dto);
 		System.out.println(ok);
 		// if 사용해서 메시지 출력 해야함
+		
+		if(ok) {
+			rttr.addFlashAttribute("message", "판매글이 삭제되었습니다.");
+		} else {
+			rttr.addFlashAttribute("message_error", "판매글 삭제에 실패하였습니다.");
+		}
 		 return "redirect:/product/list";
 		
 	}

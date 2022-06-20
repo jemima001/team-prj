@@ -84,7 +84,7 @@ public class ProductPageService {
 		}
 	}
 	//---------
-	public void AddProductPage(ProductPageDto dto , int productId, MultipartFile[] files) {
+	public boolean AddProductPage(ProductPageDto dto , int productId, MultipartFile[] files) {
 		String BoardTitle = dto.getBoardTitle();
 		String BoardBody = dto.getBoardBody();
 		dto.setProductId(productId);
@@ -93,6 +93,7 @@ public class ProductPageService {
 		//int getBoaradId = mapper.getboardId();
 		// 파일 추가 부분 
 		addFiles(dto.getId(), files);
+		return ok ==1;
 	}
 	@Transactional
 	public int addProduct(ProductDto dto) {
