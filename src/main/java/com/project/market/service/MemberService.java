@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.project.market.domain.AddressDto;
 import com.project.market.domain.MemberDto;
+import com.project.market.domain.OrderDto;
 import com.project.market.domain.ProductDto;
 import com.project.market.mapper.MemberMapper;
 
@@ -37,18 +38,6 @@ public class MemberService {
 
 		return cnt1 == 1 && cnt2 == 1;
 
-	}
-
-	public boolean hasMemberId(String id) {
-		return mapper.countMemberId(id) > 0;
-	}
-
-	public boolean hasMemberEmail(String email) {
-		return mapper.countMemberEmail(email) > 0;
-	}
-
-	public boolean hasMemberNickName(String nickName) {
-		return mapper.countMemberNickName(nickName) > 0;
 	}
 
 	public MemberDto getMemberById(String id) {
@@ -143,6 +132,23 @@ public class MemberService {
 
 	public boolean hasAddress(String address) {
 		return mapper.countAddress(address) > 0;
+	}
+
+	public List<OrderDto> listUserOrder(String id) {
+		return mapper.selectUserOrder(id);
+	}
+
+	public List<OrderDto> listAllOrder() {
+		return mapper.selectAllOrder();
+	}
+
+	public MemberDto searchId(String email) {
+		
+		return mapper.findId(email);
+	}
+
+	public void approveOrder(int orderId) {
+		mapper.orderApprove(orderId);
 	}
 
 }

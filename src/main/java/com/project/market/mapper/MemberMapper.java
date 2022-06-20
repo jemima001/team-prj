@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.project.market.domain.AddressDto;
 import com.project.market.domain.MemberDto;
+import com.project.market.domain.OrderDto;
 import com.project.market.domain.ProductDto;
 
 public interface MemberMapper {
@@ -43,6 +44,14 @@ public interface MemberMapper {
 	void removeAddress(String address);
 
 	int countAddress(String address);
+
+	List<OrderDto> selectUserOrder(String id);
+
+	List<OrderDto> selectAllOrder();
+
+	MemberDto findId(String email);
+
+	void orderApprove(int orderId);
 }
 
 
