@@ -44,6 +44,7 @@
 					
 					<input class="btn btn-primary" type="submit" value="로그인" />
 				</form>
+				<a href="${appRoot }/member/findId">아이디 찾기</a> <a href="${appRoot }/member/findPassword">비밀번호 찾기</a>
 			
 			</div>
 		</div>
