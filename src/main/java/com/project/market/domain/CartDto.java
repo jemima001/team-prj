@@ -12,6 +12,8 @@ public class CartDto {
 	private int totalPrice;
 	private int bookCount; //구매 수량
 	private List<Integer> CartIds; //체크된 상품(삭제)
+	private String fileName;
+	private int boardId;
 	
 	
 }
