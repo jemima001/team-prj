@@ -26,14 +26,13 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
 	crossorigin="anonymous"></script>
-	<script>
-	$(document).ready(function() { 
+<script>
+	$(document).ready(function() {
 		$('#message').hide(2500);
 		$('#message_error').hide(2500);
 
 	});
-	
-	</script>
+</script>
 <title>Insert title here</title>
 </head>
 <body>
@@ -97,81 +96,78 @@
 			</span>
 		</form>
 	</div>
-	<div class="container">
-		<div class="row">
-			<div class="col">
-			
+	<div class="row justify-content-center">
+		<div class="col-12 col-lg-10">
+
+
 			<c:if test="${not empty message }">
-				<div  id="message" class="alert alert-success"
-					role="alert">
-				<!-- 여기있는 클래스 때문에 다시 나타남 -->
+				<div id="message" class="alert alert-success" role="alert">
+					<!-- 여기있는 클래스 때문에 다시 나타남 -->
 					<svg class="bi flex-shrink-0 me-2" width="24" height="24"
 						role="img" aria-label="Success:">
 						<use xlink:href="#check-circle-fill" /></svg>
 					<div>${message}</div>
 				</div>
 			</c:if>
-				<c:if test="${not empty message_error }">
-					<div id ="message_error" class="alert alert-danger"
-						role="alert" >
-						<svg class="bi flex-shrink-0 me-2" width="24" height="24"
-							role="img" aria-label="Danger:">
+			<c:if test="${not empty message_error }">
+				<div id="message_error" class="alert alert-danger" role="alert">
+					<svg class="bi flex-shrink-0 me-2" width="24" height="24"
+						role="img" aria-label="Danger:">
 							<use xlink:href="#exclamation-triangle-fill" /></svg>
-						<div>${message_error}</div>
-					</div>
-				</c:if>
-				<table class="table">
-					<thead>
-						<tr class="table-dark">
-							<th>
-								<i class="fa-solid fa-hashtag"></i>
-							</th>
-							<th>상품 이미지</th>
-							<th>판매 상품</th>
-							<!-- <th>가격</th>
+					<div>${message_error}</div>
+				</div>
+			</c:if>
+			<table class="table">
+				<thead>
+					<tr class="table-dark">
+						<th>
+							<i class="fa-solid fa-hashtag"></i>
+						</th>
+						<th>상품 이미지</th>
+						<th>판매 상품</th>
+						<!-- <th>가격</th>
 							<th>
 								<i class="fa-solid fa-calendar"></i>
 							</th> -->
-						</tr>
-					</thead>
-					<tbody>
-						<c:forEach items="${boardlist }" var="pege">
-							<tr>
-								<td>${pege.id }</td>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach items="${boardlist }" var="pege">
+						<tr>
+							<td>${pege.id }</td>
 
-								<td>
-									<c:if test="${pege.fileName !=null}">
+							<td>
+								<c:if test="${pege.fileName !=null}">
 
-										<img style="width: 200px" class="img-thumbnail"
-											src="${imageUrl }/project/${pege.id }/${pege.fileName}"
-											alt="" />
-									</c:if>
-									<c:if test="${pege.fileName ==null}">
+									<img style="width: 200px" class="img-thumbnail"
+										src="${imageUrl }/project/${pege.id }/${pege.fileName}" alt="" />
+								</c:if>
+								<c:if test="${pege.fileName ==null}">
 
-										<img style="width: 200px" class="img-thumbnail"
-											src="${imageUrl }/project/noImage/noImage.png" alt="" />
-									</c:if>
+									<img style="width: 200px" class="img-thumbnail"
+										src="${imageUrl }/project/noImage/noImage.png" alt="" />
+								</c:if>
 
-								</td>
-								<td>
+							</td>
+							<td>
 
-									<c:url value="/product/get" var="getUrl">
-										<c:param name="id" value="${pege.id }"></c:param>
-									</c:url>
+								<c:url value="/product/get" var="getUrl">
+									<c:param name="id" value="${pege.id }"></c:param>
+								</c:url>
 
-									<a href="${getUrl }">
-										<c:out value="${pege.boardTitle }" />
-									</a>
-									<div>${pege.priceTopage }원</div>
+								<a href="${getUrl }">
+									<c:out value="${pege.boardTitle }" />
+								</a>
+								<div>${pege.priceTopage }원</div>
 
-									<%-- <c:if test="${board.hasFile }">
+								<%-- <c:if test="${board.hasFile }">
 										<span class="babge rounded-pill bg-light text-dark">
 											<i class="fa-solid fa-file"></i>
 										</span>
 									
 									</c:if> --%>
 
-									<%-- <c:if test="${board.numOfReply > 0 }">
+								<%-- <c:if test="${board.numOfReply > 0 }">
 										<span class="badge rounded-pill bg-light text-dark">
 											<i class="fa-solid fa-comment-dots"></i>
 											${board.numOfReply }
@@ -179,45 +175,47 @@
 									</c:if> --%>
 
 
-								</td>
-								<%-- <td>${pege.inserttime }</td> --%>
-							</tr>
-						</c:forEach>
-					</tbody>
+							</td>
+							<%-- <td>${pege.inserttime }</td> --%>
+						</tr>
+					</c:forEach>
+				</tbody>
 
-				</table>
-				<!-- ---------- 페이지 네비게이터 ----------- -->
+			</table>
+			<!-- ---------- 페이지 네비게이터 ----------- -->
+			<div class="row justify-content-center">
+				<div class="col-12 col-lg-10">
 
-
-				<nav aria-label="..." class="align-items-center">
-					<ul class="pagination">
-						<li class="page-item disabled">
-							<a class="page-link">Previous</a>
-						</li>
-						<c:forEach var="i" begin="1" end="${paginationDto.endPage}">
-
-							<li
-								class="page-item  ${paginationDto.nowpage == i ? 'active' : '' }">
-								<a class="page-link"
-									href="${appRoot }/product/list?cat=${paginationDto.cat }&search=${paginationDto.search }&page=${i}">${i}</a>
+					<nav aria-label="..." class="align-items-center">
+						<ul class="pagination">
+							<li class="page-item disabled">
+								<a class="page-link">Previous</a>
 							</li>
+							<c:forEach var="i" begin="1" end="${paginationDto.endPage}">
+
+								<li
+									class="page-item  ${paginationDto.nowpage == i ? 'active' : '' }">
+									<a class="page-link"
+										href="${appRoot }/product/list?cat=${paginationDto.cat }&search=${paginationDto.search }&page=${i}">${i}</a>
+								</li>
 
 
-						</c:forEach>
-						<li class="page-item">
-							<a class="page-link" href="#">Next</a>
-						</li>
-					</ul>
-				</nav>
+							</c:forEach>
+							<li class="page-item">
+								<a class="page-link" href="#">Next</a>
+							</li>
+						</ul>
+					</nav>
 
-
-
-
-
-				<!-- ----------------------------------- -->
-
+				</div>
 			</div>
+
+
+
+			<!-- ----------------------------------- -->
+
 		</div>
 	</div>
+
 </body>
 </html>
