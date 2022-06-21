@@ -109,41 +109,41 @@
 
 					<choose>
 						<when test="cat==0">
-							WHERE pp.BoardTitle and f.whichboard =0 LIKE #{search}
+							WHERE pp.BoardTitle LIKE #{search} and f.whichboard =0 
 						</when>
 						<when test="cat== 1">
 							WHERE pm.id = 1
-							AND pp.BoardTitle  and f.whichboard =0 LIKE #{search}
+							AND pp.BoardTitle LIKE #{search} and f.whichboard =0 
 						</when>
 						<when test="cat== 2">
 							WHERE pm.id = 2
-							AND pp.BoardTitle  and f.whichboard =0 LIKE #{search}
+							AND pp.BoardTitle LIKE #{search} and f.whichboard =0 
 						</when>
 
 						<when test="cat== 3">
 							WHERE pm.id = 3
-							AND pp.BoardTitle  and f.whichboard =0 LIKE #{search}
+							AND pp.BoardTitle LIKE #{search} and f.whichboard =0 
 						</when>
 
 						<when test="cat== 4">
 							WHERE pm.id = 4
-							AND pp.BoardTitle  and f.whichboard =0 LIKE #{search}
+							AND pp.BoardTitle LIKE #{search} and f.whichboard =0 
 						</when>
 
 						<when test="cat== 5">
 							WHERE pm.id = 5
-							AND pp.BoardTitle  and f.whichboard =0 LIKE #{search}
+							AND pp.BoardTitle LIKE #{search} and f.whichboard =0
 						</when>
 
 
 						<when test="cat== 7">
 							WHERE pm.id = 6
-							AND pp.BoardTitle  and f.whichboard =0 LIKE #{search}
+							AND pp.BoardTitle LIKE #{search} and f.whichboard =0
 						</when>
 
 						<when test="cat== 8">
 							WHERE pm.id = 7
-							AND pp.BoardTitle  and f.whichboard =0 LIKE #{search}
+							AND pp.BoardTitle LIKE #{search} and f.whichboard =0
 						</when>
 					</choose>
 
@@ -196,7 +196,7 @@
 
 			<when test="cat== null">
 				 
-				WHERE pp.BoardTitle and f.whichboard =0 LIKE #{search}
+				WHERE pp.BoardTitle LIKE #{search} and f.whichboard =0
 
 			</when>
 		</choose>
