@@ -14,8 +14,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-<my:pagenavbar current="adminpage"></my:pagenavbar>
-<my:mypagenavbar current="adminpage"></my:mypagenavbar>
+<my:pagenavbar current="adminorderlist"></my:pagenavbar>
+<my:mypagenavbar current="adminorderlist"></my:mypagenavbar>
 
 <div class="container">
 	<div class="row">
@@ -60,7 +60,12 @@
 							<td>
 								<form action="${appRoot }/member/orderApprove" method="post">
 									<input type="hidden" name="orderId" value="${order.orderId }" />
-									<button class="btn btn-outline-success" type="submit" value="승인"></button>
+									<c:if test="${order.orderState eq '0' }">
+										<button class="btn btn-outline-success" type="submit">승인</button>
+									</c:if>
+									<c:if test="${order.orderState ne '0' }">
+										<button class="btn btn-outline-success" type="submit" disabled>승인</button>
+									</c:if>
 								</form>
 							</td>
 						</tr>

@@ -109,6 +109,7 @@
 		SELECT memberId,
 		address
 		FROM Address
+		WHERE memberId = #{id}
 	</select>
 
 	<update id="updateOneAddress">
@@ -127,16 +128,16 @@
 		COUNT(address)
 		FROM
 		Address
-		WHERE address = #{address}
+		WHERE address = #{address} and memberId = #{memberId}
 	</select>
 
 	<select id="selectUserOrder"
 		resultType="com.project.market.domain.OrderDto">
-		SELECT o.orderId, o.memberId, p.name productName, c.bookCount, (p.price	* c.bookCount) totalOrderPrice, o.recipient, o.address, o.inserted
+		SELECT o.orderId, o.memberId, p.name productName, c.bookCount, (p.price	* c.bookCount) totalOrderPrice, o.recipient, o.address, o.inserted, o.orderState
 		FROM Product p
-		JOIN Orders o ON p.id = o.productId
-		JOIN Member m ON m.id = o.memberId
-		JOIN Cart c ON c.memberId = o.memberId
+		JOIN Cart c ON c.productId = p.id
+		JOIN Member m ON m.id = c.memberId
+		JOIN Orders o ON p.name = o.productName
 		WHERE m.id = #{id}
 	</select>
 	
@@ -144,9 +145,9 @@
 		resultType="com.project.market.domain.OrderDto">
 		SELECT o.orderId, o.memberId, p.name productName, c.bookCount, (p.price	* c.bookCount) totalOrderPrice, o.recipient, o.address, o.inserted, o.orderState
 		FROM Product p
-		JOIN Orders o ON p.id = o.productId
-		JOIN Member m ON m.id = o.memberId
-		JOIN Cart c ON c.memberId = o.memberId
+		JOIN Cart c ON c.productId = p.id
+		JOIN Member m ON m.id = c.memberId
+		JOIN Orders o ON p.name = o.productName
 	</select>
 	
 	<select id="findId"

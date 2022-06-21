@@ -7,7 +7,7 @@
 %>
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
-	
+
 <sec:authorize access="isAuthenticated()">
 	<sec:authentication property="principal" var="principal" />
 	<c:url value="/project/home" var="homeUrl">
@@ -156,42 +156,34 @@
 		</div>
 		<hr />
 		<div class="row">
-			<div class="col">
-				<p>
-					<img src="${appRoot }/resources/images/1.jpg">
-				</p>
-				<div class="btn-group" role="group" aria-label="Basic example">
-					<a href="${cartUrl }" class="btn btn-outline-success">장바구니 담기</a> <a
-						href="${orderUrl }" class="btn btn-outline-dark">구매하기</a>
+			<c:forEach items="${boardlist1 }" var="pege">
+				<div class="col">
+					<c:if test="${pege.fileName !=null}">
+						<a href="${appRoot }/product/get?id=${pege.id}"><img style="width: 200px" class="img-thumbnail"
+							src="${imageUrl }/project/${pege.id }/${pege.fileName}" alt="" /></a>
+					</c:if>
+					<c:if test="${pege.fileName ==null}">
+						<a href="${appRoot }/product/get?id=${pege.id}"><img style="width: 200px" class="img-thumbnail"
+							src="${imageUrl }/project/noImage/noImage.png" alt="" /></a>
+					</c:if>
+					<h5>${pege.boardTitle }</h5>
 				</div>
-			</div>
-			<div class="col">
-				<p>
-					<img src="${appRoot }/resources/images/2.jpg">
-				</p>
-				<div class="btn-group" role="group" aria-label="Basic example">
-					<a href="${cartUrl }" class="btn btn-outline-success">장바구니 담기</a> <a
-						href="${orderUrl }" class="btn btn-outline-dark">구매하기</a>
+			</c:forEach>
+		</div>
+		<div class="row">
+			<c:forEach items="${boardlist2 }" var="pege">
+				<div class="col">
+					<c:if test="${pege.fileName !=null}">
+						<a href="${appRoot }/product/get?id=${pege.id}"><img style="width: 200px" class="img-thumbnail"
+							src="${imageUrl }/project/${pege.id }/${pege.fileName}" alt="" /></a>
+					</c:if>
+					<c:if test="${pege.fileName ==null}">
+						<a href="${appRoot }/product/get?id=${pege.id}"><img style="width: 200px" class="img-thumbnail"
+							src="${imageUrl }/project/noImage/noImage.png" alt="" /></a>
+					</c:if>
+					<h5>${pege.boardTitle }</h5>
 				</div>
-			</div>
-			<div class="col">
-				<p>
-					<img src="${appRoot }/resources/images/3.jpg">
-				</p>
-				<div class="btn-group" role="group" aria-label="Basic example">
-					<a href="${cartUrl }" class="btn btn-outline-success">장바구니 담기</a> <a
-						href="${orderUrl }" class="btn btn-outline-dark">구매하기</a>
-				</div>
-			</div>
-			<div class="col">
-				<p>
-					<img src="${appRoot }/resources/images/4.jpg">
-				</p>
-				<div class="btn-group" role="group" aria-label="Basic example">
-					<a href="${cartUrl }" class="btn btn-outline-success">장바구니 담기</a> <a
-						href="${orderUrl }" class="btn btn-outline-dark">구매하기</a>
-				</div>
-			</div>
+			</c:forEach>
 		</div>
 	</div>
 
