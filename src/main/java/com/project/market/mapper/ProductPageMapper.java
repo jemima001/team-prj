@@ -37,7 +37,7 @@ public interface ProductPageMapper {
 
 	int deleteBoard(ProductPageDto dto);
 
-	void insertFile(@Param("boardId")int string, @Param("fileName")String fileName);
+	void insertFile(@Param("boardId")int string, @Param("fileName")String fileName,@Param("mod") String mod);
 	
 	List<String> getfileList(int id);
 	
@@ -54,6 +54,7 @@ public interface ProductPageMapper {
 	void addCart(ProductDto dto, Principal principal);
 	void addCart(@Param("memberId")String memberId,@Param("bookCount") int bookCount,@Param("productId") int productId);
 	PaginationDto getAllBoardNum(String cat);
+	void insertReviewFile(int string, String originalFilename);
 
 	
 

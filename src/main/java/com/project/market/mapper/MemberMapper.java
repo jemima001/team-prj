@@ -37,13 +37,13 @@ public interface MemberMapper {
 	
 	List<ProductDto> getProductlist();
 
-	List<AddressDto> selectAllAddress();
+	List<AddressDto> selectAllAddress(String id);
 
 	int updateOneAddress(@Param("id") String id,@Param("address") String address);
 
 	void removeAddress(String address);
 
-	int countAddress(String address);
+	int countAddress(@Param("memberId")String memberId, @Param("address")String address);
 
 	List<OrderDto> selectUserOrder(String id);
 

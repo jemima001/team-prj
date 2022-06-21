@@ -121,7 +121,7 @@ public class MemberController {
 			MemberDto member = service.getMemberById(id);
 			model.addAttribute("member", member);
 
-			List<AddressDto> list = service.listAddress();
+			List<AddressDto> list = service.listAddress(id);
 			model.addAttribute("addressList", list);
 
 			return null;
@@ -182,7 +182,7 @@ public class MemberController {
 			Principal principal,
 			HttpServletRequest req,
 			RedirectAttributes rttr) {
-		boolean exist = service.hasAddress(address);
+		boolean exist = service.hasAddress(principal.getName(),address);
 		if(exist) {
 			rttr.addFlashAttribute("message", "이미 존재하는 배송지 입니다.");
 			return "redirect:/member/setaddress?id="+principal.getName();
@@ -256,7 +256,7 @@ public class MemberController {
 
 	@GetMapping("userorderlist")
 	public void getUserOrderlist(Model model, String id) {
-
+//		System.out.println(id);
 		List<OrderDto> list = service.listUserOrder(id);
 		model.addAttribute("orderList", list);
 
@@ -277,8 +277,8 @@ public class MemberController {
 			HttpServletRequest req,
 			RedirectAttributes rttr) {
 
-		System.out.println(principal.getName());
-		System.out.println(address);
+//		System.out.println(principal.getName());
+//		System.out.println(address);
 		service.updateOneAddress(principal.getName(), address);
 		
 		return "redirect:/member/setaddress?id="+principal.getName();
@@ -344,7 +344,9 @@ public class MemberController {
 	}
 	
 	@PostMapping("orderApprove")
-	public void approveOrder(int orderId) {
+	public String approveOrder(int orderId) {
 		service.approveOrder(orderId);
+		
+		return "redirect:/member/adminorderlist";
 	}
 }

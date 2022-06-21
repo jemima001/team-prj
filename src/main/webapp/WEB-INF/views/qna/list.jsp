@@ -35,6 +35,7 @@
 							<th>제목</th>
 							<th>닉네임</th>
 							<th><i class="fa-solid fa-calendar"></i></th>
+							<th>답변 여부</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -54,6 +55,16 @@
 												</td>
 												<td>${query.writerNickName }</td>
 												<td>${query.prettyInserted }</td>
+												<td>
+													<c:choose>
+														<c:when test="${query.numOfAnswer > 0 }">
+															답변 완료
+														</c:when>
+														<c:otherwise>
+															답변 대기중
+														</c:otherwise>
+													</c:choose>
+												</td>
 											</tr>
 									</c:if>
 								</c:forEach>
@@ -73,6 +84,16 @@
 											</td>
 											<td>${query.writerNickName }</td>
 											<td>${query.prettyInserted }</td>
+											<td>
+												<c:choose>
+													<c:when test="${query.numOfAnswer > 0 }">
+														답변 완료
+													</c:when>
+													<c:otherwise>
+														답변 대기중
+													</c:otherwise>
+												</c:choose>
+											</td>
 										</tr>
 								</c:forEach>
 						</sec:authorize>

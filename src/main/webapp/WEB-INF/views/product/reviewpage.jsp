@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
+    <%@ taglib prefix = 'c' uri ="http://java.sun.com/jsp/jstl/core" %>
+    <%@taglib prefix="my" tagdir="/WEB-INF/tags" %>
+    <%request.setCharacterEncoding("utf-8"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,56 +11,21 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css" integrity="sha512-GQGU0fMMi238uA+a/bdWJfpUGKUkBdgfFdgBm72SUQ6BeyWjoY/ton0tEjH+OSH9iP4Dfh+7HM0I9f5eR0L/4w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-
 <title>Insert title here</title>
 </head>
+<my:pagenavbar current="reviewpage"></my:pagenavbar>
+<my:mypagenavbar></my:mypagenavbar>
 <body>
-<my:pagenavbar current="userorderlist"></my:pagenavbar>
-<my:mypagenavbar current="userorderlist"></my:mypagenavbar>
+<h1>리뷰 페이지</h1> 
+<form action="/market/product/reviewpage" method="post" enctype="multipart/form-data">
+제목 <br />
+<input type="text" name = "reviewTitle" /> <br />
+본문 <br />
+<textarea rows="15" cols="50" name ="reviewBody" ></textarea> <br />
+사진 업로드 <br />
+<input type="file" multiple="multiple" />
+<input type ="submit" value="작성">
+</form>
 
-<div class="container">
-	<div class="row">
-		<div class="col">
-		
-
-			<h1>주문 목록</h1>
-			
-			<table class="table">
-				<thead>
-					<tr>
-						<th>주문번호</th>
-						<th>ID</th>
-						<th>상품</th>
-						<th>수량</th>
-						<th>가격</th>
-						<th>주문일시</th>
-					</tr>
-				</thead>
-				<tbody>
-					<c:forEach items="${orderList }" var="order">
-						<tr>
-							<td>${order.orderId }</td>
-							<td>${order.memberId }</td>
-							<td>${order.productName }</td>
-							<td>${order.bookCount }</td>
-							<td>${order.totalOrderPrice }</td>
-							<td>${order.recipient }</td>
-							<td>${order.address }</td>
-							<td>${order.inserted }</td>
-						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
-		</div>
-	</div>
-</div>
 </body>
 </html>
-
-
-
-
-
-
-
-
