@@ -9,10 +9,14 @@
 		SELECT c.cartId cartId,
 			p.name productName,
 			c.bookCount bookCount,
-			(p.price * c.bookCount) totalPrice 
+			(p.price * c.bookCount) totalPrice,
+			f.fileName,
+			f.boardId
 		FROM Product p 
 		JOIN Cart c ON p.id = c.productId
 		JOIN Member m ON m.id = c.memberId
+		JOIN ProductPage pp ON pp.productId = p.id
+		JOIN File f ON f.boardId = pp.id
 		WHERE m.id = #{id}
 	</select>
 

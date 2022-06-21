@@ -120,7 +120,7 @@
 
 							<table class="table">
 								<thead>
-									<tr>
+									<tr class="table-success">
 										<th><i class="fa-solid fa-cart-shopping"></i></th>
 										<th>상품정보</th>
 										<th>수량</th>
@@ -162,7 +162,7 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
+									<tr class="table-success">
 
 
 										<td>총 주문 금액</td>
@@ -215,17 +215,15 @@
 
 				
 
-						<label for="recipientInput1" class="form-label"> 수령인 이름 </label> <input
-							name=recipient class="form-control" type="text"
-							id="recipientInput1" value="" /> <label for="zipCodeInput1"
-							class="form-label"> 우편번호 (新 주소) ▷ <!-- modal로 구현해도 될듯 / 지금 문제 : 창이 우체국 창으로 바뀌어버림-->
-							<a
-							href="https://www.epost.go.kr/search.RetrieveIntegrationNewZipCdList.comm">우체국
-								검색</a>
-						</label> <input id="zipCodeInput1" class="form-control" type="number"
-							value="" min="01000" max="63644" /> <label for="addressInput1"
-							class="form-label"> 기본 배송지 (수정 가능합니다.) </label> <input id="addressInput1"
-							class="form-control" type="text" id="addressInput1" value="${member.address }" />
+						<label for="recipientInput1" class="form-label"> 수령인 이름 </label>
+						<input name=recipient class="form-control" type="text" id="recipientInput1" value="" />
+						
+						<label for="zipCodeInput1" class="form-label"> 우편번호 (新 주소) ▷ <!-- modal로 구현해도 될듯 / 지금 문제 : 창이 우체국 창으로 바뀌어버림-->
+							<a href="https://www.epost.go.kr/search.RetrieveIntegrationNewZipCdList.comm">우체국 검색</a> </label>
+						<input id="zipCodeInput1" class="form-control" type="number" value="" min="01000" max="63644" />
+						
+						<label for="addressInput1" class="form-label"> 기본 배송지 (수정 가능합니다.) </label>
+						<input id="addressInput1" class="form-control" type="text" id="addressInput1" value="${member.address }" />
 
 					
 
