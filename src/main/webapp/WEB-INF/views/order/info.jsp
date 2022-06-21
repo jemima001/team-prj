@@ -137,8 +137,8 @@
 												name="cartIds" form="form21" /></th>
 
 											<td>${cart.productName }</td>
-											<td>${cart.bookCount }</td>
-											<td>${cart.totalPrice }</td>
+											<td>${cart.bookCount }개</td>
+											<td>${cart.totalPrice }원</td>
 											<td>무료</td>
 										</tr>
 
@@ -224,8 +224,8 @@
 								검색</a>
 						</label> <input id="zipCodeInput1" class="form-control" type="number"
 							value="" min="01000" max="63644" /> <label for="addressInput1"
-							class="form-label"> 수령 주소 </label> <input id="addressInput1"
-							class="form-control" type="text" id="addressInput1" value="" />
+							class="form-label"> 기본 배송지 (수정 가능합니다.) </label> <input id="addressInput1"
+							class="form-control" type="text" id="addressInput1" value="${member.address }" />
 
 					
 
@@ -239,7 +239,7 @@
 
 
 
-					<label for="nickNameInput1" class="form-label"> 닉네임 </label> <input
+					<label for="nickNameInput1" class="form-label"> 닉네임 </label><input
 						id="nickNameInput1" class="form-control" type="text"
 						value="${member.id }" readonly /> <label for="nameInput1"
 						class="form-label"> 이름 </label> <input id="nameInput1"
