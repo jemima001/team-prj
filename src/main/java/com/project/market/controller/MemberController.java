@@ -16,6 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.project.market.domain.AddressDto;
 import com.project.market.domain.MemberDto;
+import com.project.market.domain.OrderDto;
 import com.project.market.domain.ProductDto;
 import com.project.market.service.MemberService;
 
@@ -47,45 +48,6 @@ public class MemberController {
 			rttr.addFlashAttribute("member", member);
 
 			return "redirect:/member/signup";
-		}
-	}
-
-	@GetMapping(path = "check", params = "id")
-	@ResponseBody
-	public String idCheck(String id) {
-
-		boolean exist = service.hasMemberId(id);
-
-		if (exist) {
-			return "notOk";
-		} else {
-			return "ok";
-		}
-	}
-
-	@GetMapping(path = "check", params = "email")
-	@ResponseBody
-	public String emailCheck(String email) {
-
-		boolean exist = service.hasMemberEmail(email);
-
-		if (exist) {
-			return "notOk";
-		} else {
-			return "ok";
-		}
-	}
-
-	@GetMapping(path = "check", params = "nickName")
-	@ResponseBody
-	public String nickNameCheck(String nickName) {
-
-		boolean exist = service.hasMemberNickName(nickName);
-
-		if (exist) {
-			return "notOk";
-		} else {
-			return "ok";
 		}
 	}
 
@@ -282,18 +244,21 @@ public class MemberController {
 	}
 
 	@GetMapping("adminorderlist")
-	public void getOrderlist(Model model) {
+	public void getOrderlist(
+			Model model,
+			RedirectAttributes rttr
+			) {
 
-		List<MemberDto> list = service.listMember();
-		model.addAttribute("memberList", list);
-
+		List<OrderDto> list = service.listAllOrder();
+		model.addAttribute("orderList", list);
+		
 	}
 
 	@GetMapping("userorderlist")
-	public void getUserOrderlist(Model model) {
+	public void getUserOrderlist(Model model, String id) {
 
-		List<MemberDto> list = service.listMember();
-		model.addAttribute("memberList", list);
+		List<OrderDto> list = service.listUserOrder(id);
+		model.addAttribute("orderList", list);
 
 	}
 
@@ -317,5 +282,69 @@ public class MemberController {
 		service.updateOneAddress(principal.getName(), address);
 		
 		return "redirect:/member/setaddress?id="+principal.getName();
+	}
+	
+	@GetMapping("findId")
+	public void findId() {
+		
+	}
+	
+	@PostMapping("findId")
+	public String searchId(String email,
+			MemberDto dto,
+			RedirectAttributes rttr, 
+			Principal principal,
+			HttpServletRequest req) {
+		
+//		System.out.println(email);
+//		System.out.println(dto.getId());
+		
+		boolean exist = service.hasMemberEmail(email);
+		
+		if(exist) {
+			dto = service.searchId(email);
+			rttr.addFlashAttribute("message", "아이디는 " + dto.getId() + " 입니다.");
+			return "redirect:/member/findId";
+		} else {
+			rttr.addFlashAttribute("message", "존재하지 않습니다.");
+		}
+		return "redirect:/member/findId";
+	}
+	
+	@GetMapping("findPassword")
+	public void findPassword() {
+		
+	}
+	
+	@PostMapping("findPassword")
+	public String searchPassword(
+			MemberDto dto,
+			RedirectAttributes rttr, 
+			Principal principal,
+			HttpServletRequest req) {
+		
+//		System.out.println(dto.getEmail());
+//		System.out.println(dto.getId());
+		String prvemail = dto.getEmail();
+//		System.out.println(prvemail);
+		if(service.hasMemberId(dto.getId())) {
+			MemberDto member = service.getMemberById(dto.getId());
+			if(service.hasMemberId(member.getId()) && service.hasMemberEmail(member.getEmail()) && prvemail.equals(member.getEmail())) {
+				
+				service.initPassword(dto.getId());
+				rttr.addFlashAttribute("message", "비밀번호가 아이디로 초기화 되었습니다.");
+			} else if(service.hasMemberId(member.getId()) && !(prvemail.equals(member.getEmail()))) {
+				rttr.addFlashAttribute("message", "email이 맞지 않습니다.");
+			}
+		} else {
+			rttr.addFlashAttribute("message", "존재하지 않는 아이디입니다.");
+		}
+		
+		return "redirect:/member/findPassword";
+	}
+	
+	@PostMapping("orderApprove")
+	public void approveOrder(int orderId) {
+		service.approveOrder(orderId);
 	}
 }

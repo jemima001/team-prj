@@ -13,7 +13,8 @@
 
 	<select id="countMemberId" resultType="int">
 		SELECT COUNT(id)
-		FROM Member
+		FROM
+		Member
 		WHERE id = #{id}
 	</select>
 
@@ -63,7 +64,8 @@
 	<update id="updateMember">
 		UPDATE Member
 		SET password = #{password},
-		email = #{email},
+		email =
+		#{email},
 		nickName = #{nickName}
 		WHERE
 		id = #{id}
@@ -93,38 +95,72 @@
 		ORDER BY inserted DESC
 	</select>
 
-	<select id="getProductlist" resultType="com.project.market.domain.ProductDto">
+	<select id="getProductlist"
+		resultType="com.project.market.domain.ProductDto">
 		SELECT Product.id productId,
 		Product.name productname,
 		stock,
 		price
 		FROM Product
 	</select>
-	
+
 	<select id="selectAllAddress"
 		resultType="com.project.market.domain.AddressDto">
 		SELECT memberId,
 		address
 		FROM Address
 	</select>
-	
+
 	<update id="updateOneAddress">
-		UPDATE Member 
+		UPDATE Member
 		SET address = #{address}
 		WHERE id = #{id}
 	</update>
-	
+
 	<delete id="removeAddress">
 		DELETE FROM Address
 		WHERE address = #{address}
 	</delete>
-	
+
 	<select id="countAddress" resultType="int">
 		SELECT
 		COUNT(address)
-		FROM Address
+		FROM
+		Address
 		WHERE address = #{address}
 	</select>
+
+	<select id="selectUserOrder"
+		resultType="com.project.market.domain.OrderDto">
+		SELECT o.orderId, o.memberId, p.name productName, c.bookCount, (p.price	* c.bookCount) totalOrderPrice, o.recipient, o.address, o.inserted
+		FROM Product p
+		JOIN Orders o ON p.id = o.productId
+		JOIN Member m ON m.id = o.memberId
+		JOIN Cart c ON c.memberId = o.memberId
+		WHERE m.id = #{id}
+	</select>
+	
+	<select id="selectAllOrder"
+		resultType="com.project.market.domain.OrderDto">
+		SELECT o.orderId, o.memberId, p.name productName, c.bookCount, (p.price	* c.bookCount) totalOrderPrice, o.recipient, o.address, o.inserted, o.orderState
+		FROM Product p
+		JOIN Orders o ON p.id = o.productId
+		JOIN Member m ON m.id = o.memberId
+		JOIN Cart c ON c.memberId = o.memberId
+	</select>
+	
+	<select id="findId"
+		resultType="com.project.market.domain.MemberDto">
+		SELECT id
+		FROM Member
+		WHERE email = #{email}
+	</select>
+	
+	<update id="orderApprove">
+		UPDATE Orders
+		SET orderState = 1
+		WHERE orderId = #{orderId}
+	</update>
 </mapper>
 
 

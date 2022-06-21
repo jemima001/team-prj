@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.market.mapper.AnswerMapper">
+	
+	<insert id="insertQuery">
+	INSERT INTO Answers (queryId, title, body, memberId)
+	VALUES (#{queryId}, #{title}, #{body}, #{memberId})
+	</insert>
+	
+	<insert id="insertFile" >
+	INSERT INTO AnswerFile (queryId, fileName) 
+	VALUES (#{queryId}, #{fileName})
+	</insert>
+	
+	<select id="selectAnwserById" resultType="com.project.market.domain.AnswerDto">
+	SELECT a.id, 
+		   a.queryId, 
+	       a.title, 
+	       a.body, 
+	       a.inserted, 
+	       m.id memberId,
+	       m.nickName writerNickName
+	FROM Answers a JOIN Member m ON a.memberId = m.id
+	WHERE a.id = #{id}
+	</select>
+	
+	<select id="selectFileNameByAnswer" resultType="string">
+	SELECT fileName
+	FROM AnswerFile
+	WHERE queryId = #{queryId}
+	</select>
+	
+	<delete id="deleteFileByAnswerIdAndFileName">
+	DELETE FROM AnswerFile
+	WHERE queryId = #{queryId}
+	AND fileName = #{fileName}
+	</delete>
+	
+	<update id="updateAnswer">
+	UPDATE Answers 
+	SET title = #{title},
+	    body = #{body} 
+	WHERE id = #{id}
+	</update>
+	
+	<delete id="deleteAnswer">
+	DELETE FROM Answers
+	WHERE queryId = #{queryId }
+	</delete>
+	
+	<delete id="deleteFileByQueryId">
+	DELETE FROM AnswerFile
+	WHERE queryId = #{Id}
+	</delete>
+	
+	<delete id="deleteByAnswerId">
+	DELETE FROM Answers
+	WHERE queryId = #{id}
+	</delete>
+	
+	<select id="selectAnserByQueryId" resultType="com.project.market.domain.AnswerDto">
+	SELECT a.id, 
+		   a.queryId, 
+	       a.title, 
+	       a.body, 
+	       a.inserted, 
+	       m.id memberId,
+	       m.nickName writerNickName
+	FROM Answers a JOIN Member m ON a.memberId = m.id
+	WHERE a.queryId = #{id}
+	</select>
+</mapper>

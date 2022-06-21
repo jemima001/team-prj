@@ -10,7 +10,7 @@ public interface QueryMapper {
 
 	int insertQuery(QueryDto query);
 
-	void insertFile(@Param("boardId") int boardId, @Param("fileName") String fileName);
+	void insertFile(@Param("queryId") int queryId, @Param("fileName") String fileName);
 
 	List<QueryDto> selectQuery(@Param("from") int from, 
 							   @Param("row") int row);
@@ -19,15 +19,15 @@ public interface QueryMapper {
 
 	QueryDto selectQueryById(int id);
 
-	List<String> selectFileNameByQuery(int boardId);
+	List<String> selectFileNameByQuery(int queryId);
 
-	void deleteFileByBoardIdAndFileName(@Param("boardId") int id,
+	void deleteFileByQueryIdAndFileName(@Param("queryId") int id,
 			@Param("fileName") String fileName);
 
 	int updateQuery(QueryDto dto);
 
 	int deleteQuery(int id);
 
-	void deleteFileByBoardId(int id);
+	void deleteFileByQueryId(int id);
 
 }

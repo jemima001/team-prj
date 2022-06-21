@@ -38,12 +38,14 @@
 				<tbody>
 					<c:forEach items="${orderList }" var="order">
 						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
+							<td>${order.orderId }</td>
+							<td>${order.memberId }</td>
+							<td>${order.productName }</td>
+							<td>${order.bookCount }</td>
+							<td>${order.totalOrderPrice }</td>
+							<td>${order.recipient }</td>
+							<td>${order.address }</td>
+							<td>${order.inserted }</td>
 						</tr>
 					</c:forEach>
 				</tbody>

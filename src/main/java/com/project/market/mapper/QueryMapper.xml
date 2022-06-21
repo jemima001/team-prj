@@ -10,8 +10,8 @@
 	</insert>
 
 	<insert id="insertFile" >
-	INSERT INTO File (boardId, fileName) 
-	VALUES (#{boardId}, #{fileName})
+	INSERT INTO QueryFile (queryId, fileName) 
+	VALUES (#{queryId}, #{fileName})
 	</insert>
 	
 	<select id="selectQuery" resultType="com.project.market.domain.QueryDto">
@@ -19,8 +19,10 @@
   		   q.title, 
   		   q.inserted,
   		   q.memberId, 
-  		   m.nickName writerNickName 
-  	FROM Questions q JOIN Member m ON q.memberId = m.id 
+  		   m.nickName writerNickName,
+  		   COUNT(DISTINCT a.id) numOfAnswer
+  	FROM Questions q LEFT JOIN Answers a ON q.id = a.queryId
+  						  JOIN Member m ON q.memberId = m.id			
   	GROUP BY id
   	ORDER BY id DESC
   	LIMIT #{from }, #{row }
@@ -37,21 +39,23 @@
 	       q.body, 
 	       q.inserted, 
 	       m.id memberId,
-	       m.nickName writerNickName
+	       m.nickName writerNickName,
+	       COUNT(DISTINCT a.id) numOfAnswer 
 	FROM Questions q JOIN Member m ON q.memberId = m.id 
+				LEFT JOIN Answers a ON q.id = a.queryId 
 	WHERE q.id = #{id}
 	</select>
 	
 	<select id="selectFileNameByQuery" resultType="string">
 	SELECT fileName
-	FROM File
-	WHERE boardId = #{boardId}
+	FROM QueryFile
+	WHERE queryId = #{queryId}
 	</select>
 	
-	<delete id="deleteFileByBoardIdAndFileName">
-	DELETE FROM File
-	WHERE boardId = #{boardId}
-	  AND fileName = #{fileName}
+	<delete id="deleteFileByQueryIdAndFileName">
+	DELETE FROM QueryFile
+	WHERE queryId = #{queryId}
+	AND fileName = #{fileName}
 	</delete>
 	
 	<update id="updateQuery">
@@ -66,8 +70,8 @@
 	WHERE id = #{id }
 	</delete>
 	
-	<delete id="deleteFileByBoardId">
-	DELETE FROM File
-	WHERE boardId = #{boardId}
+	<delete id="deleteFileByQueryId">
+	DELETE FROM QueryFile
+	WHERE queryId = #{queryId}
 	</delete>
 </mapper>

@@ -27,6 +27,22 @@
 		FROM Member
 		WHERE id = #{id}
 	</select>
+	
+	
+	<insert id="addOrderList">
+		INSERT INTO Orders(memberId,productName,address,recipient,orderState)
+		VALUES (#{memberId}, #{cart.productName}, #{address}, #{recipient}, 0)
+
+	</insert>
+	
+	
+	<delete id="deleteCartList">	   
+			   DELETE FROM Cart
+			   WHERE memberId = #{memberId};
+			   
+	</delete>
+	
+
 
 
 
