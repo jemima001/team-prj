@@ -307,6 +307,14 @@ LIMIT #{pageToStart},#{onePageAllBoardNum}
                                
 	
 	</select>
-
+	<select id="getcat0" resultType="int">
+	SELECT ProductCode0 from ProductCode WHERE Productid = #{productId}  ;
+	
+	</select>
+	
+	<select id="getCategoryName" resultType="string">
+	SELECT * FROM Product_middle_class WHERE id =#{category};
+	
+	</select>
 
 </mapper>

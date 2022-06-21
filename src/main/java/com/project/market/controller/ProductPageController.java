@@ -30,12 +30,33 @@ public class ProductPageController {
 	
 	
 	@GetMapping("add")
-	public void addproduct(Model model) {
+	public void addproduct(Model model ,ProductDto dto, 
+				@RequestParam(name = "mod", defaultValue = "add" ) String addMod) {
+		if(addMod.equals("addFormProductList")) {
+			System.out.println("if문 안");
+			System.out.println(addMod);
+			int category =service.getcategoryone(dto);
+			String categoryName = service.getCategoryName(category);
+			System.out.println("카테고리 "+category);
+			dto.setProduct_Middle_Class(category);
+			dto.setMiddle_Name( categoryName);
+			model.addAttribute("product", dto);
+			model.addAttribute("addMod","addFormProductList" );
+			
+			List<ProductDto> list = service.getcategory();
+			// ajx로 나중에 처리 시도 해야
+			/*List<ProductDto> list_low = service.getcategory_low();*/
+			model.addAttribute("m_category", list);
+			
+		} else {
+			
+			model.addAttribute("addMod","add" );
 		List<ProductDto> list = service.getcategory();
 		// ajx로 나중에 처리 시도 해야
 		/*List<ProductDto> list_low = service.getcategory_low();*/
 		model.addAttribute("m_category", list);
 		System.out.println("처음 중분류 카테고리 리스트:"+list);
+		}
 		
 	}
 	// !!!!! 상품 등록시 service.addProduct(productdto); 로 반드시 상품 부터 등록해야 함!!!!!

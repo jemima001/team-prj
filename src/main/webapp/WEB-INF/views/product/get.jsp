@@ -131,11 +131,14 @@
 					<input type="hidden" value="${productboard.id }" name="id" />
 					<input id="productId" type="hidden"
 						value="${productboard.productId }" name="productId" />
+						
 					<button class="buttonTobuy">구매 버튼</button>
 					</c:if>
 				</form>
 				<c:if test="${product.stock != 0 }">
+				<sec:authorize access="hasRole('USER')">
 				<button class="buttonTobuy" id="purchaseButton">장바구니</button>
+				</sec:authorize>
 				</c:if>
 				<c:if test="${product.stock == 0 }">
 						품절되었습니다.

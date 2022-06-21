@@ -79,6 +79,15 @@
 							data-bs-toggle="modal" data-bs-target="#modalModify${product.productId }" data-prodid="${product.productId }">수정</button>
 							<button class="btn btn-outline-danger" 
 							data-bs-toggle="modal" data-bs-target="#modalRemove${product.productId }">삭제</button>
+							<form action="${appRoot }/product/add">
+								<input type="hidden" value="${product.productId }" name="productId" />
+								<input type="hidden" value = "${product.productName }" name ="productName" />
+								<input type="hidden" value="${product.stock }"  name = "stock"/>
+								<input type="hidden" value="${product.price }"  name = "price"/>
+								<input type="hidden" value="addFormProductList" name = "mod" />
+								<button class="btn btn-outline-success modalModifyButton" >판매글 등록</button>
+							
+							</form>
 						</div>
 					</td>
 				</tr>
@@ -134,6 +143,7 @@
 						<button type="button" class="btn btn-secondary"
 							data-bs-dismiss="modal">Close</button>
 						<button form="modifyForm${product.productId }" type="submit" class="btn btn-danger">수정</button>
+						
 					</div>
 				</div>
 			</div>
