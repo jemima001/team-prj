@@ -293,4 +293,16 @@ public class ProductPageService {
 		return paginationDto;
 	}
 
+	public int getcategoryone(ProductDto dto) {
+		System.out.println("서비스");
+		int cat0 = mapper.getcat0(dto);
+		System.out.println("cat0= "+ cat0);
+		return cat0;
+	}
+
+	public String getCategoryName(int category) {
+		String categoryName = mapper.getCategoryName(category);
+		return categoryName;
+	} 
+
 }

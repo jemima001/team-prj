@@ -121,15 +121,71 @@ $(document).ready(function() {
 					<!-- 상품명 :
 					<br />
 					<input type="text" name="productname">
+										
  -->
 
+					<!-- 상품 리스트에서 상품 페이지 추가  -->
+					<c:if test="${addMod == 'addFormProductList' }">
+						<div class="mb-3">
+							<label for="productName" class="form-label">선택된 상품</label>
+							<input type="text" name="productName" class="form-control"
+								value="${product.productName }" id="productNameInput"
+								readonly="readonly">
+
+							선택된 상품 중 분류
+
+
+
+							<select class="form-select form-select-lg mb-3"
+								aria-label=".form-select-lg example" id="middle_class"
+								name="Product_Middle_Class" disabled>
+								<option value="0">분류 선택</option>
+								<c:forEach items="${ m_category}" var="category">
+									
+									<option value="${category.product_Middle_Class}" ${product.product_Middle_Class == category.product_Middle_Class ? 'selected' : '' } >${category.middle_Name }</option>
+								</c:forEach>
+							</select>
+						</div>
+
+						<div id="low_class_categorylist_get">
+
+							상품 소 분류 :
+
+							<input type="hidden" name="Product_low_class" value="0" />
+
+							<%-- <select name="Product_low_class">
+							<c:forEach items="${ l_category}" var="category_l">
+								<option value="${category_l.product_Low_Class}">${category_l.low_Name }</option>
+							</c:forEach>
+						</select> --%>
+
+						</div>
+
+						<br />
+					수량 :
+					<input type="number" name="stock" value="${product.stock }"
+							readonly="readonly" />
+						<br />
+					
+					가격 :
+					<input type="number" name="price" value="${product.price }"
+							readonly="readonly" />
+
+
+					</c:if>
+					
+					<!----------------------- 상품과 상품 페이지 동시에 등록 ------------------>
+					<c:if test="${addMod == 'add' }" >
 					<div class="mb-3">
-  						<label for="productName" class="form-label">상품명</label>
- 						 <input type="text" name="productName" class="form-control" id="productNameInput">
+						<label for="productName" class="form-label">상품명</label>
+						<input type="text" name="productName" class="form-control"
+							id="productNameInput">
 					</div>
 
 					상품 중 분류 :
-					<select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" id="middle_class" name="Product_Middle_Class">
+					<select class="form-select form-select-lg mb-3"
+						aria-label=".form-select-lg example" id="middle_class"
+						name="Product_Middle_Class">
 						<option value="0">분류 선택</option>
 						<c:forEach items="${ m_category}" var="category">
 							<option value="${category.product_Middle_Class}">${category.middle_Name }</option>
@@ -138,39 +194,41 @@ $(document).ready(function() {
 
 
 					<div id="low_class_categorylist_get">
-					
-						 상품 소 분류 :
+
+						상품 소 분류 :
 						<select name="Product_low_class">
 							<c:forEach items="${ l_category}" var="category_l">
 								<option value="${category_l.product_Low_Class}">${category_l.low_Name }</option>
 							</c:forEach>
 						</select>
- 
+
 					</div>
 
 					<br />
 					수량 :
-					<input type="number" name="stock" min="0"/>
+					<input type="number" name="stock" min="0" />
 					<br />
-					
-					
-					
+
+
+
 					가격 :
 					<input type="number" name="price" min="0" />
+					</c:if>
 					<!-- 	<button>상품등록</button>
 	</form> -->
 
 					<!-- 상품 게시글 제목 :
 					<input type="text" name="boardTitle" />
 					<br /> -->
-					
-					
+
+
 					<div class="mb-3">
-  <label for="boardTitle" class="form-label">상품 게시글 제목</label>
-  <input type="text" name="boardTitle" class="form-control" id="boardTitle">
-</div>
-					
-					
+						<label for="boardTitle" class="form-label">상품 게시글 제목</label>
+						<input type="text" name="boardTitle" class="form-control"
+							id="boardTitle">
+					</div>
+
+
 					<!-- 게시글 내용
 					<br />
 					<textarea rows="10" cols="100" name="boardBody"></textarea>

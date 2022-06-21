@@ -55,6 +55,8 @@ public interface ProductPageMapper {
 	void addCart(@Param("memberId")String memberId,@Param("bookCount") int bookCount,@Param("productId") int productId);
 	PaginationDto getAllBoardNum(String cat);
 	void insertReviewFile(int string, String originalFilename);
+	int getcat0(ProductDto dto);
+	String getCategoryName(int category);
 
 	
 
