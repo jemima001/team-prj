@@ -31,8 +31,8 @@
 	
 	
 	<insert id="addOrderList">
-		INSERT INTO Orders(memberId,productName,address,recipient,orderState)
-		VALUES (#{memberId}, #{cart.productName}, #{address}, #{recipient}, 0)
+		INSERT INTO Orders(memberId,productName,address,recipient,orderState,bookCount)
+		VALUES (#{memberId}, #{cart.productName}, #{address}, #{recipient}, 0,#{cart.bookCount})
 
 	</insert>
 	
