@@ -129,17 +129,23 @@ public class ProductPageService {
 
 	@Transactional
 	public int addProduct(ProductDto dto) {
+		System.out.println("테스트1!");
 		ProductDto NewProductDto = new ProductDto();
 		int ok = mapper.Addproduct(dto);
 		System.out.println(ok);
 		System.out.println(dto);
+		
 		int productId = mapper.getproductId(dto);
 		System.out.println(productId);
 		NewProductDto.setProductId(productId);
 		int NewProductCode0 = dto.getProduct_Middle_Class();
 		int NewProductCode1 = dto.getProduct_Low_Class();
+		System.out.println("NewProductCode0:"+NewProductCode0);
+		System.out.println("NewProductCode1 :"+NewProductCode1);
+		System.out.println("productId" +productId);
 
-		mapper.Addcategory(NewProductCode0, NewProductCode1, productId);
+		mapper.Addcategory(NewProductCode0, 1, productId);
+		System.out.println("테스트2");
 		return mapper.getproductId(NewProductDto);
 	}
 

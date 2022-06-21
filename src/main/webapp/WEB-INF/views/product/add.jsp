@@ -28,7 +28,7 @@
 <script>
 $(document).ready(function() {
 	
-	 $("#low_class_categorylist_get").hide(); 
+	// $("#low_class_categorylist_get").hide(); 
 	
 	$('#middle_class').on('change', function() {
 		const data = {
