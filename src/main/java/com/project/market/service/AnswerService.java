@@ -13,9 +13,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.project.market.domain.QueryDto;
+import com.project.market.domain.AnswerDto;
 import com.project.market.mapper.AnswerMapper;
-import com.project.market.mapper.QueryMapper;
 
 import software.amazon.awssdk.core.sync.RequestBody;
 import software.amazon.awssdk.regions.Region;
@@ -25,13 +24,10 @@ import software.amazon.awssdk.services.s3.model.ObjectCannedACL;
 import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 
 @Service
-public class QueryService {
-	
+public class AnswerService {
+
 	@Autowired
-	private QueryMapper mapper;
-	
-	@Autowired
-	private AnswerMapper answerMapper;
+	private AnswerMapper mapper;
 	
 	private S3Client s3;
 	
@@ -50,11 +46,11 @@ public class QueryService {
 	}
 	
 	@Transactional
-	public boolean insertQuery(QueryDto query, MultipartFile[] files) {
+	public boolean insertQuery(AnswerDto answer, MultipartFile[] files) {
 		// TODO Auto-generated method stub
-		int cnt = mapper.insertQuery(query);
+		int cnt = mapper.insertQuery(answer);
 		
-		addFiles(query.getId(), files);
+		addFiles(answer.getQueryId(), files);
 		
 		return cnt == 1;
 	}
@@ -70,9 +66,9 @@ public class QueryService {
 			}
 		}
 	}
-	
+
 	private void saveFileAwsS3(int id, MultipartFile file) {
-		String key = "project/query/" + id + "/" + file.getOriginalFilename();
+		String key = "project/answer/" + id + "/" + file.getOriginalFilename();
 		
 		PutObjectRequest putObjectRequest = PutObjectRequest.builder()
 				.acl(ObjectCannedACL.PUBLIC_READ)
@@ -89,63 +85,39 @@ public class QueryService {
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		}
-		
-		
 	}
 
-	public List<QueryDto> getQueryList(int page, int rowPerPage) {
-		int from = (page-1) * rowPerPage;
-		return mapper.selectQuery(from, rowPerPage);
-	}
-
-	public int countCustomers() {
-		// TODO Auto-generated method stub
-		return mapper.countQuery();
-	}
-
-	public QueryDto getQueryById(int id) {
-		QueryDto query = mapper.selectQueryById(id);
-		List<String> fileNames = mapper.selectFileNameByQuery(id);
-		if (fileNames != null) {
-			query.setFileName(fileNames);
+	public AnswerDto getAnswerById(int id) {
+		AnswerDto answer = mapper.selectAnwserById(id);
+		List<String> fileNames = mapper.selectFileNameByAnswer(answer.getQueryId());
+		if(answer != null) {
+			answer.setFileName(fileNames);
 		}
-		
-		return query;
+		return answer;
 	}
 
 	@Transactional
-	public boolean updateQuery(QueryDto dto, ArrayList<String> removeFileList, MultipartFile[] addFileList) {
+	public boolean updateAnswer(AnswerDto dto, ArrayList<String> removeFileList, MultipartFile[] addFileList) {
 		if (removeFileList != null) {
 			for (String fileName : removeFileList) {
-				deleteQueryFromAwsS3(dto.getId(), fileName);
-				mapper.deleteFileByQueryIdAndFileName(dto.getId(), fileName);
+				deleteFromAwsS3(dto.getQueryId(), fileName);
+				mapper.deleteFileByAnswerIdAndFileName(dto.getQueryId(), fileName);
 			}
 		}
 		
 		if (addFileList != null) {
 			// File 테이블에 추가된 파일 insert
 			// s3에 upload
-			addFiles(dto.getId(), addFileList);
+			addFiles(dto.getQueryId(), addFileList);
 		}
 		
 		// Query 테이블 update
-		int cnt = mapper.updateQuery(dto);
+		int cnt = mapper.updateAnswer(dto);
 		
 		return cnt == 1;
 	}
-	
-	private void deleteQueryFromAwsS3(int id, String fileName) {
-		String key = "project/Query/" + id + "/" + fileName;
-		
-		DeleteObjectRequest deleteObjectRequest = DeleteObjectRequest.builder()
-				.bucket(bucketName)
-				.key(key)
-				.build();
-		
-		s3.deleteObject(deleteObjectRequest);
-	}
-	
-	private void deleteAnswerFromAwsS3(int id, String fileName) {
+
+	private void deleteFromAwsS3(int id, String fileName) {
 		String key = "project/answer/" + id + "/" + fileName;
 		
 		DeleteObjectRequest deleteObjectRequest = DeleteObjectRequest.builder()
@@ -156,41 +128,32 @@ public class QueryService {
 		s3.deleteObject(deleteObjectRequest);
 	}
 
-	@Transactional
-	public boolean deleteQuery(int id) {
-		// 파일 목록 읽기
-		List<String> fileList = mapper.selectFileNameByQuery(id);
+	public boolean deleteAnswer(int id) {
+		List<String> fileList = mapper.selectFileNameByAnswer(id);
 		
-		List<String> AnswerFileList = answerMapper.selectFileNameByAnswer(id);
+		removeFiles(id, fileList);
 		
-		removeQueryByFiles(id, fileList);
+		// 댓글테이블 삭제
 		
-		removeAnswerByFiles(id, AnswerFileList);
-		
-		// 답변 테이블 삭제
-		answerMapper.deleteByAnswerId(id);
-		
-		
-		return mapper.deleteQuery(id) == 1;
+		return mapper.deleteAnswer(id) == 1;
 	}
 
-	private void removeQueryByFiles(int id, List<String> fileList) {
+	private void removeFiles(int id, List<String> fileList) {
 		// s3에서 지우기
-		for (String fileName : fileList) {
-			deleteQueryFromAwsS3(id, fileName);
-		}
-		
-		// 파일테이블 삭제
-		mapper.deleteFileByQueryId(id);
+				for (String fileName : fileList) {
+					deleteFromAwsS3(id, fileName);
+				}
+				
+				// 파일테이블 삭제
+				mapper.deleteFileByQueryId(id);
 	}
-	
-	private void removeAnswerByFiles(int id, List<String> fileList) {
-		// s3에서 지우기
-		for (String fileName : fileList) {
-			deleteAnswerFromAwsS3(id, fileName);
+
+	public AnswerDto getAnswerByQueryId(int id) {
+		AnswerDto answer = mapper.selectAnserByQueryId(id);
+		List<String> fileNames = mapper.selectFileNameByAnswer(id);
+		if(answer != null) {
+			answer.setFileName(fileNames);
 		}
-		
-		// 파일테이블 삭제
-		answerMapper.deleteFileByQueryId(id);
+		return answer;
 	}
 }

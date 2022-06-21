@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.project.market.domain.AnswerDto;
 import com.project.market.domain.PageInfoDto;
 import com.project.market.domain.QueryDto;
+import com.project.market.service.AnswerService;
 import com.project.market.service.QueryService;
 
 
@@ -25,6 +27,9 @@ public class QueryController {
 	
 	@Autowired
 	private QueryService service;
+	
+	@Autowired
+	private AnswerService answerService;
 	
 	@GetMapping("query")
 	public void insert() {
@@ -85,16 +90,20 @@ public class QueryController {
 	@GetMapping("get")
 	public void get(int id, Model model) {
 		QueryDto dto = service.getQueryById(id);
+		AnswerDto answer = answerService.getAnswerByQueryId(id);
+		
 		model.addAttribute("query", dto);
+		model.addAttribute("answer", answer);
 		
 	}
 	
 	@PostMapping("modify")
 	public String modify(QueryDto dto,
-			@RequestParam(name = "removeFileList", required = false) ArrayList<String> removeFileList,
+			@RequestParam(name = "removeFileList1", required = false) ArrayList<String> removeFileList,
 			MultipartFile[] addFileList,
 			Principal principal, 
 			RedirectAttributes rttr) {
+		System.out.println(dto.getId());
 		QueryDto oldBoard = service.getQueryById(dto.getId());
 		
 		if (oldBoard.getMemberId().equals(principal.getName())) {

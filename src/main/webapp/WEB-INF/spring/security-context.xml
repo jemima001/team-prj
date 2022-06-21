@@ -24,6 +24,7 @@
 		<security:intercept-url pattern="/qna/list" access="isAuthenticated()"/>
 		<security:intercept-url pattern="/qna/remove" access="isAuthenticated()"/>
 		
+		<security:intercept-url pattern="/comm/chat" access="isAuthenticated()"/>
 		
 	</security:http>
 
