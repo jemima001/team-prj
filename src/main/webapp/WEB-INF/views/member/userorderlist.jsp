@@ -32,7 +32,10 @@
 						<th>상품</th>
 						<th>수량</th>
 						<th>가격</th>
+						<th>수령인</th>
+						<th>주소</th>
 						<th>주문일시</th>
+						<th>주문상태</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -46,6 +49,14 @@
 							<td>${order.recipient }</td>
 							<td>${order.address }</td>
 							<td>${order.inserted }</td>
+							<td>
+								<c:if test="${order.orderState eq '0' }">
+									<p>승인 대기중</p>
+								</c:if>
+								<c:if test="${order.orderState ne '0' }">
+									<p>승인 완료</p>
+								</c:if>
+							</td>
 						</tr>
 					</c:forEach>
 				</tbody>

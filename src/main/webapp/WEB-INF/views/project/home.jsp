@@ -57,6 +57,7 @@
 .row {
 	text-align: center;
 }
+
 </style>
 </head>
 <body>
@@ -102,8 +103,12 @@
 				</tr>
 			</thead>
 		</table>
-
-		<div id="carouselExampleCaptions" class="carousel slide"
+	</div>
+		<div class="row">
+			<img src="${appRoot }/resources/images/forest.jpg"/>
+		</div> 
+	<div class="container">
+		<%-- <div id="carouselExampleCaptions" class="carousel slide"
 			data-bs-ride="false">
 			<div class="carousel-indicators">
 				<button type="button" data-bs-target="#carouselExampleCaptions"
@@ -153,7 +158,7 @@
 				<span class="carousel-control-next-icon" aria-hidden="true"></span>
 				<span class="visually-hidden">Next</span>
 			</button>
-		</div>
+		</div> --%>
 		<hr />
 		<div class="row">
 			<c:forEach items="${boardlist1 }" var="pege">
