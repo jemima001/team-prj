@@ -67,11 +67,11 @@ public class ProductPageController {
 								RedirectAttributes rttr) {
 		/*	System.out.println("중분류 확인 :"+productdto);*/
 		int productId = service.addProduct(productdto);
-		System.out.println("제품 판매글 로 받은 데이터");
+		/*System.out.println("제품 판매글 로 받은 데이터");
 		System.out.println("판매글 제목 :"+dto.getBoardTitle());
 		System.out.println("판매글 내용 :"+dto.getBoardBody());
 		System.out.println("판매글 로 제품 id 학인 :" +productId);
-		System.out.println(dto);
+		System.out.println(dto);*/
 		// 사진 추가 코드 입력
 		if (file != null) {
 			List<String> fileList = new ArrayList<String>();
