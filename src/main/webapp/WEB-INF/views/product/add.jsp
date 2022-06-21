@@ -28,9 +28,9 @@
 <script>
 $(document).ready(function() {
 	
-	// $("#low_class_categorylist_get").hide(); 
+	 $("#low_class_categorylist_get").hide(); 
 	
-	$('#middle_class').on('change', function() {
+	/* $('#middle_class').on('change', function() {
 		const data = {
 				Product_Middle_Class : $("#middle_class").val()
 				} 
@@ -68,7 +68,7 @@ $(document).ready(function() {
 			
 			
 		});
-		});
+		}); */
 	
 	/* const select_middle_class = function(){
 		
