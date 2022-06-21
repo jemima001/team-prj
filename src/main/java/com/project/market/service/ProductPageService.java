@@ -144,7 +144,7 @@ public class ProductPageService {
 		System.out.println("NewProductCode1 :"+NewProductCode1);
 		System.out.println("productId" +productId);
 
-		mapper.Addcategory(NewProductCode0, 1, productId);
+		mapper.Addcategory(NewProductCode0, 1, productId); 
 		System.out.println("테스트2");
 		return mapper.getproductId(NewProductDto);
 	}
