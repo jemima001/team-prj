@@ -97,7 +97,6 @@
 				<form id="forms1" action="${appRoot }/member/setaddress"
 					method="post">
 					<div>
-						<p>${message }</p>
 					</div>
 					<div>
 						<label for="nameInput1" class="form-label"> 이름 </label>
