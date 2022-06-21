@@ -8,7 +8,12 @@
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
 	
-<c:url value="/project/home" var="homeUrl" ></c:url>
+<sec:authorize access="isAuthenticated()">
+	<sec:authentication property="principal" var="principal" />
+	<c:url value="/project/home" var="homeUrl">
+		<c:param name="id" value="${principal.username }" />
+	</c:url>
+</sec:authorize>
 
 <sec:authorize access="isAuthenticated()">
 	<sec:authentication property="principal" var="principal" />
@@ -41,16 +46,17 @@
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
 	referrerpolicy="no-referrer"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
 	crossorigin="anonymous"></script>
 <title>Insert title here</title>
 <style>
-	.row{
-		text-align: center;
-	}
+.row {
+	text-align: center;
+}
 </style>
 </head>
 <body>
@@ -60,12 +66,12 @@
 		<div class="row">
 			<div class="col justify-content-center">
 				<p>
-					<a href="${homeUrl }">
-						<img src="${appRoot }/resources/images/logo.jpg">
+					<a href="${homeUrl }"> <img
+						src="${appRoot }/resources/images/logo.jpg">
 					</a>
 				</p>
 			</div>
-			
+
 			<!-- 검색 창 -->
 			<!-- <div class="col-md-9">
 				<form action="#" class="d-flex" role="search" method="post">
@@ -74,19 +80,25 @@
 					<button class="btn btn-outline-success" type="submit">Search</button>
 				</form>
 			</div> -->
-			
+
 		</div>
-<hr />
+		<hr />
 		<table class="table">
 			<thead>
 				<tr>
 					<th><a href="${appRoot }/product/list" style="color: black;">ALL</a></th>
-					<th><a href="${appRoot }/product/list?cat=1&search=" style="color: black;">화분식물</a></th>
-					<th><a href="${appRoot}/product/list?cat=2&search=" style="color: black;">행잉식물</a></th>
-					<th><a href="${appRoot}/product/list?cat=3&search=" style="color: black;">선인장식물</a></th>
-					<th><a href="${appRoot}/product/list?cat=4&search=" style="color: black;">대형식물</a></th>
-					<th><a href="${appRoot}/product/list?cat=5&search=" style="color: black;">꽃</a></th>
-					<th><a href="${appRoot}/product/list?cat=6&search=" style="color: black;">기타</a></th>
+					<th><a href="${appRoot }/product/list?cat=1&search="
+						style="color: black;">화분식물</a></th>
+					<th><a href="${appRoot}/product/list?cat=2&search="
+						style="color: black;">행잉식물</a></th>
+					<th><a href="${appRoot}/product/list?cat=3&search="
+						style="color: black;">선인장식물</a></th>
+					<th><a href="${appRoot}/product/list?cat=4&search="
+						style="color: black;">대형식물</a></th>
+					<th><a href="${appRoot}/product/list?cat=5&search="
+						style="color: black;">꽃</a></th>
+					<th><a href="${appRoot}/product/list?cat=6&search="
+						style="color: black;">기타</a></th>
 				</tr>
 			</thead>
 		</table>
@@ -113,8 +125,8 @@
 					</div>
 				</div>
 				<div class="carousel-item">
-					<img src="${appRoot }/resources/images/main2.jpg" class="d-block w-100"
-						alt="...">
+					<img src="${appRoot }/resources/images/main2.jpg"
+						class="d-block w-100" alt="...">
 					<div class="carousel-caption d-none d-md-block">
 						<h5>Second slide label</h5>
 						<p>Some representative placeholder content for the second
@@ -149,8 +161,8 @@
 					<img src="${appRoot }/resources/images/1.jpg">
 				</p>
 				<div class="btn-group" role="group" aria-label="Basic example">
-				  	<a href="${cartUrl }" class="btn btn-outline-success">장바구니</a>
-  					<a href="${orderUrl }" class="btn btn-outline-dark">구매하기</a>
+					<a href="${cartUrl }" class="btn btn-outline-success">장바구니 담기</a> <a
+						href="${orderUrl }" class="btn btn-outline-dark">구매하기</a>
 				</div>
 			</div>
 			<div class="col">
@@ -158,8 +170,8 @@
 					<img src="${appRoot }/resources/images/2.jpg">
 				</p>
 				<div class="btn-group" role="group" aria-label="Basic example">
-				  	<a href="${cartUrl }" class="btn btn-outline-success">장바구니</a>
-  					<a href="${orderUrl }" class="btn btn-outline-dark">구매하기</a>
+					<a href="${cartUrl }" class="btn btn-outline-success">장바구니 담기</a> <a
+						href="${orderUrl }" class="btn btn-outline-dark">구매하기</a>
 				</div>
 			</div>
 			<div class="col">
@@ -167,8 +179,8 @@
 					<img src="${appRoot }/resources/images/3.jpg">
 				</p>
 				<div class="btn-group" role="group" aria-label="Basic example">
-				  	<a href="${cartUrl }" class="btn btn-outline-success">장바구니</a>
-  					<a href="${orderUrl }" class="btn btn-outline-dark">구매하기</a>
+					<a href="${cartUrl }" class="btn btn-outline-success">장바구니 담기</a> <a
+						href="${orderUrl }" class="btn btn-outline-dark">구매하기</a>
 				</div>
 			</div>
 			<div class="col">
@@ -176,8 +188,8 @@
 					<img src="${appRoot }/resources/images/4.jpg">
 				</p>
 				<div class="btn-group" role="group" aria-label="Basic example">
-				  	<a href="${cartUrl }" class="btn btn-outline-success">장바구니</a>
-  					<a href="${orderUrl }" class="btn btn-outline-dark">구매하기</a>
+					<a href="${cartUrl }" class="btn btn-outline-success">장바구니 담기</a> <a
+						href="${orderUrl }" class="btn btn-outline-dark">구매하기</a>
 				</div>
 			</div>
 		</div>

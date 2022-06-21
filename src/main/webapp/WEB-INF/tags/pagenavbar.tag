@@ -13,6 +13,13 @@
 
 <sec:authorize access="isAuthenticated()">
 	<sec:authentication property="principal" var="principal" />
+	<c:url value="/project/home" var="homeUrl">
+		<c:param name="id" value="${principal.username }" />
+	</c:url>
+</sec:authorize>
+
+<sec:authorize access="isAuthenticated()">
+	<sec:authentication property="principal" var="principal" />
 	<c:url value="/member/mypage" var="mypageUrl">
 		<c:param name="id" value="${principal.username }" />
 	</c:url>
