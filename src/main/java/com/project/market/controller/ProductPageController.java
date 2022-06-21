@@ -18,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.project.market.domain.PaginationDto;
 import com.project.market.domain.ProductDto;
 import com.project.market.domain.ProductPageDto;
+import com.project.market.domain.ReviewpageDto;
 import com.project.market.service.ProductPageService;
 
 @Controller
@@ -226,4 +227,18 @@ public class ProductPageController {
 	    service.addCart(dto,principal);
 	   
    }
+	
+	@GetMapping("reviewpage")
+		public void reviewpage() {
+			
+		}
+	
+	@PostMapping("reviewpage")
+		public String addreviewpage(ReviewpageDto dto) { 
+		
+		
+		System.out.println("리뷰페이지 추가  :"+ dto);
+		return "redirect:/product/productlist";
+	}
+	
 }
