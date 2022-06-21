@@ -133,21 +133,19 @@
 
 	<select id="selectUserOrder"
 		resultType="com.project.market.domain.OrderDto">
-		SELECT o.orderId, o.memberId, p.name productName, c.bookCount, (p.price	* c.bookCount) totalOrderPrice, o.recipient, o.address, o.inserted, o.orderState
-		FROM Product p
-		JOIN Cart c ON c.productId = p.id
-		JOIN Member m ON m.id = c.memberId
-		JOIN Orders o ON p.name = o.productName
-		WHERE m.id = #{id}
+		SELECT o.orderId, o.memberId, p.name productName, o.bookCount, (p.price	* o.bookCount) totalOrderPrice, o.recipient, o.address, o.inserted, o.orderState
+		FROM Orders o
+		JOIN Product p ON p.name = o.productName
+		WHERE o.memberId = #{id}
+		ORDER BY o.orderId
 	</select>
 	
 	<select id="selectAllOrder"
 		resultType="com.project.market.domain.OrderDto">
-		SELECT o.orderId, o.memberId, p.name productName, c.bookCount, (p.price	* c.bookCount) totalOrderPrice, o.recipient, o.address, o.inserted, o.orderState
-		FROM Product p
-		JOIN Cart c ON c.productId = p.id
-		JOIN Member m ON m.id = c.memberId
-		JOIN Orders o ON p.name = o.productName
+		SELECT o.orderId, o.memberId, p.name productName, o.bookCount, (p.price	* o.bookCount) totalOrderPrice, o.recipient, o.address, o.inserted, o.orderState
+		FROM Orders o
+		JOIN Product p ON p.name = o.productName
+		ORDER BY o.orderId
 	</select>
 	
 	<select id="findId"
