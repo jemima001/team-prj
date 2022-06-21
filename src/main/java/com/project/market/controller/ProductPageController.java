@@ -234,7 +234,9 @@ public class ProductPageController {
 		}
 	
 	@PostMapping("reviewpage")
-		public String addreviewpage(ReviewpageDto dto) { 
+		public String addreviewpage(ReviewpageDto dto,
+									MultipartFile[] file,
+									RedirectAttributes rttr) { 
 		
 		
 		System.out.println("리뷰페이지 추가  :"+ dto);

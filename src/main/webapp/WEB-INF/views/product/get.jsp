@@ -228,6 +228,16 @@
 						<input type="submit" value="판매글 수정" />
 					</form>
 				</sec:authorize>
+				<form action="">
+				리뷰 제목 <br />
+				<input type="text" name="reviewTitle" /> <br />
+				리뷰 내용 <br />
+				<input type="text" name ="reviewBody" /> <br />
+				사진 추가 <br />
+				<input type="file" name ="file" multiple="multiple"/> <br />
+				
+				</form>
+				
 			</div>
 		</div>
 	</div>
