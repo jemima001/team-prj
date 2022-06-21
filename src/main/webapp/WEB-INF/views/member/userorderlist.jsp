@@ -14,8 +14,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-<my:pagenavbar current="adminpage"></my:pagenavbar>
-<my:mypagenavbar current="adminpage"></my:mypagenavbar>
+<my:pagenavbar current="userorderlist"></my:pagenavbar>
+<my:mypagenavbar current="userorderlist"></my:mypagenavbar>
 
 <div class="container">
 	<div class="row">

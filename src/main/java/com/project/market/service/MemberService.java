@@ -117,9 +117,9 @@ public class MemberService {
 		return mapper.getProductlist();
 	}
 
-	public List<AddressDto> listAddress() {
+	public List<AddressDto> listAddress(String id) {
 		
-		return mapper.selectAllAddress();
+		return mapper.selectAllAddress(id);
 	}
 
 	public void updateOneAddress(String id, String address) {
@@ -130,8 +130,8 @@ public class MemberService {
 		mapper.removeAddress(address);
 	}
 
-	public boolean hasAddress(String address) {
-		return mapper.countAddress(address) > 0;
+	public boolean hasAddress(String memberId, String address) {
+		return mapper.countAddress(memberId, address) > 0;
 	}
 
 	public List<OrderDto> listUserOrder(String id) {
