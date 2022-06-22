@@ -57,6 +57,9 @@ public interface ProductPageMapper {
 	void insertReviewFile(int string, String originalFilename);
 	int getcat0(ProductDto dto);
 	String getCategoryName(int category);
+	int deleteCart(ProductDto dto);
+	int deleteBoardfordeleteProduct(ProductDto dto);
+	int searchProductName(String name);
 
 	
 

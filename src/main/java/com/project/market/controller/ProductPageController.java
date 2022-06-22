@@ -128,6 +128,16 @@ public class ProductPageController {
 		model.addAttribute("product", product);
 	}
 	
+	@ResponseBody
+	@PostMapping("cheekProductName")
+	public boolean cheekProductName(String name) {
+	 // System.out.println(name); 넘어 오는거 확인
+		boolean ok = service.searchProductName(name);
+		
+		return !ok;
+		
+	}
+	
 	@GetMapping("list")
 	public void getlist(Model model, 
 						@RequestParam(name = "cat", defaultValue = "0" ) String cat, 
@@ -153,6 +163,10 @@ public class ProductPageController {
 	    System.out.println("컨트롤러 페이지 네이게이터 Dto:"+ outPaginationDto);
 	    outPaginationDto.setSearch(search);
 	    outPaginationDto.setNowpage(page);
+	    
+		/* if(cat == null || cat.equals("0")) {
+			
+		}*/
 	    model.addAttribute("paginationDto", outPaginationDto);
 		
 	}
