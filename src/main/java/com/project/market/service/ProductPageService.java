@@ -246,7 +246,10 @@ public class ProductPageService {
 
 	@Transactional
 	public boolean deleteProduct(ProductDto dto) {
+		
 		int okDeleteCategory = mapper.deleteCategory(dto);
+		int okDeleteCart = mapper.deleteCart(dto);
+		int okDeleteBoard = mapper.deleteBoardfordeleteProduct(dto);
 		int okDeleteProduct = mapper.DeleteProduct(dto);
 
 		System.out.println("okDeleteCategory:" + okDeleteCategory);
@@ -309,6 +312,12 @@ public class ProductPageService {
 	public String getCategoryName(int category) {
 		String categoryName = mapper.getCategoryName(category);
 		return categoryName;
+	}
+
+	public boolean searchProductName(String name) {
+		int ok = mapper.searchProductName(name);
+		System.out.println("같은 상품 이름 갯수"+ok);
+		return ok>0;
 	} 
 
 }

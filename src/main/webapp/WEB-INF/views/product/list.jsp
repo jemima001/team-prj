@@ -124,9 +124,14 @@
 					<div>${message_error}</div>
 				</div>
 			</c:if>
+			<c:if test="${cat==0 }">
+			 전체 상품
+			
+			</c:if>
+			
 			<table class="table">
 				<thead>
-					<tr class="table-dark">
+					<tr class="table-borderless">
 						<th>
 							<i class="fa-solid fa-hashtag"></i>
 						</th>
@@ -201,7 +206,7 @@
 				<div class="col-12 col-lg-10">
 
 					<nav aria-label="..." class="align-items-center">
-						<ul class="pagination">
+						<ul class="pagination justify-content-center">
 							
 							<c:forEach var="i" begin="1" end="${paginationDto.endPage}">
 

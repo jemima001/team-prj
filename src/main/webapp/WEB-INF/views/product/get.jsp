@@ -150,7 +150,7 @@
 				
 					<div class="justify-content-center col" >
 						<!-- -------------------------------------------------------------------------- -->
-						<h1>구매 페이지</h1>
+						<h1>${productboard.boardTitle }</h1>
 						<!-- 장바구니 Form 보내는 값 설정 하는곳 -->
 						<form id="cartForm" action="${cartUrl }" method="get"></form>
 
@@ -160,7 +160,7 @@
 							<!-- 구매 버튼 연결 주소 입력 -->
 							<!-- 판매글 아이디(29번째줄), 상품 아이디(30번쨰줄) , 상품 구매수량(28번째줄) 넘어 갑니다. -->
 							<!-- 상품페이지 dto에 구매 수량 Purchase 추가 했습니다.(아직 사용한 곳은 없음...) -->
-							<p>판매글 제목 : ${productboard.boardTitle }</p>
+							
 							<!-- -------------------------------------------------------- -->
 
 
@@ -170,7 +170,7 @@
 
 							
 							<p>판매 상품 : ${product.productName }</p>
-							<p>가격 : ${product.price }</p>
+							<h2>${product.price } 원</h2>
 
 							<c:if test="${product.stock != 0 }">
 					구매 수량
@@ -179,12 +179,12 @@
 								<input id="productId" type="hidden"
 									value="${productboard.productId }" name="productId" />
 
-								<button class="buttonTobuy">구매 버튼</button>
+								<button class="buttonTobuy btn btn-outline-success">구매 버튼</button>
 							</c:if>
 						</form>
 						<c:if test="${product.stock != 0 }">
 							<sec:authorize access="hasRole('USER')">
-								<button class="buttonTobuy" id="purchaseButton">장바구니</button>
+								<button class="buttonTobuy btn btn-outline-success" id="purchaseButton"><i class="bi bi-cart-plus"></i>장바구니</button>
 							</sec:authorize>
 						</c:if>
 						<c:if test="${product.stock == 0 }">
