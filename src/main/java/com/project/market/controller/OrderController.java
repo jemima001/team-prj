@@ -80,14 +80,6 @@ public class OrderController {
 		
 		
 		
-	
-	}
-	
-	
-	@PostMapping("direct")
-	public void direct(Model model, ProductPageDto dto, Principal principal, int Purchase) {
-		
-		System.out.println(Purchase);
 	}
 		   
 	
