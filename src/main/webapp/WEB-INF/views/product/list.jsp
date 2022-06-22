@@ -144,6 +144,12 @@
 							<td>${pege.id }</td>
 
 							<td>
+							
+							<c:url value="/product/get" var="getUrl">
+									<c:param name="id" value="${pege.id }"></c:param>
+								</c:url>
+							<a href="${getUrl}">
+							
 								<c:if test="${pege.fileName !=null}">
 
 									<img style="width: 200px" class="img-thumbnail"
@@ -154,6 +160,7 @@
 									<img style="width: 200px" class="img-thumbnail"
 										src="${imageUrl }/project/noImage/noImage.png" alt="" />
 								</c:if>
+							</a>
 
 							</td>
 							<td>
