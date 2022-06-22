@@ -162,7 +162,7 @@
 		</div> --%>
 		<hr />
 		<div class="row">
-			<h2>new</h2><br />
+			<h2><b>new</b></h2><br />
 			<br />
 			<br />
 		</div>
