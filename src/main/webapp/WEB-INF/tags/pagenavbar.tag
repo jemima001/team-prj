@@ -48,7 +48,7 @@
 					<a class="navbar-brand" href="${homeUrl }" style="color: black;">
 					<img src="${appRoot }/resources/images/logo.jpg" width="120" height="30"></a>
 				</li>
-				<sec:authorize access="isAuthenticated()">
+				<sec:authorize access="isAuthenticated() and not hasRole('ADMIN')">
 					<li class="nav-item">
 						<p>${principal.username }님의 정원</p>
 					</li>
