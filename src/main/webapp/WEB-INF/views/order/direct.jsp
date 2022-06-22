@@ -118,19 +118,19 @@
 								</thead>
 								<tbody>
 
-									<c:forEach items="${cartList }" var="cart">
+									
 
 										<tr>
-											<th><input type="hidden" value="${cart.cartId }"
+											<th><input type="hidden" value="${productPage.id }"
 												name="cartIds" form="form21" /></th>
 
-											<td>${cart.productName }</td>
+											<td>${productPage.boardTitle }</td>
 											<td>${cart.bookCount }개</td>
 											<td>${cart.totalPrice }원</td>
 											<td>무료</td>
 										</tr>
 
-									</c:forEach>
+								
 
 
 

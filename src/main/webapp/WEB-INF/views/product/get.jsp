@@ -155,7 +155,7 @@
 						<form id="cartForm" action="${cartUrl }" method="get"></form>
 
 						<!-- 구매 페이지로 값 보내는 곳 -->
-						<form action="${appRoot }/order/info" method="get">
+						<form action="${appRoot }/order/direct" method="post">
 							<!-- 여기에 구매 페이지 주소 입력 -->
 							<!-- 구매 버튼 연결 주소 입력 -->
 							<!-- 판매글 아이디(29번째줄), 상품 아이디(30번쨰줄) , 상품 구매수량(28번째줄) 넘어 갑니다. -->

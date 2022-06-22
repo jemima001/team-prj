@@ -9,9 +9,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 import com.project.market.domain.CartDto;
 import com.project.market.domain.MemberDto;
 import com.project.market.domain.OrderDto;
+import com.project.market.domain.ProductPageDto;
 import com.project.market.service.OrderService;
 
 @Controller
@@ -75,7 +77,17 @@ public class OrderController {
 		
 		MemberDto member = orderService.getMemberById(principal.getName());
 		model.addAttribute("member", member);
+		
+		
+		
 	
+	}
+	
+	
+	@PostMapping("direct")
+	public void direct(Model model, ProductPageDto dto, Principal principal, int Purchase) {
+		
+		System.out.println(Purchase);
 	}
 		   
 	
