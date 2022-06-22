@@ -52,6 +52,23 @@ public interface MemberMapper {
 	MemberDto findId(String email);
 
 	void orderApprove(int orderId);
+
+	void removeAddressById(String id);
+
+	void removeCart(String id);
+
+	void removeOrders(String id);
+
+	void removeQuestions(String id);
+
+	List<Integer> selectAllQueryId(String id);
+
+	void removeAnswers(Integer queryId);
+
+	void removeAnswerFile(Integer queryId);
+
+	void removeQueryFile(Integer queryId);
+
 }
 
 

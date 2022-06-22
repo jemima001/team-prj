@@ -60,40 +60,47 @@
 
 	<div style="background-color: #eae1d8">
 		<form action="/market/product/list">
-
-			<div class="btn-group" role="group"
-				aria-label="Basic radio toggle button group">
-				<input type="radio" class="btn-check " name="cat" id="btnradio0"
-					autocomplete="off" value="0">
-				<label class="btn btn-outline-primary " for="btnradio0">전체보기</label>
-				<c:forEach items="${ m_category}" var="category">
-					<div class="form-check form-check-inline">
-						<input type="radio" class="btn-check" name="cat"
-							id="btnradio${category.product_Middle_Class}" autocomplete="off"
-							value="${category.product_Middle_Class}">
-						<label class="btn btn-outline-primary"
-							for="btnradio${category.product_Middle_Class}">${category.middle_Name }</label>
+			<div class="d-flex">
+				<div class="btn-group" role="group"
+					aria-label="Basic radio toggle button group" style="display: ;">
+					<div >
+					<input type="radio" class="btn-check " name="cat" id="btnradio0"
+						autocomplete="off" value="0">
+					<label class="btn btn-outline-primary " for="btnradio0">전체보기</label>
+					<c:forEach items="${ m_category}" var="category">
+						<div class="form-check form-check-inline ">
+							<input type="radio" class="btn-check " name="cat"
+								id="btnradio${category.product_Middle_Class}" autocomplete="off"
+								value="${category.product_Middle_Class}">
+							<label class="btn btn-outline-primary"
+								for="btnradio${category.product_Middle_Class}">${category.middle_Name }</label>
+						</div>
+					</c:forEach>
 					</div>
-				</c:forEach>
-				<span class="input-group mb-5">
-					<input type="text" class="form-control" placeholder="검색어를 입력해 주세요"
-						aria-label="Recipient's username" aria-describedby="button-addon2"
-						name="search">
-					<button class="btn btn-outline-secondary" id="button-addon2">Button</button>
-				</span>
+				</div>
+				<div class="me-auto">
+					<span class="input-group ">
+						<input type="text"  placeholder="검색어를 입력해 주세요"
+						 aria-describedby="button-addon2"
+							name="search" >
+						<button class="btn btn-outline-secondary" id="button-addon2">검색</button>
+					</span>
+				</div>
+				<div>
+					<span>
+						<sec:authorize access="hasRole('ADMIN')">
+							<a href="${appRoot }/product/add" class="btn btn-outline-dark">게시물
+								작성</a>
+							<a href="${appRoot }/product/productlist"
+								class="btn btn-outline-dark">상품 삭제</a>
+						</sec:authorize>
+					</span>
+				</div>
 			</div>
 
 
 			<!-- <input type="text" name="search" />
 			<input type="submit" value="검색"> -->
-			<span>
-				<sec:authorize access="hasRole('ADMIN')">
-					<a href="${appRoot }/product/add" class="btn btn-outline-dark">게시물
-						작성</a>
-					<a href="${appRoot }/product/productlist"
-						class="btn btn-outline-dark">상품 삭제</a>
-				</sec:authorize>
-			</span>
 		</form>
 	</div>
 	<div class="row justify-content-center">
@@ -137,6 +144,12 @@
 							<td>${pege.id }</td>
 
 							<td>
+							
+							<c:url value="/product/get" var="getUrl">
+									<c:param name="id" value="${pege.id }"></c:param>
+								</c:url>
+							<a href="${getUrl}">
+							
 								<c:if test="${pege.fileName !=null}">
 
 									<img style="width: 200px" class="img-thumbnail"
@@ -147,6 +160,7 @@
 									<img style="width: 200px" class="img-thumbnail"
 										src="${imageUrl }/project/noImage/noImage.png" alt="" />
 								</c:if>
+							</a>
 
 							</td>
 							<td>
@@ -188,9 +202,7 @@
 
 					<nav aria-label="..." class="align-items-center">
 						<ul class="pagination">
-							<li class="page-item disabled">
-								<a class="page-link">Previous</a>
-							</li>
+							
 							<c:forEach var="i" begin="1" end="${paginationDto.endPage}">
 
 								<li
@@ -201,9 +213,7 @@
 
 
 							</c:forEach>
-							<li class="page-item">
-								<a class="page-link" href="#">Next</a>
-							</li>
+							
 						</ul>
 					</nav>
 
