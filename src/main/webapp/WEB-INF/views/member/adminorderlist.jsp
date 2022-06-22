@@ -24,11 +24,12 @@
 
 			<h1>주문 목록</h1>
 			
-			<table class="table">
+			<table class="table align-middle">
 				<thead>
 					<tr>
 						<th>주문번호</th>
 						<th>ID</th>
+						<th>상품사진</th>
 						<th>상품</th>
 						<th>수량</th>
 						<th>가격</th>
@@ -43,6 +44,8 @@
 						<tr>
 							<td>${order.orderId }</td>
 							<td>${order.memberId }</td>
+							<td><img style="width: 100px" class="img-thumbnail"
+							src="${imageUrl }/project/${order.boardId }/${order.fileName}" alt="" /></td>
 							<td>${order.productName }</td>
 							<td>${order.bookCount }</td>
 							<td>${order.totalOrderPrice }</td>
