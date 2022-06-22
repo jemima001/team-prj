@@ -48,8 +48,13 @@
 					<a class="navbar-brand" href="${homeUrl }" style="color: black;">
 					<img src="${appRoot }/resources/images/logo.jpg" width="120" height="30"></a>
 				</li>
+				<sec:authorize access="isAuthenticated()">
+					<li class="nav-item">
+						<p>${principal.username }님의 정원</p>
+					</li>
+				</sec:authorize>
 			</ul>
-
+			
 			<ul class="nav">
 				<!-- 오른쪽으로 밀기 -->
 				<sec:authorize access="not isAuthenticated()">
@@ -100,6 +105,15 @@
 
 				<li class="nav-item" style="background-color: #eae1d8;"><a
 					class="nav-link" href="/market/notice/list" style="color: black;">고객센터</a>
+				</li>
+				<li class="nav-item">
+					<form action="${approot }/market/product/list" class="d-flex" role="search" method="get">
+					<div class="input-group">
+						<input class="form-control me-auto" type="search"
+							placeholder="Search" aria-label="Search" name="search">
+						<button class="btn btn-outline-success" type="submit">Search</button>
+					</div>
+					</form>
 				</li>
 			</ul>
 
