@@ -206,6 +206,12 @@
 		DELETE FROM QueryFile
 		WHERE queryId = #{queryId}
 	</delete>
+	
+	<select id="countEmailById" resultType="int">
+		SELECT COUNT(email)
+		FROM Member
+		WHERE email = #{email} and id = #{id}
+	</select>
 </mapper>
 
 

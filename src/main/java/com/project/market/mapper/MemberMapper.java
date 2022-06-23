@@ -69,6 +69,8 @@ public interface MemberMapper {
 
 	void removeQueryFile(Integer queryId);
 
+	int countEmailById(@Param("id")String id, @Param("email")String email);
+
 }
 
 
