@@ -9,6 +9,7 @@ import org.springframework.security.access.method.P;
 import com.project.market.domain.PaginationDto;
 import com.project.market.domain.ProductDto;
 import com.project.market.domain.ProductPageDto;
+import com.project.market.domain.ReviewpageDto;
 
 public interface ProductPageMapper {
 
@@ -60,6 +61,7 @@ public interface ProductPageMapper {
 	int deleteCart(ProductDto dto);
 	int deleteBoardfordeleteProduct(ProductDto dto);
 	int searchProductName(String name);
+	int AddreviewPage(ReviewpageDto dto);
 
 	
 
