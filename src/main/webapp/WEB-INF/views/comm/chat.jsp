@@ -34,8 +34,7 @@
 					</div>
 					<div class="alert alert-secondary mb-0">
 						<div class="d-flex justify-content-center">
-							<input type="hidden" id="sender" value="${nickName }"
-								placeholder="닉네임을 작성해주세요">
+							<input type="hidden" id="sender" value="${nickName }" />
 							<div class="input-group-append">
 							<button id="openBtn" class="btn btn-light" type="button" onclick="openSocket();">입장</button>
 							</div>

@@ -35,6 +35,10 @@ public class NoticeService {
 		NoticeDto notice = mapper.selectNoticeById(id);
 		return notice;
 	}
+	public List<NoticeDto> getNoticeByNaxtIdAndBackId(int id) {
+		List<NoticeDto> notice = mapper.selectNoticeByNaxtIdAndBackId(id);
+		return notice;
+	}
 
 	public boolean updateNotice(NoticeDto dto) {
 		int cnt = mapper.updateBoard(dto);
@@ -45,6 +49,8 @@ public class NoticeService {
 	public boolean deleteNotice(int id) {
 		return mapper.deleteNotice(id) == 1;
 	}
+
+	
 	
 	
 }

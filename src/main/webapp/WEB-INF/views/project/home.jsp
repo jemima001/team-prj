@@ -59,6 +59,8 @@
 }
 
 </style>
+<script>
+</script>
 </head>
 <body>
 	<my:pagenavbar current="home"></my:pagenavbar>
@@ -170,11 +172,11 @@
 			<c:forEach items="${boardlist1 }" var="pege">
 				<div class="col">
 					<c:if test="${pege.fileName !=null}">
-						<a href="${appRoot }/product/get?id=${pege.id}"><img style="width: 200px" class="img-thumbnail"
+						<a href="${appRoot }/product/get?id=${pege.id}"><img style="width: 200px; height : 200px" class="img-thumbnail"
 							src="${imageUrl }/project/${pege.id }/${pege.fileName}" alt="" /></a>
 					</c:if>
 					<c:if test="${pege.fileName ==null}">
-						<a href="${appRoot }/product/get?id=${pege.id}"><img style="width: 200px" class="img-thumbnail"
+						<a href="${appRoot }/product/get?id=${pege.id}"><img style="width: 200px; height : 200px" class="img-thumbnail"
 							src="${imageUrl }/project/noImage/noImage.png" alt="" /></a>
 					</c:if>
 					<h5>${pege.boardTitle }</h5>
@@ -185,21 +187,23 @@
 			<c:forEach items="${boardlist2 }" var="pege">
 				<div class="col">
 					<c:if test="${pege.fileName !=null}">
-						<a href="${appRoot }/product/get?id=${pege.id}"><img style="width: 200px" class="img-thumbnail"
+						<a href="${appRoot }/product/get?id=${pege.id}"><img style="width: 200px; height : 200px" class="img-thumbnail"
 							src="${imageUrl }/project/${pege.id }/${pege.fileName}" alt="" /></a>
 					</c:if>
 					<c:if test="${pege.fileName ==null}">
-						<a href="${appRoot }/product/get?id=${pege.id}"><img style="width: 200px" class="img-thumbnail"
+						<a href="${appRoot }/product/get?id=${pege.id}"><img style="width: 200px; height : 200px" class="img-thumbnail"
 							src="${imageUrl }/project/noImage/noImage.png" alt="" /></a>
 					</c:if>
-					<h5>${pege.boardTitle }</h5>
+					<c:if test="${pege.boardTitle.length() > 8 }">
+						<h5>${pege.boardTitle.substring(0,9) }...</h5>
+					</c:if>
+					<c:if test="${pege.boardTitle.length() < 8 }">
+						<h5>${pege.boardTitle }</h5>
+					</c:if>
 				</div>
 			</c:forEach>
 		</div>
 	</div>
-
-
-
 
 </body>
 </html>

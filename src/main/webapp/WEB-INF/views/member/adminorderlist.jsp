@@ -21,7 +21,7 @@
 	<div class="row">
 		<div class="col">
 		
-
+			<p>${message }</p>
 			<h1>주문 목록</h1>
 			
 			<table class="table align-middle">
@@ -63,6 +63,8 @@
 							<td>
 								<form action="${appRoot }/member/orderApprove" method="post">
 									<input type="hidden" name="orderId" value="${order.orderId }" />
+									<input type="hidden" name="bookCount" value="${order.bookCount }" />
+									<input type="hidden" name="productName" value="${order.productName }" />
 									<c:if test="${order.orderState eq '0' }">
 										<button class="btn btn-outline-success" type="submit">승인</button>
 									</c:if>
