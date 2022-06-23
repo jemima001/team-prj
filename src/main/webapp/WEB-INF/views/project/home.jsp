@@ -7,7 +7,7 @@
 %>
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
-	
+
 <sec:authorize access="isAuthenticated()">
 	<sec:authentication property="principal" var="principal" />
 	<c:url value="/project/home" var="homeUrl">
@@ -52,19 +52,21 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
 	crossorigin="anonymous"></script>
-<title>Insert title here</title>
+<title>로    고</title>
 <style>
 .row {
 	text-align: center;
 }
+
 </style>
 </head>
 <body>
 	<my:pagenavbar current="home"></my:pagenavbar>
-	<my:searchnavbar current="home"></my:searchnavbar>
+	<%-- <my:searchnavbar current="home"></my:searchnavbar> --%>
 	<div class="container">
 		<div class="row">
 			<div class="col justify-content-center">
+			<br />
 				<p>
 					<a href="${homeUrl }"> <img
 						src="${appRoot }/resources/images/logo.jpg">
@@ -82,6 +84,7 @@
 			</div> -->
 
 		</div>
+	</div>
 		<hr />
 		<table class="table">
 			<thead>
@@ -102,8 +105,11 @@
 				</tr>
 			</thead>
 		</table>
-
-		<div id="carouselExampleCaptions" class="carousel slide"
+		<div class="row">
+			<img src="${appRoot }/resources/images/forest.jpg"/>
+		</div> 
+	<div class="container">
+		<%-- <div id="carouselExampleCaptions" class="carousel slide"
 			data-bs-ride="false">
 			<div class="carousel-indicators">
 				<button type="button" data-bs-target="#carouselExampleCaptions"
@@ -153,45 +159,42 @@
 				<span class="carousel-control-next-icon" aria-hidden="true"></span>
 				<span class="visually-hidden">Next</span>
 			</button>
-		</div>
+		</div> --%>
 		<hr />
 		<div class="row">
-			<div class="col">
-				<p>
-					<img src="${appRoot }/resources/images/1.jpg">
-				</p>
-				<div class="btn-group" role="group" aria-label="Basic example">
-					<a href="${cartUrl }" class="btn btn-outline-success">장바구니 담기</a> <a
-						href="${orderUrl }" class="btn btn-outline-dark">구매하기</a>
+			<h2><b>new</b></h2><br />
+			<br />
+			<br />
+		</div>
+		<div class="row">
+			<c:forEach items="${boardlist1 }" var="pege">
+				<div class="col">
+					<c:if test="${pege.fileName !=null}">
+						<a href="${appRoot }/product/get?id=${pege.id}"><img style="width: 200px" class="img-thumbnail"
+							src="${imageUrl }/project/${pege.id }/${pege.fileName}" alt="" /></a>
+					</c:if>
+					<c:if test="${pege.fileName ==null}">
+						<a href="${appRoot }/product/get?id=${pege.id}"><img style="width: 200px" class="img-thumbnail"
+							src="${imageUrl }/project/noImage/noImage.png" alt="" /></a>
+					</c:if>
+					<h5>${pege.boardTitle }</h5>
 				</div>
-			</div>
-			<div class="col">
-				<p>
-					<img src="${appRoot }/resources/images/2.jpg">
-				</p>
-				<div class="btn-group" role="group" aria-label="Basic example">
-					<a href="${cartUrl }" class="btn btn-outline-success">장바구니 담기</a> <a
-						href="${orderUrl }" class="btn btn-outline-dark">구매하기</a>
+			</c:forEach>
+		</div>
+		<div class="row">
+			<c:forEach items="${boardlist2 }" var="pege">
+				<div class="col">
+					<c:if test="${pege.fileName !=null}">
+						<a href="${appRoot }/product/get?id=${pege.id}"><img style="width: 200px" class="img-thumbnail"
+							src="${imageUrl }/project/${pege.id }/${pege.fileName}" alt="" /></a>
+					</c:if>
+					<c:if test="${pege.fileName ==null}">
+						<a href="${appRoot }/product/get?id=${pege.id}"><img style="width: 200px" class="img-thumbnail"
+							src="${imageUrl }/project/noImage/noImage.png" alt="" /></a>
+					</c:if>
+					<h5>${pege.boardTitle }</h5>
 				</div>
-			</div>
-			<div class="col">
-				<p>
-					<img src="${appRoot }/resources/images/3.jpg">
-				</p>
-				<div class="btn-group" role="group" aria-label="Basic example">
-					<a href="${cartUrl }" class="btn btn-outline-success">장바구니 담기</a> <a
-						href="${orderUrl }" class="btn btn-outline-dark">구매하기</a>
-				</div>
-			</div>
-			<div class="col">
-				<p>
-					<img src="${appRoot }/resources/images/4.jpg">
-				</p>
-				<div class="btn-group" role="group" aria-label="Basic example">
-					<a href="${cartUrl }" class="btn btn-outline-success">장바구니 담기</a> <a
-						href="${orderUrl }" class="btn btn-outline-dark">구매하기</a>
-				</div>
-			</div>
+			</c:forEach>
 		</div>
 	</div>
 

@@ -27,4 +27,8 @@ public class OrderDto {
 	private String productName;
 	
 	private String recipient;
+	
+	private String fileName;
+	
+	private int boardId;
 }

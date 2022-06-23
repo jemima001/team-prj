@@ -37,19 +37,24 @@
 	<div class="container">
 		<div class="row">
 			<div class="col">
-				<h1>장바구니 목록</h1>
+			
+			
+			
+				<h4> Cart 장바구니</h4>
 				
 				<input type="hidden" value="${cart.orderId }" name="id" />
 				
 				<c:if test="${not empty message }">
 					<div class="alert alert-primary">${message }</div>
 				</c:if>
+				
 
 				<table class="table">
 					<thead>
-						<tr>
-							<th><i class="fa-solid fa-hashtag"></i></th>
+						<tr class="table-success">
+							<th><i class="fa-solid fa-trash-can"></i></th>
 							<th>상품정보</th>
+							<th>상품명</th>
 							<th>수량</th>
 							<th>주문금액</th>
 							<th>배송 정보</th>
@@ -62,10 +67,10 @@
 						<tr>
 							<th><input type="checkbox" value="${cart.cartId }"
 							name="cartIds" form="form21" /></th>
-							
+							<td><img style="width: 150px" class="img-thumbnail" src="${imageUrl }/project/${cart.boardId }/${cart.fileName}" alt="" /></td>
 							<td>${cart.productName }</td>
-							<td>${cart.bookCount }</td>
-							<td>${cart.totalPrice }</td>
+							<td>${cart.bookCount }개</td>
+							<td>${cart.totalPrice }원</td>
 							<td>무료</td>
 						</tr>
 					
@@ -89,7 +94,7 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
+						<tr class="table-success">
 						
 						
 							<td>총 주문 금액</td>
@@ -104,21 +109,21 @@
 		
 		
 		
-		<button class="btn btn-danger" form="form21" role="button" type="submit">선택 상품 삭제하기</button>
 		
-		
-		<!-- 결제 정보 form 보내는 곳 -->
-		
-			<form id="orderListForm" action="${appRoot }/member/userorderlist" method="get">
-				
-					<input id="orderId" type="number" value="${cart.orderId }" />
-					<input id="bookCount" type="number" value="${cart.bookCount }" />
-					<input id="allTotalPrice" type="number" value="${cart.allTotalPrice }"/>						
-					<a class="btn btn-success" href="${appRoot }/order/info" role="button"> 결제하기</a>
 					
-					
-			</form>
+			
+			<table class="table">
+				<thead>
+				<tr>
+				<th> <i class="fa-solid fa-cart-shopping"></i> : 필요한 상품을 한 번에 구매하세요 ! 다음에 구매하고 싶은 상품은 선택하면 모두 삭제 가능합니다. </th>
+				</tr>
+				</thead>
+				</table>
 				
+			
+				<button class="btn btn-danger" form="form21" role="button" type="submit"> 선택 상품 삭제하기</button>
+						
+	<a class="btn btn-success" href="${appRoot }/order/info" role="button"> 전부 결제하기</a>
 				
 		
 		 

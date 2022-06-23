@@ -53,7 +53,36 @@ public class MemberService {
 		String encodedPW = member.getPassword();
 
 		if (passwordEncoder.matches(rawPW, encodedPW)) {
-
+			// queryId 받아오기
+			List<Integer> queryIdList = mapper.selectAllQueryId(dto.getId());
+			
+			// 문의 파일 삭제
+			for(Integer queryId : queryIdList) {
+				mapper.removeQueryFile(queryId);
+			}
+			
+			// 문의 응답 파일 삭제
+			for(Integer queryId : queryIdList) {
+				mapper.removeAnswerFile(queryId);
+			}
+			
+			// 문의 응답 삭제
+			for(Integer queryId : queryIdList) {
+				mapper.removeAnswers(queryId);
+			}
+			
+			// 문의 삭제
+			mapper.removeQuestions(dto.getId());
+			
+			// 주문목록 삭제
+			mapper.removeOrders(dto.getId());
+			
+			// 장바구니 삭제
+			mapper.removeCart(dto.getId());
+			
+			// 주소 삭제
+			mapper.removeAddressById(dto.getId());
+			
 			// 권한테이블 삭제
 			mapper.deleteAuthById(dto.getId());
 
@@ -117,9 +146,9 @@ public class MemberService {
 		return mapper.getProductlist();
 	}
 
-	public List<AddressDto> listAddress() {
+	public List<AddressDto> listAddress(String id) {
 		
-		return mapper.selectAllAddress();
+		return mapper.selectAllAddress(id);
 	}
 
 	public void updateOneAddress(String id, String address) {
@@ -130,8 +159,8 @@ public class MemberService {
 		mapper.removeAddress(address);
 	}
 
-	public boolean hasAddress(String address) {
-		return mapper.countAddress(address) > 0;
+	public boolean hasAddress(String memberId, String address) {
+		return mapper.countAddress(memberId, address) > 0;
 	}
 
 	public List<OrderDto> listUserOrder(String id) {
@@ -149,6 +178,10 @@ public class MemberService {
 
 	public void approveOrder(int orderId) {
 		mapper.orderApprove(orderId);
+	}
+
+	public boolean hasMemberEmailById(String id, String email) {
+		return mapper.countEmailById(id, email) > 0;
 	}
 
 }

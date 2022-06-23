@@ -13,10 +13,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.project.market.domain.PaginationDto;
 import com.project.market.domain.ProductDto;
 import com.project.market.domain.ProductPageDto;
+import com.project.market.domain.ReviewpageDto;
 import com.project.market.service.ProductPageService;
 
 @Controller
@@ -28,19 +30,41 @@ public class ProductPageController {
 	
 	
 	@GetMapping("add")
-	public void addproduct(Model model) {
+	public void addproduct(Model model ,ProductDto dto, 
+				@RequestParam(name = "mod", defaultValue = "add" ) String addMod) {
+		if(addMod.equals("addFormProductList")) {
+			System.out.println("if문 안");
+			System.out.println(addMod);
+			int category =service.getcategoryone(dto);
+			String categoryName = service.getCategoryName(category);
+			System.out.println("카테고리 "+category);
+			dto.setProduct_Middle_Class(category);
+			dto.setMiddle_Name( categoryName);
+			model.addAttribute("product", dto);
+			model.addAttribute("addMod","addFormProductList" );
+			
+			List<ProductDto> list = service.getcategory();
+			// ajx로 나중에 처리 시도 해야
+			/*List<ProductDto> list_low = service.getcategory_low();*/
+			model.addAttribute("m_category", list);
+			
+		} else {
+			
+			model.addAttribute("addMod","add" );
 		List<ProductDto> list = service.getcategory();
 		// ajx로 나중에 처리 시도 해야
 		/*List<ProductDto> list_low = service.getcategory_low();*/
 		model.addAttribute("m_category", list);
 		System.out.println("처음 중분류 카테고리 리스트:"+list);
+		}
 		
 	}
 	// !!!!! 상품 등록시 service.addProduct(productdto); 로 반드시 상품 부터 등록해야 함!!!!!
 	@PostMapping("add")
 	public String addproduct_in(ProductPageDto dto, 
 								ProductDto productdto, 
-								MultipartFile[] file) {
+								MultipartFile[] file,
+								RedirectAttributes rttr) {
 		/*	System.out.println("중분류 확인 :"+productdto);*/
 		int productId = service.addProduct(productdto);
 		/*System.out.println("제품 판매글 로 받은 데이터");
@@ -59,7 +83,13 @@ public class ProductPageController {
 		
 		
 		//
-		service.AddProductPage(dto, productId, file);
+		boolean ok = service.AddProductPage(dto, productId, file);
+		
+		if(ok) {
+			rttr.addFlashAttribute("message", "상품이 게시되었습니다.");
+		} else {
+			rttr.addFlashAttribute("message_error", "상품이 게시에 실패하였습니다.");
+		}
 		return "redirect:/product/list";
 		
 	}
@@ -98,6 +128,16 @@ public class ProductPageController {
 		model.addAttribute("product", product);
 	}
 	
+	@ResponseBody
+	@PostMapping("cheekProductName")
+	public boolean cheekProductName(String name) {
+	 // System.out.println(name); 넘어 오는거 확인
+		boolean ok = service.searchProductName(name);
+		
+		return !ok;
+		
+	}
+	
 	@GetMapping("list")
 	public void getlist(Model model, 
 						@RequestParam(name = "cat", defaultValue = "0" ) String cat, 
@@ -123,16 +163,26 @@ public class ProductPageController {
 	    System.out.println("컨트롤러 페이지 네이게이터 Dto:"+ outPaginationDto);
 	    outPaginationDto.setSearch(search);
 	    outPaginationDto.setNowpage(page);
+	    
+		/* if(cat == null || cat.equals("0")) {
+			
+		}*/
 	    model.addAttribute("paginationDto", outPaginationDto);
 		
 	}
 	
 	@PostMapping("deleteBoard")
-	public String deleteBoard(ProductPageDto dto) {
+	public String deleteBoard(ProductPageDto dto, RedirectAttributes rttr) {
 		//System.out.println(dto.getId());
 		 boolean ok = service.deleteBoard(dto);
 		System.out.println(ok);
 		// if 사용해서 메시지 출력 해야함
+		
+		if(ok) {
+			rttr.addFlashAttribute("message", "판매글이 삭제되었습니다.");
+		} else {
+			rttr.addFlashAttribute("message_error", "판매글 삭제에 실패하였습니다.");
+		}
 		 return "redirect:/product/list";
 		
 	}
@@ -183,7 +233,7 @@ public class ProductPageController {
 	public void getlist(Model model) {
 		
 	 List<ProductDto> list = service.Productlist();
-	// System.out.println(list);
+	 System.out.println("상품 리스트"+list);
 	 model.addAttribute("productlist", list);
 		
 	}
@@ -212,4 +262,20 @@ public class ProductPageController {
 	    service.addCart(dto,principal);
 	   
    }
+	
+	@GetMapping("reviewpage")
+		public void reviewpage() {
+			
+		}
+	
+	@PostMapping("reviewpage")
+		public String addreviewpage(ReviewpageDto dto,
+									MultipartFile[] file,
+									RedirectAttributes rttr) { 
+		
+		
+		System.out.println("리뷰페이지 추가  :"+ dto);
+		return "redirect:/product/productlist";
+	}
+	
 }

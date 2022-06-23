@@ -109,6 +109,7 @@
 		SELECT memberId,
 		address
 		FROM Address
+		WHERE memberId = #{id}
 	</select>
 
 	<update id="updateOneAddress">
@@ -127,26 +128,30 @@
 		COUNT(address)
 		FROM
 		Address
-		WHERE address = #{address}
+		WHERE address = #{address} and memberId = #{memberId}
 	</select>
 
 	<select id="selectUserOrder"
 		resultType="com.project.market.domain.OrderDto">
-		SELECT o.orderId, o.memberId, p.name productName, c.bookCount, (p.price	* c.bookCount) totalOrderPrice, o.recipient, o.address, o.inserted
-		FROM Product p
-		JOIN Orders o ON p.id = o.productId
-		JOIN Member m ON m.id = o.memberId
-		JOIN Cart c ON c.memberId = o.memberId
-		WHERE m.id = #{id}
+		SELECT o.orderId, o.memberId, p.name productName, o.bookCount, (p.price	* o.bookCount) totalOrderPrice, o.recipient, o.address, o.inserted, o.orderState, pp.id boardId, f.fileName
+		FROM Orders o
+		JOIN Product p ON p.name = o.productName
+		JOIN ProductPage pp ON p.id = pp.productId
+		JOIN File f ON f.boardId = pp.id
+		WHERE o.memberId = #{id}
+		GROUP BY o.orderId
+		ORDER BY o.orderId
 	</select>
 	
 	<select id="selectAllOrder"
 		resultType="com.project.market.domain.OrderDto">
-		SELECT o.orderId, o.memberId, p.name productName, c.bookCount, (p.price	* c.bookCount) totalOrderPrice, o.recipient, o.address, o.inserted, o.orderState
-		FROM Product p
-		JOIN Orders o ON p.id = o.productId
-		JOIN Member m ON m.id = o.memberId
-		JOIN Cart c ON c.memberId = o.memberId
+		SELECT o.orderId, o.memberId, p.name productName, o.bookCount, (p.price	* o.bookCount) totalOrderPrice, o.recipient, o.address, o.inserted, o.orderState, pp.id boardId, f.fileName
+		FROM Orders o
+		JOIN Product p ON p.name = o.productName
+		JOIN ProductPage pp ON p.id = pp.productId
+		JOIN File f ON f.boardId = pp.id
+		GROUP BY o.orderId
+		ORDER BY o.orderId
 	</select>
 	
 	<select id="findId"
@@ -161,6 +166,52 @@
 		SET orderState = 1
 		WHERE orderId = #{orderId}
 	</update>
+	
+	<delete id="removeAddressById">
+		DELETE FROM Address
+		WHERE memberId = #{id}
+	</delete>
+	
+	<delete id="removeCart">
+		DELETE FROM Cart
+		WHERE memberId = #{id}
+	</delete>
+	
+	<delete id="removeOrders">
+		DELETE FROM Orders
+		WHERE memberId = #{id}
+	</delete>
+	
+	<delete id="removeQuestions">
+		DELETE FROM Questions
+		WHERE memberId = #{id}
+	</delete>
+	
+	<select id="selectAllQueryId" resultType="int">
+		SELECT id FROM Questions
+		WHERE memberId = #{id}
+	</select>
+	
+	<delete id="removeAnswers">
+		DELETE FROM Answers
+		WHERE queryId = #{queryId}
+	</delete>
+	
+	<delete id="removeAnswerFile">
+		DELETE FROM AnswerFile
+		WHERE queryId = #{queryId}
+	</delete>
+	
+	<delete id="removeQueryFile">
+		DELETE FROM QueryFile
+		WHERE queryId = #{queryId}
+	</delete>
+	
+	<select id="countEmailById" resultType="int">
+		SELECT COUNT(email)
+		FROM Member
+		WHERE email = #{email} and id = #{id}
+	</select>
 </mapper>
 
 

@@ -64,9 +64,7 @@ public class OrderService {
 
 
 	public void deleteCartList(String memberId) {
-	
-			mapper.deleteCartList(memberId); 
-		
+			mapper.deleteCartList(memberId); 	
 		
 	}
 	

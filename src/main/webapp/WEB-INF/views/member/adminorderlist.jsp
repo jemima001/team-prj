@@ -14,8 +14,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-<my:pagenavbar current="adminpage"></my:pagenavbar>
-<my:mypagenavbar current="adminpage"></my:mypagenavbar>
+<my:pagenavbar current="adminorderlist"></my:pagenavbar>
+<my:mypagenavbar current="adminorderlist"></my:mypagenavbar>
 
 <div class="container">
 	<div class="row">
@@ -24,11 +24,12 @@
 
 			<h1>주문 목록</h1>
 			
-			<table class="table">
+			<table class="table align-middle">
 				<thead>
 					<tr>
 						<th>주문번호</th>
 						<th>ID</th>
+						<th>상품사진</th>
 						<th>상품</th>
 						<th>수량</th>
 						<th>가격</th>
@@ -43,6 +44,8 @@
 						<tr>
 							<td>${order.orderId }</td>
 							<td>${order.memberId }</td>
+							<td><img style="width: 100px" class="img-thumbnail"
+							src="${imageUrl }/project/${order.boardId }/${order.fileName}" alt="" /></td>
 							<td>${order.productName }</td>
 							<td>${order.bookCount }</td>
 							<td>${order.totalOrderPrice }</td>
@@ -60,7 +63,12 @@
 							<td>
 								<form action="${appRoot }/member/orderApprove" method="post">
 									<input type="hidden" name="orderId" value="${order.orderId }" />
-									<button class="btn btn-outline-success" type="submit" value="승인"></button>
+									<c:if test="${order.orderState eq '0' }">
+										<button class="btn btn-outline-success" type="submit">승인</button>
+									</c:if>
+									<c:if test="${order.orderState ne '0' }">
+										<button class="btn btn-outline-success" type="submit" disabled>승인</button>
+									</c:if>
 								</form>
 							</td>
 						</tr>

@@ -9,9 +9,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 import com.project.market.domain.CartDto;
 import com.project.market.domain.MemberDto;
 import com.project.market.domain.OrderDto;
+import com.project.market.domain.ProductPageDto;
 import com.project.market.service.OrderService;
 
 @Controller
@@ -36,6 +38,7 @@ public class OrderController {
 		model.addAttribute("allTotalPrice", allTotal);
 		
 		MemberDto member = orderService.getMemberById(principal.getName());
+		
 		model.addAttribute("member", member);
 	}
 	
@@ -74,7 +77,21 @@ public class OrderController {
 		
 		MemberDto member = orderService.getMemberById(principal.getName());
 		model.addAttribute("member", member);
+		
+		
+		
 	
+	}
+	
+	//바로 구매
+	@PostMapping("direct")
+	public void directOrder(Model model, ProductPageDto dto, Principal principal, int Purchase) {
+		
+		//상품 get에서 넘어온 구매 수량
+		System.out.println(Purchase);
+		model.addAttribute("Purchase", Purchase);
+		
+		
 	}
 		   
 	

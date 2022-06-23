@@ -24,9 +24,9 @@ public class CartController {
 	private CartService cartService;
 	
 	@GetMapping("cart")
-	public void cart(String id, Model model) {
+	public void cart(Principal principal, Model model) {
 		
-		List<CartDto> list = cartService.cartList(id);
+		List<CartDto> list = cartService.cartList(principal.getName());
 		System.out.println(list);
 		model.addAttribute("cartList", list);
 		

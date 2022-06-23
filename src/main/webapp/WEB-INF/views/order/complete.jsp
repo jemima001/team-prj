@@ -21,24 +21,63 @@
 <div class="row justify-content-center">
 <div class="col-12 col-lg-6">
 
-<h4> 주문 완료 </h4> <br>
+<br>
+<table class="table">
+  <tr class="table-success">
+    <th>Order Complete 주문 완료</th>
+  </tr>
+  <tr>
+    <td>${member.id } 님! 주문 완료되었습니다. </td>
+  </tr>
+</table>
+
+<br>
+
+<table class="table">
+<thead>
+<tr>
+<th>  Payment Info 결제 정보 </th>
+</tr>
+</thead>
+</table>
+
+
+
+
+<table class="table">
+
+<thead>
+  <tr class="table-info">
+    <th>결제 금액</th>
+    <th>입금 정보</th>
+  </tr>
+  </thead>
+  
+  <tbody>
+  <tr>
+    <td> ${allTotalPrice } 원  </td>
+    <td>우리 352-1234-5678-90 스토어이름 </td>
+  </tr>
+  </tbody>
+</table>
+
+
+<table class="table">
+<thead>
+<tr class="table-info">
+<th> <i class="fa-solid fa-gift"></i> : 무통장 입금이 확인되면 구매가 확정됩니다.</th>
+</tr>
+</thead>
+</table>
+
+
 	
-	<!-- 주문자 성함 -->
-	${member.id } 님의 주문이 완료되었습니다. <br> <br>
-	
-	
-	<h5>Payment Info 결제 정보</h5> <br> 
-	
-	결제 금액 : ${allTotalPrice } 원 <br><br>
-	
-	입금 정보 : 우리 352-1234-5678-90 스토어이름 <br>
-	
-	입금이 확인되면 구매가 확정됩니다. <br><br><br>
-	
-	 <form action="${appRoot }/product/list" method="get">
+	<form action="${appRoot }/product/list" method="get">
 	<button id="submitButton11"> 상품 더 담기 </button>
 	<!-- 상품 페이지로 이동하는 버튼 -->
 	</form>
+	
+	
 	
 	
 	

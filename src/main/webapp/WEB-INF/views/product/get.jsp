@@ -28,6 +28,8 @@
 	crossorigin="anonymous"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
+		$("#reviewform").hide();
+		
 		$("#purchaseButton").click(function() {
 			//let purchaseNum = $("#PurchaseInput").val();
 			//$("#purchaseInput").val(purchaseNum);
@@ -79,31 +81,58 @@
 		</c:url>
 	</sec:authorize>
 	<my:pagenavbar></my:pagenavbar>
-	<div class="container">
-		<div class="row">
-			<div class="col">
+	<my:searchnavbar></my:searchnavbar>
+	<div class="row justify-content-center">
+		<div class="col-12 col-lg-10">
+			<div class="container">
+				<div class="row">
+				
+				
+				<div id="carouselExampleControls" class="carousel slide col"
+						data-bs-ride="carousel" style="float: left;">
 
-				<!-- -------------------------------------------------------------------------- -->
-				<h1>구매 페이지</h1>
-				<!-- 장바구니 Form 보내는 값 설정 하는곳 -->
-				<form id="cartForm" action="${cartUrl }" method="get"></form>
-
-				<!-- 구매 페이지로 값 보내는 곳 -->
-				<form action="${appRoot }/order/info" method="get">
-					<!-- 여기에 구매 페이지 주소 입력 -->
-					<!-- 구매 버튼 연결 주소 입력 -->
-					<!-- 판매글 아이디(29번째줄), 상품 아이디(30번쨰줄) , 상품 구매수량(28번째줄) 넘어 갑니다. -->
-					<!-- 상품페이지 dto에 구매 수량 Purchase 추가 했습니다.(아직 사용한 곳은 없음...) -->
-					<p>판매글 제목 : ${productboard.boardTitle }</p>
-					<!-- -------------------------------------------------------- -->
-
-
-					<div id="carouselExampleControls" class="carousel slide"
-						data-bs-ride="carousel">
 						<div class="carousel-inner">
-							<div class="carousel-item active">
-								<img src="..." class="d-block w-100" alt="...">
-							</div>
+							<c:forEach items="${productboard.fileList }" var="file" begin="0"
+								end="0">
+								<%
+									if (pageContext.getAttribute("file") != null) {
+
+									String file = (String) pageContext.getAttribute("file");
+									String encodedFileName = java.net.URLEncoder.encode(file, "utf-8");
+									pageContext.setAttribute("encodedFileName", encodedFileName);
+								}
+								%>
+
+								<div class="carousel-item active">
+									<img
+										src="${imageUrl }/project/${productboard.id}/${encodedFileName }"
+										class="d-block w-100" alt="..." style="width: 200px">
+								</div>
+							</c:forEach>
+
+							<c:forEach items="${productboard.fileList }" var="file" begin="1">
+								<%
+									if (pageContext.getAttribute("file") != null) {
+
+									String file = (String) pageContext.getAttribute("file");
+									String encodedFileName = java.net.URLEncoder.encode(file, "utf-8");
+									pageContext.setAttribute("encodedFileName", encodedFileName);
+								}
+								%>
+
+
+								<div class="carousel-item ">
+									<img
+										src="${imageUrl }/project/${productboard.id}/${encodedFileName }"
+										class="d-block w-100" alt="..." style="width: 200px">
+								</div>
+
+							</c:forEach>
+
+
+
+
+
 
 						</div>
 						<button class="carousel-control-prev" type="button"
@@ -117,120 +146,119 @@
 							<span class="visually-hidden">Next</span>
 						</button>
 					</div>
+				
+				
+					<div class="justify-content-center col" >
+						<!-- -------------------------------------------------------------------------- -->
+						<h1>${productboard.boardTitle }</h1>
+						<!-- 장바구니 Form 보내는 값 설정 하는곳 -->
+						<form id="cartForm" action="${cartUrl }" method="get"></form>
+
+						<!-- 구매 페이지로 값 보내는 곳 -->
+						<form action="${appRoot }/order/info" method="get">
+							<!-- 여기에 구매 페이지 주소 입력 -->
+							<!-- 구매 버튼 연결 주소 입력 -->
+							<!-- 판매글 아이디(29번째줄), 상품 아이디(30번쨰줄) , 상품 구매수량(28번째줄) 넘어 갑니다. -->
+							<!-- 상품페이지 dto에 구매 수량 Purchase 추가 했습니다.(아직 사용한 곳은 없음...) -->
+							
+							<!-- -------------------------------------------------------- -->
 
 
-					<!-- --------------------------------------------------- -->
 
-					<p>상세 정보 : ${productboard.boardBody }</p>
-					<p>판매 상품 : ${product.productName }</p>
-					<p>가격 : ${product.price }</p>
-					
-					<c:if test="${product.stock != 0 }">
+
+							<!-- --------------------------------------------------- -->
+
+							
+							<p>판매 상품 : ${product.productName }</p>
+							<h2>${product.price } 원</h2>
+
+							<c:if test="${product.stock != 0 }">
 					구매 수량
 					<input id="PurchaseInput" type="number" name="Purchase" value="1" />
-					<input type="hidden" value="${productboard.id }" name="id" />
-					<input id="productId" type="hidden"
-						value="${productboard.productId }" name="productId" />
-					<button class="buttonTobuy">구매 버튼</button>
-					</c:if>
-				</form>
-				<c:if test="${product.stock != 0 }">
-				<button class="buttonTobuy" id="purchaseButton">장바구니</button>
-				</c:if>
-				<c:if test="${product.stock == 0 }">
+								<input type="hidden" value="${productboard.id }" name="id" />
+								<input id="productId" type="hidden"
+									value="${productboard.productId }" name="productId" />
+
+								<button class="buttonTobuy btn btn-outline-success">구매 버튼</button>
+							</c:if>
+						</form>
+						<c:if test="${product.stock != 0 }">
+							<sec:authorize access="hasRole('USER')">
+								<button class="buttonTobuy btn btn-outline-success" id="purchaseButton"><i class="bi bi-cart-plus"></i>장바구니</button>
+							</sec:authorize>
+						</c:if>
+						<c:if test="${product.stock == 0 }">
 						품절되었습니다.
 					
 					</c:if>
 
 
 
-				<c:forEach items="${productboard.fileList }" var="file">
-					<%
-						if (pageContext.getAttribute("file") != null) {
-
-						String file = (String) pageContext.getAttribute("file");
-						String encodedFileName = java.net.URLEncoder.encode(file, "utf-8");
-						pageContext.setAttribute("encodedFileName", encodedFileName);
-					}
-					%>
-					<div>
-						<img
-							src="${imageUrl }/project/${productboard.id}/${encodedFileName }"
-							alt="" />
 					</div>
+					<%-- <c:forEach items="${productboard.fileList }" var="file">
+			<%
+				if (pageContext.getAttribute("file") != null) {
 
-				</c:forEach>
+				String file = (String) pageContext.getAttribute("file");
+				String encodedFileName = java.net.URLEncoder.encode(file, "utf-8");
+				pageContext.setAttribute("encodedFileName", encodedFileName);
+			}
+			%>
+			<div>
+				<img
+					src="${imageUrl }/project/${productboard.id}/${encodedFileName }"
+					alt="" />
+			</div>
 
-				<!-- -------------------------------------------------------- -->
+		</c:forEach> --%>
 
-
-				<div id="carouselExampleControls" class="carousel slide"
-					data-bs-ride="carousel">
-					<div class="carousel-inner">
-
-						<c:forEach items="${productboard.fileList }" var="file">
-							<%
-								if (pageContext.getAttribute("file") != null) {
-
-								String file = (String) pageContext.getAttribute("file");
-								String encodedFileName = java.net.URLEncoder.encode(file, "utf-8");
-								pageContext.setAttribute("encodedFileName", encodedFileName);
-							}
-							%>
-
-
-							<div class="carousel-item ">
-								<img
-									src="${imageUrl }/project/${productboard.id}/${encodedFileName }"
-									class="d-block w-100" alt="...">
-							</div>
-
-						</c:forEach>
+					<!-- -------------------------------------------------------- 사진 사용  -->
 
 
-
-
-
-						<div class="carousel-item active">
-							<img src="..." class="d-block w-100" alt="...">
-						</div>
-					</div>
-					<button class="carousel-control-prev" type="button"
-						data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-						<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-						<span class="visually-hidden">Previous</span>
-					</button>
-					<button class="carousel-control-next" type="button"
-						data-bs-target="#carouselExampleControls" data-bs-slide="next">
-						<span class="carousel-control-next-icon" aria-hidden="true"></span>
-						<span class="visually-hidden">Next</span>
-					</button>
+					
 				</div>
+			</div>
 
-				<!-- --------------------------------------------------- -->
-
-
-
-
-				<sec:authorize access="hasRole('ADMIN')">
-					<form action="/market/product/deleteBoard" method="post">
-						<input type="hidden" name="id" value="${productboard.id }" />
-						<input type="submit" value="판매글 삭제" />
-					</form>
+			<!-- --------------------------------------------------- -->
+<p>상세 정보 : ${productboard.boardBody }</p>
 
 
 
+			<sec:authorize access="hasRole('ADMIN')">
+				<form action="/market/product/deleteBoard" method="post">
+					<input type="hidden" name="id" value="${productboard.id }" />
+					<input type="submit" value="판매글 삭제" />
+				</form>
 
+				<!-- 수정폼 -->
+				<form action="/market/product/modif">
+					<input type="hidden" value="${productboard.id }" name="id" />
+					<input type="submit" value="판매글 수정" />
+				</form>
+			</sec:authorize>
+			
+			<div id="reviewform">
+			<form action="">
+				리뷰 제목
+				<br />
+				<input type="text" name="reviewTitle" />
+				<br />
+				리뷰 내용
+				<br />
+				<input type="text" name="reviewBody" />
+				<br />
+				사진 추가
+				<br />
+				<input type="file" name="file" multiple="multiple" />
+				<br />
 
-					<!-- 수정폼 -->
-					<form action="/market/product/modif">
-						<input type="hidden" value="${productboard.id }" name="id" />
-						<input type="submit" value="판매글 수정" />
-					</form>
-				</sec:authorize>
+			</form>
+
 			</div>
 		</div>
 	</div>
+
+
 
 
 
@@ -273,12 +301,11 @@
 					<button type="button" class="btn btn-primary"
 						data-bs-dismiss="modal">계속 쇼핑하기</button>
 					<button form="cartForm" class="btn btn-primary">장바구니로 이동</button>
-				
-					
+
+
 				</div>
 			</div>
 		</div>
 	</div>
-
 </body>
 </html>

@@ -66,7 +66,7 @@
 		FROM ProductPage as board LEFT JOIN File ON
 		board.id =
 		File.boardId
-		WHERE board.id = #{id} ;
+		WHERE board.id = #{id} and whichboard =0 ; ;
 
 	</select>
 
@@ -109,41 +109,41 @@
 
 					<choose>
 						<when test="cat==0">
-							WHERE pp.BoardTitle LIKE #{search}
+							WHERE pp.BoardTitle LIKE #{search} and f.whichboard =0 
 						</when>
 						<when test="cat== 1">
 							WHERE pm.id = 1
-							AND pp.BoardTitle LIKE #{search}
+							AND pp.BoardTitle LIKE #{search} and f.whichboard =0 
 						</when>
 						<when test="cat== 2">
 							WHERE pm.id = 2
-							AND pp.BoardTitle LIKE #{search}
+							AND pp.BoardTitle LIKE #{search} and f.whichboard =0 
 						</when>
 
 						<when test="cat== 3">
 							WHERE pm.id = 3
-							AND pp.BoardTitle LIKE #{search}
+							AND pp.BoardTitle LIKE #{search} and f.whichboard =0 
 						</when>
 
 						<when test="cat== 4">
 							WHERE pm.id = 4
-							AND pp.BoardTitle LIKE #{search}
+							AND pp.BoardTitle LIKE #{search} and f.whichboard =0 
 						</when>
 
 						<when test="cat== 5">
 							WHERE pm.id = 5
-							AND pp.BoardTitle LIKE #{search}
+							AND pp.BoardTitle LIKE #{search} and f.whichboard =0
 						</when>
 
 
 						<when test="cat== 7">
 							WHERE pm.id = 6
-							AND pp.BoardTitle LIKE #{search}
+							AND pp.BoardTitle LIKE #{search} and f.whichboard =0
 						</when>
 
 						<when test="cat== 8">
 							WHERE pm.id = 7
-							AND pp.BoardTitle LIKE #{search}
+							AND pp.BoardTitle LIKE #{search} and f.whichboard =0
 						</when>
 					</choose>
 
@@ -156,37 +156,37 @@
 
 						</when>
 						<when test="cat== 1">
-							WHERE pm.id = 1
+							WHERE pm.id = 1 and f.whichboard =0
 
 						</when>
 						<when test="cat== 2">
-							WHERE pm.id = 2
+							WHERE pm.id = 2 and f.whichboard =0
 
 						</when>
 
 						<when test="cat== 3">
-							WHERE pm.id = 3
+							WHERE pm.id = 3 and f.whichboard =0
 
 						</when>
 
 						<when test="cat== 4">
-							WHERE pm.id = 4
+							WHERE pm.id = 4 and f.whichboard =0
 
 						</when>
 
 						<when test="cat== 5">
-							WHERE pm.id = 5
+							WHERE pm.id = 5 and f.whichboard =0
 
 						</when>
 
 
 						<when test="cat== 7">
-							WHERE pm.id = 6
+							WHERE pm.id = 6 and f.whichboard =0
 
 						</when>
 
 						<when test="cat== 8">
-							WHERE pm.id = 7
+							WHERE pm.id = 7 and f.whichboard =0
 
 						</when>
 					</choose>
@@ -196,10 +196,11 @@
 
 			<when test="cat== null">
 				 
-				WHERE pp.BoardTitle LIKE #{search}
+				WHERE pp.BoardTitle LIKE #{search} and f.whichboard =0
 
 			</when>
 		</choose>
+	
  GROUP BY pp.id
 ORDER BY  inserttime DESC 
 LIMIT #{pageToStart},#{onePageAllBoardNum}
@@ -212,8 +213,17 @@ LIMIT #{pageToStart},#{onePageAllBoardNum}
 	</delete>
 
 	<insert id="insertFile">
-		INSERT INTO File (boardId, fileName)
-		VALUES(#{boardId}, #{fileName});
+	<if test="mod == 'productpage'">
+	
+		INSERT INTO File (boardId, fileName, whichboard)
+		VALUES(#{boardId}, #{fileName}, 0);
+	</if>
+	<if test="mod == 'reviewpage'">
+	INSERT INTO File (boardId, fileName, whichboard)
+		VALUES(#{boardId}, #{fileName}, 1);
+	
+	</if>
+	
 	</insert>
 
 	<update id="updateProduct">
@@ -247,12 +257,15 @@ LIMIT #{pageToStart},#{onePageAllBoardNum}
 	<select id="getprodutlist"
 		resultType="com.project.market.domain.ProductDto">
 
-		SELECT
-		id as productId,
-		name as productName,
-		Stock as stock,
-		price as price
-		FROM Product;
+		         SELECT Product.id as productId ,
+				Product.name as productName,
+				Product.Stock as stock,
+                Product.price as price,
+               
+                File.fileName,
+                ProductPage.id as boardId
+         FROM Product LEFT JOIN ProductPage on ProductPage.productId = Product.id
+					  LEFT JOIN File on File.boardid = ProductPage.id
 
 	</select>
 
@@ -262,10 +275,25 @@ LIMIT #{pageToStart},#{onePageAllBoardNum}
 
 	</delete>
 
+
+	<delete id="deleteCart">
+	
+	DELETE FROM Cart
+        WHERE productId = #{productId};
+	
+	</delete>
+
 	<delete id="DeleteProduct">
 		DELETE FROM Product
 		WHERE id = #{productId};
 
+	</delete>
+	
+	<delete id="deleteBoardfordeleteProduct">
+	DELETE FROM ProductPage
+		WHERE productId = #{productId};
+	
+	
 	</delete>
 
 	<update id="modifyProduct">
@@ -297,6 +325,20 @@ LIMIT #{pageToStart},#{onePageAllBoardNum}
                                
 	
 	</select>
-
+	<select id="getcat0" resultType="int">
+	SELECT ProductCode0 from ProductCode WHERE Productid = #{productId}  ;
+	
+	</select>
+	
+	<select id="getCategoryName" resultType="string">
+	SELECT * FROM Product_middle_class WHERE id =#{category};
+	
+	</select>
+	
+	<select id="searchProductName" resultType="int">
+	SELECT count(id) FROM Product 
+        WHERE name LIKE #{name} 
+	
+	</select>
 
 </mapper>
