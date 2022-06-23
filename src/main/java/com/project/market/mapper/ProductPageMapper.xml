@@ -257,12 +257,15 @@ LIMIT #{pageToStart},#{onePageAllBoardNum}
 	<select id="getprodutlist"
 		resultType="com.project.market.domain.ProductDto">
 
-		SELECT
-		id as productId,
-		name as productName,
-		Stock as stock,
-		price as price
-		FROM Product;
+		         SELECT Product.id as productId ,
+				Product.name as productName,
+				Product.Stock as stock,
+                Product.price as price,
+               
+                File.fileName,
+                ProductPage.id as boardId
+         FROM Product LEFT JOIN ProductPage on ProductPage.productId = Product.id
+					  LEFT JOIN File on File.boardid = ProductPage.id
 
 	</select>
 
