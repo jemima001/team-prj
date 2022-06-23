@@ -2,10 +2,15 @@ package com.project.market.controller;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.Random;
 
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,6 +31,9 @@ public class MemberController {
 	@Autowired
 	private MemberService service;
 
+	@Autowired
+	private JavaMailSender mailSender;
+	
 	@GetMapping("login")
 	public void loginPage() {
 
@@ -323,8 +331,9 @@ public class MemberController {
 			Principal principal,
 			HttpServletRequest req) {
 		
-//		System.out.println(dto.getEmail());
-//		System.out.println(dto.getId());
+//		System.out.println(id);
+		System.out.println(dto.getEmail());
+		System.out.println(dto.getId());
 		String prvemail = dto.getEmail();
 //		System.out.println(prvemail);
 		if(service.hasMemberId(dto.getId())) {
@@ -348,5 +357,79 @@ public class MemberController {
 		service.approveOrder(orderId);
 		
 		return "redirect:/member/adminorderlist";
+	}
+	
+	@GetMapping("checkEmailById")
+	@ResponseBody
+	public String emailCheckById(String id, String email) {
+//		System.out.println(id);
+//		System.out.println(email);
+		
+		boolean exist = service.hasMemberEmailById(id,email);
+
+		if (exist) {
+			return "ok";
+		} else {
+			return "notOk";
+		}
+	}
+	
+	
+	
+	@GetMapping("confirmEmail")
+	@ResponseBody
+	public String confirmEmail(HttpSession session, Model model, String email) {
+		boolean exist = false;
+		
+		System.out.println(email);
+		
+		Random random = new Random();
+		int pass = random.nextInt(999999)+100000;
+		System.out.println(pass);
+		
+		String subject = "인증번호 전송";
+		String content = "인증번호 : " + pass;
+		String from = "hjh564@naver.com";
+		String to = email;
+		
+		try {
+			MimeMessage mail = mailSender.createMimeMessage();
+			MimeMessageHelper mailHelper = new MimeMessageHelper(mail,true,"UTF-8");
+			
+			mailHelper.setFrom(from);
+			mailHelper.setTo(to);
+			mailHelper.setSubject(subject);
+			mailHelper.setText(content, true);
+			
+			mailSender.send(mail);
+			exist = true;
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		session.setAttribute("pass", pass);
+		if (exist) {
+			return "ok";
+		} else {
+			return "notOk";
+		}
+	}
+	
+	@GetMapping("confirmNumber")
+	@ResponseBody
+	public String confirmNumber(HttpSession session, Model model, int number) {
+		boolean exist = false;
+		System.out.println(number);
+		int pass = (Integer)session.getAttribute("pass");
+		System.out.println(pass);
+		
+		if(number == pass) {
+			exist = true;
+		}
+		
+		if (exist) {
+			return "ok";
+		} else {
+			return "notOk";
+		}
 	}
 }

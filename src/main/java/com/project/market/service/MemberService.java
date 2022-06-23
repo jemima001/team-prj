@@ -180,4 +180,8 @@ public class MemberService {
 		mapper.orderApprove(orderId);
 	}
 
+	public boolean hasMemberEmailById(String id, String email) {
+		return mapper.countEmailById(id, email) > 0;
+	}
+
 }
