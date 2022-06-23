@@ -66,7 +66,9 @@ public class NoticeController {
 	@GetMapping("get")
 	public void get(int id, Model model) {
 		NoticeDto dto = service.getNoticeById(id);
+		List<NoticeDto> notice = service.getNoticeByNaxtIdAndBackId(id);
 		model.addAttribute("notice", dto);
+		model.addAttribute("noticeList", notice);
 	}
 	
 	@PostMapping("modify")

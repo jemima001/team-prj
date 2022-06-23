@@ -11,6 +11,12 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css" integrity="sha512-GQGU0fMMi238uA+a/bdWJfpUGKUkBdgfFdgBm72SUQ6BeyWjoY/ton0tEjH+OSH9iP4Dfh+7HM0I9f5eR0L/4w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
 
+<style type="text/css">
+#form1 {
+  border-width: 0.3ex 0ex 0.3ex;;
+  border-style: solid;
+}
+</style>
 <script>
 $(document).ready(function() {
 	$("#edit-button1").click(function() {
@@ -45,16 +51,16 @@ $(document).ready(function() {
 <div class="container">
 	<div class="row">
 		<div class="col">
-			<div class="navbar">
+			<div class="navbar pt-5 pb-4">
 				<ul class="nav me-auto">
 					<li>
 						<h2 style="display: inline;">공지사항</h2>
 					</li>
 				</ul>
 				<sec:authorize access="hasRole('ADMIN')">
-						<button id="edit-button1" class="btn btn-secondary">
-							<i class="fa-solid fa-pen-to-square"></i>
-						</button>
+					<button id="edit-button1" class="btn btn-secondary">
+						<i class="fa-solid fa-pen-to-square"></i>
+					</button>
 				</sec:authorize>
 			</div>
 			<c:if test="${not empty message }">
@@ -63,7 +69,7 @@ $(document).ready(function() {
 			<form id="form1" action="${appRoot }/notice/modify" method="post" enctype="multipart/form-data">
 				<input type="hidden" name="id" value="${notice.id }" />
 				<div>
-					<label class="form-label" for="input1">제목</label>
+					<label class="form-label mt-2" for="input1">제목</label>
 					<input class="form-control mb-3" type="text" name="title" required
 						id="input1" value="${notice.title }" readonly />
 				</div>
@@ -71,7 +77,7 @@ $(document).ready(function() {
 				<div>
 					<label class="form-label" for="textarea1">본문</label>
 					<textarea class="form-control mb-3" name="body" id="textarea1"
-						cols="30" rows="10" readonly>${notice.body }</textarea>
+						cols="30" rows="10" readonly style="border:none;">${notice.body }</textarea>
 				</div>
 				
 				<div>
@@ -85,10 +91,65 @@ $(document).ready(function() {
 					<input class="form-control mb-3" type="datetime-local"
 						value="${notice.inserted }" readonly />
 				</div>
-
-				<button id="modify-submit1" class="btn btn-primary d-none">수정</button>
-				<button id="delete-submit1" class="btn btn-danger d-none">삭제</button>
+				<div class="mb-2">
+					<button id="modify-submit1" class="btn btn-primary d-none">수정</button>
+					<button id="delete-submit1" class="btn btn-danger d-none">삭제</button>
+				</div>
 			</form>
+			<table class="table">
+				<tbody>
+					<c:forEach items="${noticeList }" var="nbid">
+						<tr>
+							<c:if test="${nbid.id < notice.id }">
+								<c:url value="/notice/get" var="getUrl">
+									<c:param name="id" value="${nbid.id }"></c:param>
+								</c:url>
+								<td>
+									<i class="fa-solid fa-angle-down"></i>
+								</td>
+								<td>
+									${nbid.id }
+								</td>
+								<td>
+									<span class="badge bg-danger">[공지]</span>
+									<a href="${getUrl }">
+										${nbid.title }
+									</a>
+								</td>
+								<td>
+									${nbid.writerNickName }
+								</td>
+								<td>
+									${nbid.prettyInserted }
+								</td>
+							</c:if>
+							<c:if test="${nbid.id > notice.id }">
+								<c:url value="/notice/get" var="getUrl">
+									<c:param name="id" value="${nbid.id }"></c:param>
+								</c:url>
+								<td>
+									<i class="fa-solid fa-angle-up"></i>
+								</td>
+								<td>
+									${nbid.id }
+								</td>
+								<td>
+									<span class="badge bg-danger">[공지]</span>
+									<a href="${getUrl }">
+										${nbid.title }
+									</a>
+								</td>
+								<td>
+									${nbid.writerNickName }
+								</td>
+								<td>
+									${nbid.prettyInserted }
+								</td>
+							</c:if>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
 		</div>	
 	</div>
 </div>		
