@@ -71,6 +71,10 @@ public interface MemberMapper {
 
 	int countEmailById(@Param("id")String id, @Param("email")String email);
 
+	void countStockProduct(@Param("bookCount")int bookCount, @Param("productName")String productName);
+
+	int getStockByProduct(String productName);
+
 }
 
 

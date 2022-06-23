@@ -212,6 +212,17 @@
 		FROM Member
 		WHERE email = #{email} and id = #{id}
 	</select>
+	
+	<update id="countStockProduct">
+		UPDATE Product
+		SET Stock = Stock - #{bookCount}
+		WHERE name = #{productName}
+	</update>
+	
+	<select id="getStockByProduct" resultType="int">
+		SELECT Stock FROM Product
+		WHERE name = #{productName}
+	</select>
 </mapper>
 
 

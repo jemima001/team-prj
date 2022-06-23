@@ -353,8 +353,21 @@ public class MemberController {
 	}
 	
 	@PostMapping("orderApprove")
-	public String approveOrder(int orderId) {
-		service.approveOrder(orderId);
+	public String approveOrder(RedirectAttributes rttr, int orderId, int bookCount, String productName) {
+		System.out.println(bookCount);
+		System.out.println(productName);
+		
+		int Stock = service.getStock(productName);
+		System.out.println(Stock);
+		if((Stock - bookCount)<0) {
+			rttr.addFlashAttribute("message", "재고가 부족합니다.");
+			return "redirect:/member/adminorderlist";
+		} else {
+			service.approveOrder(orderId);
+			service.countStock(bookCount, productName);
+		}
+		
+		
 		
 		return "redirect:/member/adminorderlist";
 	}

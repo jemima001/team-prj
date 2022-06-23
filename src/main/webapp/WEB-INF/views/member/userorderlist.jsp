@@ -62,6 +62,9 @@
 								<c:if test="${order.orderState ne '0' }">
 									<a href="${appRoot }/product/get?id=${order.boardId }" class="btn btn-outline-success" role="button">리뷰 쓰기</a>
 								</c:if>
+								<c:if test="${order.orderState eq '0' }">
+									<a href="${appRoot }/product/get?id=${order.boardId }" class="btn btn-outline-success" role="button">주문 취소</a>
+								</c:if>
 							</td>
 						</tr>
 					</c:forEach>
