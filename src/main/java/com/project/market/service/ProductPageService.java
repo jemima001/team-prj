@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.project.market.domain.PaginationDto;
 import com.project.market.domain.ProductDto;
 import com.project.market.domain.ProductPageDto;
+import com.project.market.domain.ReviewpageDto;
 import com.project.market.mapper.ProductPageMapper;
 
 import software.amazon.awssdk.core.sync.RequestBody;
@@ -54,6 +55,7 @@ public class ProductPageService {
 	}
 
 	private void addFiles(int string, MultipartFile[] files, String mod) {
+		System.out.println("리뷰페이지 사진 저장0");
 		if (files != null && mod.equals("productpage")) {
 			for (MultipartFile file : files) {
 				if (file.getSize() > 0) {
@@ -64,6 +66,7 @@ public class ProductPageService {
 				}
 			}
 		} else if (files != null && mod.equals("reviewpage")) {
+			System.out.println("리뷰페이지 사진 저장1");
 			for (MultipartFile file : files) {
 				if (file.getSize() > 0) {
 
@@ -95,7 +98,7 @@ public class ProductPageService {
 				throw new RuntimeException();
 			}
 		} else if (mod.equals("reviewpage")) {
-
+				System.out.println("리뷰페이지 사진 저장2");
 			String key = "project/reviewpage/" + string + "/" + file.getOriginalFilename();
 
 			PutObjectRequest putObjectRequest = PutObjectRequest.builder().acl(ObjectCannedACL.PUBLIC_READ)
@@ -318,6 +321,15 @@ public class ProductPageService {
 		int ok = mapper.searchProductName(name);
 		System.out.println("같은 상품 이름 갯수"+ok);
 		return ok>0;
+	}
+
+	public boolean addReviewPage(ReviewpageDto dto, MultipartFile[] files) {
+		System.out.println("리뷰페이지 서비스 dto :"+dto);
+		System.out.println("리뷰페이지 서비스 files :"+files);
+		int ok = mapper.AddreviewPage(dto);
+		
+		addFiles(dto.getId(), files, "reviewpage");
+		return false;
 	} 
 
 }

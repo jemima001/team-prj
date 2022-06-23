@@ -271,8 +271,20 @@ public class ProductPageController {
 	@PostMapping("reviewpage")
 		public String addreviewpage(ReviewpageDto dto,
 									MultipartFile[] file,
-									RedirectAttributes rttr) { 
+									RedirectAttributes rttr,
+									Principal principal) { 
+		System.out.println("리뷰 컨트롤러 dto :"+dto);
+		System.out.println("리뷰 컨트롤러 file :"+file);
+		if (file != null) {
+			List<String> fileList = new ArrayList<String>();
+			for (MultipartFile f : file) {
+				fileList.add(f.getOriginalFilename());
+			}
+			dto.setFileList(fileList);
+		}
 		
+		dto.setMemberId(principal.getName());
+		boolean ok = service.addReviewPage(dto, file);
 		
 		System.out.println("리뷰페이지 추가  :"+ dto);
 		return "redirect:/product/productlist";

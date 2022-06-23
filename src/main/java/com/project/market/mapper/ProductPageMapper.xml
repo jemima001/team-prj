@@ -340,5 +340,11 @@ LIMIT #{pageToStart},#{onePageAllBoardNum}
         WHERE name LIKE #{name} 
 	
 	</select>
-
+	
+	
+	<insert id="AddreviewPage" useGeneratedKeys="true" keyColumn="id" keyProperty="id" >
+		INSERT INTO ReviewPage(reviewtitle,reviewbody,memberId,productpage)
+		VALUES(#{reviewTitle},#{reviewBody},#{memberId},#{productPage})
+	
+	</insert>
 </mapper>

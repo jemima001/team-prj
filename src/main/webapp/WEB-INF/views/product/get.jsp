@@ -28,7 +28,7 @@
 	crossorigin="anonymous"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
-		$("#reviewform").hide();
+		// $("#reviewform").hide();
 		
 		$("#purchaseButton").click(function() {
 			//let purchaseNum = $("#PurchaseInput").val();
@@ -81,7 +81,7 @@
 		</c:url>
 	</sec:authorize>
 	<my:pagenavbar></my:pagenavbar>
-	<my:searchnavbar></my:searchnavbar>
+
 	<div class="row justify-content-center">
 		<div class="col-12 col-lg-10">
 			<div class="container">
@@ -148,14 +148,16 @@
 					</div>
 				
 				
-					<div class="justify-content-center col" >
+					<div class="justify-content-center  d-flex align-items-center col" style="border-style: solid; border: 3px;" >
+					<div class="row"></div>
+					<div class="row m-5">
 						<!-- -------------------------------------------------------------------------- -->
 						<h1>${productboard.boardTitle }</h1>
 						<!-- 장바구니 Form 보내는 값 설정 하는곳 -->
 						<form id="cartForm" action="${cartUrl }" method="get"></form>
 
 						<!-- 구매 페이지로 값 보내는 곳 -->
-						<form action="${appRoot }/order/info" method="get">
+						<form id="buybutton" action="${appRoot }/order/info" method="get">
 							<!-- 여기에 구매 페이지 주소 입력 -->
 							<!-- 구매 버튼 연결 주소 입력 -->
 							<!-- 판매글 아이디(29번째줄), 상품 아이디(30번쨰줄) , 상품 구매수량(28번째줄) 넘어 갑니다. -->
@@ -179,18 +181,19 @@
 								<input id="productId" type="hidden"
 									value="${productboard.productId }" name="productId" />
 
-								<button class="buttonTobuy btn btn-outline-success">구매 버튼</button>
 							</c:if>
 						</form>
 						<c:if test="${product.stock != 0 }">
 							<sec:authorize access="hasRole('USER')">
-								<button class="buttonTobuy btn btn-outline-success" id="purchaseButton"><i class="bi bi-cart-plus"></i>장바구니</button>
+								<button class="buttonTobuy btn btn-outline-success" id="purchaseButton">장바구니</button>
 							</sec:authorize>
+							<button class="buttonTobuy btn btn-outline-success" form="buybutton">구매</button>
 						</c:if>
 						<c:if test="${product.stock == 0 }">
 						품절되었습니다.
 					
 					</c:if>
+					</div>
 
 
 
@@ -220,7 +223,10 @@
 			</div>
 
 			<!-- --------------------------------------------------- -->
-<p>상세 정보 : ${productboard.boardBody }</p>
+			
+<h2 class="justify-content-center">상세 정보</h2>
+
+<P> : ${productboard.boardBody }</p>
 
 
 
@@ -238,7 +244,8 @@
 			</sec:authorize>
 			
 			<div id="reviewform">
-			<form action="">
+			<form action="${appRoot }/product/reviewpage" method="post" enctype="multipart/form-data">
+			<input type="hidden" name ="productPage" value="${productboard.id }" />
 				리뷰 제목
 				<br />
 				<input type="text" name="reviewTitle" />
@@ -251,8 +258,42 @@
 				<br />
 				<input type="file" name="file" multiple="multiple" />
 				<br />
+				
+				<input type="submit" value="작성" />
 
 			</form>
+
+	<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">First</th>
+      <th scope="col">Last</th>
+      <th scope="col">Handle</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td>@mdo</td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Jacob</td>
+      <td>Thornton</td>
+      <td>@fat</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td colspan="2">Larry the Bird</td>
+      <td>@twitter</td>
+    </tr>
+  </tbody>
+</table>
+
+
 
 			</div>
 		</div>
