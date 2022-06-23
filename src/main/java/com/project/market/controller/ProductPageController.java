@@ -233,7 +233,7 @@ public class ProductPageController {
 	public void getlist(Model model) {
 		
 	 List<ProductDto> list = service.Productlist();
-	// System.out.println(list);
+	 System.out.println("상품 리스트"+list);
 	 model.addAttribute("productlist", list);
 		
 	}

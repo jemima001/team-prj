@@ -88,16 +88,7 @@
 										for="btnradio${category.product_Middle_Class}">${category.middle_Name }</label>
 								</div>
 							</c:forEach> --%>
-						</div>
-					</div>
-					<%-- <div class="me-auto">
-						<span class="input-group ">
-							<input type="text" placeholder="검색어를 입력해 주세요"
-								aria-describedby="button-addon2" name="search">
-							<button class="btn btn-outline-secondary" id="button-addon2">검색</button>
-						</span>
-					</div>
-					<div>
+							<div>
 						<span>
 							<sec:authorize access="hasRole('ADMIN')">
 								<a href="${appRoot }/product/add" class="btn btn-outline-dark">게시물
@@ -107,13 +98,24 @@
 							</sec:authorize>
 						</span>
 					</div>
-			</div>
-
+							
+						</div>
+					</div>
+					<%-- <div class="me-auto">
+						<span class="input-group ">
+							<input type="text" placeholder="검색어를 입력해 주세요"
+								aria-describedby="button-addon2" name="search">
+							<button class="btn btn-outline-secondary" id="button-addon2">검색</button>
+						</span>
+					</div> --%>
+					 
+			<!-- </div>
+ -->
 
 			<!-- <input type="text" name="search" />
-			<input type="submit" value="검색"> -->
+			<input type="submit" value="검색">
 		</form>
-	</div> --%>
+	</div> -->
 	<div class="row justify-content-center">
 		<div class="col-12 col-lg-10">
 

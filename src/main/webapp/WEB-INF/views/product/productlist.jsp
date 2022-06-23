@@ -27,24 +27,22 @@
 <title>Insert title here</title>
 <script>
 	$(document).ready(function() {
-		$(".modalModifyButton").click(function(){
+		$(".modalModifyButton").click(function() {
 			let pid = $(this).attr("data-prodid");
-			let newStock = $("#stockInput"+pid).val();
-			let newprice = $("#priceInput"+pid).val();
-			
-			
-			$("#modifyStockInput"+pid).val(newStock);
-			$("#modifyPriceInput"+pid).val(newprice);
+			let newStock = $("#stockInput" + pid).val();
+			let newprice = $("#priceInput" + pid).val();
+
+			$("#modifyStockInput" + pid).val(newStock);
+			$("#modifyPriceInput" + pid).val(newprice);
 			/* console.log(newStock);
 			console.log(newprice);
 			console.log(pid);
 			console.log("-------------------");
 			console.log($("#modifyStockInput"+pid).val()); */
-			
-		})	
-		
-		
-			});
+
+		})
+
+	});
 </script>
 </head>
 <body>
@@ -53,7 +51,10 @@
 	<table class="table">
 		<thead>
 			<tr class="table-dark">
-				<th><i class="fa-solid fa-hashtag"></i></th>
+				<th>
+					<i class="fa-solid fa-hashtag"></i>
+				</th>
+				<th>상품 사진</th>
 				<th>상품 이름</th>
 				<th>남은수량</th>
 				<th>가격</th>
@@ -65,40 +66,74 @@
 				<tr>
 					<td>${product.productId }</td>
 					<td>
-							<input class="form-control" id="productIdInput${product.productId }" type="text" value="${product.productName }" readonly="readonly" />
+						<c:if test="${product.fileName !=null}">
+
+							<img style="width: 200px" class="img-thumbnail"
+								src="${imageUrl }/project/${product.boardId }/${product.fileName}" alt="" />
+						</c:if>
+						<c:if test="${product.fileName ==null}">
+
+							<img style="width: 200px" class="img-thumbnail"
+								src="${imageUrl }/project/noImage/noImage.png" alt="" />
+						</c:if>
 					</td>
 					<td>
-						 <input class="form-control" id="stockInput${product.productId }" type="text" value="${product.stock }" /> 
+						<p>${product.productName }</p>
+						<%-- <input class="form-control" id="productIdInput${product.productId }" type="text" value="${product.productName }" readonly="readonly" /> --%>
 					</td>
 					<td>
-						<input class="form-control" id="priceInput${product.productId }" type="text" value="${product.price }" />
+						<input class="form-control" id="stockInput${product.productId }"
+							type="text" value="${product.stock }" />
 					</td>
 					<td>
-						<div class="btn-group" role="group" aria-label="Basic outlined example">
-							<button class="btn btn-outline-success modalModifyButton"  
-							data-bs-toggle="modal" data-bs-target="#modalModify${product.productId }" data-prodid="${product.productId }">수정</button>
-							<button class="btn btn-outline-danger" 
-							data-bs-toggle="modal" data-bs-target="#modalRemove${product.productId }">삭제</button>
+						<input class="form-control" id="priceInput${product.productId }"
+							type="text" value="${product.price }" />
+					</td>
+					<td>
+						<div class="btn-group" role="group"
+							aria-label="Basic outlined example">
+							<button class="btn btn-outline-success modalModifyButton"
+								data-bs-toggle="modal"
+								data-bs-target="#modalModify${product.productId }"
+								data-prodid="${product.productId }">수정</button>
+							<button class="btn btn-outline-danger" data-bs-toggle="modal"
+								data-bs-target="#modalRemove${product.productId }">삭제</button>
+								
+							<c:if test="${product.boardId == 0}">
 							<form action="${appRoot }/product/add">
-								<input type="hidden" value="${product.productId }" name="productId" />
-								<input type="hidden" value = "${product.productName }" name ="productName" />
-								<input type="hidden" value="${product.stock }"  name = "stock"/>
-								<input type="hidden" value="${product.price }"  name = "price"/>
-								<input type="hidden" value="addFormProductList" name = "mod" />
-								<button class="btn btn-outline-success modalModifyButton" >판매글 등록</button>
-							
+								<input type="hidden" value="${product.productId }"
+									name="productId" />
+								<input type="hidden" value="${product.productName }"
+									name="productName" />
+								<input type="hidden" value="${product.stock }" name="stock" />
+								<input type="hidden" value="${product.price }" name="price" />
+								<input type="hidden" value="addFormProductList" name="mod" />
+								<button class="btn btn-outline-success modalModifyButton">판매글
+									등록</button>
+
 							</form>
+							</c:if>	
+							<c:if test="${product.boardId != 0}">
+								<form action="${appRoot }/product/modif">
+									<input type="hidden" name="id"  value ="${product.boardId }"/>
+									<button class="btn btn-outline-success modalModifyButton">판매글 수정</button>
+								
+								
+								</form>
+							
+							</c:if>
+							
 						</div>
 					</td>
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
-	
+
 	<c:forEach items="${productlist }" var="product">
 		<!-- 삭제 확인 Modal -->
-		<div class="modal fade" id="modalRemove${product.productId }" tabindex="-1"
-			aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal fade" id="modalRemove${product.productId }"
+			tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -106,25 +141,28 @@
 						<button type="button" class="btn-close" data-bs-dismiss="modal"
 							aria-label="Close"></button>
 					</div>
-					
-					<form id="form${product.productId }" action="${appRoot }/product/productRemove" method="post">
-						<input type="hidden" value="${product.productId }" name="productId" />
+
+					<form id="form${product.productId }"
+						action="${appRoot }/product/productRemove" method="post">
+						<input type="hidden" value="${product.productId }"
+							name="productId" />
 					</form>
-					
+
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary"
 							data-bs-dismiss="modal">Close</button>
-						<button form="form${product.productId }" type="submit" class="btn btn-danger">삭제</button>
+						<button form="form${product.productId }" type="submit"
+							class="btn btn-danger">삭제</button>
 					</div>
 				</div>
 			</div>
 		</div>
 	</c:forEach>
-	
+
 	<c:forEach items="${productlist }" var="product">
 		<!-- 수정 확인 Modal -->
-		<div class="modal fade" id="modalModify${product.productId }" tabindex="-1"
-			aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal fade" id="modalModify${product.productId }"
+			tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -132,26 +170,31 @@
 						<button type="button" class="btn-close" data-bs-dismiss="modal"
 							aria-label="Close"></button>
 					</div>
-					
-					<form id="modifyForm${product.productId }" action="${appRoot }/product/productModify" method="post">
-						<input type="hidden" value="${product.productId }" name="productId" />
-						<input id="modifyStockInput${product.productId }" type="hidden" value="" name = "stock" />
-						<input id="modifyPriceInput${product.productId }" type="hidden" value="" name = "price" />
+
+					<form id="modifyForm${product.productId }"
+						action="${appRoot }/product/productModify" method="post">
+						<input type="hidden" value="${product.productId }"
+							name="productId" />
+						<input id="modifyStockInput${product.productId }" type="hidden"
+							value="" name="stock" />
+						<input id="modifyPriceInput${product.productId }" type="hidden"
+							value="" name="price" />
 					</form>
-					
+
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary"
 							data-bs-dismiss="modal">Close</button>
-						<button form="modifyForm${product.productId }" type="submit" class="btn btn-danger">수정</button>
-						
+						<button form="modifyForm${product.productId }" type="submit"
+							class="btn btn-danger">수정</button>
+
 					</div>
 				</div>
 			</div>
 		</div>
 	</c:forEach>
-	
-	
-	
+
+
+
 
 </body>
 </html>
