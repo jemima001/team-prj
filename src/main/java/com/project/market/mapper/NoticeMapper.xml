@@ -35,6 +35,18 @@
 	WHERE n.id = #{id}
 	</select>
 	
+	<select id="selectNoticeByNaxtIdAndBackId" resultType="com.project.market.domain.NoticeDto">
+	SELECT n.id, 
+	   n.title, 
+	   n.body, 
+	   n.inserted, 
+	   m.id memberId,
+	   m.nickName writerNickName
+	FROM Notice n JOIN Member m ON n.memberId = m.id
+	WHERE n.id = #{id} + 1 OR n.id = #{id} - 1
+	ORDER BY n.id DESC;
+	</select>
+	
 	<update id="updateBoard">
 	UPDATE Notice
 	SET title = #{title},

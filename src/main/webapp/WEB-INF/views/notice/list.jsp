@@ -23,7 +23,7 @@
 			<table class="table">
 				<thead>
 					<tr>
-						<th>분류</th>
+						<th>번호</th>
 						<th>제목</th>
 						<th>닉네임</th>
 						<th><i class="fa-solid fa-calendar"></i></th>
@@ -33,14 +33,14 @@
 					<c:forEach items="${noticeList }" var="notice">
 							<tr>
 								<td>
-									<p style="color: red;">[공지]</p>
+									${notice.id }
 								</td>
 													
 								<td>
 									<c:url value="/notice/get" var="getUrl">
 										<c:param name="id" value="${notice.id }"></c:param>
 									</c:url>
-									
+									<span class="badge bg-danger">[공지]</span>
 									<a href="${getUrl }">
 										<c:out value="${notice.title }" />
 									</a>
