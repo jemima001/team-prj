@@ -62,6 +62,10 @@
 		<!-- <form action="/market/product/list"> -->
 			<div class="d-flex">
 			<ul class="nav justify-content-center">
+					<li class="nav-item">
+						<a class="nav-link "
+							href="${approot }/market/product/list?cat=0&search=">전체상품</a>
+					</li>
 				<c:forEach items="${ m_category}" var="category">
 					<li class="nav-item">
 						<a class="nav-link "
