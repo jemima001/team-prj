@@ -62,6 +62,7 @@ public interface ProductPageMapper {
 	int deleteBoardfordeleteProduct(ProductDto dto);
 	int searchProductName(String name);
 	int AddreviewPage(ReviewpageDto dto);
+	List<ReviewpageDto> getReviewList(int id);
 
 	
 

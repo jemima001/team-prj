@@ -29,7 +29,7 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		// $("#reviewform").hide();
-		
+
 		$("#purchaseButton").click(function() {
 			//let purchaseNum = $("#PurchaseInput").val();
 			//$("#purchaseInput").val(purchaseNum);
@@ -86,9 +86,9 @@
 		<div class="col-12 col-lg-10">
 			<div class="container">
 				<div class="row">
-				
-				
-				<div id="carouselExampleControls" class="carousel slide col"
+
+
+					<div id="carouselExampleControls" class="carousel slide col"
 						data-bs-ride="carousel" style="float: left;">
 
 						<div class="carousel-inner">
@@ -146,54 +146,57 @@
 							<span class="visually-hidden">Next</span>
 						</button>
 					</div>
-				
-				
-					<div class="justify-content-center  d-flex align-items-center col" style="border-style: solid; border: 3px;" >
-					<div class="row"></div>
-					<div class="row m-5">
-						<!-- -------------------------------------------------------------------------- -->
-						<h1>${productboard.boardTitle }</h1>
-						<!-- 장바구니 Form 보내는 값 설정 하는곳 -->
-						<form id="cartForm" action="${cartUrl }" method="get"></form>
-
-						<!-- 구매 페이지로 값 보내는 곳 -->
-						<form id="buybutton" action="${appRoot }/order/info" method="get">
-							<!-- 여기에 구매 페이지 주소 입력 -->
-							<!-- 구매 버튼 연결 주소 입력 -->
-							<!-- 판매글 아이디(29번째줄), 상품 아이디(30번쨰줄) , 상품 구매수량(28번째줄) 넘어 갑니다. -->
-							<!-- 상품페이지 dto에 구매 수량 Purchase 추가 했습니다.(아직 사용한 곳은 없음...) -->
-							
-							<!-- -------------------------------------------------------- -->
 
 
+					<div class="justify-content-center  d-flex align-items-center col"
+						style="border-style: solid; border: 3px;">
+						<div class="row"></div>
+						<div class="row m-5">
+							<!-- -------------------------------------------------------------------------- -->
+							<h1>${productboard.boardTitle }</h1>
+							<!-- 장바구니 Form 보내는 값 설정 하는곳 -->
+							<form id="cartForm" action="${cartUrl }" method="get"></form>
+
+							<!-- 구매 페이지로 값 보내는 곳 -->
+							<form id="buybutton" action="${appRoot }/order/info" method="get">
+								<!-- 여기에 구매 페이지 주소 입력 -->
+								<!-- 구매 버튼 연결 주소 입력 -->
+								<!-- 판매글 아이디(29번째줄), 상품 아이디(30번쨰줄) , 상품 구매수량(28번째줄) 넘어 갑니다. -->
+								<!-- 상품페이지 dto에 구매 수량 Purchase 추가 했습니다.(아직 사용한 곳은 없음...) -->
+
+								<!-- -------------------------------------------------------- -->
 
 
-							<!-- --------------------------------------------------- -->
 
-							
-							<p>판매 상품 : ${product.productName }</p>
-							<h2>${product.price } 원</h2>
 
-							<c:if test="${product.stock != 0 }">
+								<!-- --------------------------------------------------- -->
+
+
+								<p>판매 상품 : ${product.productName }</p>
+								<h2>${product.price }원</h2>
+
+								<c:if test="${product.stock != 0 }">
 					구매 수량
 					<input id="PurchaseInput" type="number" name="Purchase" value="1" />
-								<input type="hidden" value="${productboard.id }" name="id" />
-								<input id="productId" type="hidden"
-									value="${productboard.productId }" name="productId" />
+									<input type="hidden" value="${productboard.id }" name="id" />
+									<input id="productId" type="hidden"
+										value="${productboard.productId }" name="productId" />
 
+								</c:if>
+							</form>
+							<c:if test="${product.stock != 0 }">
+								<sec:authorize access="hasRole('USER')">
+									<button class="buttonTobuy btn btn-outline-success"
+										id="purchaseButton">장바구니</button>
+								</sec:authorize>
+								<button class="buttonTobuy btn btn-outline-success"
+									form="buybutton">구매</button>
 							</c:if>
-						</form>
-						<c:if test="${product.stock != 0 }">
-							<sec:authorize access="hasRole('USER')">
-								<button class="buttonTobuy btn btn-outline-success" id="purchaseButton">장바구니</button>
-							</sec:authorize>
-							<button class="buttonTobuy btn btn-outline-success" form="buybutton">구매</button>
-						</c:if>
-						<c:if test="${product.stock == 0 }">
+							<c:if test="${product.stock == 0 }">
 						품절되었습니다.
 					
 					</c:if>
-					</div>
+						</div>
 
 
 
@@ -218,15 +221,15 @@
 					<!-- -------------------------------------------------------- 사진 사용  -->
 
 
-					
+
 				</div>
 			</div>
 
 			<!-- --------------------------------------------------- -->
-			
-<h2 class="justify-content-center">상세 정보</h2>
 
-<P> : ${productboard.boardBody }</p>
+			<h2 class="justify-content-center">상세 정보</h2>
+
+			<P>: ${productboard.boardBody }</p>
 
 
 
@@ -242,56 +245,65 @@
 					<input type="submit" value="판매글 수정" />
 				</form>
 			</sec:authorize>
-			
+
 			<div id="reviewform">
-			<form action="${appRoot }/product/reviewpage" method="post" enctype="multipart/form-data">
-			<input type="hidden" name ="productPage" value="${productboard.id }" />
-				리뷰 제목
-				<br />
-				<input type="text" name="reviewTitle" />
-				<br />
-				리뷰 내용
-				<br />
-				<input type="text" name="reviewBody" />
-				<br />
-				사진 추가
-				<br />
-				<input type="file" name="file" multiple="multiple" />
-				<br />
-				
-				<input type="submit" value="작성" />
+				<form action="${appRoot }/product/reviewpage" method="post"
+					enctype="multipart/form-data">
+					<input type="hidden" name="productPage" value="${productboard.id }" />
+					리뷰 제목
+					<br />
+					<input type="text" name="reviewTitle" />
+					<br />
+					리뷰 내용
+					<br />
+					<textarea rows="10" cols="30" name="reviewBody"></textarea>
+					<br />
+					사진 추가
+					<br />
+					<input type="file" name="file" multiple="multiple" />
+					<br />
 
-			</form>
+					<input type="submit" value="작성" />
 
-	<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td colspan="2">Larry the Bird</td>
-      <td>@twitter</td>
-    </tr>
-  </tbody>
-</table>
+				</form>
+
+				<table class="table">
+					<thead>
+						<tr>
+							<th scope="col">id</th>
+							<th scope="col">사진</th>
+							<th scope="col">리뷰 제목</th>
+							<th scope="col">리뷰 내용</th>
+
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="${reviewList }" var="reviewlist">
+
+							<tr>
+								<th scope="row">${reviewlist.id }</th>
+								<td>
+
+									<c:if test="${reviewlist.revireFileName !=null}">
+
+										<img style="width: 200px" class="img-thumbnail"
+											src="${imageUrl }/project/reviewpage/${reviewlist.id }/${reviewlist.revireFileName}"
+											alt="" />
+									</c:if>
+									<c:if test="${reviewlist.revireFileName ==null}">
+
+										<img style="width: 200px" class="img-thumbnail"
+											src="${imageUrl }/project/noImage/noImage.png" alt="" />
+									</c:if>
+
+								</td>
+								<td>${reviewlist.reviewTitle }</td>
+								<td>${reviewlist.reviewBody }</td>
+							</tr>
+
+						</c:forEach>
+					</tbody>
+				</table>
 
 
 

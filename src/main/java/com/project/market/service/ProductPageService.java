@@ -330,6 +330,11 @@ public class ProductPageService {
 		
 		addFiles(dto.getId(), files, "reviewpage");
 		return false;
+	}
+
+	public List<ReviewpageDto> getReviewList(int id) {
+		
+		return mapper.getReviewList(id);
 	} 
 
 }
