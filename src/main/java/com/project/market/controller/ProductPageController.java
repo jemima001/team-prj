@@ -64,9 +64,21 @@ public class ProductPageController {
 	public String addproduct_in(ProductPageDto dto, 
 								ProductDto productdto, 
 								MultipartFile[] file,
-								RedirectAttributes rttr) {
+								RedirectAttributes rttr,
+								String mod) {
+		int productId;
 		/*	System.out.println("중분류 확인 :"+productdto);*/
-		int productId = service.addProduct(productdto);
+		System.out.println("add 컨트롤러");
+		if(mod.equals("addnew")) {
+			
+			//System.out.println("add 컨트롤러  if addnew속");
+		 productId = service.addProduct(productdto);
+		} else {
+			//System.out.println("add 컨트롤러 else 속");
+		 productId = productdto.getProductId();
+			//System.out.println("productId :"+productId);
+			
+		}
 		/*System.out.println("제품 판매글 로 받은 데이터");
 		System.out.println("판매글 제목 :"+dto.getBoardTitle());
 		System.out.println("판매글 내용 :"+dto.getBoardBody());
@@ -174,19 +186,22 @@ public class ProductPageController {
 	}
 	
 	@PostMapping("deleteBoard")
-	public String deleteBoard(ProductPageDto dto, RedirectAttributes rttr) {
+	public String deleteBoard(ProductPageDto dto, 
+							  RedirectAttributes rttr,
+							  @RequestParam(name = "deleteImg", required = false) ArrayList<String> deleteImg) {
 		//System.out.println(dto.getId());
-		 boolean ok = service.deleteBoard(dto);
+		
+		 boolean ok = service.deleteBoard(dto,deleteImg);
 		System.out.println(ok);
 		// if 사용해서 메시지 출력 해야함
 		
-		if(ok) {
-			rttr.addFlashAttribute("message", "판매글이 삭제되었습니다.");
-		} else {
-			rttr.addFlashAttribute("message_error", "판매글 삭제에 실패하였습니다.");
-		}
-		 return "redirect:/product/list";
-		
+			if(ok) {
+				rttr.addFlashAttribute("message", "판매글이 삭제되었습니다.");
+			} else {
+				rttr.addFlashAttribute("message_error", "판매글 삭제에 실패하였습니다.");
+			}
+			 return "redirect:/product/list";
+			
 	}
 
 	@GetMapping("modif")
@@ -294,5 +309,9 @@ public class ProductPageController {
 		
 		return "redirect:/product/get?id="+dto.getProductPage();
 	}
-	
+	@PostMapping("deleteReview")
+	public String deletReview(ReviewpageDto dto) {
+		service.deleteReview(dto.getId());
+		return "redirect:/product/get?id="+dto.getProductPage();
+	}
 }

@@ -69,7 +69,8 @@
 						<c:if test="${product.fileName !=null}">
 
 							<img style="width: 200px" class="img-thumbnail"
-								src="${imageUrl }/project/${product.boardId }/${product.fileName}" alt="" />
+								src="${imageUrl }/project/${product.boardId }/${product.fileName}"
+								alt="" />
 						</c:if>
 						<c:if test="${product.fileName ==null}">
 
@@ -98,31 +99,32 @@
 								data-prodid="${product.productId }">수정</button>
 							<button class="btn btn-outline-danger" data-bs-toggle="modal"
 								data-bs-target="#modalRemove${product.productId }">삭제</button>
-								
-							<c:if test="${product.boardId == 0}">
-							<form action="${appRoot }/product/add">
-								<input type="hidden" value="${product.productId }"
-									name="productId" />
-								<input type="hidden" value="${product.productName }"
-									name="productName" />
-								<input type="hidden" value="${product.stock }" name="stock" />
-								<input type="hidden" value="${product.price }" name="price" />
-								<input type="hidden" value="addFormProductList" name="mod" />
-								<button class="btn btn-outline-success modalModifyButton">판매글
-									등록</button>
 
-							</form>
-							</c:if>	
+							<c:if test="${product.boardId == 0}">
+								<form action="${appRoot }/product/add">
+									<input type="hidden" value="${product.productId }"
+										name="productId" />
+									<input type="hidden" value="${product.productName }"
+										name="productName" />
+									<input type="hidden" value="${product.stock }" name="stock" />
+									<input type="hidden" value="${product.price }" name="price" />
+									<input type="hidden" value="addFormProductList" name="mod" />
+									<button class="btn btn-outline-success modalModifyButton">판매글
+										등록</button>
+
+								</form>
+							</c:if>
 							<c:if test="${product.boardId != 0}">
 								<form action="${appRoot }/product/modif">
-									<input type="hidden" name="id"  value ="${product.boardId }"/>
-									<button class="btn btn-outline-success modalModifyButton">판매글 수정</button>
-								
-								
+									<input type="hidden" name="id" value="${product.boardId }" />
+									<button class="btn btn-outline-success modalModifyButton">판매글
+										수정</button>
+
+
 								</form>
-							
+
 							</c:if>
-							
+
 						</div>
 					</td>
 				</tr>
