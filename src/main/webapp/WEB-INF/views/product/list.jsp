@@ -64,12 +64,12 @@
 			<ul class="nav justify-content-center">
 					<li class="nav-item">
 						<a class="nav-link "
-							href="${approot }/market/product/list?cat=0&search=">전체상품</a>
+							href="${approot }/market/product/list?cat=0&search=" style="color: black;">전체상품</a>
 					</li>
 				<c:forEach items="${ m_category}" var="category">
 					<li class="nav-item">
 						<a class="nav-link "
-							href="${approot }/market/product/list?cat=${category.product_Middle_Class}&search=">${category.middle_Name }</a>
+							href="${approot }/market/product/list?cat=${category.product_Middle_Class}&search=" style="color: black;">${category.middle_Name }</a>
 					</li>
 				</c:forEach>
 			</ul>
@@ -142,7 +142,7 @@
 			
 			</c:if>
 
-			<table class="table">
+			<table class="table align-middle">
 				<thead>
 					<tr class="table-borderless">
 						<th>
