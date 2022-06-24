@@ -116,14 +116,16 @@ public class ProductPageController {
 	}
 	
 	@GetMapping("get")
-	public void getProductPage(int id, Model model) {
+	public void getProductPage(int id, Model model, Principal principal) {
 		ProductPageDto Board = service.getProductBoard(id);
 		ProductDto product = service.getproduct(Board.getProductId());
 		List<String> fileList = service.getfileList(id);
+		List<ReviewpageDto> reviewList = service.getReviewList(id);
+		System.out.println("reviewList :"+reviewList);
 		Board.setFileList(fileList);
 		
 		//System.out.println("fileList:" +fileList);
-		
+		model.addAttribute("reviewList",reviewList);
 		model.addAttribute("productboard", Board);
 		model.addAttribute("product", product);
 	}
@@ -272,9 +274,10 @@ public class ProductPageController {
 		public String addreviewpage(ReviewpageDto dto,
 									MultipartFile[] file,
 									RedirectAttributes rttr,
-									Principal principal) { 
-		System.out.println("리뷰 컨트롤러 dto :"+dto);
-		System.out.println("리뷰 컨트롤러 file :"+file);
+									Principal principal
+									) { 
+		//System.out.println("리뷰 컨트롤러 dto :"+dto);
+		//System.out.println("리뷰 컨트롤러 file :"+file);
 		if (file != null) {
 			List<String> fileList = new ArrayList<String>();
 			for (MultipartFile f : file) {
@@ -286,8 +289,10 @@ public class ProductPageController {
 		dto.setMemberId(principal.getName());
 		boolean ok = service.addReviewPage(dto, file);
 		
+		
 		System.out.println("리뷰페이지 추가  :"+ dto);
-		return "redirect:/product/productlist";
+		
+		return "redirect:/product/get?id="+dto.getProductPage();
 	}
 	
 }

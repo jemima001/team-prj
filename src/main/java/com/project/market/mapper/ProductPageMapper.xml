@@ -347,4 +347,16 @@ LIMIT #{pageToStart},#{onePageAllBoardNum}
 		VALUES(#{reviewTitle},#{reviewBody},#{memberId},#{productPage})
 	
 	</insert>
+	
+	<select id="getReviewList" resultType = "com.project.market.domain.ReviewpageDto">
+	
+	         SELECT ReviewPage.id as Id,
+				ReviewPage.productpage as productPage,
+                ReviewPage.reviewtitle as reviewTitle,
+                ReviewPage.reviewbody as reviewBody,
+                File.fileName as revireFileName,
+                ReviewPage.memberId
+         FROM ReviewPage JOIN File ON File.boardid = ReviewPage.id
+        WHERE productpage =#{id} AND WhichBoard =1;
+	</select>
 </mapper>

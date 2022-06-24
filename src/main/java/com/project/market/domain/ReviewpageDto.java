@@ -10,7 +10,7 @@ public class ReviewpageDto {
 	private int productPage;
 	private String reviewTitle;
 	private String reviewBody;
-	private String pevirefile;
+	private String revireFileName;
 	private List<String> fileList;
 	private String memberId;
 }
