@@ -236,6 +236,7 @@
 			<sec:authorize access="hasRole('ADMIN')">
 				<form action="/market/product/deleteBoard" method="post">
 					<input type="hidden" name="id" value="${productboard.id }" />
+					<input type="hidden" name="deleteImg" value="${productboard.fileList }"/>
 					<input type="submit" value="판매글 삭제" />
 				</form>
 
@@ -274,6 +275,7 @@
 							<th scope="col">사진</th>
 							<th scope="col">리뷰 제목</th>
 							<th scope="col">리뷰 내용</th>
+							<th>리뷰 삭제 버튼</th>
 
 						</tr>
 					</thead>
@@ -299,6 +301,11 @@
 								</td>
 								<td>${reviewlist.reviewTitle }</td>
 								<td>${reviewlist.reviewBody }</td>
+								<td><form action="${appRoot }/product/deleteReview">
+								<input type="hidden" value ="${productboard.id }" name ="productPage"/>
+								<input type="hidden" value="${reviewlist.id} " name ="id"/>	
+								<input type="submit"  value ="리뷰 삭제"/>
+								</form></td>
 							</tr>
 
 						</c:forEach>

@@ -359,4 +359,10 @@ LIMIT #{pageToStart},#{onePageAllBoardNum}
          FROM ReviewPage JOIN File ON File.boardid = ReviewPage.id
         WHERE productpage =#{id} AND WhichBoard =1;
 	</select>
+	
+	<select id="getBoardFile" resultType = "string">
+	 SELECT fileName FROM File
+        WHERE boardId =102 and WhichBoard =0;
+	
+	</select>
 </mapper>

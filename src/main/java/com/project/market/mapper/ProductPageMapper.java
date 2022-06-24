@@ -63,6 +63,7 @@ public interface ProductPageMapper {
 	int searchProductName(String name);
 	int AddreviewPage(ReviewpageDto dto);
 	List<ReviewpageDto> getReviewList(int id);
+	List<String> getBoardFile(ProductPageDto dto);
 
 	
 

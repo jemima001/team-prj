@@ -197,7 +197,17 @@ public class ProductPageService {
 		return paginationDto;
 		
 	}*/
-	public boolean deleteBoard(ProductPageDto dto) {
+	@Transactional
+	public boolean deleteBoard(ProductPageDto dto, ArrayList<String> deleteImg) {
+		System.out.println(dto.getFileList());
+		
+		List<String> fileList = mapper.getBoardFile(dto);
+		
+		for(String file :  fileList) {
+			System.out.println("file : "+file);
+			System.out.println("삭제 테스트");
+			deleterFromAwsS3(dto.getId(),file ,"productPage" );
+		}
 		int ok = mapper.deleteBoard(dto);
 
 		return ok == 1;
@@ -221,7 +231,7 @@ public class ProductPageService {
 
 		if (deleteImg != null) {
 			for (String fileName : deleteImg) {
-				deleterFromAwsS3(pageDto.getId(), fileName);
+				deleterFromAwsS3(pageDto.getId(), fileName, "productPage" );
 				mapper.deleteImg(pageDto.getId(), fileName);
 			}
 		}
@@ -236,8 +246,17 @@ public class ProductPageService {
 		return cun == 1;
 	}
 
-	private void deleterFromAwsS3(int id, String fileName) {
-		String key = "board/" + id + "/" + fileName;
+	private void deleterFromAwsS3(int id, String fileName, String mod) {
+		String key = null;
+		
+		if(mod.equals("productPage")) {
+			System.out.println("삭제 테스트 !!!");
+			System.out.println("id :"+id);
+			System.out.println("fileName :"+fileName);
+		 key = "project/" + id + "/" + fileName;
+		} else if(mod.equals("reviewpage")) {
+		 key = "project/reviewpage/" + id + "/" + fileName;
+		}
 		DeleteObjectRequest deleteObjectRequest = DeleteObjectRequest.builder().bucket(bucketName).key(key).build();
 		s3.deleteObject(deleteObjectRequest);
 	}
@@ -335,6 +354,11 @@ public class ProductPageService {
 	public List<ReviewpageDto> getReviewList(int id) {
 		
 		return mapper.getReviewList(id);
+	}
+
+	public void deleteReview(int id) {
+		// TODO Auto-generated method stub
+		
 	} 
 
 }

@@ -32,7 +32,7 @@
 		let classOk = false;
 		let stockOk = false;
 		let priceOk = false;
-
+		
 		const enableSubmit = function() {
 			if (nameOk && classOk && stockOk && priceOk) {
 				$("#addSubmit").removeAttr("disabled");
@@ -40,7 +40,12 @@
 				$("#addSubmit").attr("disabled", "");
 			}
 		}
-
+		
+		let mod = $("#formAddforList").attr("data_mod");
+		console.log(mod);
+		
+		
+		enableSubmit();
 		$("#low_class_categorylist_get").hide();
 		$("#addProductNameMessage").hide();
 		$("#addProductClassMessage").hide();
@@ -137,7 +142,28 @@
 			}
 
 		})
-
+		
+		if (mod == "forProdutList" ){
+			console.log("if문 실행");
+			 nameOk = true;
+			 classOk = true;
+			 stockOk = true;
+			 priceOk = true;
+			
+			console.log("if문 안"+nameOk);
+			console.log("if문 안"+classOk);
+			console.log("if문 안"+stockOk);
+			console.log("if문 안"+priceOk);
+			
+		}
+		console.log(nameOk);
+		console.log(classOk);
+		console.log(stockOk);
+		console.log(priceOk);
+		enableSubmit();
+		
+		
+		
 		/* $('#middle_class').on('change', function() {
 			const data = {
 					Product_Middle_Class : $("#middle_class").val()
@@ -220,8 +246,10 @@
 
 				<h1></h1>
 				<!-- <form action="/market/product/product_add" method="post"> -->
-				<form action="/market/product/add" method="post"
-					enctype="multipart/form-data">
+				<form id="formAddforList" action="/market/product/add" method="post"
+					enctype="multipart/form-data" data_mod="forProdutList">
+					
+					
 					<!-- 상품명 :
 					<br />
 					<input type="text" name="productname">
@@ -230,6 +258,8 @@
 
 					<!-- 상품 리스트에서 상품 페이지 추가  -->
 					<c:if test="${addMod == 'addFormProductList' }">
+					<input type="hidden" name="mod" value ="notnew"/>
+					<input type="hidden" name="productId" value="${product.productId }"/>
 						<div class="mb-3">
 							<label for="productName" class="form-label">선택된 상품</label>
 							<input type="text" name="productName" class="form-control"
@@ -282,6 +312,7 @@
 					<!----------------------- 상품과 상품 페이지 동시에 등록 ------------------>
 					<c:if test="${addMod == 'add' }">
 						<div class="mb-3">
+						<input type="hidden" name="mod" value="newadd" />
 							<label for="productName" class="form-label">상품명</label>
 							<span>
 								<div id="addProductNameMessage" class="alert alert-danger"
