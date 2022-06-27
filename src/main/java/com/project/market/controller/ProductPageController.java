@@ -309,9 +309,10 @@ public class ProductPageController {
 		
 		return "redirect:/product/get?id="+dto.getProductPage();
 	}
-	@PostMapping("deleteReview")
+	@PostMapping("deleteReview") 
 	public String deletReview(ReviewpageDto dto) {
-		service.deleteReview(dto.getId());
+		System.out.println("deleteReview dto :"+dto);
+		boolean ok =service.deleteReview(dto);
 		return "redirect:/product/get?id="+dto.getProductPage();
 	}
 }

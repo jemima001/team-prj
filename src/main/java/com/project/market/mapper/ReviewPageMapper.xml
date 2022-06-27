@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.market.mapper.ReviewPageMapper">
+
+<insert id="insertFile">
+	<if test="mod == 'productpage'">
+	
+		INSERT INTO File (boardId, fileName, whichboard)
+		VALUES(#{boardId}, #{fileName}, 0);
+	</if>
+	<if test="mod == 'reviewpage'">
+	INSERT INTO File (boardId, fileName, whichboard)
+		VALUES(#{boardId}, #{fileName}, 1);
+	
+	</if>
+	
+	</insert>
+
+<insert id="AddreviewPage" useGeneratedKeys="true" keyColumn="id" keyProperty="id" >
+		INSERT INTO ReviewPage(reviewtitle,reviewbody,memberId,productpage)
+		VALUES(#{reviewTitle},#{reviewBody},#{memberId},#{productPage})
+	
+	</insert>
+	
+	<select id="getreview" resultType="com.project.market.domain.ReviewpageDto">
+		SELECT ReviewPage.id as Id,
+				ReviewPage.productpage as productPage,
+                ReviewPage.reviewtitle as reviewTitle,
+                ReviewPage.reviewbody as reviewBody,
+                ReviewPage.memberId
+         FROM ReviewPage LEFT JOIN File ON File.boardid = ReviewPage.id
+        WHERE ReviewPage.id = #{id} 
+         GROUP BY Id;
+	
+	</select>
+	
+	<select id="getreviewFile" resultType="string">
+	
+	 SELECT fileName FROM File
+        WHERE boardid = #{id} and WhichBoard =1;
+	
+	</select>
+
+<delete id="deleteImg">
+ DELETE FROM File
+        WHERE boardId =#{id} and fileName =#{fileName};
+
+</delete>
+
+<update id="updatareview">
+UPDATE ReviewPage 
+        SET reviewtitle = #{reviewTitle},
+			reviewbody = #{reviewBody}
+		WHERE id = #{id};
+
+</update>
+</mapper>
