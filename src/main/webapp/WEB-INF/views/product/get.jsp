@@ -236,7 +236,8 @@
 			<sec:authorize access="hasRole('ADMIN')">
 				<form action="/market/product/deleteBoard" method="post">
 					<input type="hidden" name="id" value="${productboard.id }" />
-					<input type="hidden" name="deleteImg" value="${productboard.fileList }"/>
+					<input type="hidden" name="deleteImg"
+						value="${productboard.fileList }" />
 					<input type="submit" value="판매글 삭제" />
 				</form>
 
@@ -247,8 +248,14 @@
 				</form>
 			</sec:authorize>
 
+			<form action="${appRoot }/review/add" method="get">
+				<input type="hidden" name="prodctPageid" value="${productboard.id }" />
+				<input type="submit" value="리뷰 작성" />
+
+			</form>
+
 			<div id="reviewform">
-				<form action="${appRoot }/product/reviewpage" method="post"
+				<%-- <form action="${appRoot }/product/reviewpage" method="post"
 					enctype="multipart/form-data">
 					<input type="hidden" name="productPage" value="${productboard.id }" />
 					리뷰 제목
@@ -266,7 +273,7 @@
 
 					<input type="submit" value="작성" />
 
-				</form>
+				</form> --%>
 
 				<table class="table">
 					<thead>
@@ -301,11 +308,21 @@
 								</td>
 								<td>${reviewlist.reviewTitle }</td>
 								<td>${reviewlist.reviewBody }</td>
-								<td><form action="${appRoot }/product/deleteReview">
-								<input type="hidden" value ="${productboard.id }" name ="productPage"/>
-								<input type="hidden" value="${reviewlist.id} " name ="id"/>	
-								<input type="submit"  value ="리뷰 삭제"/>
-								</form></td>
+								<td>
+									<form action="${appRoot }/product/deleteReview" method="post">
+										<input type="hidden" value="${productboard.id }"
+											name="productPage" />
+										<input type="hidden" value="${reviewlist.id} " name="id" />
+										<input type="submit" value="리뷰 삭제" />
+									</form>
+
+									<form action="${appRoot }/review/modif" method="get">
+										<input type="hidden" name="id"
+											value="${reviewlist.id} " />
+										<input type="submit" value="리뷰 수정" />
+
+									</form>
+								</td>
 							</tr>
 
 						</c:forEach>

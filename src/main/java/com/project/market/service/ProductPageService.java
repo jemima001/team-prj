@@ -355,10 +355,18 @@ public class ProductPageService {
 		
 		return mapper.getReviewList(id);
 	}
-
-	public void deleteReview(int id) {
-		// TODO Auto-generated method stub
+@Transactional
+	public boolean deleteReview(ReviewpageDto dto) {
+		int id = dto.getId();
+		System.out.println("deleteReview in getId(); :"+dto.getId());
+		List<String> replyFileList = mapper.replyViewFileList(id);
+		for(String file : replyFileList) {
+			
+		deleterFromAwsS3(id, file, "reviewpage");
+		}
 		
+		int ok =mapper.deleteReview(dto.getId());
+		return ok ==1;
 	} 
 
 }

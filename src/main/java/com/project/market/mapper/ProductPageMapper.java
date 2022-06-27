@@ -64,6 +64,9 @@ public interface ProductPageMapper {
 	int AddreviewPage(ReviewpageDto dto);
 	List<ReviewpageDto> getReviewList(int id);
 	List<String> getBoardFile(ProductPageDto dto);
+	List<String> replyViewFileList(int id);
+	
+	int deleteReview(int id);
 
 	
 

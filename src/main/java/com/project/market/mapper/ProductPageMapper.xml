@@ -356,13 +356,25 @@ LIMIT #{pageToStart},#{onePageAllBoardNum}
                 ReviewPage.reviewbody as reviewBody,
                 File.fileName as revireFileName,
                 ReviewPage.memberId
-         FROM ReviewPage JOIN File ON File.boardid = ReviewPage.id
-        WHERE productpage =#{id} AND WhichBoard =1;
+         FROM ReviewPage LEFT JOIN File ON File.boardid = ReviewPage.id
+        WHERE productpage =#{id} 
+         GROUP BY ReviewPage.id;
 	</select>
 	
 	<select id="getBoardFile" resultType = "string">
 	 SELECT fileName FROM File
-        WHERE boardId =102 and WhichBoard =0;
+        WHERE boardId =#{id} and WhichBoard =0;
 	
 	</select>
+	
+	<select id="replyViewFileList" resultType ="string">
+	 SELECT fileName FROM File
+        WHERE boardId =#{id} and WhichBoard =1;
+	</select>
+	
+	<delete id="deleteReview">
+	DELETE FROM ReviewPage
+        WHERE id = #{id};
+	
+	</delete>
 </mapper>

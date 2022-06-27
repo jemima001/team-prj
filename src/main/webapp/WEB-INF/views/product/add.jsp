@@ -312,7 +312,7 @@
 					<!----------------------- 상품과 상품 페이지 동시에 등록 ------------------>
 					<c:if test="${addMod == 'add' }">
 						<div class="mb-3">
-						<input type="hidden" name="mod" value="newadd" />
+						<input type="hidden" name="mod" value="addnew" />
 							<label for="productName" class="form-label">상품명</label>
 							<span>
 								<div id="addProductNameMessage" class="alert alert-danger"
