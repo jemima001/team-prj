@@ -56,4 +56,7 @@ UPDATE ReviewPage
 		WHERE id = #{id};
 
 </update>
+
+
+
 </mapper>

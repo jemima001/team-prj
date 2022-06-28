@@ -275,7 +275,8 @@
 					<input type="submit" value="작성" />
 
 				</form> --%>
-
+				 
+				
 				<table class="table">
 					<thead>
 						<tr>
@@ -322,10 +323,13 @@
 												<div class="accordion-body">
 													id :${reviewlist.id } ${reviewlist.reviewBody }
 													<br />
-													<img style="width: 200px" class="img-thumbnail"
-														src="${imageUrl }/project/reviewpage/${reviewlist.id }/${reviewlist.revireFileName}"
+											 		 <c:forEach items="${reviewfileList.fileList}" var="reviewfile">
+													
+													 <img style="width: 200px" class="img-thumbnail"
+														src="${imageUrl }/project/reviewpage/${reviewfileList.id }/${reviewfile}"
 														alt="" />
 
+													</c:forEach>
 													<form action="${appRoot }/product/deleteReview"
 														method="post">
 														<input type="hidden" value="${productboard.id }"

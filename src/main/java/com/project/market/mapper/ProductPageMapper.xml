@@ -377,4 +377,23 @@ LIMIT #{pageToStart},#{onePageAllBoardNum}
         WHERE id = #{id};
 	
 	</delete>
+	
+	
+	<select id="getreviewfile" resultMap="reviewPageMapper">
+ SELECT File.boardId as Id,
+		fileName as fileList
+         FROM ReviewPage JOIN File ON ReviewPage.id = File.boardId
+         WHERE productpage = #{Id} AND WhichBoard =1;
+
+</select>
+
+<resultMap id="fileListMapper" type="String">
+    <result property="fileList" column="fileList" 
+            javaType="String" />
+</resultMap>
+
+<resultMap type="com.project.market.domain.ReviewpageDto" id="reviewPageMapper" >
+    <id column="Id" property="id" />
+    <collection resultMap="fileListMapper" property="fileList" />
+</resultMap>
 </mapper>
