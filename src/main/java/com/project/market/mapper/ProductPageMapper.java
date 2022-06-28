@@ -67,7 +67,7 @@ public interface ProductPageMapper {
 	List<String> replyViewFileList(int id);
 	
 	int deleteReview(int id);
-	List<ReviewpageDto> getreviewfile(int id);
+//	List<ReviewpageDto> getreviewfile(int id);
 
 	
 

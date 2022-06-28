@@ -323,10 +323,10 @@
 												<div class="accordion-body">
 													id :${reviewlist.id } ${reviewlist.reviewBody }
 													<br />
-											 		 <c:forEach items="${reviewfileList.fileList}" var="reviewfile">
+											 		 <c:forEach items="${reviewlist.fileList}" var="reviewfile">
 													
 													 <img style="width: 200px" class="img-thumbnail"
-														src="${imageUrl }/project/reviewpage/${reviewfileList.id }/${reviewfile}"
+														src="${imageUrl }/project/reviewpage/${reviewlist.id }/${reviewfile}"
 														alt="" />
 
 													</c:forEach>
