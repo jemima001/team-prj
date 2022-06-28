@@ -16,12 +16,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.project.market.domain.AddressDto;
 import com.project.market.domain.MemberDto;
 import com.project.market.domain.OrderDto;
+import com.project.market.domain.PaginationDto;
 import com.project.market.domain.ProductDto;
 import com.project.market.service.MemberService;
 
@@ -254,19 +256,45 @@ public class MemberController {
 	@GetMapping("adminorderlist")
 	public void getOrderlist(
 			Model model,
+			@RequestParam(name = "page", defaultValue ="1") int page,
 			RedirectAttributes rttr
 			) {
 
-		List<OrderDto> list = service.listAllOrder();
+		List<OrderDto> allList = service.listAllOrder();
+		
+		PaginationDto paginationDto = new PaginationDto();
+		paginationDto.setPage(page);
+		paginationDto.setAllPageNum(((allList.size()-1)/10) + 1);
+		paginationDto.setEndPage((allList.size()-1)/10 + 1);
+		int limitNumber = (page-1) * 10;
+		
+		List<OrderDto> list = service.listPageOrder(limitNumber);
+		
+		PaginationDto outPaginationDto = paginationDto;
+		
 		model.addAttribute("orderList", list);
+		model.addAttribute("paginationDto", outPaginationDto);
 		
 	}
 
 	@GetMapping("userorderlist")
-	public void getUserOrderlist(Model model, String id) {
-//		System.out.println(id);
-		List<OrderDto> list = service.listUserOrder(id);
+	public void getUserOrderlist(Model model, @RequestParam(name = "page", defaultValue ="1") int page, String id, Principal principal) {
+		
+		List<OrderDto> allList = service.listUserOrder(id);
+		
+		PaginationDto paginationDto = new PaginationDto();
+		paginationDto.setPage(page);
+		paginationDto.setAllPageNum(((allList.size()-1)/10) + 1);
+		paginationDto.setEndPage((allList.size()-1)/10 + 1);
+		int limitNumber = (page-1) * 10;
+		
+		List<OrderDto> list = service.listUserPageOrder(id,limitNumber);
+		
+		PaginationDto outPaginationDto = paginationDto;
+		
 		model.addAttribute("orderList", list);
+		model.addAttribute("paginationDto", outPaginationDto);
+		model.addAttribute("id", principal.getName());
 
 	}
 

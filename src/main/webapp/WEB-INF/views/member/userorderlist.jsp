@@ -72,6 +72,17 @@
 			</table>
 		</div>
 	</div>
+	<div class="row justify-content-center">
+		<nav aria-label="Page navigation example">
+			<ul class="pagination">
+				<c:forEach var="i" begin="1" end="${paginationDto.endPage}">
+					<li	class="page-item  ${paginationDto.nowpage == i ? 'active' : '' }">
+						<a class="page-link" href="${appRoot }/member/userorderlist?id=${id }&page=${i}">${i}</a>
+					</li>
+				</c:forEach>
+			</ul>
+		</nav>
+	</div>
 </div>
 </body>
 </html>
