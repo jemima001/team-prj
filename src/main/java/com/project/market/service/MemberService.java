@@ -192,4 +192,12 @@ public class MemberService {
 		return mapper.getStockByProduct(productName);
 	}
 
+	public List<OrderDto> listPageOrder(int limitNumber) {
+		return mapper.selectPageOrder(limitNumber);
+	}
+
+	public List<OrderDto> listUserPageOrder(String id, int limitNumber) {
+		return mapper.selectUserPageOrder(id, limitNumber);
+	}
+
 }
