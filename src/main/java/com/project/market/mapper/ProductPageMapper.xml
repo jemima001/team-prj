@@ -348,17 +348,18 @@ LIMIT #{pageToStart},#{onePageAllBoardNum}
 	
 	</insert>
 	
-	<select id="getReviewList" resultType = "com.project.market.domain.ReviewpageDto">
+	<select id="getReviewList" resultMap="reviewPageMapper">
 	
-	         SELECT ReviewPage.id as Id,
+	         SELECT 
+	         ReviewPage.id as Id,
 				ReviewPage.productpage as productPage,
                 ReviewPage.reviewtitle as reviewTitle,
                 ReviewPage.reviewbody as reviewBody,
                 File.fileName as revireFileName,
+                File.fileName as fileList,
                 ReviewPage.memberId
          FROM ReviewPage LEFT JOIN File ON File.boardid = ReviewPage.id
-        WHERE productpage =#{id} 
-         GROUP BY ReviewPage.id;
+        WHERE productpage =#{id}
 	</select>
 	
 	<select id="getBoardFile" resultType = "string">
@@ -377,4 +378,28 @@ LIMIT #{pageToStart},#{onePageAllBoardNum}
         WHERE id = #{id};
 	
 	</delete>
+	
+	
+<!-- 	<select id="getreviewfile" resultMap="reviewPageMapper">
+ SELECT File.boardId as Id,
+		fileName as fileList
+         FROM ReviewPage JOIN File ON ReviewPage.id = File.boardId
+         WHERE productpage = #{Id} AND WhichBoard =1;
+
+</select> -->
+
+<resultMap id="fileListMapper" type="String">
+    <result property="fileList" column="fileList" 
+            javaType="String" />
+</resultMap>
+
+<resultMap type="com.project.market.domain.ReviewpageDto" id="reviewPageMapper" >
+    <id column="Id" property="id" />
+    <result column="productPage" property="productPage" />
+    <result column="reviewTitle" property="reviewTitle" />
+    <result column="reviewBody" property="reviewBody" />
+    <result column="revireFileName" property="revireFileName" />
+    <result column="memberId" property="memberId" />
+    <collection resultMap="fileListMapper" property="fileList" />
+</resultMap>
 </mapper>

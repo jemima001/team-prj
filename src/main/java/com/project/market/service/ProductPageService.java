@@ -367,6 +367,13 @@ public class ProductPageService {
 		
 		int ok =mapper.deleteReview(dto.getId());
 		return ok ==1;
-	} 
+	}
+
+//public List<ReviewpageDto> getreviewfile(int id) {
+//	List<ReviewpageDto> list = mapper.getreviewfile(id);
+//	System.out.println("getreviewfile");
+//	System.out.println(list);
+//	return list;
+//} 
 
 }

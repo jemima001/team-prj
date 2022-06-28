@@ -177,7 +177,8 @@
 
 								<c:if test="${product.stock != 0 }">
 					구매 수량
-					<input id="PurchaseInput" type="number" name="Purchase" value="1" />
+					<input id="PurchaseInput" type="number" name="Purchase" value="1"
+										min="0" />
 									<input type="hidden" value="${productboard.id }" name="id" />
 									<input id="productId" type="hidden"
 										value="${productboard.productId }" name="productId" />
@@ -274,15 +275,14 @@
 					<input type="submit" value="작성" />
 
 				</form> --%>
-
+				 
+				
 				<table class="table">
 					<thead>
 						<tr>
-							<th scope="col">id</th>
-							<th scope="col">사진</th>
-							<th scope="col">리뷰 제목</th>
-							<th scope="col">리뷰 내용</th>
-							<th>리뷰 삭제 버튼</th>
+
+							<th scope="col">리뷰 </th>
+
 
 						</tr>
 					</thead>
@@ -290,8 +290,8 @@
 						<c:forEach items="${reviewList }" var="reviewlist">
 
 							<tr>
-								<th scope="row">${reviewlist.id }</th>
-								<td>
+
+								<%-- <td>
 
 									<c:if test="${reviewlist.revireFileName !=null}">
 
@@ -304,24 +304,50 @@
 										<img style="width: 200px" class="img-thumbnail"
 											src="${imageUrl }/project/noImage/noImage.png" alt="" />
 									</c:if>
-
-								</td>
-								<td>${reviewlist.reviewTitle }</td>
-								<td>${reviewlist.reviewBody }</td>
+								</td> --%>
 								<td>
-									<form action="${appRoot }/product/deleteReview" method="post">
-										<input type="hidden" value="${productboard.id }"
-											name="productPage" />
-										<input type="hidden" value="${reviewlist.id} " name="id" />
-										<input type="submit" value="리뷰 삭제" />
-									</form>
 
-									<form action="${appRoot }/review/modif" method="get">
-										<input type="hidden" name="id"
-											value="${reviewlist.id} " />
-										<input type="submit" value="리뷰 수정" />
+									<div class="accordion" id="accordionPanelsStayOpenExample">
+										<div class="accordion-item">
+											<h2 class="accordion-header" id="panelsStayOpen-headingOne">
+												<button class="accordion-button" type="button"
+													data-bs-toggle="collapse"
+													data-bs-target="#panelsStayOpen-collapseOne"
+													aria-expanded="true"
+													aria-controls="panelsStayOpen-collapseOne">
+													${reviewlist.reviewTitle }</button>
+											</h2>
+											<div id="panelsStayOpen-collapseOne"
+												class="accordion-collapse collapse show"
+												aria-labelledby="panelsStayOpen-headingOne">
+												<div class="accordion-body">
+													id :${reviewlist.id } ${reviewlist.reviewBody }
+													<br />
+											 		 <c:forEach items="${reviewlist.fileList}" var="reviewfile">
+													
+													 <img style="width: 200px" class="img-thumbnail"
+														src="${imageUrl }/project/reviewpage/${reviewlist.id }/${reviewfile}"
+														alt="" />
 
-									</form>
+													</c:forEach>
+													<form action="${appRoot }/product/deleteReview"
+														method="post">
+														<input type="hidden" value="${productboard.id }"
+															name="productPage" />
+														<input type="hidden" value="${reviewlist.id} " name="id" />
+														<input type="submit" value="리뷰 삭제" />
+													</form>
+
+													<form action="${appRoot }/review/modif" method="get">
+														<input type="hidden" name="id" value="${reviewlist.id} " />
+														<input type="submit" value="리뷰 수정" />
+
+													</form>
+												</div>
+											</div>
+										</div>
+									</div>
+
 								</td>
 							</tr>
 

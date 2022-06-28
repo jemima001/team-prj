@@ -133,13 +133,17 @@ public class ProductPageController {
 		ProductDto product = service.getproduct(Board.getProductId());
 		List<String> fileList = service.getfileList(id);
 		List<ReviewpageDto> reviewList = service.getReviewList(id);
+//		List<ReviewpageDto> reviewfileList = service.getreviewfile(id);
+		
 		System.out.println("reviewList :"+reviewList);
+//		System.out.println("reviewfileList :"+reviewfileList);
 		Board.setFileList(fileList);
 		
 		//System.out.println("fileList:" +fileList);
 		model.addAttribute("reviewList",reviewList);
 		model.addAttribute("productboard", Board);
 		model.addAttribute("product", product);
+//		model.addAttribute("reviewfileList",reviewfileList);
 	}
 	
 	@ResponseBody

@@ -21,7 +21,7 @@ public interface ReviewPageMapper {
 	void deleteImg(@Param("id")int id,@Param("fileName") String fileName);
 
 	void updatareview(ReviewpageDto dto);
-
+	
 	
 
 }
