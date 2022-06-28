@@ -75,6 +75,10 @@ public interface MemberMapper {
 
 	int getStockByProduct(String productName);
 
+	List<OrderDto> selectPageOrder(int limitNumber);
+
+	List<OrderDto> selectUserPageOrder(@Param("id")String id, @Param("limitNumber")int limitNumber);
+
 }
 
 

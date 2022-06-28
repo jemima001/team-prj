@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -79,6 +80,18 @@
 			</table>
 		</div>
 	</div>
+			<div class="row justify-content-center">
+				<nav aria-label="Page navigation example">
+				  <ul class="pagination">
+				    <c:forEach var="i" begin="1" end="${paginationDto.endPage}">
+						<li
+							class="page-item  ${paginationDto.nowpage == i ? 'active' : '' }">
+							<a class="page-link" href="${appRoot }/member/adminorderlist?page=${i}">${i}</a>
+						</li>
+					</c:forEach>
+				  </ul>
+				</nav>
+			</div>
 </div>
 </body>
 </html>
