@@ -133,6 +133,8 @@ public class ProductPageController {
 		ProductDto product = service.getproduct(Board.getProductId());
 		List<String> fileList = service.getfileList(id);
 		List<ReviewpageDto> reviewList = service.getReviewList(id);
+		boolean buyThis = service.getBuyThis(id,principal.getName());
+		System.out.println(buyThis);
 //		List<ReviewpageDto> reviewfileList = service.getreviewfile(id);
 		
 		System.out.println("reviewList :"+reviewList);

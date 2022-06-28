@@ -68,6 +68,7 @@ public interface ProductPageMapper {
 	
 	int deleteReview(int id);
 //	List<ReviewpageDto> getreviewfile(int id);
+	int whoBuyThis(@Param("id")int id,@Param("name") String name);
 
 	
 

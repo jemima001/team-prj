@@ -369,6 +369,11 @@ public class ProductPageService {
 		return ok ==1;
 	}
 
+public boolean getBuyThis(int id, String name) {
+	int num = mapper.whoBuyThis(id,name);
+	return false;
+}
+
 //public List<ReviewpageDto> getreviewfile(int id) {
 //	List<ReviewpageDto> list = mapper.getreviewfile(id);
 //	System.out.println("getreviewfile");

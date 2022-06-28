@@ -402,4 +402,18 @@ LIMIT #{pageToStart},#{onePageAllBoardNum}
     <result column="memberId" property="memberId" />
     <collection resultMap="fileListMapper" property="fileList" />
 </resultMap>
+
+
+
+<select id="whoBuyThis">
+ SELECT Orders.orderId,
+				Orders.memberId,
+                Product.id as Productid,
+                Orders.orderState,
+                ProductPage.id as  ProductPageid
+                FROM Orders
+				Join Product ON Orders.productName = Product.name
+                Join ProductPage ON Product.id = ProductPage.productId
+                WHERE orderState =1 and memberId=#{name} and ProductPage.id =#{id};
+</select>
 </mapper>
