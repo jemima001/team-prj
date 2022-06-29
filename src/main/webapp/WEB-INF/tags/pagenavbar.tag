@@ -34,15 +34,29 @@
 
 <style>
 	.navbar{
-		border-bottom: 1px solid #ffffff;
+		/* border-bottom: 1px solid #ffffff;
+		position: sticky;
+		top: 0;
+		z-index: 1000;
+		height: auto;
+		width: 100%; */
+		/* opacity: 0.8; */
 	}
 	/* .div{
 		display: block;
 	} */
 </style>
 
-<nav class="navbar" style="background-color: #eae1d8;">
-	<div class="container">
+<nav class="navbar navbar-expand-lg" style="background-color: #eae1d8; 
+											opacity: 0.8;
+											border-bottom: 1px solid #ffffff;
+											position: sticky;
+											top: 0;
+											z-index: 1000;
+											height: 58px;
+											width: 100%;
+">
+	<div class="container-fluid">
 			<ul class="nav">
 				<li class="nav-item">
 					<a class="navbar-brand" href="${homeUrl }" style="color: black;">
@@ -54,7 +68,10 @@
 					</li>
 				</sec:authorize>
 			</ul>
-			
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+		      <i class="fa-solid fa-list"></i>
+		    </button>
+			<div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
 			<ul class="nav">
 				<!-- 오른쪽으로 밀기 -->
 				<sec:authorize access="not isAuthenticated()">
@@ -116,7 +133,7 @@
 					</form>
 				</li>
 			</ul>
-
+</div>
 			<div class="d-none">
 				<form action="${logoutUrl }" id="logoutForm1" method="post"></form>
 			</div>
