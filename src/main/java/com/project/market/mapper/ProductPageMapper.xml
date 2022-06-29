@@ -405,7 +405,7 @@ LIMIT #{pageToStart},#{onePageAllBoardNum}
 
 
 
-<select id="whoBuyThis">
+<select id="whoBuyThis" resultType ="com.project.market.domain.BuycheckDto">
  SELECT Orders.orderId,
 				Orders.memberId,
                 Product.id as Productid,

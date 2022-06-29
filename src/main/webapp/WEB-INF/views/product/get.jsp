@@ -248,12 +248,14 @@
 					<input type="submit" value="판매글 수정" />
 				</form>
 			</sec:authorize>
+			<c:if test="${check == true }">
+				<form action="${appRoot }/review/add" method="get">
+					<input type="hidden" name="prodctPageid"
+						value="${productboard.id }" />
+					<input type="submit" value="리뷰 작성" />
 
-			<form action="${appRoot }/review/add" method="get">
-				<input type="hidden" name="prodctPageid" value="${productboard.id }" />
-				<input type="submit" value="리뷰 작성" />
-
-			</form>
+				</form>
+			</c:if>
 
 			<div id="reviewform">
 				<%-- <form action="${appRoot }/product/reviewpage" method="post"
@@ -330,6 +332,7 @@
 														alt="" />
 
 													</c:forEach>
+													<c:if test="${check == true }">
 													<form action="${appRoot }/product/deleteReview"
 														method="post">
 														<input type="hidden" value="${productboard.id }"
@@ -343,6 +346,7 @@
 														<input type="submit" value="리뷰 수정" />
 
 													</form>
+													</c:if>
 												</div>
 											</div>
 										</div>

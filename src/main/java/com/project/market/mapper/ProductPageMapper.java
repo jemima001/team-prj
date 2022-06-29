@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.security.access.method.P;
 
+import com.project.market.domain.BuycheckDto;
 import com.project.market.domain.PaginationDto;
 import com.project.market.domain.ProductDto;
 import com.project.market.domain.ProductPageDto;
@@ -68,7 +69,7 @@ public interface ProductPageMapper {
 	
 	int deleteReview(int id);
 //	List<ReviewpageDto> getreviewfile(int id);
-	int whoBuyThis(@Param("id")int id,@Param("name") String name);
+	BuycheckDto whoBuyThis(@Param("id")int id,@Param("name") String name);
 
 	
 

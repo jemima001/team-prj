@@ -128,13 +128,22 @@ public class ProductPageController {
 	}
 	
 	@GetMapping("get")
-	public void getProductPage(int id, Model model, Principal principal) {
+	public void getProductPage(int id, Model model,
+								Principal principal) {
 		ProductPageDto Board = service.getProductBoard(id);
 		ProductDto product = service.getproduct(Board.getProductId());
 		List<String> fileList = service.getfileList(id);
 		List<ReviewpageDto> reviewList = service.getReviewList(id);
-		boolean buyThis = service.getBuyThis(id,principal.getName());
-		System.out.println(buyThis);
+		String getName; 
+		System.out.println(principal);
+		if(principal == null) {
+			System.out.println("null test");
+			 getName = "noLonin";
+		} else {
+			 getName = principal.getName();
+		}
+		boolean buyThis = service.getBuyThis(id,getName);
+		System.out.println("buyThis :"+ buyThis);
 //		List<ReviewpageDto> reviewfileList = service.getreviewfile(id);
 		
 		System.out.println("reviewList :"+reviewList);
@@ -145,6 +154,7 @@ public class ProductPageController {
 		model.addAttribute("reviewList",reviewList);
 		model.addAttribute("productboard", Board);
 		model.addAttribute("product", product);
+		model.addAttribute("check",buyThis);
 //		model.addAttribute("reviewfileList",reviewfileList);
 	}
 	
