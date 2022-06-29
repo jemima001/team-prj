@@ -323,7 +323,7 @@
 												class="accordion-collapse collapse"
 												aria-labelledby="panelsStayOpen-headingOne">
 												<div class="accordion-body">
-													id :${reviewlist.id } ${reviewlist.reviewBody }
+													id :${reviewlist.id }  ${reviewlist.reviewBody }
 													<br />
 											 		 <c:forEach items="${reviewlist.fileList}" var="reviewfile">
 													

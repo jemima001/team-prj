@@ -1,16 +1,29 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <%@ taglib prefix = 'c' uri ="http://java.sun.com/jsp/jstl/core" %>
-    <%@ taglib prefix="my" tagdir="/WEB-INF/tags" %>
-    <%request.setCharacterEncoding("utf-8"); %>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix='c' uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
+<%
+	request.setCharacterEncoding("utf-8");
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css" integrity="sha512-GQGU0fMMi238uA+a/bdWJfpUGKUkBdgfFdgBm72SUQ6BeyWjoY/ton0tEjH+OSH9iP4Dfh+7HM0I9f5eR0L/4w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+	integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css"
+	integrity="sha512-GQGU0fMMi238uA+a/bdWJfpUGKUkBdgfFdgBm72SUQ6BeyWjoY/ton0tEjH+OSH9iP4Dfh+7HM0I9f5eR0L/4w=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+	referrerpolicy="no-referrer"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+	crossorigin="anonymous"></script>
 <script>
 	$(document).ready(function() {
 
@@ -18,7 +31,7 @@
 		let classOk = false;
 		let stockOk = false;
 		let priceOk = false;
-		
+
 		const enableSubmit = function() {
 			if (nameOk && classOk && stockOk && priceOk) {
 				$("#addSubmit").removeAttr("disabled");
@@ -26,20 +39,17 @@
 				$("#addSubmit").attr("disabled", "");
 			}
 		}
-		
+
 		let mod = $("#formAddforList").attr("data_mod");
 		console.log(mod);
-		
-		
+
 		enableSubmit();
 		$("#low_class_categorylist_get").hide();
 		$("#addProductNameMessage").hide();
 		$("#addProductClassMessage").hide();
 		$("#addProductStockMessage").hide();
 		$("#addProductPriceMessage").hide();
-		
-		
-		
+
 		$("#addProductName").change(function() {
 			let newname = $("#addProductName").val();
 			//console.log("키업");
@@ -96,7 +106,7 @@
 		})
 
 		$("#priductStockInput").change(function() {
-			console.log("값변화");   
+			console.log("값변화");
 			let stock = $("#priductStockInput").val();
 			if (stock == 0) {
 				stockOk = false;
@@ -128,28 +138,13 @@
 			}
 
 		})
-		
-		if (mod == "forProdutList" ){
-			console.log("if문 실행");
-			 nameOk = true;
-			 classOk = true;
-			 stockOk = true;
-			 priceOk = true;
-			
-			console.log("if문 안"+nameOk);
-			console.log("if문 안"+classOk);
-			console.log("if문 안"+stockOk);
-			console.log("if문 안"+priceOk);
-			
-		}
+
 		console.log(nameOk);
 		console.log(classOk);
 		console.log(stockOk);
 		console.log(priceOk);
 		enableSubmit();
-		
-		
-		
+
 		/* $('#middle_class').on('change', function() {
 			const data = {
 					Product_Middle_Class : $("#middle_class").val()
@@ -226,65 +221,64 @@
 <title>Insert title here</title>
 </head>
 <body>
-<my:pagenavbar current="addproduct"></my:pagenavbar>
+	<my:pagenavbar current="addproduct"></my:pagenavbar>
 	<my:mypagenavbar current="addprodut"></my:mypagenavbar>
-	<form action="${appRoot }/market/product/addProduct">
-	<input type="hidden" name="mod" value="addnew" />
-							<label for="productName" class="form-label">상품명</label>
-							<span>
-								<div id="addProductNameMessage" class="alert alert-danger"
-									role="alert"></div>
-							</span>
-							<input id="addProductName" type="text" name="productName"
-								class="form-control" id="productNameInput">
-						</div>
+	<form action="${appRoot }/product/addProduct" method="post">
+		<label for="productName" class="form-label">상품명</label>
+		<span>
+			<div id="addProductNameMessage" class="alert alert-danger"
+				role="alert"></div>
+		</span>
+		<input id="addProductName" type="text" name="productName"
+			class="form-control" id="productNameInput">
+		</div>
 
-					상품 중 분류 :
-					<span>
-							<div id="addProductClassMessage" class="alert alert-danger"
-								role="alert"></div>
-						</span>
-						<select id="selectProductClass"
-							class="form-select form-select-lg mb-3"
-							aria-label=".form-select-lg example" name="Product_Middle_Class">
-							<option value="0">분류 선택</option>
-							<c:forEach items="${ m_category}" var="category">
-								<option value="${category.product_Middle_Class}">${category.middle_Name }</option>
-							</c:forEach>
-						</select>
-
-
-						<div id="low_class_categorylist_get">
-
-							상품 소 분류 :
-							<select name="Product_low_class">
-								<c:forEach items="${ l_category}" var="category_l">
-									<option value="${category_l.product_Low_Class}">${category_l.low_Name }</option>
-								</c:forEach>
-							</select>
-
-						</div>
-
-						<br />
-					수량 :
-					<span>
-							<div id="addProductStockMessage" class="alert alert-danger"
-								role="alert"></div>
-						</span>
-						<input id="priductStockInput" type="number" name="stock" min="0" />
-						<br />
+		상품 중 분류 :
+		<span>
+			<div id="addProductClassMessage" class="alert alert-danger"
+				role="alert"></div>
+		</span>
+		<select id="selectProductClass"
+			class="form-select form-select-lg mb-3"
+			aria-label=".form-select-lg example" name="Product_Middle_Class">
+			<option value="0">분류 선택</option>
+			<c:forEach items="${ m_category}" var="category">
+				<option value="${category.product_Middle_Class}">${category.middle_Name }</option>
+			</c:forEach>
+		</select>
 
 
+		<div id="low_class_categorylist_get">
 
-					가격 :
-					<span>
-							<div id="addProductPriceMessage" class="alert alert-danger"
-								role="alert"></div>
-						</span>
-						<input id="priductPriceInput" type="number" name="price" min="0" />
-						
-						<input type="submit" value="상품추가"/>
-	
+			상품 소 분류 :
+			<select name="Product_low_class">
+				<c:forEach items="${ l_category}" var="category_l">
+					<option value="${category_l.product_Low_Class}">${category_l.low_Name }</option>
+				</c:forEach>
+			</select>
+
+		</div>
+
+		<br />
+		수량 :
+		<span>
+			<div id="addProductStockMessage" class="alert alert-danger"
+				role="alert"></div>
+		</span>
+		<input id="priductStockInput" type="number" name="stock" min="0" />
+		<br />
+
+
+
+		가격 :
+		<span>
+			<div id="addProductPriceMessage" class="alert alert-danger"
+				role="alert"></div>
+		</span>
+		<input id="priductPriceInput" type="number" name="price" min="0" />
+
+		<input id="addSubmit" type="submit" value="상품추가" disabled />
+
 	</form>
 </body>
 </html>

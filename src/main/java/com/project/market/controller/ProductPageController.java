@@ -340,4 +340,12 @@ public class ProductPageController {
 		/*List<ProductDto> list_low = service.getcategory_low();*/
 		model.addAttribute("m_category", list);
 	}
+	
+	@PostMapping("addProduct")
+	public String addProduct(ProductDto dto) {
+		System.out.println("상품추가 dto"+dto);
+		int ok = service.addProduct(dto);
+		System.out.println("ok 상품만 추가 :"+ok);
+		return "redirect:/product/productlist";
+	}
 }
