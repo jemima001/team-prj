@@ -21,7 +21,7 @@
 	} */
 </style>
 
-<nav class="navbar" style="background-color: #eae1d8;">
+<nav class="navbar" style="background-color: #d3b7a1;">
 	<div class="container">
 		<div>
 			<ul class="nav me-auto">
@@ -36,26 +36,26 @@
 			</ul>
 		</div>
 		<ul class="nav">
-			<li class="nav-item" style="background-color: #eae1d8;"><a
-				href="${noticeUrl }" class="nav-link ${current == 'notice' ? 'active' : '' }" style="color: black;">공지사항</a>
+			<li class="nav-item" >
+				<a href="${noticeUrl }" class="nav-link ${current == 'notice' ? 'active' : '' }" style="color: black;">공지사항</a>
 			</li>
-			<li class="nav-item" style="background-color: #eae1d8;"><a
-				href="${queryUrl }" class="nav-link ${current == 'query' ? 'active' : '' }" style="color: black;">1:1문의하기</a>
+			<li class="nav-item" >
+				<a href="${queryUrl }" class="nav-link ${current == 'query' ? 'active' : '' }" style="color: black;">1:1문의하기</a>
 			</li>
-			<li class="nav-item" style="background-color: #eae1d8;"><a
-				href="${qnaUrl }" class="nav-link ${current == 'answer' ? 'active' : '' }" style="color: black;">1:1문의확인</a>
+			<li class="nav-item" >
+				<a href="${qnaUrl }" class="nav-link ${current == 'answer' ? 'active' : '' }" style="color: black;">1:1문의확인</a>
 			</li>
-			<li class="nav-item" style="background-color: #eae1d8;"><a
-				href="${chatUrl }" class="nav-link ${current == 'chat' ? 'active' : '' }"  style="color: black;">프리톡</a>
+			<li class="nav-item" >
+				<a href="${chatUrl }" class="nav-link ${current == 'chat' ? 'active' : '' }"  style="color: black;">프리톡</a>
 			</li>
 			<sec:authorize access="hasRole('USER')">
-				<li class="nav-item" style="background-color: #eae1d8;"><a
-					href="${userUrl }" class="nav-link ${current == 'chat' ? 'active' : '' }"  style="color: black;">문의톡</a>
+				<li class="nav-item" style="background-color: #d3b7a1;">
+					<a href="${userUrl }" class="nav-link ${current == 'chat' ? 'active' : '' }"  style="color: black;">문의톡</a>
 				</li>
 			</sec:authorize>
 			<sec:authorize access="hasRole('ADMIN')">
-				<li class="nav-item" style="background-color: #eae1d8;"><a
-					href="${adminUrl }" class="nav-link ${current == 'chat' ? 'active' : '' }"  style="color: black;">문의톡</a>
+				<li class="nav-item" style="background-color: #eae1d8;">
+					<a href="${adminUrl }" class="nav-link ${current == 'chat' ? 'active' : '' }"  style="color: black;">문의톡</a>
 				</li>
 			</sec:authorize>
 		</ul>

@@ -41,6 +41,7 @@ public class UserSocket {
 	private class User {
 		Session session;
 		String key;
+		String userName;
 	}
 
 	// 유저와 서버간의 접속 리스트
@@ -87,12 +88,13 @@ public class UserSocket {
 		User user = new User();
 		// Unique키를 발급 ('-'는 제거한다.)
 		user.key = UUID.randomUUID().toString().replace("-", "");
+		user.userName = userSession.getUserPrincipal().getName();
 		// WebSocket의 세션
 		user.session = userSession;
 		// 유저 리스트에 등록한다.
 		sessionUsers.add(user);
 		// 운영자 Client에 유저가 접속한 것을 알린다.
-		AdminSocket.visit(user.key);
+		AdminSocket.visit(user.key, user.userName);
 	}
 
 	// browser에서 웹 소켓을 통해 메시지가 오면 호출되는 함수
@@ -117,7 +119,6 @@ public class UserSocket {
 	public static void sendMessage(String key, String message, String nickName) {
 		// key로 접속 리스트에서 User 클래스를 탐색
 		User user = getUser(key);
-		// 접속 리스트에 User가 있으면(당연히 있다. 없으면 버그..)
 		if (user != null) {
 			try {
 				// 유저 Session으로 socket을 취득한 후 메시지를 전송한다.
@@ -150,6 +151,18 @@ public class UserSocket {
 		for (int i = 0; i < ret.length; i++) {
 			// 유저의 키만 반환 변수에 넣는다.
 			ret[i] = sessionUsers.get(i).key;
+		}
+		// 값 반환
+		return ret;
+	}
+	
+	public static String[] getUserName() {
+		// 반환할 String 배열을 선언한다.
+		String[] ret = new String[sessionUsers.size()];
+		// 유저 리스트를 반복문에 돌린다.
+		for (int i = 0; i < ret.length; i++) {
+			// 유저의 키만 반환 변수에 넣는다.
+			ret[i] = sessionUsers.get(i).userName;
 		}
 		// 값 반환
 		return ret;

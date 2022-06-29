@@ -23,4 +23,6 @@ public interface NoticeMapper {
 
 	List<NoticeDto> selectNoticeByNaxtIdAndBackId(int id);
 
+	void viewCount(int id);
+	
 }
