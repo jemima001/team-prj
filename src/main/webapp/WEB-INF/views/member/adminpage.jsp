@@ -28,7 +28,6 @@
 				<thead>
 					<tr>
 						<th>ID</th>
-						<th>PW</th>
 						<th>NAME</th>
 						<th>EMAIL</th>
 						<th>NICK</th>
@@ -46,7 +45,6 @@
 									${member.id }
 								</a>
 							</td>
-							<td>${member.password }</td>
 							<td>${member.name }</td>
 							<td>${member.email }</td>
 							<td>${member.nickName }</td>
