@@ -266,6 +266,7 @@ LIMIT #{pageToStart},#{onePageAllBoardNum}
                 ProductPage.id as boardId
          FROM Product LEFT JOIN ProductPage on ProductPage.productId = Product.id
 					  LEFT JOIN File on File.boardid = ProductPage.id
+					  ORDER BY Stock
 
 	</select>
 
@@ -415,5 +416,20 @@ LIMIT #{pageToStart},#{onePageAllBoardNum}
 				Join Product ON Orders.productName = Product.name
                 Join ProductPage ON Product.id = ProductPage.productId
                 WHERE orderState =1 and memberId=#{name} and ProductPage.id =#{id};
+</select>
+
+<select id="searchProduct"  resultType = "com.project.market.domain.ProductDto">
+ SELECT Product.id as productId ,
+				Product.name as productName,
+				Product.Stock as stock,
+                Product.price as price,
+               
+                File.fileName,
+                ProductPage.id as boardId
+         FROM Product LEFT JOIN ProductPage on ProductPage.productId = Product.id
+					  LEFT JOIN File on File.boardid = ProductPage.id
+                      WHERE Product.name LIKE #{search}
+                      ORDER BY Stock;
+
 </select>
 </mapper>

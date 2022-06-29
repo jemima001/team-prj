@@ -70,6 +70,7 @@ public interface ProductPageMapper {
 	int deleteReview(int id);
 //	List<ReviewpageDto> getreviewfile(int id);
 	BuycheckDto whoBuyThis(@Param("id")int id,@Param("name") String name);
+	List<ProductDto> searchProduct(String search);
 
 	
 

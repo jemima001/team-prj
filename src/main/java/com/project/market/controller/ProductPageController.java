@@ -270,6 +270,15 @@ public class ProductPageController {
 	 model.addAttribute("productlist", list);
 		
 	}
+	@PostMapping("productlist")
+	@ResponseBody
+	public List<ProductDto> productlist(String search){
+		List<ProductDto> list = service.ProductlistForajax(search);
+		
+		return list;
+		
+	}
+	
 	
 	@PostMapping("productRemove")
 	public String removeProduct(ProductDto dto) {

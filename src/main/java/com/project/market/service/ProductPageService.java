@@ -391,6 +391,11 @@ public boolean getBuyThis(int id, String name) {
 	return out;
 }
 
+public List<ProductDto> ProductlistForajax(String search) {
+	
+	return mapper.searchProduct("%"+search+"%");
+}
+
 //public List<ReviewpageDto> getreviewfile(int id) {
 //	List<ReviewpageDto> list = mapper.getreviewfile(id);
 //	System.out.println("getreviewfile");

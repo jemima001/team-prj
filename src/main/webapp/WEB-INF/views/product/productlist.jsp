@@ -27,11 +27,13 @@
 <title>Insert title here</title>
 <script>
 	$(document).ready(function() {
-		$(".modalModifyButton").click(function() {
+		const modalModifyButtonClickHadler = function() {
 			let pid = $(this).attr("data-prodid");
 			let newStock = $("#stockInput" + pid).val();
 			let newprice = $("#priceInput" + pid).val();
-
+			console.log("pid"+pid);
+			console.log("newprice"+newStock);
+			console.log(newprice);
 			$("#modifyStockInput" + pid).val(newStock);
 			$("#modifyPriceInput" + pid).val(newprice);
 			/* console.log(newStock);
@@ -40,7 +42,104 @@
 			console.log("-------------------");
 			console.log($("#modifyStockInput"+pid).val()); */
 
+		};
+		
+		$(".modalModifyButton").click(modalModifyButtonClickHadler);
+		
+		$("#searchProduct").change(function(){
+			
+			
+			let data = {search : $("#searchProduct").val() };
+			$.ajax({
+				url :"${appRoot}/product/productlist",
+				type :"post",
+				data :data,
+				success:function(list){
+					console.log(list)
+					
+					const productlistElement= $("#productlist");
+					productlistElement.empty();
+					
+					for (let i =0; i<list.length; i++) {
+						let showImg ="${imageUrl }/project/noImage/noImage.png";
+						if(list[i].fileName != null){
+							 showImg = "${imageUrl }/project/"+list[i].boardId+"/"+list[i].fileName;
+						} 
+						
+						const productElement =$("<tr />");
+						productElement.html(`<td>\${list[i].productId }</td>
+								<td>
+								
+								
+									
+									<img style="width: 200px" class="img-thumbnail"
+										src=\${showImg}
+										alt="" />
+								
+								
+								
+							</td>
+							<td>
+								<p>\${list[i].productName }</p>
+								<%-- <input class="form-control" id="productIdInput${product.productId }" type="text" value="${product.productName }" readonly="readonly" /> --%>
+							</td>
+							<td>
+								<input class="form-control" id="stockInput\${list[i].productId }"
+									type="text" value="\${list[i].stock }" />
+							</td>
+							<td>
+								<input class="form-control" id="priceInput\${list[i].productId }"
+									type="text" value="\${list[i].price }" />
+							</td>
+							<td>
+								<div class="btn-group" role="group"
+									aria-label="Basic outlined example">
+									<button class="btn btn-outline-success modalModifyButton"
+										data-bs-toggle="modal"
+										data-bs-target="#modalModify\${list[i].productId }"
+										data-prodid="\${list[i].productId }">수정</button>
+									<button class="btn btn-outline-danger" data-bs-toggle="modal"
+										data-bs-target="#modalRemove\${list[i].productId }">삭제</button>
+
+									<c:if test="\${list[i].boardId == 0}">
+										<form action="${appRoot }/product/add">
+											<input type="hidden" value="\${list[i].productId }"
+												name="productId" />
+											<input type="hidden" value="\${list[i].productName }"
+												name="productName" />
+											<input type="hidden" value="\${list[i].stock }" name="stock" />
+											<input type="hidden" value="\${list[i].price }" name="price" />
+											<input type="hidden" value="addFormProductList" name="mod" />
+											<button class="btn btn-outline-success modalModifyButton">판매글
+												등록</button>
+
+										</form>
+									</c:if>
+									<c:if test="${product.boardId != 0}">
+										<form action="${appRoot }/product/modif">
+											<input type="hidden" name="id" value="\${list[i].boardId }" />
+											<button class="btn btn-outline-success modalModifyButton">판매글
+												수정</button>
+
+
+										</form>
+
+									</c:if>
+
+								</div>
+							</td>`);
+						productElement.find(".modalModifyButton").click(modalModifyButtonClickHadler); // 다시 불러와서 이벤트 추가 하는 부분
+						productlistElement.append(productElement);
+						
+					}
+				},
+				
+			})
+	
+		
 		})
+		
+		
 
 	});
 </script>
@@ -48,6 +147,7 @@
 <body>
 	<my:pagenavbar current="productlist"></my:pagenavbar>
 	<my:mypagenavbar current="produtlist"></my:mypagenavbar>
+	<input id ="searchProduct" type="text" name="search" />
 	<table class="table">
 		<thead>
 			<tr class="table-dark">
@@ -61,7 +161,7 @@
 				<th>수정/삭제</th>
 			</tr>
 		</thead>
-		<tbody>
+		<tbody id ="productlist">
 			<c:forEach items="${productlist }" var="product">
 				<tr>
 					<td>${product.productId }</td>
