@@ -38,12 +38,13 @@
 	</c:url>
 </sec:authorize>
 
-<nav class="navbar" style="background-color: #eae1d8;">
+<nav class="navbar" style="background-color: #d3b7a1;">
 	<div class="container">
 		<sec:authorize access="hasRole('ADMIN')">
 			<a href="${adminpageUrl }" class="nav-link ${current == 'adminpage' ? 'active' : '' }" style="color: black;">회원관리</a>
 			<a href="${appRoot }/member/adminorderlist" class="nav-link ${current == 'orderlist' ? 'active' : '' }" style="color: black;">전체주문관리</a>
 			<a href="${appRoot }/product/productlist" class="nav-link ${current == 'productlist' ? 'active' : '' }" style="color: black;">상품관리</a>
+			<a href="${appRoot }/product/addProduct" class="nav-link ${current == '#' ? 'active' : '' }" style="color: black;">상품추가</a>
 		</sec:authorize>
 		<sec:authorize access="not hasRole('ADMIN')">
 		<a href="${mypageUrl }"

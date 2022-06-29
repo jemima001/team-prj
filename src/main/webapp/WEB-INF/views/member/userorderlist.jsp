@@ -62,12 +62,26 @@
 								<c:if test="${order.orderState ne '0' }">
 									<a href="${appRoot }/product/get?id=${order.boardId }" class="btn btn-outline-success" role="button">리뷰 쓰기</a>
 								</c:if>
+								<c:if test="${order.orderState eq '0' }">
+									<a href="${appRoot }/product/get?id=${order.boardId }" class="btn btn-outline-success" role="button">주문 취소</a>
+								</c:if>
 							</td>
 						</tr>
 					</c:forEach>
 				</tbody>
 			</table>
 		</div>
+	</div>
+	<div class="row justify-content-center">
+		<nav aria-label="Page navigation example">
+			<ul class="pagination justify-content-center">
+				<c:forEach var="i" begin="1" end="${paginationDto.endPage}">
+					<li	class="page-item  ${paginationDto.nowpage == i ? 'active' : '' }">
+						<a class="page-link" href="${appRoot }/member/userorderlist?id=${id }&page=${i}">${i}</a>
+					</li>
+				</c:forEach>
+			</ul>
+		</nav>
 	</div>
 </div>
 </body>

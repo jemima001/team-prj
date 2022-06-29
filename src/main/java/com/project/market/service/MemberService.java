@@ -184,4 +184,20 @@ public class MemberService {
 		return mapper.countEmailById(id, email) > 0;
 	}
 
+	public void countStock(int bookCount, String productName) {
+		mapper.countStockProduct(bookCount, productName);
+	}
+
+	public int getStock(String productName) {
+		return mapper.getStockByProduct(productName);
+	}
+
+	public List<OrderDto> listPageOrder(int limitNumber) {
+		return mapper.selectPageOrder(limitNumber);
+	}
+
+	public List<OrderDto> listUserPageOrder(String id, int limitNumber) {
+		return mapper.selectUserPageOrder(id, limitNumber);
+	}
+
 }

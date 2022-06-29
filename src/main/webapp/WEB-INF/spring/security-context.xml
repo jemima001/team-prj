@@ -18,13 +18,14 @@
 		<security:intercept-url pattern="/notice/write" access="hasRole('ADMIN')"/>
 		<security:intercept-url pattern="/notice/modify" access="hasRole('ADMIN')"/>
 		<security:intercept-url pattern="/notice/remove" access="hasRole('ADMIN')"/>
-		<!-- 상품판매,수정, 상품 수정  -->
+		<!-- 상품판매,수정, 상품 수정 , 리뷰 -->
 		<security:intercept-url pattern="/product/add" access ="hasRole('ADMIN')"/>
 		<security:intercept-url pattern="/product/modif" access ="hasRole('ADMIN')"/>
 		<security:intercept-url pattern="/product/productlist" access ="hasRole('ADMIN')"/>
-		
-		
-		
+		<security:intercept-url pattern="/order/info" access="isAuthenticated()"/>
+		<security:intercept-url pattern="/review/add" access="isAuthenticated()"/> 
+		<security:intercept-url pattern="/review/modif" access="isAuthenticated()"/>
+		<security:intercept-url pattern="/product/deleteReview" access="isAuthenticated()"/>
 		<!-- 공지사항 create, update, delete -->
 		<security:intercept-url pattern="/qna/query" access="isAuthenticated()"/>
 		<security:intercept-url pattern="/qna/list" access="isAuthenticated()"/>

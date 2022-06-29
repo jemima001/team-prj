@@ -212,6 +212,42 @@
 		FROM Member
 		WHERE email = #{email} and id = #{id}
 	</select>
+	
+	<update id="countStockProduct">
+		UPDATE Product
+		SET Stock = Stock - #{bookCount}
+		WHERE name = #{productName}
+	</update>
+	
+	<select id="getStockByProduct" resultType="int">
+		SELECT Stock FROM Product
+		WHERE name = #{productName}
+	</select>
+	
+	<select id="selectPageOrder"
+		resultType="com.project.market.domain.OrderDto">
+		SELECT o.orderId, o.memberId, p.name productName, o.bookCount, (p.price	* o.bookCount) totalOrderPrice, o.recipient, o.address, o.inserted, o.orderState, pp.id boardId, f.fileName
+		FROM Orders o
+		JOIN Product p ON p.name = o.productName
+		JOIN ProductPage pp ON p.id = pp.productId
+		JOIN File f ON f.boardId = pp.id
+		GROUP BY o.orderId
+		ORDER BY o.orderId
+		LIMIT #{limitNumber},10
+	</select>
+	
+	<select id="selectUserPageOrder"
+		resultType="com.project.market.domain.OrderDto">
+		SELECT o.orderId, o.memberId, p.name productName, o.bookCount, (p.price	* o.bookCount) totalOrderPrice, o.recipient, o.address, o.inserted, o.orderState, pp.id boardId, f.fileName
+		FROM Orders o
+		JOIN Product p ON p.name = o.productName
+		JOIN ProductPage pp ON p.id = pp.productId
+		JOIN File f ON f.boardId = pp.id
+		WHERE o.memberId = #{id}
+		GROUP BY o.orderId
+		ORDER BY o.orderId
+		LIMIT #{limitNumber},10
+	</select>
 </mapper>
 
 

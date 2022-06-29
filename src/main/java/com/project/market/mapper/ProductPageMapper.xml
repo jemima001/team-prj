@@ -340,5 +340,80 @@ LIMIT #{pageToStart},#{onePageAllBoardNum}
         WHERE name LIKE #{name} 
 	
 	</select>
+	
+	
+	<insert id="AddreviewPage" useGeneratedKeys="true" keyColumn="id" keyProperty="id" >
+		INSERT INTO ReviewPage(reviewtitle,reviewbody,memberId,productpage)
+		VALUES(#{reviewTitle},#{reviewBody},#{memberId},#{productPage})
+	
+	</insert>
+	
+	<select id="getReviewList" resultMap="reviewPageMapper">
+	
+	         SELECT 
+	         ReviewPage.id as Id,
+				ReviewPage.productpage as productPage,
+                ReviewPage.reviewtitle as reviewTitle,
+                ReviewPage.reviewbody as reviewBody,
+                File.fileName as revireFileName,
+                File.fileName as fileList,
+                ReviewPage.memberId
+         FROM ReviewPage LEFT JOIN File ON File.boardid = ReviewPage.id
+        WHERE productpage =#{id}
+	</select>
+	
+	<select id="getBoardFile" resultType = "string">
+	 SELECT fileName FROM File
+        WHERE boardId =#{id} and WhichBoard =0;
+	
+	</select>
+	
+	<select id="replyViewFileList" resultType ="string">
+	 SELECT fileName FROM File
+        WHERE boardId =#{id} and WhichBoard =1;
+	</select>
+	
+	<delete id="deleteReview">
+	DELETE FROM ReviewPage
+        WHERE id = #{id};
+	
+	</delete>
+	
+	
+<!-- 	<select id="getreviewfile" resultMap="reviewPageMapper">
+ SELECT File.boardId as Id,
+		fileName as fileList
+         FROM ReviewPage JOIN File ON ReviewPage.id = File.boardId
+         WHERE productpage = #{Id} AND WhichBoard =1;
 
+</select> -->
+
+<resultMap id="fileListMapper" type="String">
+    <result property="fileList" column="fileList" 
+            javaType="String" />
+</resultMap>
+
+<resultMap type="com.project.market.domain.ReviewpageDto" id="reviewPageMapper" >
+    <id column="Id" property="id" />
+    <result column="productPage" property="productPage" />
+    <result column="reviewTitle" property="reviewTitle" />
+    <result column="reviewBody" property="reviewBody" />
+    <result column="revireFileName" property="revireFileName" />
+    <result column="memberId" property="memberId" />
+    <collection resultMap="fileListMapper" property="fileList" />
+</resultMap>
+
+
+
+<select id="whoBuyThis" resultType ="com.project.market.domain.BuycheckDto">
+ SELECT Orders.orderId,
+				Orders.memberId,
+                Product.id as Productid,
+                Orders.orderState,
+                ProductPage.id as  ProductPageid
+                FROM Orders
+				Join Product ON Orders.productName = Product.name
+                Join ProductPage ON Product.id = ProductPage.productId
+                WHERE orderState =1 and memberId=#{name} and ProductPage.id =#{id};
+</select>
 </mapper>
