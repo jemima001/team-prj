@@ -38,7 +38,11 @@
 	</c:url>
 </sec:authorize>
 
-<nav class="navbar" style="background-color: #d3b7a1;">
+<nav class="navbar" style="background-color: #d3b7a1;
+						   position: sticky;
+						   top: 58px;
+						   opacity: 0.8;
+							">
 	<div class="container">
 		<sec:authorize access="hasRole('ADMIN')">
 			<a href="${adminpageUrl }" class="nav-link ${current == 'adminpage' ? 'active' : '' }" style="color: black;">회원관리</a>
