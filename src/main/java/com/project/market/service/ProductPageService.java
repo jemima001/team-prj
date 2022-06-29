@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.project.market.domain.BuycheckDto;
 import com.project.market.domain.PaginationDto;
 import com.project.market.domain.ProductDto;
 import com.project.market.domain.ProductPageDto;
@@ -368,6 +369,27 @@ public class ProductPageService {
 		int ok =mapper.deleteReview(dto.getId());
 		return ok ==1;
 	}
+
+public boolean getBuyThis(int id, String name) {
+	if(name == null) {
+		name = "noLogin";
+	}
+	
+	BuycheckDto num = mapper.whoBuyThis(id,name);
+	
+	System.out.println("num :"+num);
+	System.out.println("name:"+name);
+	System.out.println("id :"+id);
+	boolean out;
+	if(num == null) {
+		out = false;
+	} else {
+		out = num.getMemberId().equals(name) && num.getProductPageid() == id ;
+		
+	}
+	
+	return out;
+}
 
 //public List<ReviewpageDto> getreviewfile(int id) {
 //	List<ReviewpageDto> list = mapper.getreviewfile(id);
