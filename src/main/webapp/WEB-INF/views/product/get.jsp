@@ -314,13 +314,13 @@
 											<h2 class="accordion-header" id="panelsStayOpen-headingOne">
 												<button class="accordion-button" type="button"
 													data-bs-toggle="collapse"
-													data-bs-target="#panelsStayOpen-collapseOne"
-													aria-expanded="true"
+													data-bs-target="#review${reviewlist.id }"
+													aria-expanded="false"
 													aria-controls="panelsStayOpen-collapseOne">
 													${reviewlist.reviewTitle }</button>
 											</h2>
-											<div id="panelsStayOpen-collapseOne"
-												class="accordion-collapse collapse show"
+											<div id="review${reviewlist.id }"
+												class="accordion-collapse collapse"
 												aria-labelledby="panelsStayOpen-headingOne">
 												<div class="accordion-body">
 													id :${reviewlist.id } ${reviewlist.reviewBody }
