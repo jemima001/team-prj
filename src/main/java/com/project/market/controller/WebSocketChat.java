@@ -59,11 +59,12 @@ public class WebSocketChat {
 		}
 		sessionList.add(session);
 	}
+	
 	private void sendAllSessionToMessage(Session self, String message) {
 		try {
 			for(Session session : WebSocketChat.sessionList) {
 				if(!self.getId().equals(session.getId())) {
-					session.getBasicRemote().sendText(message.split(",")[1]+" : "+message.split(",")[0]);
+					session.getBasicRemote().sendText(message.split("#####")[1]+" : "+message.split("#####")[0]);
 				}
 			}
 		} catch (Exception e) {
@@ -73,10 +74,10 @@ public class WebSocketChat {
 	}
 	@OnMessage
 	public void OnMessage(String message, Session session) {
-		logger.info("Message From - " +message.split(",")[1] + ": "+message.split(",")[0]);
+		logger.info("Message From - " +message.split("#####")[1] + ": "+message.split("#####")[0]);
 		try {
 			final Basic basic = session.getBasicRemote();
-			basic.sendText("to : "+message.split(",")[0]);
+			basic.sendText("to : "+message.split("#####")[0]);
 		} catch (Exception e) {
 			// TODO: handle exception
 			System.out.println(e.getMessage());

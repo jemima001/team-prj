@@ -20,13 +20,15 @@
 <div class="container">
 	<div class="row">
 		<div class="col">
+			<h1>공지사항</h1>
 			<table class="table">
 				<thead>
 					<tr>
 						<th>번호</th>
 						<th>제목</th>
 						<th>닉네임</th>
-						<th><i class="fa-solid fa-calendar"></i></th>
+						<th>작성일</th>
+						<th>조회수</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -48,6 +50,7 @@
 								</td>
 								<td>${notice.writerNickName }</td>
 								<td>${notice.prettyInserted }</td>
+								<td>${notice.viewCount }</td>
 							</tr>
 						</c:forEach>
 				</tbody>
