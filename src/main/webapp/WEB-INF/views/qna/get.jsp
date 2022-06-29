@@ -100,7 +100,7 @@ $(document).ready(function() {
 						<div>
 							<label class="form-label" for="textarea1">본문</label>
 							<textarea class="form-control mb-3" name="body" id="textarea1"
-								cols="30" rows="10" readonly>${query.body }</textarea>
+								cols="30" rows="8" readonly>${query.body }</textarea>
 						</div>
 						
 						<c:forEach items="${query.fileName }" var="file">
@@ -178,7 +178,7 @@ $(document).ready(function() {
 								
 								<div>
 									<label class="form-label" for="textarea1">본문</label>
-									<textarea class="form-control" name="body" id="textarea11" cols="30" rows="10"></textarea>
+									<textarea class="form-control" name="body" id="textarea11" cols="30" rows="8"></textarea>
 								</div>
 								<div>
 									파일

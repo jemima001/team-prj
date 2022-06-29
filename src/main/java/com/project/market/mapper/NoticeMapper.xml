@@ -7,7 +7,8 @@
 	SELECT n.id, 
   		   n.title, 
   		   n.inserted,
-  		   m.nickName writerNickName 
+  		   m.nickName writerNickName,
+  		   n.viewCount
   	FROM Notice n JOIN Member m ON n.memberId = m.id 
   	GROUP BY id
   	ORDER BY id DESC
@@ -24,11 +25,18 @@
 	VALUES (#{title}, #{body}, #{memberId})
 	</insert>
 	
+	<update id="viewCount">
+	UPDATE Notice
+	SET viewCount = viewCount + 1
+	WHERE id = #{id}
+	</update>
+	
 	<select id="selectNoticeById" resultType="com.project.market.domain.NoticeDto">
 	SELECT n.id, 
 	       n.title, 
 	       n.body, 
 	       n.inserted, 
+	       n.viewCount,
 	       m.id memberId,
 	       m.nickName writerNickName
 	FROM Notice n JOIN Member m ON n.memberId = m.id
@@ -39,7 +47,8 @@
 	SELECT n.id, 
 	   n.title, 
 	   n.body, 
-	   n.inserted, 
+	   n.inserted,
+	   n.viewCount, 
 	   m.id memberId,
 	   m.nickName writerNickName
 	FROM Notice n JOIN Member m ON n.memberId = m.id

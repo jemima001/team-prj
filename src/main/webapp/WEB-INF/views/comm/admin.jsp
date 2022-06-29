@@ -18,6 +18,13 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
 	referrerpolicy="no-referrer"></script>
 
+<style>  /* 여러 채팅창 간의 간격과 배열 위치*/  
+.float-left{
+    float:left;    
+    margin: 5px;  
+    }
+</style>
+
 <title>Insert title here</title>
 </head>
 <body>
@@ -59,7 +66,7 @@
 				// 위 템플릿 div를 취득한다.
 				let form = $(".template").html();
 				// div를 감싸고 속성 data-key에 unique키를 넣는다.
-				form = $("<div class='float-left'></div>").attr("data-key",
+				form = $("<div class='float-left'><div>"+ node.userName+"</div></div>").attr("data-key",
 						node.key).append(form);
 				// body에 추가한다.
 				$("body").append(form);

@@ -32,6 +32,7 @@ public class NoticeService {
 	}
 
 	public NoticeDto getNoticeById(int id) {
+		mapper.viewCount(id);
 		NoticeDto notice = mapper.selectNoticeById(id);
 		return notice;
 	}

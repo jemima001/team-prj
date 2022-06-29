@@ -57,9 +57,11 @@ public class AdminSocket {
 		// 운영자 유저의 세션을 바꾼다.
 		admin = userSession;
 		// 기존에 접속해 있는 유저의 정보를 운영자 client로 보낸다.
-		for (String key : UserSocket.getUserKeys()) {
+		String[] keys = UserSocket.getUserKeys();
+		String[] names = UserSocket.getUserName();
+		for (int i = 0; i < keys.length; i++) {
 			// 전송.. 전송
-			visit(key);
+			visit(keys[i], names[i]);
 		}
 	}
 
@@ -96,9 +98,10 @@ public class AdminSocket {
 	}
 
 	// 일반 유저가 접속했을 때, 운영자 유저에게 알리는 함수
-	public static void visit(String key) {
+	public static void visit(String key, String userName) {
 		// json 구조로 status는 visit이고 key는 유저 키 정보이다.(javascript와 맞추는 프로토콜)
-		send("{\"status\":\"visit\", \"key\":\"" + key + "\"}");
+		send("{\"status\":\"visit\", \"key\":\"" + key + "\", \"userName\":\""
+				+ userName + "\"}");
 	}
 
 	// 일반 유저가 메시지를 보낼 때, 운영자 유저에게 알리는 함수
