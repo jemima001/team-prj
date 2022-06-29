@@ -82,7 +82,7 @@
 	</div>
 			<div class="row justify-content-center">
 				<nav aria-label="Page navigation example">
-				  <ul class="pagination">
+				  <ul class="pagination justify-content-center">
 				    <c:forEach var="i" begin="1" end="${paginationDto.endPage}">
 						<li
 							class="page-item  ${paginationDto.nowpage == i ? 'active' : '' }">

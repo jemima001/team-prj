@@ -267,6 +267,7 @@ public class MemberController {
 		paginationDto.setAllPageNum(((allList.size()-1)/10) + 1);
 		paginationDto.setEndPage((allList.size()-1)/10 + 1);
 		int limitNumber = (page-1) * 10;
+		paginationDto.setNowpage(page);
 		
 		List<OrderDto> list = service.listPageOrder(limitNumber);
 		
@@ -287,6 +288,7 @@ public class MemberController {
 		paginationDto.setAllPageNum(((allList.size()-1)/10) + 1);
 		paginationDto.setEndPage((allList.size()-1)/10 + 1);
 		int limitNumber = (page-1) * 10;
+		paginationDto.setNowpage(page);
 		
 		List<OrderDto> list = service.listUserPageOrder(id,limitNumber);
 		
