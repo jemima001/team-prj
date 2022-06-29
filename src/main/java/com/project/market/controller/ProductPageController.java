@@ -331,4 +331,13 @@ public class ProductPageController {
 		boolean ok =service.deleteReview(dto);
 		return "redirect:/product/get?id="+dto.getProductPage();
 	}
+	
+	
+	@GetMapping("addProduct")
+	public void addProduct(Model model) {
+		List<ProductDto> list = service.getcategory();
+		// ajx로 나중에 처리 시도 해야
+		/*List<ProductDto> list_low = service.getcategory_low();*/
+		model.addAttribute("m_category", list);
+	}
 }
