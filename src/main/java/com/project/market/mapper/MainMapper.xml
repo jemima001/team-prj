@@ -11,7 +11,7 @@
 		LEFT JOIN File f ON p.id = f.boardId
 		GROUP BY p.id
 		ORDER BY p.id
-		DESC LIMIT 0,4
+		DESC LIMIT 0,8
 	</select>
 	
 	<select id="getBoardlist2"

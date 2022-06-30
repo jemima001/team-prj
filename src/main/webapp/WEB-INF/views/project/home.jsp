@@ -35,6 +35,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
 	integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
@@ -57,7 +58,16 @@
 .row {
 	text-align: center;
 }
-
+a{
+	text-decoration-line: none;
+}
+a:hover { color:black;}
+body{
+	font-family: 나눔스퀘어, 'NanumSquare', sans-serif;
+}
+.table>:not(caption)>*>* {
+    padding: 12px;
+}
 </style>
 <script>
 $(document).ready(
@@ -71,7 +81,7 @@ $(document).ready(
 		});
 </script>
 </head>
-<body>
+<body style="background-color: #ffffff;">
 	<my:pagenavbar current="home"></my:pagenavbar>
 	<%-- <my:searchnavbar current="home"></my:searchnavbar> --%>
 	<div class="container">
@@ -96,26 +106,28 @@ $(document).ready(
 
 		</div>
 	</div>
-		<hr />
-		<table class="table">
+	<br />
+	<div style="background-color: #608463;">
+		<table class="table" style="background-color: #608463; margin: 0; padding: 10;">
 			<thead>
 				<tr>
-					<th><a href="${appRoot }/product/list" style="color: black;">ALL</a></th>
+					<th><a href="${appRoot }/product/list" style="color: #f4eedd;">ALL</a></th>
 					<th><a href="${appRoot }/product/list?cat=1&search="
-						style="color: black;">화분식물</a></th>
+						style="color: #f4eedd;">화분식물</a></th>
 					<th><a href="${appRoot}/product/list?cat=2&search="
-						style="color: black;">행잉식물</a></th>
+						style="color: #f4eedd;">행잉식물</a></th>
 					<th><a href="${appRoot}/product/list?cat=3&search="
-						style="color: black;">선인장식물</a></th>
+						style="color: #f4eedd;">선인장식물</a></th>
 					<th><a href="${appRoot}/product/list?cat=4&search="
-						style="color: black;">대형식물</a></th>
+						style="color: #f4eedd;">대형식물</a></th>
 					<th><a href="${appRoot}/product/list?cat=5&search="
-						style="color: black;">꽃</a></th>
+						style="color: #f4eedd;">꽃</a></th>
 					<th><a href="${appRoot}/product/list?cat=6&search="
-						style="color: black;">기타</a></th>
+						style="color: #f4eedd;">기타</a></th>
 				</tr>
 			</thead>
 		</table>
+	</div>
 		<div class="row">
 			<img src="${appRoot }/resources/images/forest.jpg"/>
 		</div> 
@@ -176,27 +188,28 @@ $(document).ready(
 			<h2><b>new</b></h2><br />
 			<br />
 			<br />
+			<hr />
 		</div>
 		<div class="row">
 			<c:forEach items="${boardlist1 }" var="pege" varStatus="status">
-				<div class="col" style="position: relative;">
+				<div class="col" style="position: relative; padding: 15px">
 					<c:if test="${pege.fileName !=null}">
-						<a href="${appRoot }/product/get?id=${pege.id}"><img style="width: 250px; height : 250px" class="img-thumbnail"
+						<a href="${appRoot }/product/get?id=${pege.id}"><img style="width: 250px; height : 250px" class="img-thumbnail${status.index }"
 							src="${imageUrl }/project/${pege.id }/${pege.fileName}" onmouseover="$('.imgtext${status.index }').removeClass('d-none'), this.style.opacity=0.5;" onmouseout="$('.imgtext${status.index }').addClass('d-none'), this.style.opacity=1;" /></a>
 					</c:if>
 					<c:if test="${pege.fileName ==null}">
 						<a href="${appRoot }/product/get?id=${pege.id}"><img style="width: 250px; height : 250px" class="img-thumbnail"
 							src="${imageUrl }/project/noImage/noImage.png" alt="" /></a>
 					</c:if>
-					<h5 class="imgtext${status.index } d-none" style="text-align: center; position: absolute; width: 100%; top: 50%; z-index: 999;">${pege.boardTitle }</h5>
+					<h5 class="imgtext${status.index } d-none" style="text-align: center; position: absolute; width: 100%; top: 50%; z-index: 0;">${pege.boardTitle }</h5>
 				</div>
 			</c:forEach>
 		</div>
-		<div class="row">
+		<%-- <div class="row">
 			<c:forEach items="${boardlist2 }" var="pege" varStatus="status">
 				<div class="col" style="position: relative;">
 					<c:if test="${pege.fileName !=null}">
-						<a href="${appRoot }/product/get?id=${pege.id}"><img style="width: 250px; height : 250px" class="img-thumbnail"
+						<a href="${appRoot }/product/get?id=${pege.id}"><img style="width: 250px; height : 250px" class="img-thumbnail${status.index }"
 							src="${imageUrl }/project/${pege.id }/${pege.fileName}" onmouseover="$('.imgtext2${status.index }').removeClass('d-none'), this.style.opacity=0.5;" onmouseout="$('.imgtext2${status.index }').addClass('d-none'), this.style.opacity=1;" /></a>
 					</c:if>
 					<c:if test="${pege.fileName ==null}">
@@ -211,7 +224,7 @@ $(document).ready(
 					</c:if>
 				</div>
 			</c:forEach>
-		</div>
+		</div> --%>
 	</div>
 
 </body>

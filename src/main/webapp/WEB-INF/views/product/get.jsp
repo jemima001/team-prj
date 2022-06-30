@@ -11,6 +11,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
 	integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
@@ -69,6 +70,21 @@
 
 	});
 </script>
+<style>
+.row {
+	text-align: center;
+}
+a{
+	text-decoration-line: none;
+}
+a:hover { color:black;}
+body{
+	font-family: 나눔스퀘어, 'NanumSquare', sans-serif;
+}
+.table>:not(caption)>*>* {
+    padding: 12px;
+}
+</style>
 <title>Insert title here</title>
 </head>
 <body>
@@ -81,7 +97,7 @@
 		</c:url>
 	</sec:authorize>
 	<my:pagenavbar></my:pagenavbar>
-
+	<br />
 	<div class="row justify-content-center">
 		<div class="col-12 col-lg-10">
 			<div class="container">
@@ -185,13 +201,19 @@
 
 								</c:if>
 							</form>
+							<br />
+							<br />
+							<br /><br /><br />
+							<br />
 							<c:if test="${product.stock != 0 }">
+							<div class="btn-group" role="group" style="width: 250px; align-content: center">
 								<sec:authorize access="hasRole('USER')">
 									<button class="buttonTobuy btn btn-outline-success"
 										id="purchaseButton">장바구니</button>
 								</sec:authorize>
 								<button class="buttonTobuy btn btn-outline-success"
-									form="buybutton">구매</button>
+									form="buybutton">바로구매</button>
+							</div>
 							</c:if>
 							<c:if test="${product.stock == 0 }">
 						품절되었습니다.
@@ -226,6 +248,8 @@
 				</div>
 			</div>
 
+<br />
+<br />
 			<!-- --------------------------------------------------- -->
 
 			<h2 class="justify-content-center">상세 정보</h2>
