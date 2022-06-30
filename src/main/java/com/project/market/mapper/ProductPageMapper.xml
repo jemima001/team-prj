@@ -407,15 +407,17 @@ LIMIT #{pageToStart},#{onePageAllBoardNum}
 
 
 <select id="whoBuyThis" resultType ="com.project.market.domain.BuycheckDto">
- SELECT Orders.orderId,
+SELECT Orders.orderId,
 				Orders.memberId,
                 Product.id as Productid,
                 Orders.orderState,
                 ProductPage.id as  ProductPageid
+                
                 FROM Orders
 				Join Product ON Orders.productName = Product.name
                 Join ProductPage ON Product.id = ProductPage.productId
-                WHERE orderState =1 and memberId=#{name} and ProductPage.id =#{id};
+               
+                WHERE orderState =1 and Orders.memberId=#{name} and ProductPage.id =#{id};
 </select>
 
 <select id="searchProduct"  resultType = "com.project.market.domain.ProductDto">
@@ -430,6 +432,12 @@ LIMIT #{pageToStart},#{onePageAllBoardNum}
 					  LEFT JOIN File on File.boardid = ProductPage.id
                       WHERE Product.name LIKE #{search}
                       ORDER BY Stock;
+
+</select>
+
+<select id="reviewNum" resultType ="int">
+SELECT Count(id) FROM ReviewPage
+                WHERE productpage = #{id} and memberId =#{name};
 
 </select>
 </mapper>

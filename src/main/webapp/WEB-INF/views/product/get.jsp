@@ -248,7 +248,7 @@
 					<input type="submit" value="판매글 수정" />
 				</form>
 			</sec:authorize>
-			<c:if test="${check == true }">
+			<c:if test="${check == true && checkNumReview == 0 }">
 				<form action="${appRoot }/review/add" method="get">
 					<input type="hidden" name="prodctPageid"
 						value="${productboard.id }" />

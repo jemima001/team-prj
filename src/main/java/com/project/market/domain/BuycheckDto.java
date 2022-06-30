@@ -10,5 +10,5 @@ public class BuycheckDto {
 	private int ProductId;
 	private int orderState;
 	private int ProductPageid;
-	
+	private int  reviewPageId;
 }
