@@ -64,9 +64,21 @@ public class ProductPageController {
 	public String addproduct_in(ProductPageDto dto, 
 								ProductDto productdto, 
 								MultipartFile[] file,
-								RedirectAttributes rttr) {
+								RedirectAttributes rttr,
+								String mod) {
+		int productId;
 		/*	System.out.println("중분류 확인 :"+productdto);*/
-		int productId = service.addProduct(productdto);
+		System.out.println("add 컨트롤러");
+		if(mod.equals("addnew")) {
+			
+			//System.out.println("add 컨트롤러  if addnew속");
+		 productId = service.addProduct(productdto);
+		} else {
+			//System.out.println("add 컨트롤러 else 속");
+		 productId = productdto.getProductId();
+			//System.out.println("productId :"+productId);
+			
+		}
 		/*System.out.println("제품 판매글 로 받은 데이터");
 		System.out.println("판매글 제목 :"+dto.getBoardTitle());
 		System.out.println("판매글 내용 :"+dto.getBoardBody());
@@ -116,16 +128,44 @@ public class ProductPageController {
 	}
 	
 	@GetMapping("get")
-	public void getProductPage(int id, Model model) {
+	public void getProductPage(int id, Model model,
+								Principal principal) {
 		ProductPageDto Board = service.getProductBoard(id);
 		ProductDto product = service.getproduct(Board.getProductId());
 		List<String> fileList = service.getfileList(id);
+		List<ReviewpageDto> reviewList = service.getReviewList(id);
+		String getName; 
+		System.out.println(principal);
+		if(principal == null) {
+			System.out.println("null test");
+			 getName = "noLonin";
+		} else {
+			 getName = principal.getName();
+		}
+		boolean buyThis = service.getBuyThis(id,getName);
+		System.out.println("buyThis :"+ buyThis);
+//		List<ReviewpageDto> reviewfileList = service.getreviewfile(id);
+		
+		System.out.println("reviewList :"+reviewList);
+//		System.out.println("reviewfileList :"+reviewfileList);
 		Board.setFileList(fileList);
 		
 		//System.out.println("fileList:" +fileList);
-		
+		model.addAttribute("reviewList",reviewList);
 		model.addAttribute("productboard", Board);
 		model.addAttribute("product", product);
+		model.addAttribute("check",buyThis);
+//		model.addAttribute("reviewfileList",reviewfileList);
+	}
+	
+	@ResponseBody
+	@PostMapping("cheekProductName")
+	public boolean cheekProductName(String name) {
+	 // System.out.println(name); 넘어 오는거 확인
+		boolean ok = service.searchProductName(name);
+		
+		return !ok;
+		
 	}
 	
 	@GetMapping("list")
@@ -153,24 +193,31 @@ public class ProductPageController {
 	    System.out.println("컨트롤러 페이지 네이게이터 Dto:"+ outPaginationDto);
 	    outPaginationDto.setSearch(search);
 	    outPaginationDto.setNowpage(page);
+	    
+		/* if(cat == null || cat.equals("0")) {
+			
+		}*/
 	    model.addAttribute("paginationDto", outPaginationDto);
 		
 	}
 	
 	@PostMapping("deleteBoard")
-	public String deleteBoard(ProductPageDto dto, RedirectAttributes rttr) {
+	public String deleteBoard(ProductPageDto dto, 
+							  RedirectAttributes rttr,
+							  @RequestParam(name = "deleteImg", required = false) ArrayList<String> deleteImg) {
 		//System.out.println(dto.getId());
-		 boolean ok = service.deleteBoard(dto);
+		
+		 boolean ok = service.deleteBoard(dto,deleteImg);
 		System.out.println(ok);
 		// if 사용해서 메시지 출력 해야함
 		
-		if(ok) {
-			rttr.addFlashAttribute("message", "판매글이 삭제되었습니다.");
-		} else {
-			rttr.addFlashAttribute("message_error", "판매글 삭제에 실패하였습니다.");
-		}
-		 return "redirect:/product/list";
-		
+			if(ok) {
+				rttr.addFlashAttribute("message", "판매글이 삭제되었습니다.");
+			} else {
+				rttr.addFlashAttribute("message_error", "판매글 삭제에 실패하였습니다.");
+			}
+			 return "redirect:/product/list";
+			
 	}
 
 	@GetMapping("modif")
@@ -219,10 +266,19 @@ public class ProductPageController {
 	public void getlist(Model model) {
 		
 	 List<ProductDto> list = service.Productlist();
-	// System.out.println(list);
+	 System.out.println("상품 리스트"+list);
 	 model.addAttribute("productlist", list);
 		
 	}
+	@PostMapping("productlist")
+	@ResponseBody
+	public List<ProductDto> productlist(String search){
+		List<ProductDto> list = service.ProductlistForajax(search);
+		
+		return list;
+		
+	}
+	
 	
 	@PostMapping("productRemove")
 	public String removeProduct(ProductDto dto) {
@@ -257,11 +313,48 @@ public class ProductPageController {
 	@PostMapping("reviewpage")
 		public String addreviewpage(ReviewpageDto dto,
 									MultipartFile[] file,
-									RedirectAttributes rttr) { 
+									RedirectAttributes rttr,
+									Principal principal
+									) { 
+		//System.out.println("리뷰 컨트롤러 dto :"+dto);
+		//System.out.println("리뷰 컨트롤러 file :"+file);
+		if (file != null) {
+			List<String> fileList = new ArrayList<String>();
+			for (MultipartFile f : file) {
+				fileList.add(f.getOriginalFilename());
+			}
+			dto.setFileList(fileList);
+		}
+		
+		dto.setMemberId(principal.getName());
+		boolean ok = service.addReviewPage(dto, file);
 		
 		
 		System.out.println("리뷰페이지 추가  :"+ dto);
-		return "redirect:/product/productlist";
+		
+		return "redirect:/product/get?id="+dto.getProductPage();
+	}
+	@PostMapping("deleteReview") 
+	public String deletReview(ReviewpageDto dto) {
+		System.out.println("deleteReview dto :"+dto);
+		boolean ok =service.deleteReview(dto);
+		return "redirect:/product/get?id="+dto.getProductPage();
 	}
 	
+	
+	@GetMapping("addProduct")
+	public void addProduct(Model model) {
+		List<ProductDto> list = service.getcategory();
+		// ajx로 나중에 처리 시도 해야
+		/*List<ProductDto> list_low = service.getcategory_low();*/
+		model.addAttribute("m_category", list);
+	}
+	
+	@PostMapping("addProduct")
+	public String addProduct(ProductDto dto) {
+		System.out.println("상품추가 dto"+dto);
+		int ok = service.addProduct(dto);
+		System.out.println("ok 상품만 추가 :"+ok);
+		return "redirect:/product/productlist";
+	}
 }

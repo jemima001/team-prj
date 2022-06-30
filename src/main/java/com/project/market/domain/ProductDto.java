@@ -13,6 +13,8 @@ public class ProductDto {
 	private int product_Low_Class;
 	private String low_Name;
 	private int productId;
+	private int boardId;
+	private String fileName;
 	private int purchase;
 	
 }

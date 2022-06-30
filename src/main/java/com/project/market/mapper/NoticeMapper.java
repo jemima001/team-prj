@@ -21,4 +21,8 @@ public interface NoticeMapper {
 
 	int deleteNotice(int id);
 
+	List<NoticeDto> selectNoticeByNaxtIdAndBackId(int id);
+
+	void viewCount(int id);
+	
 }

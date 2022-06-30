@@ -15,9 +15,11 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.project.market.domain.BuycheckDto;
 import com.project.market.domain.PaginationDto;
 import com.project.market.domain.ProductDto;
 import com.project.market.domain.ProductPageDto;
+import com.project.market.domain.ReviewpageDto;
 import com.project.market.mapper.ProductPageMapper;
 
 import software.amazon.awssdk.core.sync.RequestBody;
@@ -54,6 +56,7 @@ public class ProductPageService {
 	}
 
 	private void addFiles(int string, MultipartFile[] files, String mod) {
+		System.out.println("리뷰페이지 사진 저장0");
 		if (files != null && mod.equals("productpage")) {
 			for (MultipartFile file : files) {
 				if (file.getSize() > 0) {
@@ -64,6 +67,7 @@ public class ProductPageService {
 				}
 			}
 		} else if (files != null && mod.equals("reviewpage")) {
+			System.out.println("리뷰페이지 사진 저장1");
 			for (MultipartFile file : files) {
 				if (file.getSize() > 0) {
 
@@ -95,7 +99,7 @@ public class ProductPageService {
 				throw new RuntimeException();
 			}
 		} else if (mod.equals("reviewpage")) {
-
+				System.out.println("리뷰페이지 사진 저장2");
 			String key = "project/reviewpage/" + string + "/" + file.getOriginalFilename();
 
 			PutObjectRequest putObjectRequest = PutObjectRequest.builder().acl(ObjectCannedACL.PUBLIC_READ)
@@ -194,7 +198,17 @@ public class ProductPageService {
 		return paginationDto;
 		
 	}*/
-	public boolean deleteBoard(ProductPageDto dto) {
+	@Transactional
+	public boolean deleteBoard(ProductPageDto dto, ArrayList<String> deleteImg) {
+		System.out.println(dto.getFileList());
+		
+		List<String> fileList = mapper.getBoardFile(dto);
+		
+		for(String file :  fileList) {
+			System.out.println("file : "+file);
+			System.out.println("삭제 테스트");
+			deleterFromAwsS3(dto.getId(),file ,"productPage" );
+		}
 		int ok = mapper.deleteBoard(dto);
 
 		return ok == 1;
@@ -218,7 +232,7 @@ public class ProductPageService {
 
 		if (deleteImg != null) {
 			for (String fileName : deleteImg) {
-				deleterFromAwsS3(pageDto.getId(), fileName);
+				deleterFromAwsS3(pageDto.getId(), fileName, "productPage" );
 				mapper.deleteImg(pageDto.getId(), fileName);
 			}
 		}
@@ -233,8 +247,17 @@ public class ProductPageService {
 		return cun == 1;
 	}
 
-	private void deleterFromAwsS3(int id, String fileName) {
-		String key = "board/" + id + "/" + fileName;
+	private void deleterFromAwsS3(int id, String fileName, String mod) {
+		String key = null;
+		
+		if(mod.equals("productPage")) {
+			System.out.println("삭제 테스트 !!!");
+			System.out.println("id :"+id);
+			System.out.println("fileName :"+fileName);
+		 key = "project/" + id + "/" + fileName;
+		} else if(mod.equals("reviewpage")) {
+		 key = "project/reviewpage/" + id + "/" + fileName;
+		}
 		DeleteObjectRequest deleteObjectRequest = DeleteObjectRequest.builder().bucket(bucketName).key(key).build();
 		s3.deleteObject(deleteObjectRequest);
 	}
@@ -246,7 +269,10 @@ public class ProductPageService {
 
 	@Transactional
 	public boolean deleteProduct(ProductDto dto) {
+		
 		int okDeleteCategory = mapper.deleteCategory(dto);
+		int okDeleteCart = mapper.deleteCart(dto);
+		int okDeleteBoard = mapper.deleteBoardfordeleteProduct(dto);
 		int okDeleteProduct = mapper.DeleteProduct(dto);
 
 		System.out.println("okDeleteCategory:" + okDeleteCategory);
@@ -309,6 +335,72 @@ public class ProductPageService {
 	public String getCategoryName(int category) {
 		String categoryName = mapper.getCategoryName(category);
 		return categoryName;
-	} 
+	}
+
+	public boolean searchProductName(String name) {
+		int ok = mapper.searchProductName(name);
+		System.out.println("같은 상품 이름 갯수"+ok);
+		return ok>0;
+	}
+
+	public boolean addReviewPage(ReviewpageDto dto, MultipartFile[] files) {
+		System.out.println("리뷰페이지 서비스 dto :"+dto);
+		System.out.println("리뷰페이지 서비스 files :"+files);
+		int ok = mapper.AddreviewPage(dto);
+		
+		addFiles(dto.getId(), files, "reviewpage");
+		return false;
+	}
+
+	public List<ReviewpageDto> getReviewList(int id) {
+		
+		return mapper.getReviewList(id);
+	}
+@Transactional
+	public boolean deleteReview(ReviewpageDto dto) {
+		int id = dto.getId();
+		System.out.println("deleteReview in getId(); :"+dto.getId());
+		List<String> replyFileList = mapper.replyViewFileList(id);
+		for(String file : replyFileList) {
+			
+		deleterFromAwsS3(id, file, "reviewpage");
+		}
+		
+		int ok =mapper.deleteReview(dto.getId());
+		return ok ==1;
+	}
+
+public boolean getBuyThis(int id, String name) {
+	if(name == null) {
+		name = "noLogin";
+	}
+	
+	BuycheckDto num = mapper.whoBuyThis(id,name);
+	
+	System.out.println("num :"+num);
+	System.out.println("name:"+name);
+	System.out.println("id :"+id);
+	boolean out;
+	if(num == null) {
+		out = false;
+	} else {
+		out = num.getMemberId().equals(name) && num.getProductPageid() == id ;
+		
+	}
+	
+	return out;
+}
+
+public List<ProductDto> ProductlistForajax(String search) {
+	
+	return mapper.searchProduct("%"+search+"%");
+}
+
+//public List<ReviewpageDto> getreviewfile(int id) {
+//	List<ReviewpageDto> list = mapper.getreviewfile(id);
+//	System.out.println("getreviewfile");
+//	System.out.println(list);
+//	return list;
+//} 
 
 }

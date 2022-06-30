@@ -69,6 +69,16 @@ public interface MemberMapper {
 
 	void removeQueryFile(Integer queryId);
 
+	int countEmailById(@Param("id")String id, @Param("email")String email);
+
+	void countStockProduct(@Param("bookCount")int bookCount, @Param("productName")String productName);
+
+	int getStockByProduct(String productName);
+
+	List<OrderDto> selectPageOrder(int limitNumber);
+
+	List<OrderDto> selectUserPageOrder(@Param("id")String id, @Param("limitNumber")int limitNumber);
+
 }
 
 

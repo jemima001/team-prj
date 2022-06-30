@@ -29,18 +29,17 @@
 			<div class="col">
 				<div class="card m-auto" style="width: 18rem;">
 					<button id="closeBtn" class="d-none btn btn-light" type="button" onclick="closeSocket();">퇴장</button>
-					<div>
-						<div id="messages" class="d-none alert alert-success mb-0"></div>
+					<div>	
+						<div id="messages" style="overflow-y: scroll; height:200px;" class="alert alert-success mb-0"></div>
 					</div>
 					<div class="alert alert-secondary mb-0">
 						<div class="d-flex justify-content-center">
-							<input type="hidden" id="sender" value="${nickName }"
-								placeholder="닉네임을 작성해주세요">
+							<input type="hidden" id="sender" value="${nickName }" />
 							<div class="input-group-append">
 							<button id="openBtn" class="btn btn-light" type="button" onclick="openSocket();">입장</button>
 							</div>
 							<input type="text" class="d-none" id="messageinput"
-								placeholder="하고싶은 말을 작성해주세요" />
+								placeholder="하고싶은 말을 작성해주세요" onkeydown="Enter_Check();" />
 							<div class="input-group-append">
 								<button id="sendBtn" class="d-none btn btn-light" type="button" onclick="send();">보내기</button>
 							</div>
@@ -52,11 +51,16 @@
 				<script type="text/javascript">
 					var ws;
 					var messages = document.getElementById("messages");
+					var name = document.getElementById("sender").value;
 					function openSocket() {
 						if (false) {
 							writeResponse("WebSocket is already opened.");
 							return;
 						}
+						
+						var element = document.getElementById("messages");
+						element.innerHTML = '';
+						
 						// 웹소켓 객체 만드는 코드
 						ws = new WebSocket(
 								"ws://${pageContext.request.serverName}:${pageContext.request.serverPort}/market/comm/echo");
@@ -64,7 +68,6 @@
 						ws.onopen = function(event) {
 							if (event.data === undefined)
 								return;
-
 							writeResponse(event.data);
 						};
 						ws.onmessage = function(event) {
@@ -73,7 +76,6 @@
 						ws.onclose = function(event) {
 							writeResponse("Connection closed");
 						}
-						$("#messages").removeClass("d-none");
 						$("#sender").addClass("d-none");
 						$("#messageinput").removeClass("d-none");
 						$("#openBtn").addClass("d-none");
@@ -82,12 +84,23 @@
 					}
 					function send() {
 						var text = document.getElementById("messageinput").value
-								+ "," + document.getElementById("sender").value;
+								+ "#####" + document.getElementById("sender").value;
 						var obj = document.getElementById("messageinput");
-						if (obj.value.length >= 1) {
+						var regExp = /[\{\}:|\)\'\"\(\=]/gi;
+						if (obj.value.length >= 1 && obj.value != " " && !regExp.test(obj.value)) {
 							ws.send(text);
 							text = "";
 							obj.value= "";						
+						} else {
+							text = "";
+							obj.value= "";
+						}
+					}
+					
+					function Enter_Check() {
+						if(event.keyCode == 13){
+							send();
+							return;
 						}
 					}
 					function closeSocket() {
@@ -100,6 +113,7 @@
 					}
 					function writeResponse(text) {
 						messages.innerHTML += "<br />" + text;
+						messages.scrollTo(0, document.body.scrollHeight);
 					}
 				</script>
 			</div>

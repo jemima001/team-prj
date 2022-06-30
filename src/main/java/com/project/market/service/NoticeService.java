@@ -32,7 +32,12 @@ public class NoticeService {
 	}
 
 	public NoticeDto getNoticeById(int id) {
+		mapper.viewCount(id);
 		NoticeDto notice = mapper.selectNoticeById(id);
+		return notice;
+	}
+	public List<NoticeDto> getNoticeByNaxtIdAndBackId(int id) {
+		List<NoticeDto> notice = mapper.selectNoticeByNaxtIdAndBackId(id);
 		return notice;
 	}
 
@@ -45,6 +50,8 @@ public class NoticeService {
 	public boolean deleteNotice(int id) {
 		return mapper.deleteNotice(id) == 1;
 	}
+
+	
 	
 	
 }

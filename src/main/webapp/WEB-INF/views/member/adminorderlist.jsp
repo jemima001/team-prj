@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,7 +22,7 @@
 	<div class="row">
 		<div class="col">
 		
-
+			<p>${message }</p>
 			<h1>주문 목록</h1>
 			
 			<table class="table align-middle">
@@ -63,6 +64,8 @@
 							<td>
 								<form action="${appRoot }/member/orderApprove" method="post">
 									<input type="hidden" name="orderId" value="${order.orderId }" />
+									<input type="hidden" name="bookCount" value="${order.bookCount }" />
+									<input type="hidden" name="productName" value="${order.productName }" />
 									<c:if test="${order.orderState eq '0' }">
 										<button class="btn btn-outline-success" type="submit">승인</button>
 									</c:if>
@@ -77,6 +80,18 @@
 			</table>
 		</div>
 	</div>
+			<div class="row justify-content-center">
+				<nav aria-label="Page navigation example">
+				  <ul class="pagination justify-content-center">
+				    <c:forEach var="i" begin="1" end="${paginationDto.endPage}">
+						<li
+							class="page-item  ${paginationDto.nowpage == i ? 'active' : '' }">
+							<a class="page-link" href="${appRoot }/member/adminorderlist?page=${i}">${i}</a>
+						</li>
+					</c:forEach>
+				  </ul>
+				</nav>
+			</div>
 </div>
 </body>
 </html>

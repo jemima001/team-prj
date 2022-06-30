@@ -12,6 +12,7 @@ public class NoticeDto {
 	private LocalDateTime inserted;
 	private String memberId;
 	private String writerNickName;
+	private int viewCount;
 	
 	public String getPrettyInserted() {
 		// 24시간 이내면 시간만

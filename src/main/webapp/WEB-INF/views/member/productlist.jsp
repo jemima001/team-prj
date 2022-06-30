@@ -35,6 +35,10 @@
 <body>
 	<my:pagenavbar current="productlist"></my:pagenavbar>
 	<my:mypagenavbar current="produtlist"></my:mypagenavbar>
+	<form action="${appRoot}/product/productlist">
+		<input type="text" name="search" />
+		<input type="submit" name="검색" />
+	</form>
 	<table class="table">
 		<thead>
 			<tr class="table-dark">
@@ -46,6 +50,7 @@
 			</tr>
 		</thead>
 		<tbody>
+		
 			<c:forEach items="${productlist }" var="product">
 				<tr>
 					<td>${product.productId }</td>
