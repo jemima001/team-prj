@@ -60,6 +60,15 @@
 
 </style>
 <script>
+$(document).ready(
+		function() {
+			/* const container = document.querySelector('.img-thumbnail');
+			container.addEventListener */
+			/* $("#img1").onmouseover(function(){
+				console.log("마우스 올려짐");
+				$(".imageText").removeClass("d-none");
+			}); */
+		});
 </script>
 </head>
 <body>
@@ -169,36 +178,36 @@
 			<br />
 		</div>
 		<div class="row">
-			<c:forEach items="${boardlist1 }" var="pege">
-				<div class="col">
+			<c:forEach items="${boardlist1 }" var="pege" varStatus="status">
+				<div class="col" style="position: relative;">
 					<c:if test="${pege.fileName !=null}">
-						<a href="${appRoot }/product/get?id=${pege.id}"><img style="width: 200px; height : 200px" class="img-thumbnail"
-							src="${imageUrl }/project/${pege.id }/${pege.fileName}" alt="" /></a>
+						<a href="${appRoot }/product/get?id=${pege.id}"><img style="width: 250px; height : 250px" class="img-thumbnail"
+							src="${imageUrl }/project/${pege.id }/${pege.fileName}" onmouseover="$('.imgtext${status.index }').removeClass('d-none'), this.style.opacity=0.5;" onmouseout="$('.imgtext${status.index }').addClass('d-none'), this.style.opacity=1;" /></a>
 					</c:if>
 					<c:if test="${pege.fileName ==null}">
-						<a href="${appRoot }/product/get?id=${pege.id}"><img style="width: 200px; height : 200px" class="img-thumbnail"
+						<a href="${appRoot }/product/get?id=${pege.id}"><img style="width: 250px; height : 250px" class="img-thumbnail"
 							src="${imageUrl }/project/noImage/noImage.png" alt="" /></a>
 					</c:if>
-					<h5>${pege.boardTitle }</h5>
+					<h5 class="imgtext${status.index } d-none" style="text-align: center; position: absolute; width: 100%; top: 50%; z-index: 999;">${pege.boardTitle }</h5>
 				</div>
 			</c:forEach>
 		</div>
 		<div class="row">
-			<c:forEach items="${boardlist2 }" var="pege">
-				<div class="col">
+			<c:forEach items="${boardlist2 }" var="pege" varStatus="status">
+				<div class="col" style="position: relative;">
 					<c:if test="${pege.fileName !=null}">
-						<a href="${appRoot }/product/get?id=${pege.id}"><img style="width: 200px; height : 200px" class="img-thumbnail"
-							src="${imageUrl }/project/${pege.id }/${pege.fileName}" alt="" /></a>
+						<a href="${appRoot }/product/get?id=${pege.id}"><img style="width: 250px; height : 250px" class="img-thumbnail"
+							src="${imageUrl }/project/${pege.id }/${pege.fileName}" onmouseover="$('.imgtext2${status.index }').removeClass('d-none'), this.style.opacity=0.5;" onmouseout="$('.imgtext2${status.index }').addClass('d-none'), this.style.opacity=1;" /></a>
 					</c:if>
 					<c:if test="${pege.fileName ==null}">
-						<a href="${appRoot }/product/get?id=${pege.id}"><img style="width: 200px; height : 200px" class="img-thumbnail"
+						<a href="${appRoot }/product/get?id=${pege.id}"><img style="width: 250px; height : 250px" class="img-thumbnail"
 							src="${imageUrl }/project/noImage/noImage.png" alt="" /></a>
 					</c:if>
-					<c:if test="${pege.boardTitle.length() > 8 }">
-						<h5>${pege.boardTitle.substring(0,9) }...</h5>
+					<c:if test="${pege.boardTitle.length() > 6 }">
+						<h5 class="imgtext2${status.index } d-none" style="text-align: center; position: absolute; width: 100%; top: 50%; z-index: 999;">${pege.boardTitle.substring(0,7) }...</h5>
 					</c:if>
-					<c:if test="${pege.boardTitle.length() < 8 }">
-						<h5>${pege.boardTitle }</h5>
+					<c:if test="${pege.boardTitle.length() < 6 }">
+						<h5 class="imgtext2${status.index } d-none" style="text-align: center; position: absolute; width: 100%; top: 50%; z-index: 999;">${pege.boardTitle }</h5>
 					</c:if>
 				</div>
 			</c:forEach>
