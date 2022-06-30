@@ -33,7 +33,7 @@
 	<insert id="addOrderList">
 		INSERT INTO Orders(memberId,productName,address,recipient,orderState,bookCount)
 		VALUES (#{memberId}, #{cart.productName}, #{address}, #{recipient}, 0,#{cart.bookCount})
-
+		
 	</insert>
 	
 	
@@ -42,6 +42,22 @@
 			   WHERE memberId = #{memberId};
 			   
 	</delete>
+	
+	
+	<select id="getProduct"
+		resultType="com.project.market.domain.OrderDto">
+		SELECT name productName,
+			   price price
+		FROM Product
+		WHERE id = #{productId}
+	</select>
+
+
+	<insert id="addDirectOrder">
+		INSERT INTO Orders(memberId, productName, address, recipient, orderState, bookCount)
+		VALUES (#{memberId},#{dto.productName}, #{address}, #{recipient}, 0, #{dto.bookCount})
+		
+	</insert>
 	
 
 

@@ -48,6 +48,7 @@
 
 <thead>
   <tr class="table-info">
+  	<th>결제 수량</th>
     <th>결제 금액</th>
     <th>입금 정보</th>
   </tr>
@@ -55,7 +56,8 @@
   
   <tbody>
   <tr>
-    <td> ${allTotalPrice } 원  </td>
+  	<td>${b }개</td>
+    <td> ${a } 원  </td>
     <td>우리 352-1234-5678-90 스토어이름 </td>
   </tr>
   </tbody>

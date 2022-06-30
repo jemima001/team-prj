@@ -3,12 +3,14 @@ package com.project.market.controller;
 import java.security.Principal;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.project.market.domain.CartDto;
 import com.project.market.domain.MemberDto;
@@ -44,36 +46,51 @@ public class OrderController {
 	
 	
 	@GetMapping("complete")
-	public void orderComplete(Model model, Principal principal) {
+	public void orderComplete(Model model, Principal principal, OrderDto dto, RedirectAttributes rttr) {
 		
 		List<CartDto> list = orderService.cartList(principal.getName());
 		
 		model.addAttribute("cartList", list);
 		
 		int allTotal = 0;
+		int bookCount = 0;
 		for (CartDto cart : list) {
 			allTotal += cart.getTotalPrice();
+			bookCount += cart.getBookCount();
+			orderService.addOrder(cart, principal.getName(), dto.getRecipient(), dto.getAddress());
 		}
-		model.addAttribute("allTotalPrice", allTotal);
-		
+		orderService.deleteCartList(principal.getName());
+		System.out.println(list);
+	
+		System.out.println(allTotal);
+		System.out.println(dto.getBookCount());
+		model.addAttribute("a", allTotal);
+		model.addAttribute("b", bookCount);
 		MemberDto member = orderService.getMemberById(principal.getName());
 		model.addAttribute("member", member);
 	}
 	
 	@PostMapping ("complete")
-	   public void addcart(Model model, OrderDto dto, Principal principal) {
+	   public void addcart(Model model, OrderDto dto, Principal principal,RedirectAttributes rttr) {
+		
+		System.out.println(dto);
 		List<CartDto> list = orderService.cartList(principal.getName());
 		
 		int allTotal = 0;
 		for (CartDto cart : list) {
 			allTotal += cart.getTotalPrice();
+			
+			
 			orderService.addOrder(cart, principal.getName(), dto.getRecipient(), dto.getAddress());
 			
 		}
 		
+		
+		
 		orderService.deleteCartList(principal.getName()); //카트 정보가 추가된 뒤 삭제
 	
-		model.addAttribute("allTotalPrice", allTotal);
+		rttr.addFlashAttribute("a", allTotal);
+		rttr.addFlashAttribute("b", list.size());
 		
 		MemberDto member = orderService.getMemberById(principal.getName());
 		model.addAttribute("member", member);
@@ -81,6 +98,48 @@ public class OrderController {
 		
 		
 	}
-		   
+	
+	
+	@PostMapping("directComplete")
+	public String directComplete(Model model, String recipient, int totalOrderPrice, OrderDto dto, Principal principal, String address, int bookCount, RedirectAttributes rttr) {
+	System.out.println(address);
+	System.out.println(recipient);
+	
+	model.addAttribute("a", totalOrderPrice);
+	model.addAttribute("b", bookCount);
+	
+	dto = orderService.getProduct(dto.getProductId());
+	dto.setBookCount(bookCount);
+	System.out.println(dto);
+	System.out.println(principal.getName());
+	System.out.println(dto.getRecipient());
+	System.out.println(dto.getAddress());
+	orderService.addDirectOrder(dto, principal.getName(), recipient, address);
+	
+	MemberDto member = orderService.getMemberById(principal.getName());
+	model.addAttribute("member", member);
+	return "/order/complete";
+	}
+
+
+	//바로 구매
+	@GetMapping("direct")
+	public void directOrder(Model model, ProductPageDto dto, Principal principal,
+			int productId, int Purchase, int id) {
+		
+		//상품 get에서 넘어온 구매 수량
+		OrderDto order = orderService.getProduct(productId);
+		order.setBookCount(Purchase);
+		order.setTotalOrderPrice(order.getPrice() * Purchase);
+		
+		model.addAttribute("price", order.getTotalOrderPrice());
+		model.addAttribute("order", order);
+		
+		//member 정보 받아오기
+		MemberDto member = orderService.getMemberById(principal.getName());
+		model.addAttribute("member", member); //jsp에 넘기기
+		model.addAttribute("productId", productId);
+		model.addAttribute("bookCount", Purchase);
+	}		   
 	
 }

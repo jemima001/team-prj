@@ -279,7 +279,7 @@
 							aria-label="Close"></button>
 					</div>
 					<div class="modal-body">
-						<form id="form10" action="${appRoot }/order/complete" method="post">
+						<form id="form10" action="${appRoot }/order/complete" method="get">
 							<input type="text" value="${member.id }" name="id" readonly />
 							고객님의 주문 <br>
 							<br>
@@ -288,7 +288,7 @@
 
 							<input type="text" name="recipient" readonly /> 고객님의
 							<input type="text" name="address" readonly /> 주소로 배송됩니다.
-
+							
 						</form>
 					</div>
 					<div class="modal-footer">

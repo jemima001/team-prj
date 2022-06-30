@@ -54,7 +54,6 @@
 			//input 값 옮기기
 			$("#form10").find("[name=recipient]").val($("#recipientInput1").val());
 			$("#form10").find("[name=address]").val($("#addressInput1").val());
-
 		});
 
 		
@@ -102,9 +101,6 @@
 					<div class="row">
 						<div class="col">
 							<h6>  ▼ 주문 목록  </h6>
-							<c:if test="${not empty message }">
-								<div class="alert alert-primary">${message }</div>
-							</c:if>
 
 							<table class="table">
 								<thead>
@@ -121,12 +117,11 @@
 									
 
 										<tr>
-											<th><input type="hidden" value="${productPage.id }"
-												name="cartIds" form="form21" /></th>
+											<th><input type="hidden"  value="${order.orderId }" /></th>
 
-											<td>${productPage.boardTitle }</td>
-											<td>${cart.bookCount }개</td>
-											<td>${cart.totalPrice }원</td>
+											<td>${order.productName }</td>
+											<td>${order.bookCount }개</td>
+											<td>${order.totalOrderPrice }원</td>
 											<td>무료</td>
 										</tr>
 
@@ -145,7 +140,7 @@
 								<thead>
 									<tr>
 
-										<th>총 주문 상품 ${cartList.size() }개</th>
+										<th>총 주문 상품 1개</th>
 
 									</tr>
 								</thead>
@@ -154,7 +149,7 @@
 
 
 										<td>총 주문 금액</td>
-										<td>${allTotalPrice }원</td>
+										<td>${order.totalOrderPrice }원</td>
 
 
 									</tr>
@@ -267,7 +262,10 @@
 							aria-label="Close"></button>
 					</div>
 					<div class="modal-body">
-						<form id="form10" action="${appRoot }/order/complete" method="post">
+						<form id="form10" action="${appRoot }/order/directComplete" method="post">
+							<input type="hidden" value="${productId }" name="productId">
+							<input type="hidden" value="${order.totalOrderPrice }" name="totalOrderPrice">
+							<input type="hidden" value="${order.bookCount }" name="bookCount">
 							<input type="text" value="${member.id }" name="id" readonly />
 							고객님의 주문 <br>
 							<br>
