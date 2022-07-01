@@ -21,12 +21,12 @@
 	} */
 </style>
 
-<nav class="navbar" style="background-color: #d3b7a1;">
+<nav class="navbar" style="background-color: #d1e7dd;">
 	<div class="container">
 		<div>
 			<ul class="nav me-auto">
 				<li>
-					<h2 style="display: inline;">고객센터</h2>
+					<h4 style="display: inline;">고객센터</h4>
 				</li>
 				<sec:authorize access="hasRole('ADMIN')">
 					<li class="nav-item" style="background-color: #eae1d8;"><a

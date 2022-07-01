@@ -9,6 +9,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
 	integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
@@ -28,12 +29,25 @@
 	
 	
 	
-	</script>
-	
+</script>
+<style>
+
+a{
+	text-decoration-line: none;
+}
+a:hover { color:black;}
+body{
+	font-family: 나눔스퀘어, 'NanumSquare', sans-serif;
+}
+.table>:not(caption)>*>* {
+    padding: 12px;
+}
+</style>
 <title>Insert title here</title>
 </head>
 <body>
 	<my:pagenavbar current="cart"></my:pagenavbar>
+	<br />
 	<div class="container">
 		<div class="row">
 			<div class="col">

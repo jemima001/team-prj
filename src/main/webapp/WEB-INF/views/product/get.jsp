@@ -11,7 +11,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css">
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
 	integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
@@ -74,15 +75,43 @@
 .row {
 	text-align: center;
 }
-a{
+
+a {
 	text-decoration-line: none;
 }
-a:hover { color:black;}
-body{
+
+a:hover {
+	color: black;
+}
+
+body {
 	font-family: 나눔스퀘어, 'NanumSquare', sans-serif;
 }
+
 .table>:not(caption)>*>* {
-    padding: 12px;
+	padding: 12px;
+}
+.accordion-button:not(.collapsed) {
+    color: #f4eedd;
+    background-color: #608463;
+    box-shadow: inset 0 -1px 0 rgb(0 0 0 / 13%);
+	opacity: 1;
+}
+.accordion-button {
+    color: #f4eedd;
+    text-align: left;
+    background-color: #608463;
+    opacity: 0.7;
+}
+.accordion-button::after {
+    flex-shrink: 0;
+    width: 0rem;
+    height: 1.25rem;
+    margin-left: auto;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 1.25rem;
+    transition: transform .2s ease-in-out;
 }
 </style>
 <title>Insert title here</title>
@@ -187,7 +216,6 @@ body{
 
 								<!-- --------------------------------------------------- -->
 
-
 								<p>판매 상품 : ${product.productName }</p>
 								<h2>${product.price }원</h2>
 
@@ -203,17 +231,20 @@ body{
 							</form>
 							<br />
 							<br />
-							<br /><br /><br />
+							<br />
+							<br />
+							<br />
 							<br />
 							<c:if test="${product.stock != 0 }">
-							<div class="btn-group" role="group" style="width: 250px; align-content: center">
-								<sec:authorize access="hasRole('USER')">
+								<div class="btn-group" role="group"
+									style="">
+									<sec:authorize access="hasRole('USER')">
+										<button class="buttonTobuy btn btn-outline-success"
+											id="purchaseButton">장바구니</button>
+									</sec:authorize>
 									<button class="buttonTobuy btn btn-outline-success"
-										id="purchaseButton">장바구니</button>
-								</sec:authorize>
-								<button class="buttonTobuy btn btn-outline-success"
-									form="buybutton">바로구매</button>
-							</div>
+										form="buybutton">바로구매</button>
+								</div>
 							</c:if>
 							<c:if test="${product.stock == 0 }">
 						품절되었습니다.
@@ -223,7 +254,7 @@ body{
 
 
 
-					</div>
+								</div>
 					<%-- <c:forEach items="${productboard.fileList }" var="file">
 			<%
 				if (pageContext.getAttribute("file") != null) {
@@ -248,8 +279,8 @@ body{
 				</div>
 			</div>
 
-<br />
-<br />
+			<br />
+			<br />
 			<!-- --------------------------------------------------- -->
 
 			<h2 class="justify-content-center">상세 정보</h2>
@@ -301,13 +332,13 @@ body{
 					<input type="submit" value="작성" />
 
 				</form> --%>
-				 
-				
+
+
 				<table class="table">
 					<thead>
 						<tr>
 
-							<th scope="col">리뷰 </th>
+							<th scope="col">리뷰</th>
 
 
 						</tr>
@@ -336,40 +367,41 @@ body{
 									<div class="accordion" id="accordionPanelsStayOpenExample">
 										<div class="accordion-item">
 											<h2 class="accordion-header" id="panelsStayOpen-headingOne">
-												<button class="accordion-button" type="button"
+												<button class="accordion-button collapsed" type="button"
 													data-bs-toggle="collapse"
 													data-bs-target="#review${reviewlist.id }"
 													aria-expanded="false"
-													aria-controls="panelsStayOpen-collapseOne">
+													aria-controls="panelsStayOpen-collapseOne"
+													style="">
 													${reviewlist.reviewTitle }</button>
 											</h2>
 											<div id="review${reviewlist.id }"
 												class="accordion-collapse collapse"
 												aria-labelledby="panelsStayOpen-headingOne">
 												<div class="accordion-body">
-													id :${reviewlist.id }  ${reviewlist.reviewBody }
+													id :${reviewlist.id } ${reviewlist.reviewBody }
 													<br />
-											 		 <c:forEach items="${reviewlist.fileList}" var="reviewfile">
-													
-													 <img style="width: 200px" class="img-thumbnail"
-														src="${imageUrl }/project/reviewpage/${reviewlist.id }/${reviewfile}"
-														alt="" />
+													<c:forEach items="${reviewlist.fileList}" var="reviewfile">
+
+														<img style="width: 200px" class="img-thumbnail"
+															src="${imageUrl }/project/reviewpage/${reviewlist.id }/${reviewfile}"
+															alt="" />
 
 													</c:forEach>
 													<c:if test="${not empty check }">
-													<form action="${appRoot }/product/deleteReview"
-														method="post">
-														<input type="hidden" value="${productboard.id }"
-															name="productPage" />
-														<input type="hidden" value="${reviewlist.id} " name="id" />
-														<input type="submit" value="리뷰 삭제" />
-													</form>
+														<form action="${appRoot }/product/deleteReview"
+															method="post">
+															<input type="hidden" value="${productboard.id }"
+																name="productPage" />
+															<input type="hidden" value="${reviewlist.id} " name="id" />
+															<input type="submit" value="리뷰 삭제" />
+														</form>
 
-													<form action="${appRoot }/review/modif" method="get">
-														<input type="hidden" name="id" value="${reviewlist.id} " />
-														<input type="submit" value="리뷰 수정" />
+														<form action="${appRoot }/review/modif" method="get">
+															<input type="hidden" name="id" value="${reviewlist.id} " />
+															<input type="submit" value="리뷰 수정" />
 
-													</form>
+														</form>
 													</c:if>
 												</div>
 											</div>
