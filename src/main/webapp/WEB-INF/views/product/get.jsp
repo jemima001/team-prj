@@ -272,7 +272,7 @@ body{
 					<input type="submit" value="판매글 수정" />
 				</form>
 			</sec:authorize>
-			<c:if test="${check == true && checkNumReview == 0 }">
+			<c:if test="${not empty check && show}">
 				<form action="${appRoot }/review/add" method="get">
 					<input type="hidden" name="prodctPageid"
 						value="${productboard.id }" />
@@ -356,7 +356,7 @@ body{
 														alt="" />
 
 													</c:forEach>
-													<c:if test="${check == true }">
+													<c:if test="${not empty check }">
 													<form action="${appRoot }/product/deleteReview"
 														method="post">
 														<input type="hidden" value="${productboard.id }"

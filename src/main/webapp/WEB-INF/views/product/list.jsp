@@ -94,6 +94,7 @@ body {
 		</div>
 	</div>
 	<br />
+	<!-- ---------------------------------------------- -->
 	<div style="background-color: #608463;">
 		<table class="table"
 			style="background-color: #608463; margin: 0; padding: 10;">
@@ -102,53 +103,28 @@ body {
 					<th>
 						<a href="${appRoot }/product/list" style="color: #f4eedd;">ALL</a>
 					</th>
-					<th>
-						<a href="${appRoot }/product/list?cat=1&search="
-							style="color: #f4eedd;">화분식물</a>
-					</th>
-					<th>
-						<a href="${appRoot}/product/list?cat=2&search="
-							style="color: #f4eedd;">행잉식물</a>
-					</th>
-					<th>
-						<a href="${appRoot}/product/list?cat=3&search="
-							style="color: #f4eedd;">선인장식물</a>
-					</th>
-					<th>
-						<a href="${appRoot}/product/list?cat=4&search="
-							style="color: #f4eedd;">대형식물</a>
-					</th>
-					<th>
-						<a href="${appRoot}/product/list?cat=5&search="
-							style="color: #f4eedd;">꽃</a>
-					</th>
-					<th>
-						<a href="${appRoot}/product/list?cat=6&search="
-							style="color: #f4eedd;">기타</a>
-					</th>
+					<c:forEach items="${ m_category}" var="category">
+						<th class="nav-item">
+							<a class="nav-link "
+								href="${approot }/market/product/list?cat=${category.product_Middle_Class}&search="
+								style="color: #f4eedd;">${category.middle_Name }</a>
+						</th>
+					</c:forEach>
 				</tr>
 			</thead>
 		</table>
 	</div>
 
-	<div style="background-color: #eae1d8">
-		<!-- <form action="/market/product/list"> -->
-		<div class="d-flex">
-			<ul class="nav justify-content-center">
-				<li class="nav-item">
-					<a class="nav-link "
-						href="${approot }/market/product/list?cat=0&search="
-						style="color: black;">전체상품</a>
-				</li>
-				<c:forEach items="${ m_category}" var="category">
-					<li class="nav-item">
-						<a class="nav-link "
-							href="${approot }/market/product/list?cat=${category.product_Middle_Class}&search="
-							style="color: black;">${category.middle_Name }</a>
-					</li>
-				</c:forEach>
-			</ul>
-			<%-- <div class="btn-group" role="group"
+	<!-- ---------------------------------------------- -->
+
+
+
+
+
+	<!-- ---------------------------------------------- -->
+
+
+	<%-- <div class="btn-group" role="group"
 						aria-label="Basic radio toggle button group" style="display:;">
 						<div>
 							<input type="radio" class="btn-check " name="cat" id="btnradio0"
@@ -163,19 +139,18 @@ body {
 										for="btnradio${category.product_Middle_Class}">${category.middle_Name }</label>
 								</div>
 							</c:forEach> --%>
-			<div>
-				<span>
-					<sec:authorize access="hasRole('ADMIN')">
-						<a href="${appRoot }/product/add" class="btn btn-outline-dark">게시물
-							작성</a>
-						<a href="${appRoot }/product/productlist"
-							class="btn btn-outline-dark">상품 삭제</a>
-					</sec:authorize>
-				</span>
-			</div>
-
-		</div>
+	<div>
+		<span>
+			<sec:authorize access="hasRole('ADMIN')">
+				<a href="${appRoot }/product/add" class="btn btn-outline-dark">게시물
+					작성</a>
+				<a href="${appRoot }/product/productlist"
+					class="btn btn-outline-dark">상품 삭제</a>
+			</sec:authorize>
+		</span>
 	</div>
+
+
 	<%-- <div class="me-auto">
 						<span class="input-group ">
 							<input type="text" placeholder="검색어를 입력해 주세요"
@@ -223,6 +198,9 @@ body {
 						<div class="card mb-3" style="max-width: 540px;">
 							<div class="row g-0">
 								<div class="col-md-7">
+									<c:url value="/product/get" var="getUrl">
+										<c:param name="id" value="${pege.id }"></c:param>
+									</c:url>
 									<a href="${getUrl}">
 										<c:if test="${pege.fileName !=null}">
 											<img style="width: 100%; height: 100%;" class=""
@@ -237,9 +215,7 @@ body {
 								</div>
 								<div class="col-md-5 ">
 									<div class="" style="margin-top: 70px">
-										<c:url value="/product/get" var="getUrl">
-											<c:param name="id" value="${pege.id }"></c:param>
-										</c:url>
+
 
 										<a class="align-bottom" href="${getUrl }">
 											<c:out value="${pege.boardTitle }" />
@@ -257,7 +233,7 @@ body {
 
 			</div>
 
-			<table class="table align-middle">
+<%-- 			<table class="table align-middle">
 				<thead>
 					<tr class="table-borderless">
 						<th>
@@ -308,28 +284,28 @@ body {
 								</a>
 								<div>${pege.priceTopage }원</div>
 
-								<%-- <c:if test="${board.hasFile }">
+								<c:if test="${board.hasFile }">
 										<span class="babge rounded-pill bg-light text-dark">
 											<i class="fa-solid fa-file"></i>
 										</span>
 									
-									</c:if> --%>
+									</c:if>
 
-								<%-- <c:if test="${board.numOfReply > 0 }">
+								<c:if test="${board.numOfReply > 0 }">
 										<span class="badge rounded-pill bg-light text-dark">
 											<i class="fa-solid fa-comment-dots"></i>
 											${board.numOfReply }
 										</span>
-									</c:if> --%>
+									</c:if>
 
 
 							</td>
-							<%-- <td>${pege.inserttime }</td> --%>
+							<td>${pege.inserttime }</td>
 						</tr>
 					</c:forEach>
 				</tbody>
 
-			</table>
+			</table> --%>
 			<!-- ---------- 페이지 네비게이터 ----------- -->
 			<div class="row justify-content-center">
 				<div class="col-12 col-lg-10">
