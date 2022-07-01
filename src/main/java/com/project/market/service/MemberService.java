@@ -2,7 +2,11 @@ package com.project.market.service;
 
 import java.util.List;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,11 +15,35 @@ import com.project.market.domain.AddressDto;
 import com.project.market.domain.MemberDto;
 import com.project.market.domain.OrderDto;
 import com.project.market.domain.ProductDto;
+import com.project.market.domain.ReviewpageDto;
 import com.project.market.mapper.MemberMapper;
+
+import software.amazon.awssdk.regions.Region;
+import software.amazon.awssdk.services.s3.S3Client;
+import software.amazon.awssdk.services.s3.model.DeleteObjectRequest;
 
 @Service
 public class MemberService {
 
+	@Value("${aws.s3.bucketName}")
+	private String bucketName;
+
+	private S3Client s3;
+
+	// 파일 업로드 세팅
+	@PostConstruct
+	public void init() {
+		Region region = Region.AP_NORTHEAST_2;
+
+		this.s3 = S3Client.builder().region(region).build();
+	}
+
+	// 파일업 메소드  종료
+	@PreDestroy
+	public void destroy() {
+		this.s3.close();
+	}
+	
 	@Autowired
 	private MemberMapper mapper;
 
@@ -56,6 +84,9 @@ public class MemberService {
 			// queryId 받아오기
 			List<Integer> queryIdList = mapper.selectAllQueryId(dto.getId());
 			
+			// 리뷰 사진 이름 아이디 받아오기
+			List<ReviewpageDto> reviewList = mapper.selectAllreview(dto.getId());
+			
 			// 문의 파일 삭제
 			for(Integer queryId : queryIdList) {
 				mapper.removeQueryFile(queryId);
@@ -70,6 +101,13 @@ public class MemberService {
 			for(Integer queryId : queryIdList) {
 				mapper.removeAnswers(queryId);
 			}
+			// 리뷰 사진 삭제
+			for(ReviewpageDto list : reviewList) {
+				deleteReviewImg(list.getReviewId(), list.getFileName());
+			}
+			
+			// 리뷰 삭제
+			mapper.removereview(dto.getId());
 			
 			// 문의 삭제
 			mapper.removeQuestions(dto.getId());
@@ -93,6 +131,15 @@ public class MemberService {
 		}
 
 		return false;
+	}
+	
+	private void deleteReviewImg(int id, String fileName) {
+		String key = null;
+		
+		 key = "project/reviewpage/" + id + "/" + fileName;
+		
+		DeleteObjectRequest deleteObjectRequest = DeleteObjectRequest.builder().bucket(bucketName).key(key).build();
+		s3.deleteObject(deleteObjectRequest);
 	}
 
 	public boolean modifyMember(MemberDto dto, String oldPassword) {

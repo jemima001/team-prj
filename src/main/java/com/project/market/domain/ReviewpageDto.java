@@ -13,5 +13,7 @@ public class ReviewpageDto {
 	private String revireFileName;
 	private List<String> fileList;
 	private String memberId;
+	private int reviewId;
+	private String fileName;
 	
 }

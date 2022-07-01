@@ -38,7 +38,7 @@
 	</c:url>
 </sec:authorize>
 
-<nav class="navbar" style="background-color: #d3b7a1;
+<nav class="navbar" style="background-color: #d1e7dd;
 						   position: sticky;
 						   top: 58px;
 						   opacity: 0.8;

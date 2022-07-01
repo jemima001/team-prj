@@ -26,6 +26,7 @@
 		<security:intercept-url pattern="/review/add" access="isAuthenticated()"/> 
 		<security:intercept-url pattern="/review/modif" access="isAuthenticated()"/>
 		<security:intercept-url pattern="/product/deleteReview" access="isAuthenticated()"/>
+		<security:intercept-url pattern="/order/direct" access="isAuthenticated()"/>
 		<!-- 공지사항 create, update, delete -->
 		<security:intercept-url pattern="/qna/query" access="isAuthenticated()"/>
 		<security:intercept-url pattern="/qna/list" access="isAuthenticated()"/>

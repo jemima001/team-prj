@@ -6,6 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css" integrity="sha512-GQGU0fMMi238uA+a/bdWJfpUGKUkBdgfFdgBm72SUQ6BeyWjoY/ton0tEjH+OSH9iP4Dfh+7HM0I9f5eR0L/4w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
@@ -18,8 +19,54 @@
 	$(document).ready(function() {
 
 		//기존 암호, 작성 암호 일치 시에 주문하기 버튼 활성화
-		let passwordCheck = true;
-
+		let recipientOk = false;
+		let addressOk = false;
+		let check = $("#addressInput1").val();
+		let check2 = $("#recipientInput1").val();
+		if(check !=="" ){
+			console.log("널 if")
+			 addressOk = true;
+		} else if (check =="" ){
+			console.log("else if")
+			addressOk = false;
+		}
+		
+		
+		const enableSubmit = function() {
+			if (recipientOk && addressOk) {
+				$("#error").empty();
+				$("#orderCheckButton1").removeAttr("disabled");
+			} else {
+				$("#error").text("수령인과 주소를 확인해주세요");
+				$("#orderCheckButton1").attr("disabled", "");
+			}
+		}
+		
+		$("#recipientInput1").keyup(function(){
+			
+			
+			 check2 = $("#recipientInput1").val();
+				if(check2 != "" ){
+					console.log("널2 if")
+					 recipientOk = true;
+				} else{
+					console.log("else2 if")
+					recipientOk = false;
+				}
+			enableSubmit();
+		});
+		$("#addressInput1").keyup(function(){
+		 check = $("#addressInput1").val();
+			if(check != "" ){
+				console.log("널 if")
+				 addressOk = true;
+			} else{
+				console.log("else if")
+				addressOk = false;
+			}
+		
+			enableSubmit();
+		}); 
 		// 회원 닉네임
 		const nickName = $("#nickNameInput1").val();
 
@@ -54,6 +101,8 @@
 			//input 값 옮기기
 			$("#form10").find("[name=recipient]").val($("#recipientInput1").val());
 			$("#form10").find("[name=address]").val($("#addressInput1").val());
+			$("#form10").find($("#recipient9")).text($("#recipientInput1").val());
+			$("#form10").find($("#address9")).text($("#addressInput1").val());
 		});
 
 		
@@ -73,7 +122,18 @@
 		*/
 	});
 </script>
-
+<style>
+a{
+	text-decoration-line: none;
+}
+a:hover { color:black;}
+body{
+	font-family: 나눔스퀘어, 'NanumSquare', sans-serif;
+}
+.table>:not(caption)>*>* {
+    padding: 12px;
+}
+</style>
 </head>
 <body>
 
@@ -201,10 +261,6 @@
 						<label for="recipientInput1" class="form-label"> 수령인 이름 </label>
 						<input name=recipient class="form-control" type="text" id="recipientInput1" value="" />
 						
-						<label for="zipCodeInput1" class="form-label"> 우편번호 (新 주소) ▷ <!-- modal로 구현해도 될듯 / 지금 문제 : 창이 우체국 창으로 바뀌어버림-->
-							<a href="https://www.epost.go.kr/search.RetrieveIntegrationNewZipCdList.comm">우체국 검색</a> </label>
-						<input id="zipCodeInput1" class="form-control" type="number" value="" min="01000" max="63644" />
-						
 						<label for="addressInput1" class="form-label"> 기본 배송지 (수정 가능합니다.) </label>
 						<input id="addressInput1" class="form-control" type="text" id="addressInput1" value="${member.address }" />
 
@@ -242,11 +298,12 @@
 
 					<!-- 결제 전 정보 확인 Modal -->
 					<!-- Button trigger modal -->
+					<%-- <c:if test="$('#recipientInput1').val != null && $('#addressInput1').val != null"></c:if> --%>
 					<button id="orderCheckButton1" type="button"
-						class="btn btn-primary" form="form9" type="submit"
+						class="btn btn-success" form="form9" type="submit"
 						data-bs-toggle="modal" data-bs-target="#orderCheckModal1"
-						id="confirm">주문 확인</button>
-
+						id="confirm" disabled>주문 확인</button>
+					<p id="error">수령인과 주소를 확인해주세요</p>
 				</div>
 			</div>
 		</div>
@@ -266,15 +323,14 @@
 							<input type="hidden" value="${productId }" name="productId">
 							<input type="hidden" value="${order.totalOrderPrice }" name="totalOrderPrice">
 							<input type="hidden" value="${order.bookCount }" name="bookCount">
-							<input type="text" value="${member.id }" name="id" readonly />
-							고객님의 주문 <br>
-							<br>
+							<input type="hidden" value="${member.id }" name="id" readonly />
+							<p>${member.id }고객님의 주문</p>
 
 							<!-- <input id="recipientName"  type="text" name=recipient value="${recipientInput1}" -->
 
-							<input type="text" name="recipient" readonly /> 고객님의
-							<input type="text" name="address" readonly /> 주소로 배송됩니다.
-
+							<input type="hidden" name="recipient" readonly /> <span id="recipient9"></span>고객님의 <br />
+							<input type="hidden" name="address" readonly /> <span id="address9"></span>주소로 배송됩니다.
+							
 						</form>
 					</div>
 					<div class="modal-footer">
