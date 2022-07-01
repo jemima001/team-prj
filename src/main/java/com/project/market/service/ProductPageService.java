@@ -373,7 +373,7 @@ public class ProductPageService {
 		return ok ==1;
 	}
 
-public boolean getBuyThis(int id, String name) {
+public BuycheckDto getBuyThis(int id, String name) {
 	if(name == null) {
 		name = "noLogin";
 	}
@@ -384,15 +384,15 @@ public boolean getBuyThis(int id, String name) {
 	System.out.println("num :"+num);
 	System.out.println("name:"+name);
 	System.out.println("id :"+id);
-	boolean out;
+	/*boolean out;
 	if(num == null ) {
 		out = false;
 	} else {
 		out = num.getMemberId().equals(name) && num.getProductPageid() == id ;
 		
-	}
+	}*/
 	
-	return out;
+	return num;
 }
 
 public List<ProductDto> ProductlistForajax(String search) {

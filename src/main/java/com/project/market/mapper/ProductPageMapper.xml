@@ -180,12 +180,12 @@
 						</when>
 
 
-						<when test="cat== 7">
+						<when test="cat== 6">
 							WHERE pm.id = 6 and f.whichboard =0
 
 						</when>
 
-						<when test="cat== 8">
+						<when test="cat== 7">
 							WHERE pm.id = 7 and f.whichboard =0
 
 						</when>
@@ -411,8 +411,8 @@ SELECT Orders.orderId,
 				Orders.memberId,
                 Product.id as Productid,
                 Orders.orderState,
-                ProductPage.id as  ProductPageid
-                
+                ProductPage.id as  ProductPageid,
+                COUNT( ProductPage.id) as howMany
                 FROM Orders
 				Join Product ON Orders.productName = Product.name
                 Join ProductPage ON Product.id = ProductPage.productId

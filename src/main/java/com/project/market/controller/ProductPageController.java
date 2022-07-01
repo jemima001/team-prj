@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.project.market.domain.BuycheckDto;
 import com.project.market.domain.PaginationDto;
 import com.project.market.domain.ProductDto;
 import com.project.market.domain.ProductPageDto;
@@ -143,7 +144,7 @@ public class ProductPageController {
 			 getName = principal.getName();
 		}
 		int checkNumReview =service.reviewNum(id,getName);
-		boolean buyThis = service.getBuyThis(id,getName);
+		BuycheckDto buyThis = service.getBuyThis(id,getName);
 		System.out.println("checkNumReview :"+checkNumReview);
 		System.out.println("buyThis :"+ buyThis);
 //		List<ReviewpageDto> reviewfileList = service.getreviewfile(id);
@@ -151,6 +152,7 @@ public class ProductPageController {
 		System.out.println("reviewList :"+reviewList);
 //		System.out.println("reviewfileList :"+reviewfileList);
 		Board.setFileList(fileList);
+		boolean show = (buyThis.getHowMany() > checkNumReview);
 		
 		//System.out.println("fileList:" +fileList);
 		model.addAttribute("reviewList",reviewList);
@@ -158,6 +160,7 @@ public class ProductPageController {
 		model.addAttribute("product", product);
 		model.addAttribute("check",buyThis);
 		model.addAttribute("checkNumReview ",checkNumReview );
+		model.addAttribute("show", show);
 //		model.addAttribute("reviewfileList",reviewfileList);
 	}
 	
