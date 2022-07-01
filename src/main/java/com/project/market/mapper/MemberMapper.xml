@@ -248,6 +248,19 @@
 		ORDER BY o.orderId
 		LIMIT #{limitNumber},10
 	</select>
+	
+	<delete id="removereview">
+		DELETE FROM ReviewPage
+		WHERE memberId = #{id}
+	</delete>
+	
+	<select id="selectAllreview"
+		resultType="com.project.market.domain.ReviewpageDto">
+		SELECT boardId reviewid, fileName
+		FROM File f
+		JOIN ReviewPage r ON r.id = f.boardId
+		WHERE r.memberId = #{id} and f.WhichBoard = 1
+	</select>
 </mapper>
 
 

@@ -9,6 +9,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
 	integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
@@ -217,12 +218,18 @@
 	});
 </script>
 
-
+<style>
+body{
+	font-family: 나눔스퀘어, 'NanumSquare', sans-serif;
+}
+</style>
 <title>Insert title here</title>
 </head>
 <body>
 	<my:pagenavbar current="addproduct"></my:pagenavbar>
 	<my:mypagenavbar current="addprodut"></my:mypagenavbar>
+	
+	<div class="container">
 	<form action="${appRoot }/product/addProduct" method="post">
 		<label for="productName" class="form-label">상품명</label>
 		<span>
@@ -231,7 +238,6 @@
 		</span>
 		<input id="addProductName" type="text" name="productName"
 			class="form-control" id="productNameInput">
-		</div>
 
 		상품 중 분류 :
 		<span>
@@ -280,5 +286,8 @@
 		<input id="addSubmit" type="submit" value="상품추가" disabled />
 
 	</form>
+	</div>
+	</div>
+
 </body>
 </html>

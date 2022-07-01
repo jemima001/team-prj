@@ -93,11 +93,14 @@
 		inserttime,
 		f.fileName as fileName
 
-		FROM ProductPage as pp Join ProductCode as p ON pp.productId
+		FROM ProductPage as pp Join
+		ProductCode as p ON pp.productId
 		= p.Productid
-		JOIN Product ON Product.id =pp.productId
+		JOIN Product ON
+		Product.id =pp.productId
 		Join
-		Product_middle_class as pm ON p.ProductCode0 = pm.id
+		Product_middle_class as pm ON
+		p.ProductCode0 = pm.id
 		LEFT JOIN File as f ON pp.id = f.boardId
 
 		<choose>
@@ -109,41 +112,49 @@
 
 					<choose>
 						<when test="cat==0">
-							WHERE pp.BoardTitle LIKE #{search} and f.whichboard =0 
+							WHERE pp.BoardTitle LIKE #{search} and
+							f.whichboard =0
 						</when>
 						<when test="cat== 1">
 							WHERE pm.id = 1
-							AND pp.BoardTitle LIKE #{search} and f.whichboard =0 
+							AND pp.BoardTitle LIKE #{search}
+							and f.whichboard =0
 						</when>
 						<when test="cat== 2">
 							WHERE pm.id = 2
-							AND pp.BoardTitle LIKE #{search} and f.whichboard =0 
+							AND pp.BoardTitle LIKE #{search}
+							and f.whichboard =0
 						</when>
 
 						<when test="cat== 3">
 							WHERE pm.id = 3
-							AND pp.BoardTitle LIKE #{search} and f.whichboard =0 
+							AND pp.BoardTitle LIKE #{search}
+							and f.whichboard =0
 						</when>
 
 						<when test="cat== 4">
 							WHERE pm.id = 4
-							AND pp.BoardTitle LIKE #{search} and f.whichboard =0 
+							AND pp.BoardTitle LIKE #{search}
+							and f.whichboard =0
 						</when>
 
 						<when test="cat== 5">
 							WHERE pm.id = 5
-							AND pp.BoardTitle LIKE #{search} and f.whichboard =0
+							AND pp.BoardTitle LIKE #{search}
+							and f.whichboard =0
 						</when>
 
 
 						<when test="cat== 7">
 							WHERE pm.id = 6
-							AND pp.BoardTitle LIKE #{search} and f.whichboard =0
+							AND pp.BoardTitle LIKE #{search}
+							and f.whichboard =0
 						</when>
 
 						<when test="cat== 8">
 							WHERE pm.id = 7
-							AND pp.BoardTitle LIKE #{search} and f.whichboard =0
+							AND pp.BoardTitle LIKE #{search}
+							and f.whichboard =0
 						</when>
 					</choose>
 
@@ -195,15 +206,15 @@
 			</when>
 
 			<when test="cat== null">
-				 
+
 				WHERE pp.BoardTitle LIKE #{search} and f.whichboard =0
 
 			</when>
 		</choose>
-	
- GROUP BY pp.id
-ORDER BY  inserttime DESC 
-LIMIT #{pageToStart},#{onePageAllBoardNum}
+
+		GROUP BY pp.id
+		ORDER BY inserttime DESC
+		LIMIT #{pageToStart},#{onePageAllBoardNum}
 	</select>
 
 	<delete id="deleteBoard">
@@ -213,17 +224,17 @@ LIMIT #{pageToStart},#{onePageAllBoardNum}
 	</delete>
 
 	<insert id="insertFile">
-	<if test="mod == 'productpage'">
-	
-		INSERT INTO File (boardId, fileName, whichboard)
-		VALUES(#{boardId}, #{fileName}, 0);
-	</if>
-	<if test="mod == 'reviewpage'">
-	INSERT INTO File (boardId, fileName, whichboard)
-		VALUES(#{boardId}, #{fileName}, 1);
-	
-	</if>
-	
+		<if test="mod == 'productpage'">
+
+			INSERT INTO File (boardId, fileName, whichboard)
+			VALUES(#{boardId}, #{fileName}, 0);
+		</if>
+		<if test="mod == 'reviewpage'">
+			INSERT INTO File (boardId, fileName, whichboard)
+			VALUES(#{boardId}, #{fileName}, 1);
+
+		</if>
+
 	</insert>
 
 	<update id="updateProduct">
@@ -257,31 +268,32 @@ LIMIT #{pageToStart},#{onePageAllBoardNum}
 	<select id="getprodutlist"
 		resultType="com.project.market.domain.ProductDto">
 
-		         SELECT Product.id as productId ,
-				Product.name as productName,
-				Product.Stock as stock,
-                Product.price as price,
-               
-                File.fileName,
-                ProductPage.id as boardId
-         FROM Product LEFT JOIN ProductPage on ProductPage.productId = Product.id
-					  LEFT JOIN File on File.boardid = ProductPage.id
-					  ORDER BY Stock
+		SELECT Product.id as productId ,
+		Product.name as productName,
+		Product.Stock as stock,
+		Product.price as price,
+
+		File.fileName,
+		ProductPage.id as boardId
+		FROM Product LEFT JOIN ProductPage on ProductPage.productId = Product.id
+		LEFT JOIN File on File.boardid = ProductPage.id
+		ORDER BY Stock
 
 	</select>
 
 	<delete id="deleteCategory">
 		DELETE FROM ProductCode
-		WHERE Productid = #{productId};
+		WHERE Productid =
+		#{productId};
 
 	</delete>
 
 
 	<delete id="deleteCart">
-	
-	DELETE FROM Cart
-        WHERE productId = #{productId};
-	
+
+		DELETE FROM Cart
+		WHERE productId = #{productId};
+
 	</delete>
 
 	<delete id="DeleteProduct">
@@ -289,12 +301,12 @@ LIMIT #{pageToStart},#{onePageAllBoardNum}
 		WHERE id = #{productId};
 
 	</delete>
-	
+
 	<delete id="deleteBoardfordeleteProduct">
-	DELETE FROM ProductPage
+		DELETE FROM ProductPage
 		WHERE productId = #{productId};
-	
-	
+
+
 	</delete>
 
 	<update id="modifyProduct">
@@ -307,137 +319,150 @@ LIMIT #{pageToStart},#{onePageAllBoardNum}
 
 	<select id="getFileForList" resultType="string">
 
-		SELECT * FROM File GROUP BY boardId;
+		SELECT * FROM File GROUP
+		BY boardId;
 	</select>
-	
+
 	<insert id="addCart">
-	INSERT INTO Cart(memberId,productId,bookCount)
-        VALUES(#{memberId},#{productId},#{bookCount})
-	
+		INSERT INTO Cart(memberId,productId,bookCount)
+		VALUES(#{memberId},#{productId},#{bookCount})
+
 	</insert>
-	
-	<select id="getAllBoardNum" resultType="com.project.market.domain.PaginationDto">
-	   SELECT COUNT(ProductPage.id) as allBoard
-	  FROM ProductPage LEFT JOIN Product ON ProductPage.productId = Product.id
-								JOIN ProductCode ON ProductCode.Productid = Product.id 
-                               <if test = "cat != 0">                               
-                               WHERE ProductCode0 = #{cat} ;
-                               </if>
-                               
-	
+
+	<select id="getAllBoardNum"
+		resultType="com.project.market.domain.PaginationDto">
+		SELECT COUNT(ProductPage.id) as allBoard
+		FROM ProductPage LEFT JOIN Product ON ProductPage.productId = Product.id
+		JOIN ProductCode ON ProductCode.Productid = Product.id
+		<if test="cat != 0">
+			WHERE ProductCode0 = #{cat} ;
+		</if>
+
+
 	</select>
 	<select id="getcat0" resultType="int">
-	SELECT ProductCode0 from ProductCode WHERE Productid = #{productId}  ;
-	
+		SELECT ProductCode0 from ProductCode WHERE Productid = #{productId} ;
+
 	</select>
-	
+
 	<select id="getCategoryName" resultType="string">
-	SELECT * FROM Product_middle_class WHERE id =#{category};
-	
+		SELECT * FROM Product_middle_class WHERE id =#{category};
+
 	</select>
-	
+
 	<select id="searchProductName" resultType="int">
-	SELECT count(id) FROM Product 
-        WHERE name LIKE #{name} 
-	
+		SELECT count(id) FROM Product
+		WHERE name LIKE #{name}
+
 	</select>
-	
-	
-	<insert id="AddreviewPage" useGeneratedKeys="true" keyColumn="id" keyProperty="id" >
-		INSERT INTO ReviewPage(reviewtitle,reviewbody,memberId,productpage)
+
+
+	<insert id="AddreviewPage" useGeneratedKeys="true"
+		keyColumn="id" keyProperty="id">
+		INSERT INTO
+		ReviewPage(reviewtitle,reviewbody,memberId,productpage)
 		VALUES(#{reviewTitle},#{reviewBody},#{memberId},#{productPage})
-	
+
 	</insert>
-	
+
 	<select id="getReviewList" resultMap="reviewPageMapper">
-	
-	         SELECT 
-	         ReviewPage.id as Id,
-				ReviewPage.productpage as productPage,
-                ReviewPage.reviewtitle as reviewTitle,
-                ReviewPage.reviewbody as reviewBody,
-                File.fileName as revireFileName,
-                File.fileName as fileList,
-                ReviewPage.memberId
-         FROM ReviewPage LEFT JOIN File ON File.boardid = ReviewPage.id
-        WHERE productpage =#{id}
+
+		SELECT
+		ReviewPage.id as Id,
+		ReviewPage.productpage as productPage,
+		ReviewPage.reviewtitle as reviewTitle,
+		ReviewPage.reviewbody as reviewBody,
+		File.fileName as revireFileName,
+		File.fileName as fileList,
+		ReviewPage.memberId
+		FROM ReviewPage LEFT JOIN File ON File.boardid = ReviewPage.id
+		WHERE productpage =#{id}
 	</select>
-	
-	<select id="getBoardFile" resultType = "string">
-	 SELECT fileName FROM File
-        WHERE boardId =#{id} and WhichBoard =0;
-	
+
+	<select id="getBoardFile" resultType="string">
+		SELECT fileName FROM File
+		WHERE boardId =#{id} and WhichBoard =0;
+
 	</select>
-	
-	<select id="replyViewFileList" resultType ="string">
-	 SELECT fileName FROM File
-        WHERE boardId =#{id} and WhichBoard =1;
+
+	<select id="replyViewFileList" resultType="string">
+		SELECT fileName FROM File
+		WHERE boardId =#{id} and WhichBoard =1;
 	</select>
-	
+
 	<delete id="deleteReview">
-	DELETE FROM ReviewPage
-        WHERE id = #{id};
-	
+		DELETE FROM ReviewPage
+		WHERE id = #{id};
+
+	</delete>
+
+
+	<!-- <select id="getreviewfile" resultMap="reviewPageMapper"> SELECT File.boardId 
+		as Id, fileName as fileList FROM ReviewPage JOIN File ON ReviewPage.id = 
+		File.boardId WHERE productpage = #{Id} AND WhichBoard =1; </select> -->
+
+	<resultMap id="fileListMapper" type="String">
+		<result property="fileList" column="fileList" javaType="String" />
+	</resultMap>
+
+	<resultMap type="com.project.market.domain.ReviewpageDto"
+		id="reviewPageMapper">
+		<id column="Id" property="id" />
+		<result column="productPage" property="productPage" />
+		<result column="reviewTitle" property="reviewTitle" />
+		<result column="reviewBody" property="reviewBody" />
+		<result column="revireFileName" property="revireFileName" />
+		<result column="memberId" property="memberId" />
+		<collection resultMap="fileListMapper" property="fileList" />
+	</resultMap>
+
+
+
+	<select id="whoBuyThis"
+		resultType="com.project.market.domain.BuycheckDto">
+		SELECT Orders.orderId,
+		Orders.memberId,
+		Product.id as Productid,
+		Orders.orderState,
+		ProductPage.id as ProductPageid,
+		COUNT( ProductPage.id) as howMany
+		FROM Orders
+		Join Product ON Orders.productName = Product.name
+		Join ProductPage ON Product.id = ProductPage.productId
+
+		WHERE orderState =1 and Orders.memberId=#{name} and ProductPage.id =#{id};
+	</select>
+
+	<select id="searchProduct"
+		resultType="com.project.market.domain.ProductDto">
+		SELECT Product.id as productId ,
+		Product.name as productName,
+		Product.Stock as stock,
+		Product.price as price,
+
+		File.fileName,
+		ProductPage.id as boardId
+		FROM Product LEFT JOIN ProductPage on ProductPage.productId = Product.id
+		LEFT JOIN File on File.boardid = ProductPage.id
+		WHERE Product.name LIKE #{search}
+		ORDER BY Stock;
+
+	</select>
+
+	<select id="reviewNum" resultType="int">
+		SELECT Count(id) FROM ReviewPage
+		WHERE productpage = #{id} and memberId =#{name};
+
+	</select>
+
+	<delete id="deletReviewFordeleteProduct">
+		DELETE FROM ReviewPage
+		WHERE ProductPage = #{boardId};
+
 	</delete>
 	
-	
-<!-- 	<select id="getreviewfile" resultMap="reviewPageMapper">
- SELECT File.boardId as Id,
-		fileName as fileList
-         FROM ReviewPage JOIN File ON ReviewPage.id = File.boardId
-         WHERE productpage = #{Id} AND WhichBoard =1;
-
-</select> -->
-
-<resultMap id="fileListMapper" type="String">
-    <result property="fileList" column="fileList" 
-            javaType="String" />
-</resultMap>
-
-<resultMap type="com.project.market.domain.ReviewpageDto" id="reviewPageMapper" >
-    <id column="Id" property="id" />
-    <result column="productPage" property="productPage" />
-    <result column="reviewTitle" property="reviewTitle" />
-    <result column="reviewBody" property="reviewBody" />
-    <result column="revireFileName" property="revireFileName" />
-    <result column="memberId" property="memberId" />
-    <collection resultMap="fileListMapper" property="fileList" />
-</resultMap>
-
-
-
-<select id="whoBuyThis" resultType ="com.project.market.domain.BuycheckDto">
-SELECT Orders.orderId,
-				Orders.memberId,
-                Product.id as Productid,
-                Orders.orderState,
-                ProductPage.id as  ProductPageid,
-                COUNT( ProductPage.id) as howMany
-                FROM Orders
-				Join Product ON Orders.productName = Product.name
-                Join ProductPage ON Product.id = ProductPage.productId
-               
-                WHERE orderState =1 and Orders.memberId=#{name} and ProductPage.id =#{id};
-</select>
-
-<select id="searchProduct"  resultType = "com.project.market.domain.ProductDto">
- SELECT Product.id as productId ,
-				Product.name as productName,
-				Product.Stock as stock,
-                Product.price as price,
-               
-                File.fileName,
-                ProductPage.id as boardId
-         FROM Product LEFT JOIN ProductPage on ProductPage.productId = Product.id
-					  LEFT JOIN File on File.boardid = ProductPage.id
-                      WHERE Product.name LIKE #{search}
-                      ORDER BY Stock;
-
-</select>
-
-<select id="reviewNum" resultType ="int">
-SELECT Count(id) FROM ReviewPage
-                WHERE productpage = #{id} and memberId =#{name};
-
-</select>
+	<delete id="deleteReviewForBoardDelete">
+		DELETE FROM ReviewPage
+		WHERE ProductPage = #{id};
+	</delete>
 </mapper>

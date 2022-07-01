@@ -91,27 +91,30 @@ body {
 .table>:not(caption)>*>* {
 	padding: 12px;
 }
+
 .accordion-button:not(.collapsed) {
-    color: #f4eedd;
-    background-color: #608463;
-    box-shadow: inset 0 -1px 0 rgb(0 0 0 / 13%);
+	color: #f4eedd;
+	background-color: #608463;
+	box-shadow: inset 0 -1px 0 rgb(0 0 0/ 13%);
 	opacity: 1;
 }
+
 .accordion-button {
-    color: #f4eedd;
-    text-align: left;
-    background-color: #608463;
-    opacity: 0.7;
+	color: #f4eedd;
+	text-align: left;
+	background-color: #608463;
+	opacity: 0.7;
 }
+
 .accordion-button::after {
-    flex-shrink: 0;
-    width: 0rem;
-    height: 1.25rem;
-    margin-left: auto;
-    content: "";
-    background-repeat: no-repeat;
-    background-size: 1.25rem;
-    transition: transform .2s ease-in-out;
+	flex-shrink: 0;
+	width: 0rem;
+	height: 1.25rem;
+	margin-left: auto;
+	content: "";
+	background-repeat: no-repeat;
+	background-size: 1.25rem;
+	transition: transform .2s ease-in-out;
 }
 </style>
 <title>Insert title here</title>
@@ -203,7 +206,8 @@ body {
 							<form id="cartForm" action="${cartUrl }" method="get"></form>
 
 							<!-- 구매 페이지로 값 보내는 곳 -->
-							<form id="buybutton" action="${appRoot }/order/direct" method="get">
+							<form id="buybutton" action="${appRoot }/order/direct"
+								method="get">
 								<!-- 여기에 구매 페이지 주소 입력 -->
 								<!-- 구매 버튼 연결 주소 입력 -->
 								<!-- 판매글 아이디(29번째줄), 상품 아이디(30번쨰줄) , 상품 구매수량(28번째줄) 넘어 갑니다. -->
@@ -236,8 +240,7 @@ body {
 							<br />
 							<br />
 							<c:if test="${product.stock != 0 }">
-								<div class="btn-group" role="group"
-									style="">
+								<div class="btn-group" role="group" style="">
 									<sec:authorize access="hasRole('USER')">
 										<button class="buttonTobuy btn btn-outline-success"
 											id="purchaseButton">장바구니</button>
@@ -254,7 +257,7 @@ body {
 
 
 
-								</div>
+					</div>
 					<%-- <c:forEach items="${productboard.fileList }" var="file">
 			<%
 				if (pageContext.getAttribute("file") != null) {
@@ -371,8 +374,7 @@ body {
 													data-bs-toggle="collapse"
 													data-bs-target="#review${reviewlist.id }"
 													aria-expanded="false"
-													aria-controls="panelsStayOpen-collapseOne"
-													style="">
+													aria-controls="panelsStayOpen-collapseOne" style="">
 													${reviewlist.reviewTitle }</button>
 											</h2>
 											<div id="review${reviewlist.id }"
@@ -388,21 +390,23 @@ body {
 															alt="" />
 
 													</c:forEach>
-													<c:if test="${not empty check }">
-														<form action="${appRoot }/product/deleteReview"
-															method="post">
-															<input type="hidden" value="${productboard.id }"
-																name="productPage" />
-															<input type="hidden" value="${reviewlist.id} " name="id" />
-															<input type="submit" value="리뷰 삭제" />
-														</form>
+													<sec:authorize access="isAuthenticated()">
+														<sec:authentication property="principal" var="principal" />
+														<c:if test="${not empty check }">
+															<form action="${appRoot }/product/deleteReview"
+																method="post">
+																<input type="hidden" value="${productboard.id }"
+																	name="productPage" />
+																<input type="hidden" value="${reviewlist.id} " name="id" />
+																<input type="submit" value="리뷰 삭제" />
+															</form>
+															<form action="${appRoot }/review/modif" method="get">
+																<input type="hidden" name="id" value="${reviewlist.id} " />
+																<input type="submit" value="리뷰 수정" />
 
-														<form action="${appRoot }/review/modif" method="get">
-															<input type="hidden" name="id" value="${reviewlist.id} " />
-															<input type="submit" value="리뷰 수정" />
-
-														</form>
-													</c:if>
+															</form>
+														</c:if>
+													</sec:authorize>
 												</div>
 											</div>
 										</div>

@@ -77,6 +77,10 @@ public class OrderService {
 		
 		mapper.addDirectOrder(dto, memberId, recipient, address);
 	}
+
+	public void removeOrder(int orderId) {
+		mapper.removeOrder(orderId);
+	}
 	
 
 

@@ -9,6 +9,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
 	integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
@@ -24,6 +25,11 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
 	crossorigin="anonymous"></script>
+<style>
+body{
+	font-family: 나눔스퀘어, 'NanumSquare', sans-serif;
+}
+</style>
 <title>Insert title here</title>
 <script>
 	$(document).ready(function() {
@@ -246,8 +252,9 @@
 
 					<form id="form${product.productId }"
 						action="${appRoot }/product/productRemove" method="post">
-						<input type="hidden" value="${product.productId }"
-							name="productId" />
+						<input type="hidden" value="${product.productId }"name="productId" />
+						<input type="hidden" value="${product.boardId }" name="boardId"/>
+							
 					</form>
 
 					<div class="modal-footer">

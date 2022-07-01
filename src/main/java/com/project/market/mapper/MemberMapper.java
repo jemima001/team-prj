@@ -8,6 +8,7 @@ import com.project.market.domain.AddressDto;
 import com.project.market.domain.MemberDto;
 import com.project.market.domain.OrderDto;
 import com.project.market.domain.ProductDto;
+import com.project.market.domain.ReviewpageDto;
 
 public interface MemberMapper {
 
@@ -78,6 +79,10 @@ public interface MemberMapper {
 	List<OrderDto> selectPageOrder(int limitNumber);
 
 	List<OrderDto> selectUserPageOrder(@Param("id")String id, @Param("limitNumber")int limitNumber);
+
+	void removereview(String id);
+
+	List<ReviewpageDto> selectAllreview(String id);
 
 }
 

@@ -6,6 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
 	integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
@@ -18,32 +19,46 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
 	referrerpolicy="no-referrer"></script>
 
-<style>  /* 여러 채팅창 간의 간격과 배열 위치*/  
-.float-left{
-    float:left;    
-    margin: 5px;  
-    }
+<style> /* 여러 채팅창 간의 간격과 배열 위치*/
+.float-left {
+	float: left;
+	margin: 5px;
+}
+body{
+	font-family: 나눔스퀘어, 'NanumSquare', sans-serif;
+}
 </style>
 
 <title>Insert title here</title>
 </head>
 <body>
 	<my:pagenavbar></my:pagenavbar>
-	<my:customercenternavbar></my:customercenternavbar>
-	<!-- 유저가 접속할 때마다 이 템플릿으로 채팅창을 생성한다. -->
-	<div class="template" style="display: none">
-		<form>
-			<!-- 메시지 텍스트 박스 -->
-			<input type="hidden" id="sender" value="${nickName }" />
-			<input type="text" class="message"
-				onkeydown="if(event.keyCode === 13) return false;">
-			<!-- 전송 버튼 -->
-			<input value="Send" type="button" class="sendBtn">
-		</form>
+	<div class="container">
 		<br />
-		<!-- 서버와 메시지를 주고 받는 콘솔 텍스트 영역 -->
-		<textarea rows="10" cols="50" class="console" disabled="disabled"></textarea>
+		<div class="row">
+			<div class="col-3">
+				<my:customercenternavbar current="notice"></my:customercenternavbar>
+			</div>
+			<div class="col-9">
+				<!-- 유저가 접속할 때마다 이 템플릿으로 채팅창을 생성한다. -->
+				<div class="template" style="display: none">
+					<form>
+						<!-- 메시지 텍스트 박스 -->
+						<input type="hidden" id="sender" value="${nickName }" />
+						<input type="text" class="message"
+							onkeydown="if(event.keyCode === 13) return false;">
+						<!-- 전송 버튼 -->
+						<input value="Send" type="button" class="sendBtn">
+					</form>
+					<br />
+					<!-- 서버와 메시지를 주고 받는 콘솔 텍스트 영역 -->
+					<textarea rows="10" cols="50" class="console" disabled="disabled"></textarea>
+				</div>
+
+			</div>
+		</div>
 	</div>
+
 	<!-- 소스를 간단하게 하기 위하 Jquery를 사용했습니다. -->
 	<script type="text/javascript">
 		// 서버의 admin의 서블릿으로 웹 소켓을 한다.
@@ -66,8 +81,10 @@
 				// 위 템플릿 div를 취득한다.
 				let form = $(".template").html();
 				// div를 감싸고 속성 data-key에 unique키를 넣는다.
-				form = $("<div class='float-left'><div>"+ node.userName+"</div></div>").attr("data-key",
-						node.key).append(form);
+				form = $(
+						"<div class='float-left'><div>" + node.userName
+								+ "</div></div>").attr("data-key", node.key)
+						.append(form);
 				// body에 추가한다.
 				$("body").append(form);
 				// message는 유저가 메시지를 보낼 때 알려주는 메시지이다.

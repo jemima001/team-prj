@@ -28,6 +28,8 @@ public interface OrderMapper {
 	OrderDto getProduct(int productId);
 
 	void addDirectOrder(@Param("dto")OrderDto dto, @Param("memberId")String memberId, @Param("recipient")String recipient, @Param("address")String address);
+
+	void removeOrder(int orderId);
 	
 	
 	

@@ -59,7 +59,11 @@
 		
 	</insert>
 	
-
+	<delete id="removeOrder">	   
+			   DELETE FROM Orders
+			   WHERE orderId = #{orderId}
+			   
+	</delete>
 
 
 

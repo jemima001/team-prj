@@ -140,6 +140,15 @@ public class OrderController {
 		model.addAttribute("member", member); //jsp에 넘기기
 		model.addAttribute("productId", productId);
 		model.addAttribute("bookCount", Purchase);
-	}		   
+	}	
+	
+	@PostMapping ("remove")
+	public String removeOrder(Principal principal, int orderId) {
+		
+		orderService.removeOrder(orderId);
+		
+		return "redirect:/member/userorderlist?id=" + principal.getName();
+	}
+		
 	
 }

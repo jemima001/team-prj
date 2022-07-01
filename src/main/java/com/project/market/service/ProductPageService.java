@@ -209,6 +209,7 @@ public class ProductPageService {
 			System.out.println("삭제 테스트");
 			deleterFromAwsS3(dto.getId(),file ,"productPage" );
 		}
+		int okReview = mapper.deleteReviewForBoardDelete(dto);
 		int ok = mapper.deleteBoard(dto);
 
 		return ok == 1;
@@ -270,9 +271,17 @@ public class ProductPageService {
 	@Transactional
 	public boolean deleteProduct(ProductDto dto) {
 		
+		System.out.println("제품 삭제 dto :"+dto);
 		int okDeleteCategory = mapper.deleteCategory(dto);
+		int okDeleteReview = mapper.deletReviewFordeleteProduct(dto);
 		int okDeleteCart = mapper.deleteCart(dto);
 		int okDeleteBoard = mapper.deleteBoardfordeleteProduct(dto);
+		List<ReviewpageDto> reviewList = mapper.getReviewList(dto.getBoardId());
+		
+		for(ReviewpageDto file : reviewList) {
+			deleterFromAwsS3( file.getId(), file.getRevireFileName(), "reviewpage");
+		}
+		
 		int okDeleteProduct = mapper.DeleteProduct(dto);
 
 		System.out.println("okDeleteCategory:" + okDeleteCategory);

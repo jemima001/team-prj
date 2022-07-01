@@ -73,6 +73,8 @@ public interface ProductPageMapper {
 	List<ProductDto> searchProduct(String search);
 	int reviewNum(@Param("id")int id,@Param("name") String name);
 	BuycheckDto whoBuyThis(@Param("id")int id,@Param("name")String name);
+	int deletReviewFordeleteProduct(ProductDto dto);
+	int deleteReviewForBoardDelete(ProductPageDto dto);
 
 	
 

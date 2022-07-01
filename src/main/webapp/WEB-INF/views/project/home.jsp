@@ -55,6 +55,9 @@
 	crossorigin="anonymous"></script>
 <title>로    고</title>
 <style>
+body{
+	font-family: 나눔스퀘어, 'NanumSquare', sans-serif;
+}
 .row {
 	text-align: center;
 }
@@ -62,9 +65,6 @@ a{
 	text-decoration-line: none;
 }
 a:hover { color:black;}
-body{
-	font-family: 나눔스퀘어, 'NanumSquare', sans-serif;
-}
 .table>:not(caption)>*>* {
     padding: 12px;
 }
@@ -90,7 +90,8 @@ $(document).ready(
 			<br />
 				<p>
 					<a href="${homeUrl }"> <img
-						src="${appRoot }/resources/images/logo.jpg">
+						src="${appRoot }/resources/images/logo2.png"
+						style="width: 300px; height: 190px;">
 					</a>
 				</p>
 			</div>
