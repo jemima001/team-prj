@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.project.market.domain.BuycheckDto;
 import com.project.market.domain.PaginationDto;
 import com.project.market.domain.ProductDto;
 import com.project.market.domain.ProductPageDto;
@@ -142,19 +143,24 @@ public class ProductPageController {
 		} else {
 			 getName = principal.getName();
 		}
-		boolean buyThis = service.getBuyThis(id,getName);
+		int checkNumReview =service.reviewNum(id,getName);
+		BuycheckDto buyThis = service.getBuyThis(id,getName);
+		System.out.println("checkNumReview :"+checkNumReview);
 		System.out.println("buyThis :"+ buyThis);
 //		List<ReviewpageDto> reviewfileList = service.getreviewfile(id);
 		
 		System.out.println("reviewList :"+reviewList);
 //		System.out.println("reviewfileList :"+reviewfileList);
 		Board.setFileList(fileList);
+		boolean show = (buyThis.getHowMany() > checkNumReview);
 		
 		//System.out.println("fileList:" +fileList);
 		model.addAttribute("reviewList",reviewList);
 		model.addAttribute("productboard", Board);
 		model.addAttribute("product", product);
 		model.addAttribute("check",buyThis);
+		model.addAttribute("checkNumReview ",checkNumReview );
+		model.addAttribute("show", show);
 //		model.addAttribute("reviewfileList",reviewfileList);
 	}
 	
@@ -297,12 +303,17 @@ public class ProductPageController {
 	}
 	@PostMapping ("addcart")
    @ResponseBody
-   public void addcart(ProductDto dto, Principal principal) {
+   public String addcart(ProductDto dto, Principal principal) {
 	   System.out.println("장바구니 추가 ajax:"+dto.getPurchase());
 	   System.out.println("장바구니 추가 ajax:"+dto.getProductId());
 	   System.out.println("장바구니 추가 ajax:"+principal.getName());
 	    service.addCart(dto,principal);
-	   
+	    // 장바구니 에러 추가 작업 필요
+	    //	 1. 장바구니에 이미 추가 되었습니다.
+	    //   2.  ...
+	    String aaa= "aaa";
+	    
+	    return aaa;
    }
 	
 	@GetMapping("reviewpage")

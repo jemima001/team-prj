@@ -291,7 +291,7 @@ public class ProductPageService {
 		return mapper.getFileForList();
 	}
 
-	public void addCart(ProductDto dto, Principal principal) {
+	public String addCart(ProductDto dto, Principal principal) {
 		// TODO Auto-generated method stub
 		String memberId = principal.getName();
 		System.out.println("서비스" + dto);
@@ -300,7 +300,10 @@ public class ProductPageService {
 		System.out.println("구매 갯수 서비스에서" + bookCount);
 		System.out.println("제품 아이디 서비스에서" + productId);
 		System.out.println("맴버 아이디 서비스 에서" + memberId);
-		mapper.addCart(memberId, bookCount, productId);
+		int num = mapper.addCart(memberId, bookCount, productId);
+		
+		System.out.println("num:"+num);
+		return "test";
 
 	}
 
@@ -370,30 +373,37 @@ public class ProductPageService {
 		return ok ==1;
 	}
 
-public boolean getBuyThis(int id, String name) {
+public BuycheckDto getBuyThis(int id, String name) {
 	if(name == null) {
 		name = "noLogin";
 	}
 	
 	BuycheckDto num = mapper.whoBuyThis(id,name);
-	
+	//int checkNumReview =mapper.reviewNum(id,name);
+	//System.out.println("checkNumReview :"+checkNumReview);
 	System.out.println("num :"+num);
 	System.out.println("name:"+name);
 	System.out.println("id :"+id);
-	boolean out;
-	if(num == null) {
+	/*boolean out;
+	if(num == null ) {
 		out = false;
 	} else {
 		out = num.getMemberId().equals(name) && num.getProductPageid() == id ;
 		
-	}
+	}*/
 	
-	return out;
+	return num;
 }
 
 public List<ProductDto> ProductlistForajax(String search) {
 	
 	return mapper.searchProduct("%"+search+"%");
+}
+
+public int reviewNum(int id, String name) {
+	// TODO Auto-generated method stub
+	int checkNumReview =mapper.reviewNum(id,name);
+	return  checkNumReview;
 }
 
 //public List<ReviewpageDto> getreviewfile(int id) {

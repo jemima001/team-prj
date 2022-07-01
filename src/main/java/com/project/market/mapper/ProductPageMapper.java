@@ -54,7 +54,7 @@ public interface ProductPageMapper {
 	int modifyProduct(ProductDto dto);
 	List<String> getFileForList();
 	void addCart(ProductDto dto, Principal principal);
-	void addCart(@Param("memberId")String memberId,@Param("bookCount") int bookCount,@Param("productId") int productId);
+	int addCart(@Param("memberId")String memberId,@Param("bookCount") int bookCount,@Param("productId") int productId);
 	PaginationDto getAllBoardNum(String cat);
 	void insertReviewFile(int string, String originalFilename);
 	int getcat0(ProductDto dto);
@@ -69,8 +69,10 @@ public interface ProductPageMapper {
 	
 	int deleteReview(int id);
 //	List<ReviewpageDto> getreviewfile(int id);
-	BuycheckDto whoBuyThis(@Param("id")int id,@Param("name") String name);
+	BuycheckDto c(@Param("id")int id,@Param("name") String name);
 	List<ProductDto> searchProduct(String search);
+	int reviewNum(@Param("id")int id,@Param("name") String name);
+	BuycheckDto whoBuyThis(@Param("id")int id,@Param("name")String name);
 
 	
 
