@@ -24,5 +24,11 @@ public interface OrderMapper {
 	void addOrderList(@Param("cart")CartDto cart, @Param("memberId")String memberId, @Param("recipient")String recipient, @Param("address")String address);
 
 	void deleteCartList(String memberId);
+
+	OrderDto getProduct(int productId);
+
+	void addDirectOrder(@Param("dto")OrderDto dto, @Param("memberId")String memberId, @Param("recipient")String recipient, @Param("address")String address);
+	
+	
 	
 }

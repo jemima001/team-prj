@@ -1,27 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix = "c" uri ="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
-
 <meta charset="UTF-8">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
-	integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
-	crossorigin="anonymous" referrerpolicy="no-referrer" />
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css"
-	integrity="sha512-GQGU0fMMi238uA+a/bdWJfpUGKUkBdgfFdgBm72SUQ6BeyWjoY/ton0tEjH+OSH9iP4Dfh+7HM0I9f5eR0L/4w=="
-	crossorigin="anonymous" referrerpolicy="no-referrer" />
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
-	referrerpolicy="no-referrer"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-	crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css" integrity="sha512-GQGU0fMMi238uA+a/bdWJfpUGKUkBdgfFdgBm72SUQ6BeyWjoY/ton0tEjH+OSH9iP4Dfh+7HM0I9f5eR0L/4w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
 <title> 주문서 작성 ▶ 스토어</title>
 
@@ -66,7 +54,6 @@
 			//input 값 옮기기
 			$("#form10").find("[name=recipient]").val($("#recipientInput1").val());
 			$("#form10").find("[name=address]").val($("#addressInput1").val());
-
 		});
 
 		
@@ -114,9 +101,6 @@
 					<div class="row">
 						<div class="col">
 							<h6>  ▼ 주문 목록  </h6>
-							<c:if test="${not empty message }">
-								<div class="alert alert-primary">${message }</div>
-							</c:if>
 
 							<table class="table">
 								<thead>
@@ -130,19 +114,18 @@
 								</thead>
 								<tbody>
 
-									<c:forEach items="${cartList }" var="cart">
+									
 
 										<tr>
-											<th><input type="hidden" value="${cart.cartId }"
-												name="cartIds" form="form21" /></th>
+											<th><input type="hidden"  value="${order.orderId }" /></th>
 
-											<td>${cart.productName }</td>
-											<td>${cart.bookCount }개</td>
-											<td>${cart.totalPrice }원</td>
+											<td>${order.productName }</td>
+											<td>${order.bookCount }개</td>
+											<td>${order.totalOrderPrice }원</td>
 											<td>무료</td>
 										</tr>
 
-									</c:forEach>
+								
 
 
 
@@ -157,7 +140,7 @@
 								<thead>
 									<tr>
 
-										<th>총 주문 상품 ${cartList.size() }개</th>
+										<th>총 주문 상품 1개</th>
 
 									</tr>
 								</thead>
@@ -166,7 +149,7 @@
 
 
 										<td>총 주문 금액</td>
-										<td>${allTotalPrice }원</td>
+										<td>${order.totalOrderPrice }원</td>
 
 
 									</tr>
@@ -279,7 +262,10 @@
 							aria-label="Close"></button>
 					</div>
 					<div class="modal-body">
-						<form id="form10" action="${appRoot }/order/complete" method="get">
+						<form id="form10" action="${appRoot }/order/directComplete" method="post">
+							<input type="hidden" value="${productId }" name="productId">
+							<input type="hidden" value="${order.totalOrderPrice }" name="totalOrderPrice">
+							<input type="hidden" value="${order.bookCount }" name="bookCount">
 							<input type="text" value="${member.id }" name="id" readonly />
 							고객님의 주문 <br>
 							<br>
@@ -288,7 +274,7 @@
 
 							<input type="text" name="recipient" readonly /> 고객님의
 							<input type="text" name="address" readonly /> 주소로 배송됩니다.
-							
+
 						</form>
 					</div>
 					<div class="modal-footer">
@@ -309,4 +295,5 @@
 
 	
 </body>
+
 </html>

@@ -27,7 +27,7 @@ public class CartController {
 	public void cart(Principal principal, Model model) {
 		
 		List<CartDto> list = cartService.cartList(principal.getName());
-		System.out.println(list);
+		//System.out.println(list);
 		model.addAttribute("cartList", list);
 		
 		int allTotal = 0;

@@ -67,6 +67,16 @@ public class OrderService {
 			mapper.deleteCartList(memberId); 	
 		
 	}
+
+	public OrderDto getProduct(int productId) {
+		
+		return mapper.getProduct(productId);
+	}
+
+	public void addDirectOrder(OrderDto dto, String memberId, String recipient, String address) {
+		
+		mapper.addDirectOrder(dto, memberId, recipient, address);
+	}
 	
 
 

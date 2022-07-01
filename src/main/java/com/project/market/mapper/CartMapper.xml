@@ -18,6 +18,7 @@
 		JOIN ProductPage pp ON pp.productId = p.id
 		JOIN File f ON f.boardId = pp.id
 		WHERE m.id = #{id}
+		GROUP BY c.cartId
 	</select>
 
 <delete id="deleteCheckedCart">	   
