@@ -27,7 +27,7 @@ body{
 	font-family: 나눔스퀘어, 'NanumSquare', sans-serif;
 }
 </style>
-<title>OrderList</title>
+<title>작은 숲</title>
 </head>
 <body>
 	<my:pagenavbar current="userorderlist"></my:pagenavbar>
@@ -103,6 +103,7 @@ body{
 						<li
 							class="page-item  ${paginationDto.nowpage == i ? 'active' : '' }">
 							<a class="page-link"
+								style="background-color: #608463; border: 0px;"
 								href="${appRoot }/member/userorderlist?id=${id }&page=${i}">${i}</a>
 						</li>
 					</c:forEach>

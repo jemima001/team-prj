@@ -13,7 +13,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <style>
 </style>
-<title>LOGIN</title>
+<title>작은 숲</title>
 </head>
 <body>
 
@@ -23,8 +23,14 @@
 	
 		
 		<div class="row justify-content-center">
-			<div class="col-12 col-lg-6">
-				<h1>로그인 </h1>
+			<div class="col-6">
+			<br /><br />
+				<img 	src="${appRoot }/resources/images/logo2.png"
+						style="width: 80%; margin: 5px">
+			</div>
+			<div class="col-6" style="">
+			<br /><br /><br /><br />
+				
 				<form action="${appRoot }/login" method="post">
 					<label for="usernameInput1" class="form-label">
 						아이디 
@@ -43,6 +49,7 @@
 							자동로그인
 						</label>
 					</div>
+					<br />
 					
 					<input class="btn btn-outline-success" type="submit" value="로그인" />
 				</form>

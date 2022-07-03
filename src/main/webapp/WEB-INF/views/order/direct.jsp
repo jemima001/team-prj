@@ -12,7 +12,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
-<title> 주문서 작성 ▶ 스토어</title>
+<title>작은 숲</title>
 
 <script>
 	//orderCompleteButton1 클릭 시(결제하기 버튼)
@@ -275,11 +275,11 @@ body{
 					<p id="error">수령인과 주소 작성이 완료되지 않았습니다.</p>
 				</div>
 			</div>
-		</div>
+		</div>	
 
 		<!-- Modal -->
 		<div class="modal fade" id="orderCheckModal1" tabindex="-1"
-			aria-labelledby="orderCheckModal1Label" aria-hidden="true">
+			aria-labelledby="orderCheckModal1Label" aria-hidden="true">	
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">

@@ -17,7 +17,7 @@ body{
 	font-family: 나눔스퀘어, 'NanumSquare', sans-serif;
 }
 </style>
-<title>Insert title here</title>
+<title>작은 숲</title>
 </head>
 <body>
 <my:pagenavbar current="adminorderlist"></my:pagenavbar>
@@ -91,7 +91,7 @@ body{
 				    <c:forEach var="i" begin="1" end="${paginationDto.endPage}">
 						<li
 							class="page-item  ${paginationDto.nowpage == i ? 'active' : '' }">
-							<a class="page-link" href="${appRoot }/member/adminorderlist?page=${i}">${i}</a>
+							<a class="page-link" style="background-color: #608463; border: 0px;" href="${appRoot }/member/adminorderlist?page=${i}">${i}</a>
 						</li>
 					</c:forEach>
 				  </ul>

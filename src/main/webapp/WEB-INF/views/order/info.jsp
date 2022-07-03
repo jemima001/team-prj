@@ -24,7 +24,7 @@
 	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
 	crossorigin="anonymous"></script>
 
-<title> 주문서 작성 ▶ 스토어</title>
+<title>작은 숲</title>
 
 <script>
 	//orderCompleteButton1 클릭 시(결제하기 버튼)

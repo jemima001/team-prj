@@ -47,7 +47,7 @@ body{
 	$(document).ready(function(){
 	});
 </script>
-<title>Insert title here</title>
+<title>작은 숲</title>
 </head>
 <body>
 	<my:pagenavbar current="cart"></my:pagenavbar>

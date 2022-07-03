@@ -109,6 +109,9 @@ public class MemberService {
 			// 리뷰 삭제
 			mapper.removereview(dto.getId());
 			
+			// 공지 삭제
+			mapper.removeNotice(dto.getId());
+			
 			// 문의 삭제
 			mapper.removeQuestions(dto.getId());
 			

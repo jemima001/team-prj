@@ -16,7 +16,7 @@ body{
 	font-family: 나눔스퀘어, 'NanumSquare', sans-serif;
 }
 </style>
-<title>Insert title here</title>
+<title>작은 숲</title>
 </head>
 <body>
 	<my:pagenavbar current="findId"></my:pagenavbar>

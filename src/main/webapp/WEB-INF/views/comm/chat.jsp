@@ -23,7 +23,7 @@ body{
 	font-family: 나눔스퀘어, 'NanumSquare', sans-serif;
 }
 </style>
-<title>Insert title here</title>
+<title>작은 숲</title>
 </head>
 <body>
 	<my:pagenavbar></my:pagenavbar>
@@ -37,7 +37,7 @@ body{
 				<div class="card m-auto" style="width: 18rem;">
 					<button id="closeBtn" class="d-none btn btn-light" type="button" onclick="closeSocket();">퇴장</button>
 					<div>	
-						<div id="messages" style="overflow-y: scroll; height:200px;" class="alert alert-success mb-0"></div>
+						<div id="messages" style="overflow-y: scroll; height:300px; " class="alert alert-success mb-0"></div>
 					</div>
 					<div class="alert alert-secondary mb-0">
 						<div class="d-flex justify-content-center">

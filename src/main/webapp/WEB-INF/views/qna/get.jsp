@@ -76,7 +76,7 @@ $(document).ready(function() {
 	$("#mes").hide(2000);
 });
 </script>
-<title>Insert title here</title>
+<title>작은 숲</title>
 </head>
 <body>
 

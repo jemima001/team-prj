@@ -117,7 +117,7 @@ body {
 	transition: transform .2s ease-in-out;
 }
 </style>
-<title>Insert title here</title>
+<title>작은 숲</title>
 </head>
 <body>
 
@@ -288,7 +288,8 @@ body {
 
 			<h2 class="justify-content-center">상세 정보</h2>
 
-			<P>: ${productboard.boardBody }</p>
+			<textarea name="body" id="textarea1"
+							style="text-align: center; outline-color: white; border: 0px; width: 100%; height: 100%;" readonly>${productboard.boardBody }</textarea>
 
 
 
