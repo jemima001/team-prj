@@ -77,6 +77,7 @@ public interface ProductPageMapper {
 	int deleteReviewForBoardDelete(ProductPageDto dto);
 	List<ReviewpageDto> getReviewListfordelete(int boardId);
 	List<Integer> getReviewId(int id);
+	List<String> getBoardFilefordelete(ProductDto dto);
 
 	
 

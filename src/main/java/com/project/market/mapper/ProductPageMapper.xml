@@ -480,5 +480,10 @@
         JOIN ReviewPage ON ProductPage.id = ReviewPage.productpage
         WHERE ProductPage.id = #{id};
 	</select>
+	<select id="getBoardFilefordelete" resultType="string">
+	SELECT fileName
+	FROM ProductPage  JOIN File  ON ProductPage.id = File.boardId
+        WHERE ProductPage.id =#{boardId};
 	
+	</select>
 </mapper>

@@ -284,6 +284,14 @@ public class ProductPageService {
 		int okDeleteCategory = mapper.deleteCategory(dto);
 		int okDeleteReview = mapper.deletReviewFordeleteProduct(dto);
 		int okDeleteCart = mapper.deleteCart(dto);
+		List<String> boardFileList = mapper.getBoardFilefordelete(dto);
+		System.out.println("boardFileList :"+boardFileList);
+		for(String file :  boardFileList) {
+			System.out.println("file : reviewList :"+file);
+			
+			deleterFromAwsS3( dto.getBoardId(), file, "productPage");
+		}
+		
 		int okDeleteBoard = mapper.deleteBoardfordeleteProduct(dto);
 		
 		int okDeleteProduct = mapper.DeleteProduct(dto);
