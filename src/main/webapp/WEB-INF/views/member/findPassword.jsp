@@ -16,7 +16,7 @@ body{
 	font-family: 나눔스퀘어, 'NanumSquare', sans-serif;
 }
 </style>
-<title>Insert title here</title>
+<title>작은 숲</title>
 <script>
 $(document).ready(
 		function() {
@@ -115,7 +115,7 @@ $(document).ready(
 									break;
 								case "notOk":
 									$("#confirmMessage1").text(
-											"맞지 않는 이메일입니다.");
+											"인증번호 전송 실패");
 
 									break;
 								}

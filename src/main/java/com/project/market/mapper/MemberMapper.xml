@@ -261,6 +261,12 @@
 		JOIN ReviewPage r ON r.id = f.boardId
 		WHERE r.memberId = #{id} and f.WhichBoard = 1
 	</select>
+	
+	<delete id="removeNotice">
+		DELETE FROM Notice
+		WHERE memberId = #{id}
+	</delete>
+	
 </mapper>
 
 

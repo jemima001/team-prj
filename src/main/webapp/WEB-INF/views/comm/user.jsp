@@ -23,7 +23,7 @@ body{
 	font-family: 나눔스퀘어, 'NanumSquare', sans-serif;
 }
 </style>
-<title>Insert title here</title>
+<title>작은 숲</title>
 </head>
 <body>
 	<my:pagenavbar></my:pagenavbar>
@@ -78,10 +78,13 @@ body{
 			// 유저 nickName을 취득한다.
 			let nickName = $("#sender").val();
 			// 콘솔에 메세지를 남긴다.
+			if(message.value.length >= 1 && message.value != " ") {
 			messageTextArea.value += "(me) => " + message.value + "\n";
 			// 소켓으로 보낸다.
 			webSocket.send(message.value + "#####" + nickName);
 			// 텍스트 박스 추기화
+			}
+			messageTextArea.scrollTop = messageTextArea.scrollHeight;
 			message.value = "";
 		}
 		function enter() {

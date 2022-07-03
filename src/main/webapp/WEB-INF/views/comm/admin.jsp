@@ -29,7 +29,7 @@ body{
 }
 </style>
 
-<title>Insert title here</title>
+<title>작은 숲</title>
 </head>
 <body>
 	<my:pagenavbar></my:pagenavbar>

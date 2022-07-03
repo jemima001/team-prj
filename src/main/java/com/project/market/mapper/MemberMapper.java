@@ -84,6 +84,8 @@ public interface MemberMapper {
 
 	List<ReviewpageDto> selectAllreview(String id);
 
+	void removeNotice(String id);
+
 }
 
 

@@ -16,7 +16,7 @@ body{
 	font-family: 나눔스퀘어, 'NanumSquare', sans-serif;
 }
 </style>
-<title>SIGN UP</title>
+<title>작은 숲</title>
 
 <script>
 	$(document).ready(function() {
@@ -160,12 +160,10 @@ body{
 <body>
 
 <my:pagenavbar current="signup"></my:pagenavbar>
-
 	<div class="container">
-	
-		
 		<div class="row justify-content-center">
 			<div class="col-12 col-lg-6">
+			<br />
 				<h1>회원 가입 </h1>
 
 				<form id="form1" action="${appRoot }/member/signup" method="post">

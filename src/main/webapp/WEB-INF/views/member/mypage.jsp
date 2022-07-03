@@ -30,7 +30,7 @@ body{
 	font-family: 나눔스퀘어, 'NanumSquare', sans-serif;
 }
 </style>
-<title>My Page</title>
+<title>작은 숲</title>
 <script>
 	$(document).ready(
 			function() {

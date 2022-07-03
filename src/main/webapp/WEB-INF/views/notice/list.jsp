@@ -42,7 +42,7 @@ body {
 	padding: 12px;
 }
 </style>
-<title>market</title>
+<title>작은 숲</title>
 </head>
 <body>
 	<my:pagenavbar></my:pagenavbar>

@@ -37,7 +37,7 @@
 	
 	<!-- 메일보내기 -->
 	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl"> 
-	 <property name="host" value="mx3.naver.com"/> 
+	 <property name="host" value="mx1.naver.com"/> 
 	</bean>
 	
 	

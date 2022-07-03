@@ -18,6 +18,7 @@
   border-style: solid;
 }
 a{
+	text-decoration-line: none;
 	color: black;
 }
 </style>
@@ -51,7 +52,7 @@ body{
 	font-family: 나눔스퀘어, 'NanumSquare', sans-serif;
 }
 </style>
-<title>Insert title here</title>
+<title>작은 숲</title>
 </head>
 <body>
 

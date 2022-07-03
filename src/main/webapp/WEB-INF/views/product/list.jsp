@@ -57,7 +57,7 @@ body {
 	padding: 12px;
 }
 </style>
-<title>Insert title here</title>
+<title>작은 숲</title>
 </head>
 <body>
 	<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
@@ -319,7 +319,7 @@ body {
 
 								<li
 									class="page-item  ${paginationDto.nowpage == i ? 'active' : '' }">
-									<a class="page-link"
+									<a class="page-link" style="background-color: #608463; border: 0px;"
 										href="${appRoot }/product/list?cat=${paginationDto.cat }&search=${paginationDto.search }&page=${i}">${i}</a>
 								</li>
 
