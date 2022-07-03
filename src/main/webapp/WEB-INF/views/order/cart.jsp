@@ -54,7 +54,7 @@ body{
 			
 			
 			
-				<h4> Cart 장바구니</h4>
+				<h4> 장바구니</h4>
 				
 				<input type="hidden" value="${cart.orderId }" name="id" />
 				
