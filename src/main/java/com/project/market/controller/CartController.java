@@ -55,10 +55,14 @@ public class CartController {
 		//System.out.println("12"+dto.getCartId());
 		//System.out.println("555"+principal.getName());
 		//System.out.println(cartIds);
-		
-		rttr.addAttribute("id", dto.getMemberId());
-		
-		boolean success = cartService.cartDelete(cartIds);
+		if(cartIds==null) {
+			return "redirect:/order/cart?id="+principal.getName();
+		} else {
+			
+			rttr.addAttribute("id", dto.getMemberId());
+			
+			boolean success = cartService.cartDelete(cartIds);
+		}
 			
 		return "redirect:/order/cart?id="+principal.getName();
 	}

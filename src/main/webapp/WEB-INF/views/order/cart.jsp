@@ -43,6 +43,10 @@ body{
     padding: 12px;
 }
 </style>
+<script>
+	$(document).ready(function(){
+	});
+</script>
 <title>Insert title here</title>
 </head>
 <body>
@@ -134,10 +138,17 @@ body{
 				</thead>
 				</table>
 				
-			
+			<c:if test="${cartList.size() != 0 }">
 				<button class="btn btn-danger" form="form21" role="button" type="submit"> 선택 상품 삭제하기</button>
-						
-	<a class="btn btn-success" href="${appRoot }/order/info" role="button"> 전부 결제하기</a>
+	
+				<a class="btn btn-success" href="${appRoot }/order/info" role="button"> 전부 결제하기</a>
+			</c:if>
+			<c:if test="${cartList.size() == 0 }">
+				<button class="btn btn-danger" form="form21" role="button" type="submit" disabled> 선택 상품 삭제하기</button>
+	
+				<a class="btn btn-success disabled" href="${appRoot }/order/info" role="button" id="empty"> 전부 결제하기</a>
+			</c:if>
+			
 				
 		
 		 
