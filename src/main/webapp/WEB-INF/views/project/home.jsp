@@ -202,14 +202,14 @@ $(document).ready(
 						<a href="${appRoot }/product/get?id=${pege.id}"><img style="width: 250px; height : 250px" class="img-thumbnail"
 							src="${imageUrl }/project/noImage/noImage.png" alt="" /></a>
 					</c:if>
-					<h5 class="imgtext${status.index } d-none" style="text-align: center; 
+					<div class="imgtext${status.index } d-none" style="text-align: center; 
 																	  position: absolute; 
 																	  width: 100%; 
-																	  top: 50%; 
+																	  top: 40%; 
 																	  z-index: 0;
 																	  pointer-events: none;
 																	  "
-					>${pege.boardTitle }</h5>
+					><h5>${pege.boardTitle }</h5><p>${pege.price }원</p></div>
 				</div>
 			</c:forEach>
 		</div>

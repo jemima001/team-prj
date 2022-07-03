@@ -80,14 +80,16 @@ body {
 	<!-- <div class="container">
 		<div class="row">
 			<div class="col"> -->
-
+<c:url value="/project/home" var="homeUrl">
+		<c:param name="id" value="${principal.username }" />
+	</c:url>
 	<div class="container">
 		<div class="row">
 			<div class="col justify-content-center">
 				<br />
 				<p>
 					<a href="${homeUrl }">
-						<img src="${appRoot }/resources/images/logo.jpg">
+						<img src="${appRoot }/resources/images/logo2.png"style="width: 300px; height: 190px;">
 					</a>
 				</p>
 			</div>

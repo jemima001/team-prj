@@ -15,6 +15,17 @@
 body{
 	font-family: 나눔스퀘어, 'NanumSquare', sans-serif;
 }
+a {
+	text-decoration-line: none;
+}
+
+a {
+	color: black;
+}
+
+a:hover {
+	color: #608463;
+}
 </style>
 <script>
 $(document).ready(function() {
@@ -70,18 +81,18 @@ $(document).ready(function() {
 <body>
 
 <my:pagenavbar></my:pagenavbar>
-<my:customercenternavbar current="notice"></my:customercenternavbar>
 <div class="container">
-	<div class="row">
-		<div class="col">
+		<br />
+		<div class="row">
+			<div class="col-3">
+				<my:customercenternavbar current="notice"></my:customercenternavbar>
+			</div>
+			<div class="col-9">
 			<div class="row">
 				<div class="col-sm-6">
-					<div class="navbar">
-						<ul class="nav me-auto">
-							<li>
-								<h2 style="display: inline;">문의</h2>
-							</li>
-						</ul>
+					<div>
+						
+						<h2 style="">문의
 						<sec:authorize access="isAuthenticated()">
 								<sec:authentication property="principal" var="principal"/>
 								<c:if test="${principal.username == query.memberId }">
@@ -90,6 +101,8 @@ $(document).ready(function() {
 									</button>
 								</c:if>
 						</sec:authorize>
+						</h2>
+						
 					</div>
 					<c:if test="${not empty message }">
 						<div id="mes" class="alert alert-primary">${message }</div>
@@ -157,7 +170,7 @@ $(document).ready(function() {
 				</div>
 				
 				<div class="col-sm-6">
-					<div class="navbar">
+					<div class="">
 						<ul class="nav me-auto">
 							<li>
 								<h2 style="display: inline;">답변</h2>

@@ -24,6 +24,7 @@ public class MainController {
 		 List<ProductPageDto> list2 = service.getboardlist2();
 		 model.addAttribute("boardlist1", list1);
 		 model.addAttribute("boardlist2", list2);
+		 System.out.println(list1);
 	}
 	
 }

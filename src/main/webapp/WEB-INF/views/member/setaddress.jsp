@@ -30,6 +30,7 @@
 body{
 	font-family: 나눔스퀘어, 'NanumSquare', sans-serif;
 }
+
 </style>
 <script>
 	$(document).ready(
@@ -41,9 +42,9 @@ body{
 <body>
 	<my:pagenavbar current="setaddress"></my:pagenavbar>
 	<my:mypagenavbar current="setaddress"></my:mypagenavbar>
-
+<br />
 	<div class="container">
-		<div class="row justify-content-center">
+		<div class="row justify-content-center" style="">
 			<div class="col-12 col-lg-6">
 				<h1>현재 기본 배송지</h1>
 					<div>
@@ -62,9 +63,11 @@ body{
 					</div>
 			</div>
 		</div>
-		<div class="row">
-			<div class="col">
-				<h1>배송지 목록</h1>
+		<br />
+		<div class="row" style="border-top: 3px solid black;">
+			<div class="col" style="border-right: 2px solid black;">
+				<br />
+				<h3>배송지 목록</h3>
 				<table class="table">
 					<thead>
 						<tr>
@@ -99,7 +102,8 @@ body{
 				</table>
 			</div>
 			<div class="col-12 col-lg-6">
-				<h1>배송지 추가</h1>
+				<br />
+				<h3>배송지 추가</h3>
 				<form id="forms1" action="${appRoot }/member/setaddress"
 					method="post">
 					<div>
