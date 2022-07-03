@@ -272,15 +272,19 @@ public class ProductPageService {
 	public boolean deleteProduct(ProductDto dto) {
 		
 		System.out.println("제품 삭제 dto :"+dto);
+		List<Integer> reviewId = mapper.getReviewId(dto.getBoardId());
+		List<ReviewpageDto> reviewList = mapper.getReviewListfordelete(dto.getBoardId());
+		
+		System.out.println("reviewList : "+reviewList);
+		for(ReviewpageDto file : reviewList) {
+			System.out.println("file : reviewList :"+file);
+			
+			deleterFromAwsS3( file.getId(), file.getRevireFileName(), "reviewpage");
+		}
 		int okDeleteCategory = mapper.deleteCategory(dto);
 		int okDeleteReview = mapper.deletReviewFordeleteProduct(dto);
 		int okDeleteCart = mapper.deleteCart(dto);
 		int okDeleteBoard = mapper.deleteBoardfordeleteProduct(dto);
-		List<ReviewpageDto> reviewList = mapper.getReviewList(dto.getBoardId());
-		
-		for(ReviewpageDto file : reviewList) {
-			deleterFromAwsS3( file.getId(), file.getRevireFileName(), "reviewpage");
-		}
 		
 		int okDeleteProduct = mapper.DeleteProduct(dto);
 
@@ -288,6 +292,8 @@ public class ProductPageService {
 		System.out.println("okDeleteProduct:" + okDeleteProduct);
 
 		return okDeleteProduct == 1;
+				
+				
 	}
 
 	public boolean modifyProduct(ProductDto dto) {
@@ -374,7 +380,7 @@ public class ProductPageService {
 		System.out.println("deleteReview in getId(); :"+dto.getId());
 		List<String> replyFileList = mapper.replyViewFileList(id);
 		for(String file : replyFileList) {
-			
+			System.out.println("file :"+file);
 		deleterFromAwsS3(id, file, "reviewpage");
 		}
 		

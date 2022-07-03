@@ -15,5 +15,6 @@ public class ReviewpageDto {
 	private String memberId;
 	private int reviewId;
 	private String fileName;
+	private List<Integer> boardList;
 	
 }

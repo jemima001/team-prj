@@ -67,6 +67,7 @@ body{
 			%>
 	<img style="width: 200px" src="${imageUrl }/project/reviewpage/${review.id}/${encodedFileName}" alt="" />
 	<input type="checkbox" name = "deleteimg" value="${file}" />
+	<input type="hidden" name = "productPage" value="${review.productPage }" />
 
 		</c:forEach>
 

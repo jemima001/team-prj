@@ -62,9 +62,10 @@ public class ReviewpageController {
 
 	
 	@GetMapping("modif")
-	public void reviewmodif(int id , Model model) {
+	public void reviewmodif(int id , int boardId, Model model) {
 		List<String> fileList = service.getreviewFile(id);
 		ReviewpageDto dto = service.getReview(id);
+		//dto.setProductPage(boardId);
 		if(fileList.isEmpty() == false) {
 			System.out.println("test");
 		dto.setFileList(fileList);
@@ -77,7 +78,7 @@ public class ReviewpageController {
 	}
 	
 	@PostMapping("modif")
-	public void reviewupdata(ReviewpageDto dto,
+	public String reviewupdata(ReviewpageDto dto,
 							@RequestParam(name = "deleteimg", required = false) ArrayList<String>  deleteimg, 
 			 				 MultipartFile[] file) {
 		System.out.println("리뷰에서 삭제할 이미지 :"+deleteimg);
@@ -92,6 +93,7 @@ public class ReviewpageController {
 		}
 		  service.updatareview(dto);
 		  
+		  return "redirect:/product/get?id="+dto.getProductPage();
 		  
 	}
 }
