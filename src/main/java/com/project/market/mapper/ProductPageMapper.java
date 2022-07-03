@@ -75,6 +75,8 @@ public interface ProductPageMapper {
 	BuycheckDto whoBuyThis(@Param("id")int id,@Param("name")String name);
 	int deletReviewFordeleteProduct(ProductDto dto);
 	int deleteReviewForBoardDelete(ProductPageDto dto);
+	List<ReviewpageDto> getReviewListfordelete(int boardId);
+	List<Integer> getReviewId(int id);
 
 	
 

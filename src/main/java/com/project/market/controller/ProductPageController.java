@@ -146,14 +146,16 @@ public class ProductPageController {
 		int checkNumReview =service.reviewNum(id,getName);
 		BuycheckDto buyThis = service.getBuyThis(id,getName);
 		System.out.println("checkNumReview :"+checkNumReview);
-		System.out.println("buyThis :"+ buyThis);
+		System.out.println("check :"+ buyThis);
 //		List<ReviewpageDto> reviewfileList = service.getreviewfile(id);
 		
 		System.out.println("reviewList :"+reviewList);
 //		System.out.println("reviewfileList :"+reviewfileList);
 		Board.setFileList(fileList);
 		boolean show = (buyThis.getHowMany() > checkNumReview);
-		
+		System.out.println("show :"+ show);
+		System.out.println("(buyThis.getHowMany()"+buyThis.getHowMany());
+		System.out.println("(checkNumReview"+checkNumReview);
 		//System.out.println("fileList:" +fileList);
 		model.addAttribute("reviewList",reviewList);
 		model.addAttribute("productboard", Board);
@@ -161,6 +163,7 @@ public class ProductPageController {
 		model.addAttribute("check",buyThis);
 		model.addAttribute("checkNumReview ",checkNumReview );
 		model.addAttribute("show", show);
+		
 //		model.addAttribute("reviewfileList",reviewfileList);
 	}
 	

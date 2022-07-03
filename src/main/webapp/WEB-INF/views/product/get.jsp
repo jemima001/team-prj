@@ -306,7 +306,9 @@ body {
 					<input type="submit" value="판매글 수정" />
 				</form>
 			</sec:authorize>
+
 			<c:if test="${not empty check && show}">
+
 				<form action="${appRoot }/review/add" method="get">
 					<input type="hidden" name="prodctPageid"
 						value="${productboard.id }" />
@@ -314,7 +316,6 @@ body {
 
 				</form>
 			</c:if>
-
 			<div id="reviewform">
 				<%-- <form action="${appRoot }/product/reviewpage" method="post"
 					enctype="multipart/form-data">
@@ -385,10 +386,15 @@ body {
 													<br />
 													<c:forEach items="${reviewlist.fileList}" var="reviewfile">
 
+													<c:if test="${reviewfile != null }">
+													
 														<img style="width: 200px" class="img-thumbnail"
 															src="${imageUrl }/project/reviewpage/${reviewlist.id }/${reviewfile}"
 															alt="" />
+													</c:if>
 
+													<c:if test="${reviewfile == null }">
+													</c:if>
 													</c:forEach>
 													<sec:authorize access="isAuthenticated()">
 														<sec:authentication property="principal" var="principal" />
@@ -402,6 +408,7 @@ body {
 															</form>
 															<form action="${appRoot }/review/modif" method="get">
 																<input type="hidden" name="id" value="${reviewlist.id} " />
+																<input type="hidden" name= "boardId" value ="${productboard.id }">
 																<input type="submit" value="리뷰 수정" />
 
 															</form>

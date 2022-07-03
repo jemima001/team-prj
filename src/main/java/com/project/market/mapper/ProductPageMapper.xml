@@ -376,7 +376,7 @@
 		File.fileName as fileList,
 		ReviewPage.memberId
 		FROM ReviewPage LEFT JOIN File ON File.boardid = ReviewPage.id
-		WHERE productpage =#{id}
+		WHERE productpage =#{id} and File.WhichBoard =1; ;
 	</select>
 
 	<select id="getBoardFile" resultType="string">
@@ -388,6 +388,16 @@
 	<select id="replyViewFileList" resultType="string">
 		SELECT fileName FROM File
 		WHERE boardId =#{id} and WhichBoard =1;
+	</select>
+	
+	<select id="getReviewListfordelete" resultType="com.project.market.domain.ReviewpageDto">
+	SELECT
+        ReviewPage.id as Id ,
+        File.fileName as revireFileName
+				FROM ReviewPage
+        JOIN File ON ReviewPage.id = File.boardId
+        WHERE ReviewPage.productpage = #{boardId} and WhichBoard =1;
+	
 	</select>
 
 	<delete id="deleteReview">
@@ -465,4 +475,10 @@
 		DELETE FROM ReviewPage
 		WHERE ProductPage = #{id};
 	</delete>
+	<select id="getReviewId" resultType="int">
+	 SELECT * FROM ProductPage
+        JOIN ReviewPage ON ProductPage.id = ReviewPage.productpage
+        WHERE ProductPage.id = #{id};
+	</select>
+	
 </mapper>
