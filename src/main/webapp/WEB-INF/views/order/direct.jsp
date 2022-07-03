@@ -147,7 +147,7 @@ body{
 	<div class="row justify-content-center">
 		<div class="col-12 col-lg-6">
 
-			<h4>Order/Payment 주문/결제</h4>
+			<h4>주문/결제</h4>
 
 			<br>
 
@@ -224,31 +224,6 @@ body{
 
 
 
-
-					<!--  
-		<label for="productInput1" class="form-label">
-		상품 이름
-		</label>
-		<input id="productInput1" class="form-control" type="text" value="${product.id }" readonly />
-		
-		<label for="productInput2" class="form-label">
-		상품 수량 (일단 장바구니 아이디 몰라서 label 수정해야 함)
-		</label>
-		<input id="productInput2" class="form-control" type="number" value="${product.id }" readonly />
-		
-		
-		<label for="totalPriceInput1" class="form-label">
-		총 금액 (일단 장바구니 아이디 몰라서 label 수정해야 함)
-		</label>
-		<input id="totalPriceInput1" class="form-control" type="number" value="${product.id }" readonly />
-
-	
-	<!-- 주문 번호를 hidden으로 넣어야 하나? -->
-
-
-
-
-					<br>
 					<br>
 
 
@@ -266,7 +241,7 @@ body{
 
 					
 
-					<br>
+					
 					<br>
 
 
@@ -285,17 +260,11 @@ body{
 
 
 
-					<!--  
-	<div class="center mt-3">
-			<button type="button" class="btn btn-info" id="orderCheckButton1"
-			data-bs-toggle="modal" data-bs-target="#modal2" disabled>주문 확인</button>
-		</div> -->
 
 
 
 
-
-
+<br>
 					<!-- 결제 전 정보 확인 Modal -->
 					<!-- Button trigger modal -->
 					<%-- <c:if test="$('#recipientInput1').val != null && $('#addressInput1').val != null"></c:if> --%>
@@ -303,7 +272,7 @@ body{
 						class="btn btn-success" form="form9" type="submit"
 						data-bs-toggle="modal" data-bs-target="#orderCheckModal1"
 						id="confirm" disabled>주문 확인</button>
-					<p id="error">수령인과 주소를 확인해주세요</p>
+					<p id="error">수령인과 주소 작성이 완료되지 않았습니다.</p>
 				</div>
 			</div>
 		</div>
@@ -314,7 +283,7 @@ body{
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title" id="orderCheckModal1Label">결제하시겠습니까?</h5>
+						<h5 class="modal-title" id="orderCheckModal1Label">주문 확인</h5>
 						<button type="button" class="btn-close" data-bs-dismiss="modal"
 							aria-label="Close"></button>
 					</div>
@@ -324,12 +293,12 @@ body{
 							<input type="hidden" value="${order.totalOrderPrice }" name="totalOrderPrice">
 							<input type="hidden" value="${order.bookCount }" name="bookCount">
 							<input type="hidden" value="${member.id }" name="id" readonly />
-							<p>${member.id }고객님의 주문</p>
+							<p>${member.id } 고객님!</p>
 
 							<!-- <input id="recipientName"  type="text" name=recipient value="${recipientInput1}" -->
 
-							<input type="hidden" name="recipient" readonly /> <span id="recipient9"></span>고객님의 <br />
-							<input type="hidden" name="address" readonly /> <span id="address9"></span>주소로 배송됩니다.
+							<input type="hidden" name="recipient" readonly /> <span id="recipient9"></span> 고객님의 <br />
+							<input type="hidden" name="address" readonly /> <span id="address9"></span>주소로 배송하시겠습니까?
 							
 						</form>
 					</div>

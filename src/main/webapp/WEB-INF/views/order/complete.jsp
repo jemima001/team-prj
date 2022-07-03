@@ -36,7 +36,7 @@ body{
 <br>
 <table class="table">
   <tr class="table-success">
-    <th>Order Complete 주문 완료</th>
+    <th> 주문 완료</th>
   </tr>
   <tr>
     <td>${member.id } 님! 주문 완료되었습니다. </td>
@@ -48,7 +48,7 @@ body{
 <table class="table">
 <thead>
 <tr>
-<th>  Payment Info 결제 정보 </th>
+<th> 결제 정보 </th>
 </tr>
 </thead>
 </table>
