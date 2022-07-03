@@ -17,6 +17,9 @@
   border-width: 0.3ex 0ex 0.3ex;;
   border-style: solid;
 }
+a{
+	color: black;
+}
 </style>
 <script>
 $(document).ready(function() {
@@ -78,29 +81,40 @@ body{
 			</c:if>
 			<form id="form1" action="${appRoot }/notice/modify" method="post" enctype="multipart/form-data">
 				<input type="hidden" name="id" value="${notice.id }" />
+				<br />
 				<div>
-					<label class="form-label mt-2" for="input1">제목</label>
+					<h3>${notice.title }</h3>
+					<div class="row">
+					<div class="col" style="height: 20px;">
+						<p>${notice.writerNickName }</p>
+					</div>
+					<div class="col" style="text-align: end; height: 20px;">
+						<p>${notice.prettyInserted } &nbsp;&nbsp;   <i class="fa-solid fa-eye" style="opacity: 0.5;"></i>${notice.viewCount }</p>
+					</div>
+					</div>
+					<%-- <label class="form-label mt-2" for="input1">제목</label>
 					<input class="form-control mb-3" type="text" name="title" required
-						id="input1" value="${notice.title }" readonly />
+						id="input1" value="${notice.title }" readonly /> --%>
 				</div>
-
+<hr />
 				<div>
-					<label class="form-label" for="textarea1">본문</label>
+					<p>${notice.body }</p>
+					<%-- <label class="form-label" for="textarea1">본문</label>
 					<textarea class="form-control mb-3" name="body" id="textarea1"
-						cols="30" rows="10" readonly style="border:none;">${notice.body }</textarea>
+						cols="30" rows="10" readonly style="border:none;">${notice.body }</textarea> --%>
 				</div>
-				
-				<div>
+				<hr />
+				<%-- <div>
 					<label for="input3" class="form-label">작성자</label>
 					<input id="input3" class="form-control mb-3" type="text"
 						value="${notice.writerNickName }" readonly />
-				</div>
+				</div> --%>
 
-				<div>
+				<%-- <div>
 					<label for="input2" class="form-label">작성일시</label>
 					<input class="form-control mb-3" type="datetime-local"
 						value="${notice.inserted }" readonly />
-				</div>
+				</div> --%>
 				<div class="mb-2">
 					<button id="modify-submit1" class="btn btn-primary d-none">수정</button>
 					<button id="delete-submit1" class="btn btn-danger d-none">삭제</button>

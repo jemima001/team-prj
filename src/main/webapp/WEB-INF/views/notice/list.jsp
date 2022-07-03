@@ -26,8 +26,12 @@ a {
 	text-decoration-line: none;
 }
 
-a:hover {
+a {
 	color: black;
+}
+
+a:hover {
+	color: #608463;
 }
 
 body {
@@ -62,7 +66,7 @@ body {
 						<tr>
 							<th>번호</th>
 							<th>제목</th>
-							<th>닉네임</th>
+							<th>관리자</th>
 							<th>작성일</th>
 							<th>조회수</th>
 						</tr>

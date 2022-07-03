@@ -16,6 +16,17 @@
 body{
 	font-family: 나눔스퀘어, 'NanumSquare', sans-serif;
 }
+a {
+	text-decoration-line: none;
+}
+
+a {
+	color: black;
+}
+
+a:hover {
+	color: #608463;
+}
 </style>
 <title>Insert title here</title>
 </head>

@@ -6,9 +6,10 @@
 
 	<select id="getBoardlist1"
 		resultType="com.project.market.domain.ProductPageDto">
-		SELECT p.id id, f.fileName fileName, p.BoardTitle boardTitle
+		SELECT p.id id, f.fileName fileName, p.BoardTitle boardTitle, FORMAT(pr.price, 0) price
 		FROM ProductPage p
 		LEFT JOIN File f ON p.id = f.boardId
+		JOIN Product pr ON pr.id = p.productId
 		GROUP BY p.id
 		ORDER BY p.id
 		DESC LIMIT 0,8
