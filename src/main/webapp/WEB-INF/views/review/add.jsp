@@ -35,7 +35,7 @@ body{
   <label for="reviewAddBody" class="form-label">내용</label>
   <textarea class="form-control" id="reviewAddBody" rows="3" name="reviewBody"></textarea>
 </div>
-<input type="file" name="file" multiple="multiple" required="required"/>
+<input type="file" name="file" multiple="multiple" />
 <input type="submit" value="작성" />
 	</form>
 </body>
