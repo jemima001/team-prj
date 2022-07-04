@@ -292,19 +292,19 @@ body {
 							style="text-align: center; outline-color: white; border: 0px; width: 100%; height: 100%;" readonly>${productboard.boardBody }</textarea>
 
 
-
+			
 			<sec:authorize access="hasRole('ADMIN')">
 				<form action="/market/product/deleteBoard" method="post">
 					<input type="hidden" name="id" value="${productboard.id }" />
 					<input type="hidden" name="deleteImg"
-						value="${productboard.fileList }" />
-					<input type="submit" value="판매글 삭제" />
+						value="${productboard.fileList }" style="display: inline-block; " />
+					<button class="btn btn-success" >판매글 삭제</button>
 				</form>
 
 				<!-- 수정폼 -->
 				<form action="/market/product/modif">
 					<input type="hidden" value="${productboard.id }" name="id" />
-					<input type="submit" value="판매글 수정" />
+					<button class="btn btn-success" >판매글 수정</button>
 				</form>
 			</sec:authorize>
 
@@ -313,10 +313,10 @@ body {
 				<form action="${appRoot }/review/add" method="get">
 					<input type="hidden" name="prodctPageid"
 						value="${productboard.id }" />
-					<input type="submit" value="리뷰 작성" />
-
+						<button class="btn btn-success" >리뷰 작성</button>
 				</form>
 			</c:if>
+		
 			<div id="reviewform">
 				<%-- <form action="${appRoot }/product/reviewpage" method="post"
 					enctype="multipart/form-data">
