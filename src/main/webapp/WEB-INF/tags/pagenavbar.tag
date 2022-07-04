@@ -9,7 +9,7 @@
 <c:url value="/member/signup" var="signupUrl"></c:url>
 <c:url value="/project/home" var="homeUrl"></c:url>
 <c:url value="/member/initpw" var="initPasswordUrl"></c:url>
-<c:url value="/member/adminpage" var="adminpageUrl"></c:url>
+<c:url value="/member/adminorderlist" var="adminpageUrl"></c:url>
 
 <sec:authorize access="isAuthenticated()">
 	<sec:authentication property="principal" var="principal" />
