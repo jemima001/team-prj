@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix='c' uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
+<%@ page import="com.project.market.domain.*" %>
 <%
 	request.setCharacterEncoding("utf-8");
 %>
@@ -102,7 +103,14 @@ body{
 						
 						let showImg ="${imageUrl }/project/noImage/noImage.png";
 						if(list[i].fileName != null){
-							 showImg = "${imageUrl }/project/"+list[i].boardId+"/"+list[i].fileName;
+							
+							
+
+								
+							let encodedFileName = encodeURI(list[i].fileName);
+							
+							
+							 showImg = "${imageUrl }/project/"+list[i].boardId+"/"+encodedFileName;
 						} 
 						
 						const productElement =$("<tr />");
@@ -188,7 +196,19 @@ body{
 				<tr>
 					<td>${product.productId }</td>
 					<td>
+					
+					
 						<c:if test="${product.fileName !=null}">
+
+<%
+									if (pageContext.getAttribute("file") != null) {
+
+									ProductDto Dto = (ProductDto) pageContext.getAttribute("product");
+									String file = Dto.getFileName();
+									String encodedFileName = java.net.URLEncoder.encode(file, "utf-8");
+									pageContext.setAttribute("encodedFileName", encodedFileName);
+								}
+								%>
 
 							<img style="width: 200px" class="img-thumbnail"
 								src="${imageUrl }/project/${product.boardId }/${product.fileName}"
