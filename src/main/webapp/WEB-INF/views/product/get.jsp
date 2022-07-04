@@ -221,7 +221,7 @@ body {
 								<!-- --------------------------------------------------- -->
 
 								<p>판매 상품 : ${product.productName }</p>
-								<h2>${product.price }원</h2>
+								<h2>${product.strPrice }원</h2>
 
 								<c:if test="${product.stock != 0 }">
 					구매 수량
@@ -289,23 +289,26 @@ body {
 			<h2 class="justify-content-center">상세 정보</h2>
 
 			<textarea name="body" id="textarea1"
-							style="text-align: center; outline-color: white; border: 0px; width: 100%; height: 100%;" readonly>${productboard.boardBody }</textarea>
+				style="text-align: center; outline-color: white; border: 0px; width: 100%; height: 100%;"
+				readonly>${productboard.boardBody }</textarea>
 
 
-			
+
 			<sec:authorize access="hasRole('ADMIN')">
-				<form action="/market/product/deleteBoard" method="post">
+				<form id="deleteBoard" action="/market/product/deleteBoard" method="post">
 					<input type="hidden" name="id" value="${productboard.id }" />
 					<input type="hidden" name="deleteImg"
-						value="${productboard.fileList }" style="display: inline-block; " />
-					<button class="btn btn-success" >판매글 삭제</button>
+						value="${productboard.fileList }" style="display: inline-block;" />
 				</form>
 
 				<!-- 수정폼 -->
-				<form action="/market/product/modif">
+				<form id="deleteModif" action="/market/product/modif">
 					<input type="hidden" value="${productboard.id }" name="id" />
-					<button class="btn btn-success" >판매글 수정</button>
 				</form>
+				
+					<button form="deleteModif" class="btn btn-success">판매글 수정</button>
+					<button form="deleteBoard" class="btn btn-danger">판매글 삭제</button>
+				
 			</sec:authorize>
 
 			<c:if test="${not empty check && show}">
@@ -313,10 +316,10 @@ body {
 				<form action="${appRoot }/review/add" method="get">
 					<input type="hidden" name="prodctPageid"
 						value="${productboard.id }" />
-						<button class="btn btn-success" >리뷰 작성</button>
+					<button class="btn btn-success">리뷰 작성</button>
 				</form>
 			</c:if>
-		
+
 			<div id="reviewform">
 				<%-- <form action="${appRoot }/product/reviewpage" method="post"
 					enctype="multipart/form-data">
@@ -376,45 +379,63 @@ body {
 													data-bs-toggle="collapse"
 													data-bs-target="#review${reviewlist.id }"
 													aria-expanded="false"
-													aria-controls="panelsStayOpen-collapseOne" style="">
-													${reviewlist.reviewTitle }</button>
+													aria-controls="panelsStayOpen-collapseOne">
+
+													<div class="col">${reviewlist.reviewTitle }</div>
+
+												</button>
 											</h2>
 											<div id="review${reviewlist.id }"
 												class="accordion-collapse collapse"
 												aria-labelledby="panelsStayOpen-headingOne">
 												<div class="accordion-body">
-													id :${reviewlist.memberId } ${reviewlist.reviewBody }
-													<br />
 													<c:forEach items="${reviewlist.fileList}" var="reviewfile">
 
-													<c:if test="${reviewfile != null }">
-													
-														<img style="width: 200px" class="img-thumbnail"
-															src="${imageUrl }/project/reviewpage/${reviewlist.id }/${reviewfile}"
-															alt="" />
-													</c:if>
+														<c:if test="${reviewfile != null }">
 
-													<c:if test="${reviewfile == null }">
-													</c:if>
+															<img style="width: 200px" class="img-thumbnail"
+																src="${imageUrl }/project/reviewpage/${reviewlist.id }/${reviewfile}"
+																alt="" />
+														</c:if>
+
+														<c:if test="${reviewfile == null }">
+														</c:if>
 													</c:forEach>
+													<div class="row">
+														<div class="col" style="text-align: end;">작성자
+															:${reviewlist.memberId }</div>
+														<textarea name="reviewbody" id="textarea1" rows="10"
+															style="text-align: center; outline-color: white; border: 0px; width: 100%;"
+															readonly>${reviewlist.reviewBody }</textarea>
+
+													</div>
+													<br />
+													<div class="row">
 													<sec:authorize access="isAuthenticated()">
 														<sec:authentication property="principal" var="principal" />
 														<c:if test="${not empty check }">
-															<form action="${appRoot }/product/deleteReview"
+															<form id="formForReviewDelete" action="${appRoot }/product/deleteReview"
 																method="post">
 																<input type="hidden" value="${productboard.id }"
 																	name="productPage" />
 																<input type="hidden" value="${reviewlist.id} " name="id" />
-																<input type="submit" value="리뷰 삭제" />
+																<!-- <input type="submit" value="리뷰 삭제" /> -->
 															</form>
-															<form action="${appRoot }/review/modif" method="get">
+															<form id="formForReviewModif" action="${appRoot }/review/modif" method="get">
 																<input type="hidden" name="id" value="${reviewlist.id} " />
-																<input type="hidden" name= "boardId" value ="${productboard.id }">
-																<input type="submit" value="리뷰 수정" />
+																<input type="hidden" name="boardId"
+																	value="${productboard.id }">
+																<!-- <input type="submit" value="리뷰 수정" /> -->
 
 															</form>
+														<div class="col" style="text-align: right;">
+														<button class="btn btn-success" form="formForReviewModif">리뷰 수정!</button>
+														<button class="btn btn-danger" form="formForReviewDelete">리뷰 삭제!</button>
+														</div>
+														
 														</c:if>
 													</sec:authorize>
+													</div>
 												</div>
 											</div>
 										</div>
