@@ -72,7 +72,7 @@ body{
 						if (list[i].boardId == 0) {
 							
 							sellButtonText = `
-								\${list[i].boardId}
+								
 								<form action="${appRoot }/product/add">
 									<input type="hidden" value="\${list[i].productId }"
 										name="productId" />
@@ -88,7 +88,7 @@ body{
 							`
 						} else {
 							sellButtonText = `
-								\${list[i].boardId}
+								
 									<form action="${appRoot }/product/modif">
 										<input type="hidden" name="id" value="\${list[i].boardId }" />
 										<button class="btn btn-outline-success modalModifyButton">판매글
@@ -218,7 +218,7 @@ body{
 								data-bs-target="#modalRemove${product.productId }">삭제</button>
 
 							<c:if test="${product.boardId == 0}">
-							${product.boardId}
+							
 								<form action="${appRoot }/product/add">
 									<input type="hidden" value="${product.productId }"
 										name="productId" />
@@ -233,7 +233,7 @@ body{
 								</form>
 							</c:if>
 							<c:if test="${product.boardId != 0}">
-							${product.boardId}
+							
 								<form action="${appRoot }/product/modif">
 									<input type="hidden" name="id" value="${product.boardId }" />
 									<button class="btn btn-outline-success modalModifyButton">판매글

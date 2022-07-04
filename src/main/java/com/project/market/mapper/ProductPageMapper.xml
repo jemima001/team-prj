@@ -72,8 +72,8 @@
 
 	<select id="getproduct"
 		resultType="com.project.market.domain.ProductDto">
-		SELECT name as productName,
-		price as price,
+		 SELECT name as productName,
+		format(price, 0) strPrice,
 		Stock
 		From Product
 		WHERE id =#{productId};
