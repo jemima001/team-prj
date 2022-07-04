@@ -60,7 +60,7 @@
 											position: sticky;
 											top: 0;
 											z-index: 1000;
-											height: 58px;
+											height: 100%;
 											width: 100%;
 ">
 	<div class="container-fluid">
