@@ -24,6 +24,7 @@ a{
 </style>
 <script>
 $(document).ready(function() {
+	
 	$("#edit-button1").click(function() {
 		$("#input1").removeAttr("readonly");
 		$("#textarea1").removeAttr("readonly");
@@ -31,6 +32,13 @@ $(document).ready(function() {
 		$("#delete-submit1").removeClass("d-none");
 		$("#addFileInputContainer1").removeClass("d-none");
 		$(".removeFileCheckbox").removeClass("d-none");
+		 document.oncontextmenu=function(){return true;} // 우클릭 방지
+
+		    document.onselectstart=function(){return true;} // 드래그 방지
+
+		    document.ondragstart=function(){return true;} // 선택 방지
+
+		    document.onmousedown=function(){return true;}
 	});
 
 	$("#delete-submit1").click(function(e) {
@@ -46,6 +54,40 @@ $(document).ready(function() {
 
 	});
 });
+</script>
+<script>
+
+    $(document).ready(function() {
+
+        $(document).bind("contextmenu", function(e){
+			return false;
+
+        });
+
+
+
+        $('img').bind("contextmenu",function(e){
+            return false;
+
+        });
+
+
+
+        $('img').bind("selectstart",function(e){
+            return false;
+
+        });
+
+	    $("#mes").hide(2000);
+    });
+    document.oncontextmenu=function(){return false;} // 우클릭 방지
+
+    document.onselectstart=function(){return false;} // 드래그 방지
+
+    document.ondragstart=function(){return false;} // 선택 방지
+
+    document.onmousedown=function(){return false;}
+
 </script>
 <style>
 body{
@@ -69,22 +111,25 @@ body{
 				<ul class="nav me-auto">
 					<li>
 						<h2 style="display: inline;">공지사항</h2>
+						<sec:authorize access="hasRole('ADMIN')">
+							<button id="edit-button1" class="btn btn-secondary">
+								<i class="fa-solid fa-pen-to-square"></i>
+							</button>
+						</sec:authorize>
 					</li>
 				</ul>
-				<sec:authorize access="hasRole('ADMIN')">
-					<button id="edit-button1" class="btn btn-secondary">
-						<i class="fa-solid fa-pen-to-square"></i>
-					</button>
-				</sec:authorize>
 			</div>
 			<c:if test="${not empty message }">
-				<div class="alert alert-primary">${message }</div>
+				<div id="mes" class="alert alert-primary">${message }</div>
 			</c:if>
 			<form id="form1" action="${appRoot }/notice/modify" method="post" enctype="multipart/form-data">
 				<input type="hidden" name="id" value="${notice.id }" />
 				<br />
 				<div>
-					<h3>${notice.title }</h3>
+					<h3>
+						<input type="text" name="title" required
+							id="input1" value="${notice.title }" readonly style="border: 0px;"/>
+					</h3>
 					<div class="row">
 					<div class="col" style="height: 20px;">
 						<p>${notice.writerNickName }</p>
@@ -93,16 +138,13 @@ body{
 						<p>${notice.prettyInserted } &nbsp;&nbsp;   <i class="fa-solid fa-eye" style="opacity: 0.5;"></i>${notice.viewCount }</p>
 					</div>
 					</div>
-					<%-- <label class="form-label mt-2" for="input1">제목</label>
-					<input class="form-control mb-3" type="text" name="title" required
-						id="input1" value="${notice.title }" readonly /> --%>
 				</div>
 <hr />
 				<div>
-					<p>${notice.body }</p>
-					<%-- <label class="form-label" for="textarea1">본문</label>
-					<textarea class="form-control mb-3" name="body" id="textarea1"
-						cols="30" rows="10" readonly style="border:none;">${notice.body }</textarea> --%>
+					<%-- <textarea name="body" id="textarea1"style="text-align: center; outline-color: white; border: 0px; width: 100%; height: 450px; resize: none;" readonly>${notice.body }</textarea> --%>
+					<%-- <p>${notice.body }</p> --%>
+					<textarea name="body" id="textarea1"
+						cols="30" rows="10" readonly style="text-align: center; border: 0px; width: 100%; height: 450px; resize: none;">${notice.body }</textarea>
 				</div>
 				<hr />
 				<%-- <div>
