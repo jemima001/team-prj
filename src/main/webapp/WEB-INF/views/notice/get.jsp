@@ -142,7 +142,7 @@ body{
 				<div>
 					<h3>
 						<input type="text" name="title" required
-							id="input1" value="${notice.title }" readonly style="border: 0px;"/>
+							id="input1" value="${notice.title }" readonly style="border: 0px; width: 100%"/>
 					</h3>
 					<div class="row">
 					<div class="col" style="height: 20px;">
@@ -158,7 +158,7 @@ body{
 					<%-- <textarea name="body" id="textarea1"style="text-align: center; outline-color: white; border: 0px; width: 100%; height: 450px; resize: none;" readonly>${notice.body }</textarea> --%>
 					<%-- <p>${notice.body }</p> --%>
 					<textarea name="body" id="textarea1"
-						cols="30" rows="10" readonly style="text-align: center; border: 0px; width: 100%; height: 450px; resize: none;">${notice.body }</textarea>
+						cols="30" rows="10" readonly style="text-align: center; border: 0px; width: 100%; height: 100%; resize: none;">${notice.body }</textarea>
 				</div>
 				<hr />
 				<%-- <div>

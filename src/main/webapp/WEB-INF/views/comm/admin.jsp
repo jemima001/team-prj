@@ -59,7 +59,7 @@ body{
 						</form>
 						<br />
 						<!-- 서버와 메시지를 주고 받는 콘솔 텍스트 영역 -->
-						<textarea rows="10" cols="50" class="console" disabled="disabled"></textarea>
+						<textarea rows="10" cols="50" class="console" disabled="disabled" style="resize: none;"></textarea>
 					</div>
 				</div>
 			</div>
@@ -89,7 +89,7 @@ body{
 				let form = $(".template").html();
 				// div를 감싸고 속성 data-key에 unique키를 넣는다.
 				form = $(
-						"<div class='float-left'><div>" + node.userName
+						"<div class='float-left'><div>" + node.userName + "님의 채팅입니다."
 								+ "</div></div>").attr("data-key", node.key)
 						.append(form);
 				// body에 추가한다.
@@ -123,11 +123,14 @@ body{
 			// console영역을 찾는다.
 			let log = $div.find(".console").val();
 			// 아래에 메시지를 추가한다.
+			if(message.length >= 1 && message != " ") {
 			$div.find(".console").val(log + "(me) => " + message + "\n");
-			// 텍스트 박스의 값을 초기화 한다.
-			$div.find(".message").val("");
 			// 웹소켓으로 메시지를 보낸다.
 			webSocket.send(key + "#####" + message + "#####" + nickName);
+			}
+			// 텍스트 박스의 값을 초기화 한다.
+			message = "";
+			$div.find(".message").val("");
 		});
 		// 텍스트 박스에서 엔터키를 누르면
 		$(document).on(

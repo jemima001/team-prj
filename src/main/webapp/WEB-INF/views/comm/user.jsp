@@ -49,7 +49,7 @@ body{
 					<br />
 					<!-- 서버와 메시지를 주고 받는 콘솔 텍스트 영역 -->
 					<!-- <div id="messageTextArea" style="overflow-y: scroll; height:200px;" ></div> -->
-					<textarea id="messageTextArea" rows="10" cols="50" disabled="disabled"></textarea>
+					<textarea id="messageTextArea" rows="10" cols="50" disabled="disabled" style="resize: none;"></textarea>
 				</div>
 			</div>
 		</div>
@@ -77,6 +77,7 @@ body{
 		// 서버로부터 메시지가 도착하면 콘솔 화면에 메시지를 남긴다.
 		webSocket.onmessage = function(message) {
 			messageTextArea.value += message.data + "\n";
+			messageTextArea.scrollTop = messageTextArea.scrollHeight;
 		};
 		// 서버로 메시지를 발송하는 함수
 		function sendMessage() {
