@@ -336,7 +336,7 @@ public class ProductPageService {
 		/*System.out.println("allPageNum:"+allPageNum);
 		System.out.println("setOnePageAllBoardNum :"+setOnePageAllBoardNum);*/
 		paginationDto.setOnePageAllBoardNum(setOnePageAllBoardNum);
-		paginationDto.setEndPage((allPageNum / setOnePageAllBoardNum) + 1);
+		paginationDto.setEndPage((allPageNum / setOnePageAllBoardNum) );
 		/*System.out.println("(allPageNum/setOnePageAllBoardNum)+1 :"+(allPageNum/setOnePageAllBoardNum)+1);
 		System.out.println("(allPageNum/setOnePageAllBoardNum): "+(allPageNum/setOnePageAllBoardNum));*/
 		if (paginationDto.getEndPage() == 0) {
