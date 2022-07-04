@@ -268,7 +268,7 @@
 	<select id="getprodutlist"
 		resultType="com.project.market.domain.ProductDto">
 
-		SELECT Product.id as productId ,
+		  SELECT Product.id as productId ,
 		Product.name as productName,
 		Product.Stock as stock,
 		Product.price as price,
@@ -277,8 +277,8 @@
 		ProductPage.id as boardId
 		FROM Product LEFT JOIN ProductPage on ProductPage.productId = Product.id
 		LEFT JOIN File on File.boardid = ProductPage.id
-		ORDER BY Stock
-
+        GROUP BY Product.Id
+		ORDER BY Stock;
 	</select>
 
 	<delete id="deleteCategory">

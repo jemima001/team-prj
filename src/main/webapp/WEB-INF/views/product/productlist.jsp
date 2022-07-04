@@ -66,7 +66,40 @@ body{
 					const productlistElement= $("#productlist");
 					productlistElement.empty();
 					
+					
 					for (let i =0; i<list.length; i++) {
+						let sellButtonText = "";
+						if (list[i].boardId == 0) {
+							
+							sellButtonText = `
+								\${list[i].boardId}
+								<form action="${appRoot }/product/add">
+									<input type="hidden" value="\${list[i].productId }"
+										name="productId" />
+									<input type="hidden" value="\${list[i].productName }"
+										name="productName" />
+									<input type="hidden" value="\${list[i].stock }" name="stock" />
+									<input type="hidden" value="\${list[i].price }" name="price" />
+									<input type="hidden" value="addFormProductList" name="mod" />
+									<button class="btn btn-outline-success modalModifyButton">판매글
+										등록</button>
+		
+								</form>
+							`
+						} else {
+							sellButtonText = `
+								\${list[i].boardId}
+									<form action="${appRoot }/product/modif">
+										<input type="hidden" name="id" value="\${list[i].boardId }" />
+										<button class="btn btn-outline-success modalModifyButton">판매글
+											수정</button>
+			
+			
+									</form>
+							
+							`
+						}
+						
 						let showImg ="${imageUrl }/project/noImage/noImage.png";
 						if(list[i].fileName != null){
 							 showImg = "${imageUrl }/project/"+list[i].boardId+"/"+list[i].fileName;
@@ -107,30 +140,8 @@ body{
 									<button class="btn btn-outline-danger" data-bs-toggle="modal"
 										data-bs-target="#modalRemove\${list[i].productId }">삭제</button>
 
-									<c:if test="\${list[i].boardId == 0}">
-										<form action="${appRoot }/product/add">
-											<input type="hidden" value="\${list[i].productId }"
-												name="productId" />
-											<input type="hidden" value="\${list[i].productName }"
-												name="productName" />
-											<input type="hidden" value="\${list[i].stock }" name="stock" />
-											<input type="hidden" value="\${list[i].price }" name="price" />
-											<input type="hidden" value="addFormProductList" name="mod" />
-											<button class="btn btn-outline-success modalModifyButton">판매글
-												등록</button>
-
-										</form>
-									</c:if>
-									<c:if test="${product.boardId != 0}">
-										<form action="${appRoot }/product/modif">
-											<input type="hidden" name="id" value="\${list[i].boardId }" />
-											<button class="btn btn-outline-success modalModifyButton">판매글
-												수정</button>
-
-
-										</form>
-
-									</c:if>
+										
+									\${sellButtonText}
 
 								</div>
 							</td>`);
@@ -207,6 +218,7 @@ body{
 								data-bs-target="#modalRemove${product.productId }">삭제</button>
 
 							<c:if test="${product.boardId == 0}">
+							${product.boardId}
 								<form action="${appRoot }/product/add">
 									<input type="hidden" value="${product.productId }"
 										name="productId" />
@@ -221,6 +233,7 @@ body{
 								</form>
 							</c:if>
 							<c:if test="${product.boardId != 0}">
+							${product.boardId}
 								<form action="${appRoot }/product/modif">
 									<input type="hidden" name="id" value="${product.boardId }" />
 									<button class="btn btn-outline-success modalModifyButton">판매글
