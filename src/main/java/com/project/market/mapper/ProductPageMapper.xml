@@ -90,6 +90,7 @@
 		pp.BoardBody,
 		Product.price as
 		priceTopage,
+		format(Product.price, 0) as price,
 		Product.name as productName,
 		pm.name,
 		pp.inserttime as

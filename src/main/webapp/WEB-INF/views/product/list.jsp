@@ -105,12 +105,17 @@ body {
 					<th>
 						<a href="${appRoot }/product/list" style="color: #f4eedd;">ALL</a>
 					</th>
-					<c:forEach items="${ m_category}" var="category">
+					<c:forEach items="${ m_category}" var="category" >
+					<c:if test="${category.middle_Name == '꽃' }">
+					
+					</c:if>
+					<c:if test="${category.middle_Name != '꽃' }">
 						<th class="nav-item">
 							<a class="nav-link "
 								href="${approot }/market/product/list?cat=${category.product_Middle_Class}&search="
 								style="color: #f4eedd;">${category.middle_Name }</a>
 						</th>
+					</c:if>
 					</c:forEach>
 				</tr>
 			</thead>
@@ -222,7 +227,7 @@ body {
 										<a class="align-bottom" href="${getUrl }">
 											<c:out value="${pege.boardTitle }" />
 										</a>
-										<div class="align-bottom">${pege.priceTopage }원</div>
+										<div class="align-bottom">${pege.price }원</div>
 									</div>
 									<!-- <div class="card-body" >
 
