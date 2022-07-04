@@ -375,8 +375,8 @@
 		File.fileName as revireFileName,
 		File.fileName as fileList,
 		ReviewPage.memberId
-		FROM ReviewPage LEFT JOIN File ON File.boardid = ReviewPage.id
-		WHERE productpage =#{id} and File.WhichBoard =1; ;
+		FROM ReviewPage LEFT JOIN File ON File.boardid = ReviewPage.id and File.WhichBoard =1
+		WHERE productpage =#{id};
 	</select>
 
 	<select id="getBoardFile" resultType="string">
