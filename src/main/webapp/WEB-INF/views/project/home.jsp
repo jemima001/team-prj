@@ -121,8 +121,8 @@ $(document).ready(
 						style="color: #f4eedd;">선인장식물</a></th>
 					<th><a href="${appRoot}/product/list?cat=4&search="
 						style="color: #f4eedd;">대형식물</a></th>
-					<th><a href="${appRoot}/product/list?cat=5&search="
-						style="color: #f4eedd;">꽃</a></th>
+					<%-- <th><a href="${appRoot}/product/list?cat=5&search="
+						style="color: #f4eedd;">꽃</a></th> --%>
 					<th><a href="${appRoot}/product/list?cat=6&search="
 						style="color: #f4eedd;">기타</a></th>
 				</tr>
