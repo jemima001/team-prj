@@ -72,11 +72,14 @@
 
 	<select id="getproduct"
 		resultType="com.project.market.domain.ProductDto">
-		 SELECT name as productName,
+					 SELECT Product.name as productName,
 		format(price, 0) strPrice,
-		Stock
-		From Product
-		WHERE id =#{productId};
+		Stock, 
+        ProductCode0 as product_Middle_Class,
+        Product_middle_class.name as middle_Name
+        From Product JOIN ProductCode ON Product.id = ProductCode.Productid
+        JOIN Product_middle_class ON Product_middle_class.id = ProductCode.ProductCode0
+		WHERE Product.id =#{productId};
 
 	</select>
 

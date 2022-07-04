@@ -164,7 +164,12 @@ body{
 <body>
 	<my:pagenavbar current="productlist"></my:pagenavbar>
 	<my:mypagenavbar current="produtlist"></my:mypagenavbar>
-	<input id ="searchProduct" type="text" name="search" />
+	<!-- <input id ="searchProduct" type="text" name="search" /> -->
+	<div class="mb-3" style="background-color: #d1e7dd">
+  <label for="searchProduct" class="form-label">상품 검색</label>
+  <input id ="searchProduct" name="search" type="text" class="form-control" placeholder="상품명을 입력하세요!">
+</div>
+	
 	<table class="table">
 		<thead>
 			<tr class="table-dark">

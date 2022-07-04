@@ -119,10 +119,10 @@ body {
 						<br />
 						상품 중 분류 :
 						<select id="middle_class" name="Product_middle_class">
-							<option value="0">분류 선택</option>
-							<c:forEach items="${ m_category}" var="category">
+							<option value="${product.product_Middle_Class}">${product.middle_Name}</option>
+							<%-- <c:forEach items="${ m_category}" var="category">
 								<option value="${category.product_Middle_Class}">${category.middle_Name }</option>
-							</c:forEach>
+							</c:forEach> --%>
 						</select>
 
 
