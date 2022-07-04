@@ -221,7 +221,7 @@ body {
 								<!-- --------------------------------------------------- -->
 
 								<p>판매 상품 : ${product.productName }</p>
-								<h2>${product.price }원</h2>
+								<h2>${product.strPrice }원</h2>
 
 								<c:if test="${product.stock != 0 }">
 					구매 수량

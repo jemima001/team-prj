@@ -16,5 +16,6 @@ public class ProductDto {
 	private int boardId;
 	private String fileName;
 	private int purchase;
+	private String strPrice;
 	
 }
