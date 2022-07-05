@@ -235,7 +235,7 @@ textarea {
 								<c:if test="${product.stock != 0 }">
 					구매 수량
 					<input id="PurchaseInput" type="number" name="Purchase" value="1"
-										min="0" />
+										min="1" />
 									<input type="hidden" value="${productboard.id }" name="id" />
 									<input id="productId" type="hidden"
 										value="${productboard.productId }" name="productId" />
