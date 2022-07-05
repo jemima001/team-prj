@@ -50,13 +50,17 @@
 					console.log("ajax 성공");
 					console.log($("#PurchaseInput").val());
 					console.log($("#productId").val());
+					console.log(data);
+					$("#outInfo").empty();
+					$("#outInfo").text(data);
 					$("#cartInforModal1").modal('show');
 
 				},
-				error : function(dtat) {
+				error : function(error) {
 					console.log("ajax 문제 발생");
 					console.log($("#PurchaseInput").val());
 					console.log($("#productId").val());
+					console.log(error);
 					$("#cartInforModal2").modal('show');
 
 				},
@@ -468,7 +472,7 @@ body {
 					<button type="button" class="btn-close" data-bs-dismiss="modal"
 						aria-label="Close"></button>
 				</div>
-				<div class="modal-body">
+				<div id="outInfo" class="modal-body">
 					<p>장바구니에 추가 했습니다.</p>
 				</div>
 				<div class="modal-footer">

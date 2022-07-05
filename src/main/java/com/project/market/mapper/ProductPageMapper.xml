@@ -492,4 +492,11 @@
         WHERE ProductPage.id =#{boardId};
 	
 	</select>
+	
+	<select id="cartCheck" resultType="int">
+	
+	SELECT COUNT(cartId)
+        FROM Cart
+         WHERE memberId = #{memberId} and productId =#{productId};
+	</select>
 </mapper>
