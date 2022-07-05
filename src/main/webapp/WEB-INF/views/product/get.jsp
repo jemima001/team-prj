@@ -465,7 +465,8 @@ textarea {
 													<div class="row">
 														<sec:authorize access="isAuthenticated()">
 															<sec:authentication property="principal" var="principal" />
-															<c:if test="${not empty check }">
+															<c:if test="${not empty check && (reviewlist.memberId ==name || name =='admin' ) }">
+															
 																<form id="formForReviewDelete"
 																	action="${appRoot }/product/deleteReview" method="post">
 																	<input type="hidden" value="${productboard.id }"

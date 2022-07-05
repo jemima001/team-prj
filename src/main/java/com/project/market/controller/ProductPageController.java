@@ -164,6 +164,7 @@ public class ProductPageController {
 		model.addAttribute("check",buyThis);
 		model.addAttribute("checkNumReview ",checkNumReview );
 		model.addAttribute("show", show);
+		model.addAttribute("name", getName);
 		
 //		model.addAttribute("reviewfileList",reviewfileList);
 	}
