@@ -481,6 +481,7 @@ textarea {
 																		value="${reviewlist.id} " />
 																	<input type="hidden" name="boardId"
 																		value="${productboard.id }">
+																	<input type="hidden" name = "memberId" value ="${name }" />
 																	<!-- <input type="submit" value="리뷰 수정" /> -->
 
 																</form>

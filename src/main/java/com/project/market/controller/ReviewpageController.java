@@ -62,17 +62,24 @@ public class ReviewpageController {
 
 	
 	@GetMapping("modif")
-	public void reviewmodif(int id , int boardId, Model model) {
+	public String reviewmodif(int id , int boardId, Model model, Principal principal) {
 		List<String> fileList = service.getreviewFile(id);
 		ReviewpageDto dto = service.getReview(id);
-		//dto.setProductPage(boardId);
-		if(fileList.isEmpty() == false) {
-			System.out.println("test");
-		dto.setFileList(fileList);
+		if(principal.getName().equals(dto.getMemberId())) {
+			
+			//dto.setProductPage(boardId);
+			if(fileList.isEmpty() == false) {
+				System.out.println("test");
+				dto.setFileList(fileList);
+			}
+			
+			System.out.println("dto:"+dto);
+			System.out.println("fileList:"+fileList);
+			model.addAttribute("review", dto);
+			return null;
+		} else {
+			return "redirect:/member/login";
 		}
-		System.out.println("dto:"+dto);
-		System.out.println("fileList:"+fileList);
-		model.addAttribute("review", dto);
 		
 		
 	}
@@ -80,7 +87,16 @@ public class ReviewpageController {
 	@PostMapping("modif")
 	public String reviewupdata(ReviewpageDto dto,
 							@RequestParam(name = "deleteimg", required = false) ArrayList<String>  deleteimg, 
-			 				 MultipartFile[] file) {
+			 				 MultipartFile[] file, 
+			 				 String name, 
+			 				 Principal principal) {
+		System.out.println("수정 컨트롤 dto :"+dto);
+		System.out.println(dto.getMemberId());
+		System.out.println(principal.getName());
+		
+		if(dto.getMemberId().equals(principal.getName())) {
+			
+		
 		System.out.println("리뷰에서 삭제할 이미지 :"+deleteimg);
 		System.out.println("수정 컨트롤 dto :"+dto);
 		if(deleteimg != null) {
@@ -94,6 +110,10 @@ public class ReviewpageController {
 		  service.updatareview(dto);
 		  
 		  return "redirect:/product/get?id="+dto.getProductPage();
+		} else {
+			System.out.println("잘못된 접근 입니다.");
+			return "redirect:/product/get?id="+dto.getProductPage();
+		}
 		  
 	}
 }
