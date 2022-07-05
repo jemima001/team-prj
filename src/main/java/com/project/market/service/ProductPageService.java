@@ -209,6 +209,16 @@ public class ProductPageService {
 			System.out.println("삭제 테스트");
 			deleterFromAwsS3(dto.getId(),file ,"productPage" );
 		}
+		
+     List<ReviewpageDto> reviewList = mapper.getReviewListfordelete(dto.getId());
+		
+		System.out.println("reviewList : "+reviewList);
+		for(ReviewpageDto file : reviewList) {
+			System.out.println("file : reviewList :"+file);
+			
+			deleterFromAwsS3( file.getId(), file.getRevireFileName(), "reviewpage");
+		}
+		
 		int okReview = mapper.deleteReviewForBoardDelete(dto);
 		int ok = mapper.deleteBoard(dto);
 
