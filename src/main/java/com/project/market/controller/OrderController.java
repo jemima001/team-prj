@@ -21,11 +21,15 @@ import com.project.market.domain.CartDto;
 import com.project.market.domain.MemberDto;
 import com.project.market.domain.OrderDto;
 import com.project.market.domain.ProductPageDto;
+import com.project.market.service.MemberService;
 import com.project.market.service.OrderService;
 
 @Controller
 @RequestMapping("order")
 public class OrderController {
+	
+	@Autowired
+	private MemberService memberService;
 	
 	@Autowired
 	private OrderService orderService;
@@ -128,6 +132,8 @@ public class OrderController {
 				e.printStackTrace();
 			}
 		}
+		
+		
 		
 	}
 	
@@ -233,6 +239,14 @@ public class OrderController {
 		orderService.removeOrder(orderId);
 		
 		return "redirect:/member/userorderlist?id=" + principal.getName();
+	}
+	
+	@PostMapping ("adminRemove")
+	public String removeAdminOrder(Principal principal, int orderId) {
+		
+		orderService.removeOrder(orderId);
+		
+		return "redirect:/member/adminorderlist";
 	}
 		
 	

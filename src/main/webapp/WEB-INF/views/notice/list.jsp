@@ -41,6 +41,9 @@ body {
 .table>:not(caption)>*>* {
 	padding: 12px;
 }
+.page-link {
+    color: black;
+    }
 </style>
 <title>작은 숲</title>
 </head>

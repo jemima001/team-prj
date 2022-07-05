@@ -31,6 +31,15 @@
 <script type="text/javascript">
 	$(document).ready(
 			function() {
+				
+				document.oncontextmenu=function(){return false;} // 우클릭 방지
+
+			    document.onselectstart=function(){return false;} // 드래그 방지
+
+			    document.ondragstart=function(){return false;} // 선택 방지
+
+			    document.onmousedown=function(){return false;}
+				
 				// $("#reviewform").hide();
 
 				$("#purchaseButton").click(
@@ -340,7 +349,7 @@ textarea {
 			<h2 class="justify-content-center">상세 정보</h2>
 
 			<textarea name="body" id="textarea1"
-				style="text-align: center; outline-color: white; border: 0px; width: 100%; height: 100%;"
+				style="text-align: center; outline-color: white; border: 0px; width: 100%; height: 70%;"
 				readonly>${productboard.boardBody }</textarea>
 
 
