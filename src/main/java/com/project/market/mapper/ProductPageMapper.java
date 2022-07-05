@@ -78,6 +78,7 @@ public interface ProductPageMapper {
 	List<ReviewpageDto> getReviewListfordelete(int boardId);
 	List<Integer> getReviewId(int id);
 	List<String> getBoardFilefordelete(ProductDto dto);
+	int cartCheck(@Param("memberId") String memberId,@Param("productId") int productId);
 
 	
 

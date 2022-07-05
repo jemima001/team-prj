@@ -447,6 +447,7 @@
 		WHERE orderState =1 and Orders.memberId=#{name} and ProductPage.id =#{id};
 	</select>
 
+
 	<select id="searchProduct"
 		resultType="com.project.market.domain.ProductDto">
 		SELECT Product.id as productId ,
@@ -459,6 +460,7 @@
 		FROM Product LEFT JOIN ProductPage on ProductPage.productId = Product.id
 		LEFT JOIN File on File.boardid = ProductPage.id
 		WHERE Product.name LIKE #{search}
+		GROUP BY Product.Id
 		ORDER BY Stock;
 
 	</select>
@@ -489,5 +491,12 @@
 	FROM ProductPage  JOIN File  ON ProductPage.id = File.boardId
         WHERE ProductPage.id =#{boardId};
 	
+	</select>
+	
+	<select id="cartCheck" resultType="int">
+	
+	SELECT COUNT(cartId)
+        FROM Cart
+         WHERE memberId = #{memberId} and productId =#{productId};
 	</select>
 </mapper>

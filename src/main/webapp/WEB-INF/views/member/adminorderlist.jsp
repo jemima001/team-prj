@@ -16,6 +16,9 @@
 body{
 	font-family: 나눔스퀘어, 'NanumSquare', sans-serif;
 }
+.page-link {
+    color: black;
+    }
 </style>
 <title>작은 숲</title>
 </head>
@@ -78,6 +81,13 @@ body{
 										<button class="btn btn-outline-success" type="submit" disabled>승인</button>
 									</c:if>
 								</form>
+								<c:if test="${order.orderState eq '0' }">
+										<form action="${appRoot }/order/adminRemove" method="post">
+											<input type="hidden" name="orderId" value="${order.orderId }" />
+											<button class="btn btn-outline-danger">취소</button>
+										</form>
+										
+								</c:if>
 							</td>
 						</tr>
 					</c:forEach>

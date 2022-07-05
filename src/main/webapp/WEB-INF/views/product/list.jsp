@@ -105,8 +105,8 @@ body {
 			style="background-color: #608463; margin: 0; padding: 10;">
 			<thead>
 				<tr>
-					<th>
-						<a href="${appRoot }/product/list" style="color: #f4eedd;">ALL</a>
+					<th class="nav-item">
+						<a class="nav-link " href="${appRoot }/product/list" style="color: #f4eedd;">ALL</a>
 					</th>
 					<c:forEach items="${ m_category}" var="category" >
 					<c:if test="${category.middle_Name == '꽃' }">
@@ -205,7 +205,7 @@ body {
 			<div class="row">
 				<c:forEach items="${boardlist }" var="pege">
 					<div class="col-sm-6">
-						<div class="card mb-3" style="max-width: 540px;">
+						<div class="card mb-3" style="max-width: 540px; margin: auto;">
 							<div class="row g-0">
 								<div class="col-md-7">
 									<c:url value="/product/get" var="getUrl">

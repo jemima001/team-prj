@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -163,6 +164,7 @@ public class ProductPageController {
 		model.addAttribute("check",buyThis);
 		model.addAttribute("checkNumReview ",checkNumReview );
 		model.addAttribute("show", show);
+		model.addAttribute("name", getName);
 		
 //		model.addAttribute("reviewfileList",reviewfileList);
 	}
@@ -304,19 +306,22 @@ public class ProductPageController {
 		System.out.println("상품 수정 받는 dto:"+dto);
 		return "redirect:/product/productlist";
 	}
-	@PostMapping ("addcart")
+	@PostMapping (value = "addcart", produces = "text/plain;charset=UTF-8" )
    @ResponseBody
    public String addcart(ProductDto dto, Principal principal) {
 	   System.out.println("장바구니 추가 ajax:"+dto.getPurchase());
 	   System.out.println("장바구니 추가 ajax:"+dto.getProductId());
 	   System.out.println("장바구니 추가 ajax:"+principal.getName());
-	    service.addCart(dto,principal);
+	   boolean cartCheck = service.addCart(dto,principal);
 	    // 장바구니 에러 추가 작업 필요
 	    //	 1. 장바구니에 이미 추가 되었습니다.
 	    //   2.  ...
-	    String aaa= "aaa";
+	    String outPut= "장바구니 추가 성공";
+	    if(!cartCheck) {
+	    	outPut= "장바구니에 이미 추가 되어 있습니다.";	
+	    }
 	    
-	    return aaa;
+	    return outPut;
    }
 	
 	@GetMapping("reviewpage")

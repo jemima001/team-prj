@@ -26,6 +26,9 @@
 body{
 	font-family: 나눔스퀘어, 'NanumSquare', sans-serif;
 }
+.page-link {
+    color: black;
+}
 </style>
 <title>작은 숲</title>
 </head>

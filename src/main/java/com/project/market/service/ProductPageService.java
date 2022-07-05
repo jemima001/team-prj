@@ -209,6 +209,16 @@ public class ProductPageService {
 			System.out.println("삭제 테스트");
 			deleterFromAwsS3(dto.getId(),file ,"productPage" );
 		}
+		
+     List<ReviewpageDto> reviewList = mapper.getReviewListfordelete(dto.getId());
+		
+		System.out.println("reviewList : "+reviewList);
+		for(ReviewpageDto file : reviewList) {
+			System.out.println("file : reviewList :"+file);
+			
+			deleterFromAwsS3( file.getId(), file.getRevireFileName(), "reviewpage");
+		}
+		
 		int okReview = mapper.deleteReviewForBoardDelete(dto);
 		int ok = mapper.deleteBoard(dto);
 
@@ -314,19 +324,31 @@ public class ProductPageService {
 		return mapper.getFileForList();
 	}
 
-	public String addCart(ProductDto dto, Principal principal) {
-		// TODO Auto-generated method stub
+	public boolean addCart(ProductDto dto, Principal principal) {
+		
+		boolean outPut = true;
 		String memberId = principal.getName();
 		System.out.println("서비스" + dto);
 		int bookCount = dto.getPurchase();
 		int productId = dto.getProductId();
+		int cartCheck = mapper.cartCheck(memberId, productId);
+		System.out.println("cartCheck :"+cartCheck);
+		if(cartCheck==0) {
+			
+			int num = mapper.addCart(memberId, bookCount, productId);
+			
+			System.out.println("num:"+num);
+		} else {
+			
+			if(cartCheck>=1) {
+				
+				outPut = false;
+			}
+		}
 		System.out.println("구매 갯수 서비스에서" + bookCount);
 		System.out.println("제품 아이디 서비스에서" + productId);
 		System.out.println("맴버 아이디 서비스 에서" + memberId);
-		int num = mapper.addCart(memberId, bookCount, productId);
-		
-		System.out.println("num:"+num);
-		return "test";
+		return outPut ;
 
 	}
 

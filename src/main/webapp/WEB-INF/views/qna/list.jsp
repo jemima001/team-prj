@@ -41,6 +41,9 @@ a {
 a:hover {
 	color: #608463;
 }
+.page-link {
+    color: black;
+    }
 </style>
 <title>작은 숲</title>
 </head>
