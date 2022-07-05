@@ -18,6 +18,12 @@
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
 	referrerpolicy="no-referrer"></script>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+	crossorigin="anonymous"></script>
 <style>
 body{
 	font-family: 나눔스퀘어, 'NanumSquare', sans-serif;
@@ -43,7 +49,7 @@ body{
 					<br />
 					<!-- 서버와 메시지를 주고 받는 콘솔 텍스트 영역 -->
 					<!-- <div id="messageTextArea" style="overflow-y: scroll; height:200px;" ></div> -->
-					<textarea id="messageTextArea" rows="10" cols="50" disabled="disabled"></textarea>
+					<textarea id="messageTextArea" rows="10" cols="50" disabled="disabled" style="resize: none;"></textarea>
 				</div>
 			</div>
 		</div>
@@ -71,6 +77,7 @@ body{
 		// 서버로부터 메시지가 도착하면 콘솔 화면에 메시지를 남긴다.
 		webSocket.onmessage = function(message) {
 			messageTextArea.value += message.data + "\n";
+			messageTextArea.scrollTop = messageTextArea.scrollHeight;
 		};
 		// 서버로 메시지를 발송하는 함수
 		function sendMessage() {

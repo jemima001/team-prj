@@ -18,11 +18,17 @@
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
 	referrerpolicy="no-referrer"></script>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+	crossorigin="anonymous"></script>
 
 <style> /* 여러 채팅창 간의 간격과 배열 위치*/
 .float-left {
 	float: left;
-	margin: 5px;
+	margin: 20px;
 }
 body{
 	font-family: 나눔스퀘어, 'NanumSquare', sans-serif;
@@ -36,25 +42,26 @@ body{
 	<div class="container">
 		<br />
 		<div class="row">
-			<div class="col-3">
+			<div class="col-2">
 				<my:customercenternavbar current="notice"></my:customercenternavbar>
 			</div>
 			<div class="col-9">
 				<!-- 유저가 접속할 때마다 이 템플릿으로 채팅창을 생성한다. -->
-				<div class="template" style="display: none">
-					<form>
-						<!-- 메시지 텍스트 박스 -->
-						<input type="hidden" id="sender" value="${nickName }" />
-						<input type="text" class="message"
-							onkeydown="if(event.keyCode === 13) return false;">
-						<!-- 전송 버튼 -->
-						<input value="Send" type="button" class="sendBtn">
-					</form>
-					<br />
-					<!-- 서버와 메시지를 주고 받는 콘솔 텍스트 영역 -->
-					<textarea rows="10" cols="50" class="console" disabled="disabled"></textarea>
+				<div>
+					<div class="template" style="display: none">
+						<form>
+							<!-- 메시지 텍스트 박스 -->
+							<input type="hidden" id="sender" value="${nickName }" />
+							<input type="text" class="message"
+								onkeydown="if(event.keyCode === 13) return false;">
+							<!-- 전송 버튼 -->
+							<input value="Send" type="button" class="sendBtn">
+						</form>
+						<br />
+						<!-- 서버와 메시지를 주고 받는 콘솔 텍스트 영역 -->
+						<textarea rows="10" cols="50" class="console" disabled="disabled" style="resize: none;"></textarea>
+					</div>
 				</div>
-
 			</div>
 		</div>
 	</div>
@@ -82,11 +89,11 @@ body{
 				let form = $(".template").html();
 				// div를 감싸고 속성 data-key에 unique키를 넣는다.
 				form = $(
-						"<div class='float-left'><div>" + node.userName
+						"<div class='float-left'><div>" + node.userName + "님의 채팅입니다."
 								+ "</div></div>").attr("data-key", node.key)
 						.append(form);
 				// body에 추가한다.
-				$("body").append(form);
+				$(".col-9").append(form);
 				// message는 유저가 메시지를 보낼 때 알려주는 메시지이다.
 			} else if (node.status === "message") {
 				// key로 해당 div영역을 찾는다.
@@ -116,11 +123,14 @@ body{
 			// console영역을 찾는다.
 			let log = $div.find(".console").val();
 			// 아래에 메시지를 추가한다.
+			if(message.length >= 1 && message != " ") {
 			$div.find(".console").val(log + "(me) => " + message + "\n");
-			// 텍스트 박스의 값을 초기화 한다.
-			$div.find(".message").val("");
 			// 웹소켓으로 메시지를 보낸다.
 			webSocket.send(key + "#####" + message + "#####" + nickName);
+			}
+			// 텍스트 박스의 값을 초기화 한다.
+			message = "";
+			$div.find(".message").val("");
 		});
 		// 텍스트 박스에서 엔터키를 누르면
 		$(document).on(
