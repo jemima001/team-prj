@@ -23,8 +23,19 @@ body{
 		// 중복,암호 확인 변수
 		let idOk = false;
 		let pwOk = false;
-		let emailOk = false;
+		let emailCheck = false;
 		let nickNameOk = false;
+		let numberOk = false;
+		
+		// 기존 이메일
+		const oldEmail = $("#emailInput1").val();
+		
+		// 인증번호전송 활성화 함수
+		const enableConfirmButton = function() {
+				$("#confirmNumberButton1").removeAttr("disabled");
+		};
+		
+		
 		
 		// 아이디 중복 체크 버튼 클릭시
 		$("#checkIdButton1").click(function(e) {
@@ -60,40 +71,134 @@ body{
 			});
 		});
 		
-		// 이메일 중복 체크 버튼 클릭시
-		$("#checkEmailButton1").click(function(e) {
-			e.preventDefault();
-			$("#checkEmailButton1").attr("disabled", "");
-			
-			const data = {
-				email : $("#form1").find("[name=email]").val()
-			};
-			emailOk = false;
-			$.ajax({
-				url : "${appRoot}/member/check",
-				type : "get",
-				data : data,
-				success : function(data) {
-					switch (data) {
-					case "ok" :
-						$("#emailMessage1").text("사용 가능한 이메일입니다.");
-						emailOk = true;
-						break;
-					case "notOk" :
-						$("#emailMessage1").text("사용 불가능한 이메일입니다.");
-						
-						break;
-					}
-				}, 
-				error : function() {
-					$("#emailMessage1").text("이메일 중복 확인 중 오류 발생, 다시 시도해 주세요.");
-				},
-				complete : function() {
-					$("#checkEmailButton1").removeAttr("disabled", "");
-					enableSubmit();
-				}
-			});
+		// 이메일 input 요소에 text 변경시 이메일중복확인버튼 활성화
+		$("#emailInput1").keyup(function() {
+			const newEmail = $("#emailInput1").val();
+
+			if (oldEmail === newEmail) {
+				$("#emailCheckButton1").attr("disabled", "");
+				$("#emailMessage1").text("");
+				emailCheck = true;
+			} else {
+				$("#emailCheckButton1").removeAttr("disabled");
+				emailCheck = false;
+			}
+
 		});
+		
+		// 이메일중복버튼 클릭시 ajax 요청 발생
+		$("#emailCheckButton1").click(
+				function(e) {
+					// 기본 이벤트 진행 중지
+					e.preventDefault();
+					const data = {
+							email : $("#form1").find("[name=email]").val()
+					};
+
+					emailCheck = false;
+					$.ajax({
+						url : "${appRoot}/member/check",
+						type : "get",
+						data : data,
+						success : function(data) {
+							switch (data) {
+							case "ok":
+								$("#emailMessage1").text("사용 가능한 이메일입니다.");
+								emailCheck = true;
+								enableConfirmButton();
+								
+								break;
+							case "notOk":
+								$("#emailMessage1").text(
+										"사용 불가능한 이메일입니다.");
+
+								break;
+							}
+						},
+						error : function() {
+							$("#emailMessage1").text(
+									"이메일 중복 확인 중 오류 발생, 다시 시도해주세요.");
+						},
+						complete : function() {
+							console.log("이메일 확인 완료")
+						}
+					});
+				});
+		
+		// 인증번호 전송 클릭시 ajax 요청 발생
+		$("#confirmNumberButton1").click(
+				function(e) {
+					e.preventDefault();
+					
+					$("#confirmGroup").show();
+					
+					const data = {
+						email : $("#emailInput1").val()
+					};
+					$.ajax({
+						url : "${appRoot}/member/confirmEmail",
+						type : "get",
+						data : data,
+						success : function(data) {
+							switch (data) {
+							case "ok":
+								$("#confirmMessage1").text(
+										"인증번호를 입력해주세요");
+								break;
+							case "notOk":
+								$("#confirmMessage1").text(
+										"인증번호 전송 실패");
+
+								break;
+							}
+						},
+						error : function() {
+							$("#confirmMessage1").text(
+									"인증번호 전송 중 오류 발생, 다시 시도해주세요.");
+						},
+						complete : function() {
+							console.log("인증번호 전송 완료")
+						}
+					});
+				});
+		
+		// 인증번호 입력 후 확인버튼 클릭시
+		$("#confirmCheckButton1").click(
+				function(e) {
+					e.preventDefault();
+					
+					const data = {
+							number : $("#confirmInput1").val()
+					};
+					$.ajax({
+						url : "${appRoot}/member/confirmNumber",
+						type : "get",
+						data : data,
+						success : function(data) {
+							switch (data) {
+							case "ok":
+								$("#confirmMessage1").text(
+										"맞는 인증번호 입니다.");
+								numberOk = true;
+								enablePassButton();
+								break;
+							case "notOk":
+								$("#confirmMessage1").text(
+										"맞지 않는 인증번호 입니다.");
+								numberOk = false;
+								break;
+							}
+						},
+						error : function() {
+							$("#confirmMessage1").text(
+									"인증번호 전송 중 오류 발생, 다시 시도해주세요.");
+						},
+						complete : function() {
+							console.log("인증번호 전송 완료")
+						}
+					});
+					
+				});
 		
 		// 닉네임 중복 체크 버튼 클릭시
 		$("#checkNickNameButton1").click(function(e) {
@@ -148,7 +253,7 @@ body{
 		
 		// 회원가입 submit 버튼 활성화/비활성화 함수
 		const enableSubmit = function () {
-			if (idOk && pwOk && emailOk && nickNameOk) {
+			if (idOk && pwOk && emailCheck && nickNameOk && numberOk) {
 				$("#submitButton1").removeAttr("disabled");
 			} else {
 				$("#submitButton1").attr("disabled", "");
@@ -193,14 +298,22 @@ body{
 					<input class="form-control" id="passwordInput2" type="text" name="passwordConfirm" />
 					<div class="form-text" id="passwordMessage1"></div>
 					
-					<label for="emailInput1" class="form-label">
-					이메일
-					</label>
-					<div class="input-group">
-						<input id="emailInput1" class="form-control" type="email" name="email" /> 
-						<button class="btn btn-secondary" id="checkEmailButton1" type="button">이메일 중복 확인</button>
+					<label for="emailInput1" class="form-label"> 이메일 </label>
+						<div class="input-group">
+							<input class="form-control" id="emailInput1" type="email" value="" name="email"/>
+							<button class="btn btn-secondary" id="emailCheckButton1" disabled>이메일 중복 확인</button>
+							<button class="btn btn-outline-secondary" id="confirmNumberButton1" disabled>인증번호 전송</button>
+						</div>
+						<p class="form-text" id="emailMessage1"></p>
+					
+					<div style="display:none" id="confirmGroup">
+						<label for="confirmInput1" class="form-label"> 인증번호 </label>
+							<div class="input-group">
+								<input class="form-control" id="confirmInput1" type="text" value="" />
+								<button form="formPass" class="btn btn-secondary" id="confirmCheckButton1">확인</button>
+							</div>
+							<p class="form-text" id="confirmMessage1"></p>
 					</div>
-					<div class="form-text" id="emailMessage1"></div>
 					
 					<label for="nickNameInput1" class="form-label">
 					닉네임
