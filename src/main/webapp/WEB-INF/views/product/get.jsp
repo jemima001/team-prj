@@ -476,9 +476,9 @@ body {
 					<p>장바구니에 추가 했습니다.</p>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-primary"
+					<button type="button" class="btn btn-success"
 						data-bs-dismiss="modal">계속 쇼핑하기</button>
-					<button form="cartForm" class="btn btn-primary">장바구니로 이동</button>
+					<button form="cartForm" class="btn btn-success">장바구니로 이동</button>
 				</div>
 			</div>
 		</div>
@@ -498,9 +498,9 @@ body {
 					<p>장바구니추가에 실패 했습니다.</p>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-primary"
+					<button type="button" class="btn btn-success"
 						data-bs-dismiss="modal">계속 쇼핑하기</button>
-					<button form="cartForm" class="btn btn-primary">장바구니로 이동</button>
+					<button form="cartForm" class="btn btn-success">장바구니로 이동</button>
 
 
 				</div>
