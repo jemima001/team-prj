@@ -120,6 +120,11 @@ body {
 	background-size: 1.25rem;
 	transition: transform .2s ease-in-out;
 }
+
+textarea {
+    resize: none; 
+    overflow:visible;
+}
 </style>
 <title>작은 숲</title>
 </head>
@@ -409,7 +414,7 @@ body {
 														<div class="col" style="text-align: end;">작성자
 															:${reviewlist.memberId }</div>
 														<textarea name="reviewbody" id="textarea1" rows="10"
-															style="text-align: center; outline-color: white; border: 0px; width: 100%;"
+															style="text-align: center; outline-color: white; border: 0px; width: 100%; resize: none; overflow:visible;"
 															readonly>${reviewlist.reviewBody }</textarea>
 
 													</div>
@@ -433,8 +438,8 @@ body {
 
 															</form>
 														<div class="col" style="text-align: right;">
-														<button class="btn btn-success" form="formForReviewModif">리뷰 수정!</button>
-														<button class="btn btn-danger" form="formForReviewDelete">리뷰 삭제!</button>
+														<button class="btn btn-success" form="formForReviewModif">리뷰 수정</button>
+														<button class="btn btn-danger" form="formForReviewDelete">리뷰 삭제</button>
 														</div>
 														
 														</c:if>
