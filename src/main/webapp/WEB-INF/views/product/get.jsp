@@ -29,51 +29,93 @@
 	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
 	crossorigin="anonymous"></script>
 <script type="text/javascript">
-	$(document).ready(function() {
-		// $("#reviewform").hide();
+	$(document).ready(
+			function() {
+				// $("#reviewform").hide();
 
-		$("#purchaseButton").click(function() {
-			//let purchaseNum = $("#PurchaseInput").val();
-			//$("#purchaseInput").val(purchaseNum);
-			//console.log(purchaseNum);
+				$("#purchaseButton").click(
+						function() {
+							let PurchaseNum = $("#PurchaseInput").val();
+							let PurchaseInput = Number(PurchaseNum);
 
-			let data = {
-				purchase : $("#PurchaseInput").val(),
-				productId : $("#productId").val()
-			}
+							let PurchaseInputMax = Number($("#PurchaseInput")
+									.attr("max"));
+							console.log("클릭!!")
+							console.log(PurchaseInput + ">0 &&" + PurchaseInput
+									+ "<=" + PurchaseInputMax);
+							console.log(PurchaseInput > 0
+									&& PurchaseInput <= PurchaseInputMax)
+									console.log(PurchaseInput > 0
+									)
+									console.log(PurchaseInput <= PurchaseInputMax)
+							//let purchaseNum = $("#PurchaseInput").val();
+							//$("#purchaseInput").val(purchaseNum);
+							//console.log(purchaseNum);
+							if (
+								0 < PurchaseInput && PurchaseInput <= PurchaseInputMax) {
+								console.log("0<"+ PurchaseInput);
+								
+								console.log(PurchaseInput + "<="
+										+ PurchaseInputMax);
+								console.log("-----------------");
+								console.log("0 < PurchaseInput  <=  PurchaseInputMax :"+ 0 < PurchaseInput  <=
+										 PurchaseInputMax);
+								
+								console.log("0<"
+										+ PurchaseInput + "<="
+										+ PurchaseInputMax);
 
-			$.ajax({
-				url : "${appRoot}/product/addcart",
-				type : "post",
-				data : data,
-				success : function(data) {
-					console.log("ajax 성공");
-					console.log($("#PurchaseInput").val());
-					console.log($("#productId").val());
-					console.log(data);
-					$("#outInfo").empty();
-					$("#outInfo").text(data);
-					$("#cartInforModal1").modal('show');
+								let data = {
+									purchase : $("#PurchaseInput").val(),
+									productId : $("#productId").val()
+								}
+								$.ajax({
+									url : "${appRoot}/product/addcart",
+									type : "post",
+									data : data,
+									success : function(data) {
+										console.log("ajax 성공");
+										console.log($("#PurchaseInput").val());
+										console.log($("#productId").val());
+										console.log(data);
+										$("#outInfo").empty();
+										$("#outInfo").text(data);
+										$("#cartInforModal1").modal('show');
 
-				},
-				error : function(error) {
-					console.log("ajax 문제 발생");
-					console.log($("#PurchaseInput").val());
-					console.log($("#productId").val());
-					console.log(error);
-					$("#cartInforModal2").modal('show');
+									},
+									error : function(error) {
+										console.log("ajax 문제 발생");
+										console.log($("#PurchaseInput").val());
+										console.log($("#productId").val());
+										console.log(error);
+										$("#cartInforModal2").modal('show');
 
-				},
-				complete : function() {
+									},
+									complete : function() {
 
-					console.log("ajax 종료");
-				}
+										console.log("ajax 종료");
+									}
 
-			})
+								})
+							} else if (PurchaseInput == 0) {
+								console.log($("#PurchaseInput").val());
+								$("#outInfo").empty();
+								$("#outInfo").text("주문 수량이 0입니다.");
+								$("#cartInforModal1").modal('show');
 
-		})
+							}
 
-	});
+							else if (PurchaseInput >= PurchaseInputMax) {
+								console.log($("#PurchaseInput").val() + " <= "
+										+ $("#PurchaseInput").attr("max"));
+								$("#outInfo").empty();
+								$("#outInfo").text("재고가 부족 합니다.");
+								$("#cartInforModal1").modal('show');
+							}
+
+						})
+
+			});
 </script>
 <style>
 .row {
@@ -122,8 +164,8 @@ body {
 }
 
 textarea {
-    resize: none; 
-    overflow:visible;
+	resize: none;
+	overflow: visible;
 }
 </style>
 <title>작은 숲</title>
@@ -235,7 +277,7 @@ textarea {
 								<c:if test="${product.stock != 0 }">
 					구매 수량
 					<input id="PurchaseInput" type="number" name="Purchase" value="1"
-										min="1" />
+										min="1" max="${product.stock }" />
 									<input type="hidden" value="${productboard.id }" name="id" />
 									<input id="productId" type="hidden"
 										value="${productboard.productId }" name="productId" />
@@ -304,7 +346,8 @@ textarea {
 
 
 			<sec:authorize access="hasRole('ADMIN')">
-				<form id="deleteBoard" action="/market/product/deleteBoard" method="post">
+				<form id="deleteBoard" action="/market/product/deleteBoard"
+					method="post">
 					<input type="hidden" name="id" value="${productboard.id }" />
 					<input type="hidden" name="deleteImg"
 						value="${productboard.fileList }" style="display: inline-block;" />
@@ -314,10 +357,10 @@ textarea {
 				<form id="deleteModif" action="/market/product/modif">
 					<input type="hidden" value="${productboard.id }" name="id" />
 				</form>
-				
-					<button form="deleteModif" class="btn btn-success">판매글 수정</button>
-					<button form="deleteBoard" class="btn btn-danger">판매글 삭제</button>
-				
+
+				<button form="deleteModif" class="btn btn-success">판매글 수정</button>
+				<button form="deleteBoard" class="btn btn-danger">판매글 삭제</button>
+
 			</sec:authorize>
 
 			<c:if test="${not empty check && show}">
@@ -414,36 +457,41 @@ textarea {
 														<div class="col" style="text-align: end;">작성자
 															:${reviewlist.memberId }</div>
 														<textarea name="reviewbody" id="textarea1" rows="10"
-															style="text-align: center; outline-color: white; border: 0px; width: 100%; resize: none; overflow:visible;"
+															style="text-align: center; outline-color: white; border: 0px; width: 100%; resize: none; overflow: visible;"
 															readonly>${reviewlist.reviewBody }</textarea>
 
 													</div>
 													<br />
 													<div class="row">
-													<sec:authorize access="isAuthenticated()">
-														<sec:authentication property="principal" var="principal" />
-														<c:if test="${not empty check }">
-															<form id="formForReviewDelete" action="${appRoot }/product/deleteReview"
-																method="post">
-																<input type="hidden" value="${productboard.id }"
-																	name="productPage" />
-																<input type="hidden" value="${reviewlist.id} " name="id" />
-																<!-- <input type="submit" value="리뷰 삭제" /> -->
-															</form>
-															<form id="formForReviewModif" action="${appRoot }/review/modif" method="get">
-																<input type="hidden" name="id" value="${reviewlist.id} " />
-																<input type="hidden" name="boardId"
-																	value="${productboard.id }">
-																<!-- <input type="submit" value="리뷰 수정" /> -->
+														<sec:authorize access="isAuthenticated()">
+															<sec:authentication property="principal" var="principal" />
+															<c:if test="${not empty check }">
+																<form id="formForReviewDelete"
+																	action="${appRoot }/product/deleteReview" method="post">
+																	<input type="hidden" value="${productboard.id }"
+																		name="productPage" />
+																	<input type="hidden" value="${reviewlist.id} "
+																		name="id" />
+																	<!-- <input type="submit" value="리뷰 삭제" /> -->
+																</form>
+																<form id="formForReviewModif"
+																	action="${appRoot }/review/modif" method="get">
+																	<input type="hidden" name="id"
+																		value="${reviewlist.id} " />
+																	<input type="hidden" name="boardId"
+																		value="${productboard.id }">
+																	<!-- <input type="submit" value="리뷰 수정" /> -->
 
-															</form>
-														<div class="col" style="text-align: right;">
-														<button class="btn btn-success" form="formForReviewModif">리뷰 수정</button>
-														<button class="btn btn-danger" form="formForReviewDelete">리뷰 삭제</button>
-														</div>
-														
-														</c:if>
-													</sec:authorize>
+																</form>
+																<div class="col" style="text-align: right;">
+																	<button class="btn btn-success"
+																		form="formForReviewModif">리뷰 수정</button>
+																	<button class="btn btn-danger"
+																		form="formForReviewDelete">리뷰 삭제</button>
+																</div>
+
+															</c:if>
+														</sec:authorize>
 													</div>
 												</div>
 											</div>
