@@ -54,6 +54,7 @@ body{
 				name="reviewBody">${review.reviewBody }</textarea>
 		</div>
 		<input type="file" name="file" multiple="multiple" />
+		<input type="hidden" name ="memberId" value ="${review.memberId }" />
 		<input type="submit" value="작성" />
 <br />
 		<c:forEach items="${review.fileList }" var="file">
