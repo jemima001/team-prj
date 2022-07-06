@@ -36,10 +36,8 @@
 
 			    document.onselectstart=function(){return false;} // 드래그 방지
 
-			    document.ondragstart=function(){return false;} // 선택 방지
-
-			    document.onmousedown=function(){return false;}
-				
+			   
+			   
 				// $("#reviewform").hide();
 
 				$("#purchaseButton").click(
