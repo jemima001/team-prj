@@ -128,10 +128,10 @@
 				</sec:authorize>
 
 				<li class="nav-item" style=""><a
-					class="nav-link" href="/market/notice/list" style="">고객센터</a>
+					class="nav-link" href="${appRoot }/notice/list" style="">고객센터</a>
 				</li>
 				<li class="nav-item">
-					<form action="${approot }/market/product/list" class="d-flex" role="search" method="get">
+					<form action="${appRoot }/product/list" class="d-flex" role="search" method="get">
 					<div class="input-group">
 						<input class="form-control me-auto" type="search"
 							placeholder="Search" aria-label="Search" name="search">
