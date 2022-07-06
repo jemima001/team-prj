@@ -54,7 +54,7 @@ body{
 							<input type="text" class="d-none" id="messageinput"
 								placeholder="하고싶은 말을 작성해주세요" onkeydown="Enter_Check();" />
 							<div class="input-group-append">
-								<button id="sendBtn" class="d-none btn btn-light" type="button" onclick="send();">보내기</button>
+								<button id="sendBtn" class="d-none btn btn-light" type="button" onclick="send();" style="padding-left: 6px; padding-right: 6px;">보내기</button>
 							</div>
 						</div>
 					</div>
@@ -87,7 +87,7 @@ body{
 							writeResponse(event.data);
 						};
 						ws.onclose = function(event) {
-							writeResponse("Connection closed");
+							writeResponse("연결이 끊켰습니다.");
 						}
 						$("#sender").addClass("d-none");
 						$("#messageinput").removeClass("d-none");

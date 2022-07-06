@@ -92,7 +92,7 @@ body{
 						"<div class='float-left'><div>" + node.userName + "님의 채팅입니다."
 								+ "</div></div>").attr("data-key", node.key)
 						.append(form);
-				// body에 추가한다.
+				// .col-9에 추가한다.
 				$(".col-9").append(form);
 				// message는 유저가 메시지를 보낼 때 알려주는 메시지이다.
 			} else if (node.status === "message") {
