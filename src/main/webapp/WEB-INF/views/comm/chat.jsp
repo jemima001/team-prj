@@ -76,7 +76,7 @@ body{
 						
 						// 웹소켓 객체 만드는 코드
 						ws = new WebSocket(
-								"ws://${pageContext.request.serverName}:${pageContext.request.serverPort}/market/comm/echo");
+								"ws://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/comm/echo");
 
 						ws.onopen = function(event) {
 							if (event.data === undefined)

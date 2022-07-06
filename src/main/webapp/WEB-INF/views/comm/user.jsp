@@ -57,7 +57,7 @@ body{
 	<script type="text/javascript">
 		// 서버의 broadsocket의 서블릿으로 웹 소켓을 한다.
 		var webSocket = new WebSocket(
-				"ws://${pageContext.request.serverName}:${pageContext.request.serverPort}/market/comm/user");
+				"ws://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/comm/user");
 		// 콘솔 텍스트 영역
 		var messageTextArea = document.getElementById("messageTextArea");
 		// 접속이 완료되면
