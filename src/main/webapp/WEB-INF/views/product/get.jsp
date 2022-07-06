@@ -353,7 +353,7 @@ textarea {
 
 
 			<sec:authorize access="hasRole('ADMIN')">
-				<form id="deleteBoard" action="/market/product/deleteBoard"
+				<form id="deleteBoard" action="${appRoot }/product/deleteBoard"
 					method="post">
 					<input type="hidden" name="id" value="${productboard.id }" />
 					<input type="hidden" name="deleteImg"
@@ -361,7 +361,7 @@ textarea {
 				</form>
 
 				<!-- 수정폼 -->
-				<form id="deleteModif" action="/market/product/modif">
+				<form id="deleteModif" action="${appRoot }/product/modif">
 					<input type="hidden" value="${productboard.id }" name="id" />
 				</form>
 

@@ -115,7 +115,7 @@ body {
 					<c:if test="${category.middle_Name != '꽃' }">
 						<th class="nav-item">
 							<a class="nav-link "
-								href="${approot }/market/product/list?cat=${category.product_Middle_Class}&search="
+								href="${appRoot }/product/list?cat=${category.product_Middle_Class}&search="
 								style="color: #f4eedd;">${category.middle_Name }</a>
 						</th>
 					</c:if>

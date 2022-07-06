@@ -251,7 +251,7 @@ body{
 
 				<h1></h1>
 				<!-- <form action="/market/product/product_add" method="post"> -->
-				<form id="formAddforList" action="/market/product/add" method="post"
+				<form id="formAddforList" action="${appRoot }/product/add" method="post"
 					enctype="multipart/form-data" data_mod="forProdutList">
 					
 					
