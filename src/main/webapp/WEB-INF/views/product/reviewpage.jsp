@@ -23,7 +23,7 @@ body{
 <my:mypagenavbar></my:mypagenavbar>
 <body>
 <h1>리뷰 페이지</h1> 
-<form action="/market/product/reviewpage" method="post" enctype="multipart/form-data">
+<form action="${appRoot }/product/reviewpage" method="post" enctype="multipart/form-data">
 제목 <br />
 <input type="text" name = "reviewTitle" /> <br />
 본문 <br />
