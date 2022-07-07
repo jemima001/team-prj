@@ -42,6 +42,9 @@ body{
 
 
 				<h1>주문 목록</h1>
+				
+				<h5> '우리 352-1234-5678-90 작은 숲'으로 입금해주세요.  </br>
+				<i class="fa-solid fa-gift"></i> : 무통장 입금이 확인되면 구매가 확정됩니다.</h5>
 
 				<table class="table align-middle">
 					<thead>
