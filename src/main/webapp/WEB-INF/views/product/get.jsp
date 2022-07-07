@@ -347,7 +347,7 @@ textarea {
 			<h2 class="justify-content-center">상세 정보</h2>
 
 			<textarea name="body" id="textarea1"
-				style="text-align: center; outline-color: white; border: 0px; width: 100%; height: 70%;"
+				style="text-align: center; outline-color: white; border: 0px; width: 100%; height: 80%;"
 				readonly>${productboard.boardBody }</textarea>
 
 
