@@ -41,8 +41,7 @@ body{
 		enctype="multipart/form-data">
 		<input type="hidden" name="productPage" value="${review.productPage }" />
 		<input type="hidden" name ="id"  value="${review.id }"/>
-		${review.id }
-		${review.productPage }
+		
 		<div class="mb-3">
 			<label for="reviewAddTitle" class="form-label">리뷰 제목</label>
 			<input type="text" class="form-control" id="reviewAddTitle"
