@@ -84,7 +84,7 @@ public class OrderController {
 		model.addAttribute("b", bookCount);
 		model.addAttribute("member", member);
 		
-		if(list.size() > 1) {
+		/*if(list.size() > 1) {
 			String email = member.getEmail();
 			System.out.println(member.getEmail());
 			String subject = "작은 숲 주문이 완료되었습니다.";
@@ -131,7 +131,7 @@ public class OrderController {
 			} catch(Exception e) {
 				e.printStackTrace();
 			}
-		}
+		}*/
 		
 		
 		
