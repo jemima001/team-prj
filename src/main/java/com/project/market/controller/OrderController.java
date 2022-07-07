@@ -185,29 +185,30 @@ public class OrderController {
 	
 	MemberDto member = orderService.getMemberById(principal.getName());
 	model.addAttribute("member", member);
+	// 이메일 발송 부분 서버에 올리면 더이상 진행이 안되서 일단 두석 처리
 	
-		String email = member.getEmail();
-		System.out.println(member.getEmail());
-		String subject = "작은 숲 주문이 완료되었습니다.";
-			
-		String content = "작은 숲 주문이 완료되었습니다." + "<br>" + "상품명  : " + dto.getProductName()+"<br>"
-						 + "수량 : " + bookCount + "<br>총 금액 : " + totalOrderPrice + "<br>우리 352-1234-5678-90 작은 숲 으로 입금 부탁드립니다.";
-		String from = "hjh564@naver.com";
-		String to = email;
+	/*String email = member.getEmail();
+	System.out.println(member.getEmail());
+	String subject = "작은 숲 주문이 완료되었습니다.";
 		
-		try {
-			MimeMessage mail = mailSender.createMimeMessage();
-			MimeMessageHelper mailHelper = new MimeMessageHelper(mail,true,"UTF-8");
-			
-			mailHelper.setFrom(from);
-			mailHelper.setTo(to);
-			mailHelper.setSubject(subject);
-			mailHelper.setText(content, true);
-			
-			mailSender.send(mail);
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
+	String content = "작은 숲 주문이 완료되었습니다." + "<br>" + "상품명  : " + dto.getProductName()+"<br>"
+					 + "수량 : " + bookCount + "<br>총 금액 : " + totalOrderPrice + "<br>우리 352-1234-5678-90 작은 숲 으로 입금 부탁드립니다.";
+	String from = "hjh564@naver.com";
+	String to = email;
+	
+	try {
+		MimeMessage mail = mailSender.createMimeMessage();
+		MimeMessageHelper mailHelper = new MimeMessageHelper(mail,true,"UTF-8");
+		
+		mailHelper.setFrom(from);
+		mailHelper.setTo(to);
+		mailHelper.setSubject(subject);
+		mailHelper.setText(content, true);
+		
+		mailSender.send(mail);
+	} catch(Exception e) {
+		e.printStackTrace();
+	}*/
 		
 	return "/order/complete";
 	}

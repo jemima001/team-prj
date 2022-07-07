@@ -422,7 +422,9 @@ public class MemberController {
 	@GetMapping("confirmEmail")
 	@ResponseBody
 	public String confirmEmail(HttpSession session, Model model, String email) {
-		boolean exist = false;
+		// 이메일 주석 처리
+		
+		/*boolean exist = false;
 		
 		System.out.println(email);
 		
@@ -454,7 +456,12 @@ public class MemberController {
 			return "ok";
 		} else {
 			return "notOk";
-		}
+		}*/
+		// 이메일 주석 처리로 인해서 임시로 리턴 작성
+		// 무조건 1111로 리셋 가능하게 변경
+		int pass = 1111;
+		session.setAttribute("pass", pass);
+		return "ok";
 	}
 	
 	@GetMapping("confirmNumber")
