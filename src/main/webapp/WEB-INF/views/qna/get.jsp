@@ -106,7 +106,7 @@ $(document).ready(function() {
 				<div class="col-sm-6">
 					<div>
 						
-						<h2 style="">문의
+						<h2>문의
 						<sec:authorize access="isAuthenticated()">
 								<sec:authentication property="principal" var="principal"/>
 								<c:if test="${principal.username == query.memberId }">
@@ -132,7 +132,7 @@ $(document).ready(function() {
 						<div>
 							<label class="form-label" for="textarea1">본문</label>
 							<textarea class="form-control mb-3" name="body" id="textarea1"
-								cols="30" rows="8" readonly>${query.body }</textarea>
+								cols="30" rows="8" readonly style=" resize: none;">${query.body }</textarea>
 						</div>
 						
 						<c:forEach items="${query.fileName }" var="file">
@@ -188,18 +188,27 @@ $(document).ready(function() {
 						<ul class="nav me-auto">
 							<li>
 								<h2 style="display: inline;">답변</h2>
+								<c:if test="${query.numOfAnswer > 0 }">
+									<sec:authorize access="hasRole('ADMIN')">
+										<button id="edit-button2" class="btn btn-secondary">
+											<i class="fa-solid fa-pen-to-square"></i>
+										</button>
+									</sec:authorize>
+								</c:if>
 							</li>
 						</ul>
-						<sec:authorize access="hasRole('ADMIN')">
-							<button id="edit-button2" class="btn btn-secondary">
-								<i class="fa-solid fa-pen-to-square"></i>
-							</button>
-						</sec:authorize>
 					</div>
 						<c:if test="${not empty message2 }">
 							<div id="mes" class="alert alert-primary">${message2 }</div>
 						</c:if>
 					<c:if test="${query.numOfAnswer == 0 }">
+						<sec:authorize access="hasRole('USER')">
+							<div class="alert alert-warning" style="margin-top: 125px; text-align: center;">
+								<h3 style="margin-top: 70px; margin-bottom: 70px;">
+									답변 대기중
+								</h3>
+							</div>
+						</sec:authorize>
 						<sec:authorize access="hasRole('ADMIN')">
 							<form action="${appRoot }/qna/answer" method="post" enctype="multipart/form-data">
 								<input type="hidden" name="queryId" value="${query.id }" />
@@ -210,14 +219,14 @@ $(document).ready(function() {
 								
 								<div>
 									<label class="form-label" for="textarea1">본문</label>
-									<textarea class="form-control" name="body" id="textarea11" cols="30" rows="8"></textarea>
+									<textarea class="form-control" name="body" id="textarea11" cols="30" rows="8" style=" resize: none;"></textarea>
 								</div>
 								<div>
 									파일
 									<input multiple="multiple" type="file" name="file" accept="image/*"/>
 								</div>
 								
-								<button class="btn btn-primary">작성</button>
+								<button class="btn btn-success">작성</button>
 							</form>
 						</sec:authorize>
 					</c:if>
@@ -234,7 +243,7 @@ $(document).ready(function() {
 							<div>
 								<label class="form-label" for="textarea1">본문</label>
 								<textarea class="form-control mb-3" name="body" id="textarea11"
-									cols="30" rows="10" readonly>${answer.body }</textarea>
+									cols="30" rows="10" readonly style=" resize: none;">${answer.body }</textarea>
 							</div>
 							
 							<c:forEach items="${answer.fileName }" var="file">

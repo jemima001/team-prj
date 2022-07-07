@@ -122,10 +122,10 @@ a:hover {
 											<td>
 												<c:choose>
 													<c:when test="${query.numOfAnswer > 0 }">
-														답변 완료
+														<span class="badge rounded-pill bg-success">답변 완료</span>
 													</c:when>
 													<c:otherwise>
-														답변 대기중
+														<span class="badge rounded-pill bg-warning">답변 대기</span>
 													</c:otherwise>
 												</c:choose>
 											</td>

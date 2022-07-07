@@ -42,7 +42,7 @@ body{
 	<div class="container">
 		<br />
 		<div class="row">
-			<div class="col-2">
+			<div class="col-3">
 				<my:customercenternavbar current="notice"></my:customercenternavbar>
 			</div>
 			<div class="col-9">
@@ -70,7 +70,7 @@ body{
 	<script type="text/javascript">
 		// 서버의 admin의 서블릿으로 웹 소켓을 한다.
 		var webSocket = new WebSocket(
-				"ws://${pageContext.request.serverName}:${pageContext.request.serverPort}/market/comm/admin");
+				"ws://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/comm/admin");
 		// 운영자에서의 open, close, error는 의미가 없어서 형태만 선언
 		webSocket.onopen = function(message) {
 		};
@@ -92,7 +92,7 @@ body{
 						"<div class='float-left'><div>" + node.userName + "님의 채팅입니다."
 								+ "</div></div>").attr("data-key", node.key)
 						.append(form);
-				// body에 추가한다.
+				// .col-9에 추가한다.
 				$(".col-9").append(form);
 				// message는 유저가 메시지를 보낼 때 알려주는 메시지이다.
 			} else if (node.status === "message") {
