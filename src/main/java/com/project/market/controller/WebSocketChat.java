@@ -52,7 +52,7 @@ public class WebSocketChat {
 		logger.info("Open session ld:" + session.getId());
 		try {
 			final Basic basic = session.getBasicRemote();
-			basic.sendText("Connection Established");
+			basic.sendText("연결에 성공하였습니다.");
 		} catch (Exception e) {
 			// TODO: handle exception
 			System.out.println(e.getMessage());
