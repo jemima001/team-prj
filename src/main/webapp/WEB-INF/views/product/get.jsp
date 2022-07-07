@@ -36,10 +36,8 @@
 
 			    document.onselectstart=function(){return false;} // 드래그 방지
 
-			    document.ondragstart=function(){return false;} // 선택 방지
-
-			    document.onmousedown=function(){return false;}
-				
+			   
+			   
 				// $("#reviewform").hide();
 
 				$("#purchaseButton").click(
@@ -355,7 +353,7 @@ textarea {
 
 
 			<sec:authorize access="hasRole('ADMIN')">
-				<form id="deleteBoard" action="/market/product/deleteBoard"
+				<form id="deleteBoard" action="${appRoot }/product/deleteBoard"
 					method="post">
 					<input type="hidden" name="id" value="${productboard.id }" />
 					<input type="hidden" name="deleteImg"
@@ -363,7 +361,7 @@ textarea {
 				</form>
 
 				<!-- 수정폼 -->
-				<form id="deleteModif" action="/market/product/modif">
+				<form id="deleteModif" action="${appRoot }/product/modif">
 					<input type="hidden" value="${productboard.id }" name="id" />
 				</form>
 
