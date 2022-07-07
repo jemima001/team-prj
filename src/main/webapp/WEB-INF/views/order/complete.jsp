@@ -80,7 +80,7 @@ body{
 <thead>
 <tr class="table-info">
 <th> <i class="fa-solid fa-gift"></i> : 무통장 입금이 확인되면 구매가 확정됩니다. </th>
-<th> 마이페이지> 주문확인 페이지를 확인하세요. <th>
+<th> 마이페이지> 주문 목록 페이지를 확인하세요. <th>
 </tr>
 </thead>
 </table>
