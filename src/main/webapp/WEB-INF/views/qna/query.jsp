@@ -50,7 +50,7 @@ body{
 					
 					<div>
 						<label class="form-label" for="textarea1">본문</label>
-						<textarea class="form-control" name="body" id="textarea1" cols="30" rows="10"></textarea>
+						<textarea class="form-control" name="body" id="textarea1" cols="30" rows="10" style=" resize: none;"></textarea>
 					</div>
 					<div>
 						파일

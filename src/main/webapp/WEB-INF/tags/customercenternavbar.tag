@@ -46,15 +46,22 @@
 			<li class="nav-item" >
 				<a href="${chatUrl }" class="nav-link ${current == 'chat' ? 'active' : '' }"  style="color: black;">▶ 프리톡</a>
 			</li>
-			<sec:authorize access="hasRole('USER')">
+			<sec:authorize access="isAnonymous()">
 				<li class="nav-item" style="">
 					<a href="${userUrl }" class="nav-link ${current == 'chat' ? 'active' : '' }"  style="color: black;">▶ 문의톡</a>
 				</li>
 			</sec:authorize>
-			<sec:authorize access="hasRole('ADMIN')">
-				<li class="nav-item" style="">
-					<a href="${adminUrl }" class="nav-link ${current == 'chat' ? 'active' : '' }"  style="color: black;">▶ 문의톡</a>
-				</li>
+			<sec:authorize access="isAuthenticated()">
+				<sec:authorize access="hasRole('USER')">
+					<li class="nav-item" style="">
+						<a href="${userUrl }" class="nav-link ${current == 'chat' ? 'active' : '' }"  style="color: black;">▶ 문의톡</a>
+					</li>
+				</sec:authorize>
+				<sec:authorize access="hasRole('ADMIN')">
+					<li class="nav-item" style="">
+						<a href="${adminUrl }" class="nav-link ${current == 'chat' ? 'active' : '' }"  style="color: black;">▶ 문의톡</a>
+					</li>
+				</sec:authorize>
 			</sec:authorize>
 		</ul>
 	</div>
